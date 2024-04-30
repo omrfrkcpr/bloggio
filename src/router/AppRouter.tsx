@@ -14,8 +14,8 @@ import Profile from "../pages/Profile";
 import Detail from "../pages/Detail";
 import PrivateRouter from "./PrivateRouter";
 import MyBlogs from "../pages/MyBlogs";
-import Navbar from "../components/global/Navbar";
-import Footer from "../components/global/Footer";
+import Navbar from "../components/Global/Navbar";
+import Footer from "../components/Global/Footer";
 
 const AppRouter = () => {
   return (
