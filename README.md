@@ -1,70 +1,14 @@
-<p>Clarusway<img align="right"
-  src="https://secure.meetupstatic.com/photos/event/3/1/b/9/600_488352729.jpeg"  width="15px"></p>
-
-# Milestone Blog App
+# Bloggio
 
 ## Description
 
 Project aims to create a Milestone Blog App.
 
-## Problem Statement
-
-- We are adding a new project to our portfolios. So you and your colleagues have started to work on the project.
-
-## Project Skeleton Example
+## Project Skeleton
 
 ```
-Milestone Blog App (folder for context)
-|       # Given to the students (Definition of the project)
-SOLUTION
-├── src
-│    ├── index.js
-│    ├── App.js
-│    ├── assets
-│    │   └── cw.png
-│    ├── components
-│    │   ├── auth
-│    │   │   ├── Login.jsx
-│    │   │   └── Register.jsx
-│    │   ├── blog
-│    │   │   ├── BlogCard.jsx
-│    │   │   ├── BlogForm.jsx
-│    │   │   ├── CommentForm.jsx
-│    │   │   ├── DeleteModal.jsx
-│    │   │   └── UpdateModal.jsx
-│    │   ├── Footers.jsx
-│    │   └── NavBars.jsx
-│    ├── context
-│    │   ├── AuthContext.jsx
-│    │   └── BlogContext.jsx
-│    ├── helper
-│    │   ├── ToastNotify.jsx
-│    │   └── menuList.js
-│    ├── pages
-│    │   ├── About.jsx
-│    │   ├── Auth.jsx
-│    │   ├── BlogDetail.jsx
-│    │   ├── Dashboard.jsx
-│    │   ├── MyBlog.jsx
-│    │   ├── NewBlog.jsx
-│    │   └── Profile.jsx
-│    ├── reducer
-│    │   ├── authReducer.js
-│    │   └── blogReducer.js
-│    ├── router
-│    │   ├── AppRouter.jsx
-│    │   └── PrivateRouter.jsx
-│    ├── service
-│    │   └── useAxios.jsx
-│    └── styles
-│        └── globalStyles.jsx
-```
-
-```
-Milestone Blog App (folder for redux)
-
-|----readme.md         # Given to the students (Definition of the project)
-SOLUTION
+Bloggio
+|----readme.md
 ├── src
 |    ├── index.css
 |    ├── index.js
@@ -111,8 +55,6 @@ SOLUTION
 
 ## Expected Outcome
 
-![Blog App](blogapp1.gif)
-
 ## Objective
 
 Build a Milestone Blog App using ReactJS.
@@ -132,22 +74,6 @@ Build a Milestone Blog App using ReactJS.
 - improve coding skills within HTML & CSS & JS & ReactJS & Django.
 
 - use git commands (push, pull, commit, add etc.) and Github as Version Control System.
-
-## Steps to Solution
-
-- Step 1 : Create React App using `npx create-react-app milestone-blog-app`
-
-- Step 2 : Use NodeSs backend for authentication and CRUD operations.
-
-- Step 3 : You can use css frameworks like Bootstrap, Tailwind Css, Material UI.
-
-- Step 4 : You can view sample app on https://milestone-blogapp-cw.vercel.app/.
-
-- Step 5 : Add project gif to your project and README.md file.
-
-## Notes
-
-- You can add additional functionalities to your app.
 
 ## Bonus
 
