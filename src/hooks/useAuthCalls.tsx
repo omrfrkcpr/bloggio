@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchFail,
@@ -14,9 +15,8 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-  const { token } = useSelector((store) => store.auth);
+  const { token } = useSelector((store: any) => store.auth);
 
   const register = async (userInfo: object) => {
     dispatch(fetchStart());
