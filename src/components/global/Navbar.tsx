@@ -11,7 +11,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import amblem from "../../assets/amblem.png";
+import Logo from "../commons/Logo";
 
 const pages = [
   { label: "Dashboard", path: "/" },
@@ -30,7 +30,7 @@ const settings = [
 //   { label: "Register", path: "/register" },
 // ];
 
-function Navbar() {
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -57,14 +57,15 @@ function Navbar() {
     <AppBar position="static">
       <Container maxWidth={false} sx={{ backgroundColor: "#ff8991" }}>
         <Toolbar disableGutters>
-          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <img src={amblem} alt="" width="60px" />
-          </Box>
+          <Logo
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            width="60px"
+          />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -107,8 +108,8 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map(({ label, path }) => (
-                <MenuItem key={label} onClick={handleCloseNavMenu}>
+              {pages.map(({ label, path }, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
                   <a href={path}>
                     <Typography
                       textAlign="center"
@@ -121,14 +122,19 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-            <img src={amblem} alt="" width="60px" />
-          </Box>
+          <Logo
+            sx={{
+              display: { xs: "flex", md: "none" },
+              mr: 1,
+              mt: "5px",
+            }}
+            width="40px"
+          />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -150,10 +156,10 @@ function Navbar() {
               gap: 1,
             }}
           >
-            {pages.map(({ label, path }) => (
+            {pages.map(({ label, path }, index) => (
               <a href={path}>
                 <Button
-                  key={label}
+                  key={index}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
@@ -212,8 +218,8 @@ function Navbar() {
                   omr@gmail.com
                 </span>
               </div>
-              {settings.map(({ label, path }) => (
-                <MenuItem key={label} onClick={handleCloseUserMenu}>
+              {settings.map(({ label, path }, index) => (
+                <MenuItem key={index} onClick={handleCloseUserMenu}>
                   <a href={path}>
                     <Typography textAlign="center">{label}</Typography>
                   </a>
@@ -225,5 +231,5 @@ function Navbar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default Navbar;
