@@ -14,7 +14,7 @@ const SocialMedia = () => {
       path: "https://github.com/omrfrkcpr/bloggio",
     },
     {
-      icon: <ImMail size={23} style={{ margin: "1px" }} />,
+      icon: <ImMail size={22} style={{ margin: "1px" }} />,
       path: "omerrfarukcapur@gmail.com",
     },
     {
