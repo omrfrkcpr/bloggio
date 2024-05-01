@@ -1,5 +1,5 @@
 import pencil from "../../assets/pencil.png";
-import machine from "../../assets/machine.jpg";
+import machine from "../../assets/machine.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -47,11 +47,11 @@ const Hero = () => {
         <img src={pencil} alt="" />
       </div>
       <div
-        className={`hidden lg:block absolute bottom-0 right-[3rem] lg:transition-transform lg:duration-[2s] ${
-          isLoaded ? "lg:translate-x-0" : "lg:translate-x-[110%]"
+        className={`hidden lg:block absolute bottom-5 right-[4rem] xl:right-[8rem] lg:transition-transform lg:duration-[2s] ${
+          isLoaded ? "lg:translate-x-0" : "lg:translate-x-[140%]"
         }`}
       >
-        <img src={machine} alt="" width="350px" />
+        <img src={machine} alt="" width="320px" />
       </div>
     </div>
   );

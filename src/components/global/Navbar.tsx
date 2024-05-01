@@ -60,7 +60,7 @@ const Navbar = () => {
         sx={{
           backgroundColor: "#b9d0f0",
           borderBottom: "1px solid black",
-          padding: { sm: "0", md: "0.2rem 8rem" },
+          padding: { sm: "0 1rem", md: "0.2rem 8rem" },
         }}
       >
         <Toolbar disableGutters>
@@ -77,7 +77,7 @@ const Navbar = () => {
               fontWeight: 600,
               letterSpacing: ".3rem",
               color: "inherit",
-              textShadow: "2px 2px 6px #000000",
+              textShadow: "2px 2px 8px #000000",
               textDecoration: "none",
             }}
             component="a"
@@ -92,7 +92,7 @@ const Navbar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="default"
             >
               <MenuIcon />
             </IconButton>
@@ -147,14 +147,14 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "Segoe UI",
+              fontFamily: "Playfair Display",
               fontWeight: 600,
               letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
-              textShadow: "1px 4px 1px #0000004a",
+              textShadow: "1px 2px 1px #0000004a",
             }}
-            content="BLOGGIO"
+            content="Bloggio"
           />
           <Box
             sx={{
