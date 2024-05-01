@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import LoginForm from "../Forms/LoginForm";
-import RegisterForm from "../Forms/RegisterForm";
+import Register from "../../pages/Register";
+import Login from "../../pages/Login";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -32,8 +32,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
           onClick={handleOuterClick}
           className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-white bg-opacity-80"
         >
-          <div className="bg-white rounded-lg p-8 w-full h-[100vh] md:max-h-[700px] max-w-[650px] xl:max-w-[700px] relative shadow-md shadow-black/20">
-            <div className="absolute right-8">
+          <div className="bg-white rounded-lg p-8 w-full h-[100%] overflow-auto md:max-h-[700px] max-w-[650px] xl:max-w-[700px] relative shadow-md shadow-black/20">
+            <div className="absolute right-3 top-3">
               <button onClick={handleClose}>
                 <IoCloseOutline
                   size={26}
@@ -46,7 +46,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
                 {formType === "sign in" ? "Welcome Back" : "Join Bloggio"}
               </h2>
               <div className="text-center flex flex-col space-y-6">
-                {formType === "sign up" ? <RegisterForm /> : <LoginForm />}
+                {formType === "sign up" ? <Register /> : <Login />}
                 <span>
                   {formType === "sign up"
                     ? "Already have an account?"
@@ -59,7 +59,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
                   </button>
                 </span>
               </div>
-              <p className="text-sm opacity-50 w-[500px] text-center">
+              <p className="text-sm opacity-50 w-[90%] max-w-[500px] text-center">
                 Click “<span className="capitalize">{formText()}</span>” to
                 agree to Bloggio’s{" "}
                 <span className="underline">Terms of Service</span> and
