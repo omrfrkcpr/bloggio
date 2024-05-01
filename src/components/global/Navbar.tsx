@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
@@ -12,6 +11,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Commons/Logo";
+import CustomTypography from "../Commons/CustomTypography";
 
 const pages = [
   { label: "Dashboard", path: "/" },
@@ -65,27 +65,25 @@ const Navbar = () => {
       >
         <Toolbar disableGutters>
           <Logo
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-            width="60px"
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1, mt: "5px" }}
+            width="50px"
           />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
+          <CustomTypography
+            variant="h4"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "serif",
-              fontWeight: 400,
+              fontFamily: "Playfair Display",
+              fontWeight: 600,
               letterSpacing: ".3rem",
               color: "inherit",
-              textShadow: "2px 2px 5px #000000",
+              textShadow: "2px 2px 6px #000000",
               textDecoration: "none",
             }}
-          >
-            BLOGGIO
-          </Typography>
+            component="a"
+            href="/"
+            content="Bloggio"
+          />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -118,17 +116,16 @@ const Navbar = () => {
             >
               {pages.map(({ label, path }, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <a href={path}>
-                    <Typography
-                      textAlign="center"
-                      sx={{
-                        color: "black",
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      {label}
-                    </Typography>
-                  </a>
+                  <CustomTypography
+                    textAlign="center"
+                    component="a"
+                    href={path}
+                    sx={{
+                      color: "black",
+                      textTransform: "capitalize",
+                    }}
+                    content={label}
+                  />
                 </MenuItem>
               ))}
             </Menu>
@@ -141,7 +138,7 @@ const Navbar = () => {
             }}
             width="40px"
           />
-          <Typography
+          <CustomTypography
             variant="h5"
             noWrap
             component="a"
@@ -150,16 +147,15 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontFamily: "Segoe UI",
+              fontWeight: 600,
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
               textShadow: "1px 4px 1px #0000004a",
             }}
-          >
-            BLOGGIO
-          </Typography>
+            content="BLOGGIO"
+          />
           <Box
             sx={{
               flexGrow: 1,
@@ -233,9 +229,12 @@ const Navbar = () => {
               </div>
               {settings.map(({ label, path }, index) => (
                 <MenuItem key={index} onClick={handleCloseUserMenu}>
-                  <a href={path}>
-                    <Typography textAlign="center">{label}</Typography>
-                  </a>
+                  <CustomTypography
+                    component="a"
+                    href={path}
+                    textAlign="center"
+                    content={label}
+                  />
                 </MenuItem>
               ))}
             </Menu>
