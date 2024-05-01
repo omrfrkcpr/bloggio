@@ -9,7 +9,7 @@ interface AuthModalProps {
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
-  const [formType, setFormType] = useState("register");
+  const [formType, setFormType] = useState("sign up");
 
   const handleClose = () => {
     setIsOpen(false);
@@ -20,6 +20,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
       handleClose();
     }
   };
+
+  const formText = () => (formType === "sign up" ? "sign up" : "sign in");
+  const formTextReverse = () =>
+    formType === "sign up" ? "sign in" : "sign up";
 
   return (
     <>
@@ -39,27 +43,24 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
             </div>
             <div className="flex flex-col justify-evenly items-center h-full">
               <h2 className="text-3xl mb-4">
-                {formType === "login" ? "Welcome Back" : "Join Bloggio"}
+                {formType === "sign in" ? "Welcome Back" : "Join Bloggio"}
               </h2>
               <div className="text-center flex flex-col space-y-6">
-                {formType === "register" ? <RegisterForm /> : <LoginForm />}
+                {formType === "sign up" ? <RegisterForm /> : <LoginForm />}
                 <span>
-                  {formType === "register"
+                  {formType === "sign up"
                     ? "Already have an account?"
-                    : "No account?"}{" "}
+                    : "Don't have an account?"}{" "}
                   <button
-                    onClick={() =>
-                      setFormType(
-                        `${formType === "login" ? "register" : "login"}`
-                      )
-                    }
+                    className="text-green-900 hover:underline font-bold capitalize"
+                    onClick={() => setFormType(formTextReverse())}
                   >
-                    {formType === "register" ? "Sign in" : "Sign up"}
+                    {formTextReverse()}
                   </button>
                 </span>
               </div>
               <p className="text-sm opacity-50 w-[500px] text-center">
-                Click “{formType === "register" ? "Sign up" : "Sign ip"}” to
+                Click “<span className="capitalize">{formText()}</span>” to
                 agree to Bloggio’s{" "}
                 <span className="underline">Terms of Service</span> and
                 acknowledge that Bloggio’s{" "}
