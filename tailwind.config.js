@@ -4,9 +4,12 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 export default withMT({
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/flowbite/**/*.js"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      text: {
+        xl: "5rem",
+      },
       colors: {
         text: {
           primary: "#000000",
@@ -20,5 +23,5 @@ export default withMT({
       },
     },
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [],
 });

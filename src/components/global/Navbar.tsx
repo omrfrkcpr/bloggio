@@ -15,8 +15,8 @@ import Logo from "../Commons/Logo";
 
 const pages = [
   { label: "Dashboard", path: "/" },
-  { label: "New Blog", path: "/new-blog" },
-  { label: "About", path: "/about" },
+  { label: "Write", path: "/write" },
+  { label: "Our Story", path: "/our-story" },
 ];
 
 const settings = [
@@ -55,7 +55,14 @@ const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth={false} sx={{ backgroundColor: "#ff8991" }}>
+      <Container
+        maxWidth={false}
+        sx={{
+          backgroundColor: "#b9d0f0",
+          borderBottom: "1px solid black",
+          padding: { sm: "0", md: "0.2rem 8rem" },
+        }}
+      >
         <Toolbar disableGutters>
           <Logo
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
@@ -70,9 +77,10 @@ const Navbar = () => {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "serif",
-              fontWeight: 500,
+              fontWeight: 400,
               letterSpacing: ".3rem",
               color: "inherit",
+              textShadow: "2px 2px 5px #000000",
               textDecoration: "none",
             }}
           >
@@ -113,7 +121,10 @@ const Navbar = () => {
                   <a href={path}>
                     <Typography
                       textAlign="center"
-                      sx={{ color: "#A63740", textTransform: "capitalize" }}
+                      sx={{
+                        color: "black",
+                        textTransform: "capitalize",
+                      }}
                     >
                       {label}
                     </Typography>
@@ -144,6 +155,7 @@ const Navbar = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              textShadow: "1px 4px 1px #0000004a",
             }}
           >
             BLOGGIO
@@ -152,7 +164,8 @@ const Navbar = () => {
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              margin: "0",
+              justifyContent: "end",
+              marginRight: "1rem",
               gap: 1,
             }}
           >
@@ -163,9 +176,9 @@ const Navbar = () => {
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: "#A63740",
+                    color: "black",
                     borderRadius: "20px",
-                    textTransform: "uppercase",
+                    textTransform: "capitalize",
                     fontWeight: 600,
                     "&:hover": {
                       color: "black",

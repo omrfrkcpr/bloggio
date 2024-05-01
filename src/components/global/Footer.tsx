@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <section
       className="absolute w-full bottom-0 p-2"
-      style={{ backgroundColor: "#ff8991" }}
+      style={{ backgroundColor: "#b9d0f0" }}
     >
       <footer className="relative w-full">
         <div className="mx-auto w-full px-6">

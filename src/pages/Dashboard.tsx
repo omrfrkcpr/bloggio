@@ -1,5 +1,11 @@
+import Hero from "../components/Commons/Hero";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div className="">
+      <Hero />
+    </div>
+  );
 };
 
 export default Dashboard;
