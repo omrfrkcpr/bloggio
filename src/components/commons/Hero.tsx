@@ -1,11 +1,11 @@
 import pencil from "../../assets/pencil.png";
 import machine from "../../assets/machine.png";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import AuthModal from "../Modals/AuthModal";
 
 const Hero = () => {
-  const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -30,7 +30,7 @@ const Hero = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => setIsOpen((prevState) => !prevState)}
           className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
         >
           Get started
@@ -53,6 +53,7 @@ const Hero = () => {
       >
         <img src={machine} alt="" width="320px" />
       </div>
+      {isOpen && <AuthModal isOpen={isOpen} setIsOpen={setIsOpen} />}
     </div>
   );
 };

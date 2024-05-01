@@ -14,21 +14,16 @@ import Logo from "../Commons/Logo";
 import CustomTypography from "../Commons/CustomTypography";
 
 const pages = [
-  { label: "Dashboard", path: "/" },
-  { label: "Write", path: "/write" },
-  { label: "Our Story", path: "/our-story" },
+  { label: "Dashboard", path: "/", id: 1 },
+  { label: "Write", path: "/write", id: 2 },
+  { label: "Our Story", path: "/our-story", id: 3 },
 ];
 
 const settings = [
-  { label: "My Blogs", path: "/my-blogs" },
-  { label: "Profile", path: "/profile" },
-  { label: "Logout", path: "/logout" },
+  { label: "My Blogs", path: "/my-blogs", id: 1 },
+  { label: "Profile", path: "/profile", id: 2 },
+  { label: "Logout", path: "/logout", id: 3 },
 ];
-
-// const auth = [
-//   { label: "Login", path: "/login" },
-//   { label: "Register", path: "/register" },
-// ];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -114,8 +109,8 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map(({ label, path }, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
+              {pages.map(({ label, path, id }) => (
+                <MenuItem key={id} onClick={handleCloseNavMenu}>
                   <CustomTypography
                     textAlign="center"
                     component="a"
@@ -165,10 +160,9 @@ const Navbar = () => {
               gap: 1,
             }}
           >
-            {pages.map(({ label, path }, index) => (
-              <a href={path}>
+            {pages.map(({ label, path, id }) => (
+              <a href={path} key={id}>
                 <Button
-                  key={index}
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
@@ -227,8 +221,8 @@ const Navbar = () => {
                   omr@gmail.com
                 </span>
               </div>
-              {settings.map(({ label, path }, index) => (
-                <MenuItem key={index} onClick={handleCloseUserMenu}>
+              {settings.map(({ label, path, id }) => (
+                <MenuItem key={id} onClick={handleCloseUserMenu}>
                   <CustomTypography
                     component="a"
                     href={path}
