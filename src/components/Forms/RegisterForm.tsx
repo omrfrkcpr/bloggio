@@ -10,7 +10,7 @@ interface FormValues {
   lastName: string;
   email: string;
   password: string;
-  image: string;
+  // image: string;
   // bio: string;
   // city: string;
 }
@@ -53,22 +53,22 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
   const registerFormFields = [
     {
-      name: "username",
-      label: "Enter Username",
-      type: "text",
-    },
-    {
       name: "firstName",
-      label: "Your First Name",
+      label: "Enter First Name",
       type: "text",
     },
     {
       name: "lastName",
-      label: "Your Last Name",
+      label: "Enter Last Name",
       type: "text",
     },
-    { name: "email", label: "Your Email", type: "email" },
-    { name: "image", label: "Image Url", type: "text" },
+    {
+      name: "username",
+      label: "Enter Username",
+      type: "text",
+    },
+    { name: "email", label: "Enter Email", type: "email" },
+    // { name: "image", label: "Image Url", type: "text" },
     // { name: "bio", label: "Your Bio", type: "text" },
     // { name: "city", label: "Your City", type: "text" },
     {
@@ -154,7 +154,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-black text-white py-1 px-3 rounded-xl mt-4 hover:bg-black/70"
+          className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
         >
           {isSubmitting ? "Loading..." : "Sign Up"}
         </button>

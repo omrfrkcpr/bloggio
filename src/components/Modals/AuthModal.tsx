@@ -42,7 +42,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
               </button>
             </div>
             <div className="flex flex-col justify-evenly items-center h-full">
-              <h2 className="text-3xl mb-4">
+              <h2 className="text-2xl lg:text-3xl mb-4">
                 {formType === "sign in" ? "Welcome Back" : "Join Bloggio"}
               </h2>
               <div className="text-center flex flex-col space-y-6">
@@ -59,7 +59,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
                   </button>
                 </span>
               </div>
-              <p className="text-sm opacity-50 w-[90%] max-w-[500px] text-center">
+              <p className="text-xs md:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center">
                 Click “<span className="capitalize">{formText()}</span>” to
                 agree to Bloggio’s{" "}
                 <span className="underline">Terms of Service</span> and
