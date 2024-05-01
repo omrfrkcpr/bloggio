@@ -14,7 +14,7 @@ import Logo from "../Commons/Logo";
 import CustomTypography from "../Commons/CustomTypography";
 
 const pages = [
-  { label: "Dashboard", path: "/", id: 1 },
+  { label: "Home", path: "/", id: 1 },
   { label: "Write", path: "/write", id: 2 },
   { label: "Our Story", path: "/our-story", id: 3 },
 ];
@@ -187,6 +187,7 @@ const Navbar = () => {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {/* <Avatar
+                  alt="Omer photo"
                   src="/static/images/avatar/2.jpg"
                   sx={{ width: "42px", height: "42px" }}
                 /> */}
