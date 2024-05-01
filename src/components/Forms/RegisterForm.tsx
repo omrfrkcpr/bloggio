@@ -4,7 +4,7 @@ import { useState } from "react";
 import AuthTextField from "../TextFields/AuthTextField";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-interface FormValues {
+interface RegisterFormValues {
   username: string;
   firstName: string;
   lastName: string;
@@ -15,7 +15,7 @@ interface FormValues {
   // city: string;
 }
 
-interface RegisterFormProps extends FormikProps<FormValues> {
+interface RegisterFormProps extends FormikProps<RegisterFormValues> {
   isSubmitting: boolean;
 }
 
@@ -106,17 +106,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
                 value={
                   field.name === "confirmPassword" && isSubmitting
                     ? ""
-                    : values[field.name as keyof FormValues]
+                    : values[field.name as keyof RegisterFormValues]
                 }
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={
-                  touched[field.name as keyof FormValues] &&
-                  Boolean(errors[field.name as keyof FormValues])
+                  touched[field.name as keyof RegisterFormValues] &&
+                  Boolean(errors[field.name as keyof RegisterFormValues])
                 }
                 helperText={
-                  (touched[field.name as keyof FormValues] &&
-                    errors[field.name as keyof FormValues]) ||
+                  (touched[field.name as keyof RegisterFormValues] &&
+                    errors[field.name as keyof RegisterFormValues]) ||
                   undefined
                 }
               />

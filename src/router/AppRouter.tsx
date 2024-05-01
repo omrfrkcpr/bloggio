@@ -22,7 +22,7 @@ const AppRouter = () => {
       <Outlet />
       <Router>
         <Routes>
-          <Route path="/our-story" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
           <Route path="/my-blogs" element={<MyBlogs />} />
           <Route path="/write" element={<PrivateRouter />}>

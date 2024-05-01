@@ -16,7 +16,7 @@ import CustomTypography from "../Commons/CustomTypography";
 const pages = [
   { label: "Home", path: "/", id: 1 },
   { label: "Write", path: "/write", id: 2 },
-  { label: "Our Story", path: "/our-story", id: 3 },
+  { label: "About", path: "/about", id: 3 },
 ];
 
 const settings = [

@@ -33,7 +33,7 @@ const Hero = () => {
           onClick={() => setIsOpen((prevState) => !prevState)}
           className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
         >
-          Get started
+          Start writing
         </button>
       </div>
 
