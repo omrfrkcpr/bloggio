@@ -40,11 +40,17 @@ const Hero = () => {
       <div
         className={`w-[300px] md:w-[100px] rotate-90 md:rotate-0 absolute -bottom-52 md:bottom-0 left-0 md:left-[70%] lg:left-[50%] transition-transform duration-[3s] ${
           isLoaded ? "translate-x-0" : "-translate-x-[120%]"
-        } md:transition-none md:translate-x-0`}
+        } md:transition-none md:translate-x-0 md:transition-transform md:duration-[2s] ${
+          isLoaded ? "md:translate-y-0" : "md:translate-y-[110%]"
+        }`}
       >
         <img src={pencil} alt="" />
       </div>
-      <div className="hidden lg:block absolute bottom-0 right-[3rem]">
+      <div
+        className={`hidden lg:block absolute bottom-0 right-[3rem] lg:transition-transform lg:duration-[2s] ${
+          isLoaded ? "lg:translate-x-0" : "lg:translate-x-[110%]"
+        }`}
+      >
         <img src={machine} alt="" width="350px" />
       </div>
     </div>
