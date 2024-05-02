@@ -99,12 +99,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
             Sign In
           </button>
         ) : (
-          <button
-            disabled={loading}
-            className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6"
-          >
-            <CircularProgress />
-          </button>
+          <div className="bg-[#76a9f0] w-[68px] h-[28px] lg:w-[78px] lg:h-[36px] text-white rounded-xl mt-6 flex items-center justify-center mx-auto">
+            <CircularProgress sx={{ color: "white", padding: "0.8rem" }} />
+          </div>
         )}
       </Form>
     </div>

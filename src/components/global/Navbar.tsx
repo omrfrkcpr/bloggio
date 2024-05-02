@@ -19,23 +19,6 @@ import { useNavigate } from "react-router-dom";
 import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 
-const pages = [
-  { label: "Home", path: "/", id: 1 },
-  { label: "Contact", path: "/contact", id: 2 },
-  { label: "About", path: "/about", id: 3 },
-];
-
-const loggedInSettings = [
-  { label: "My Blogs", path: "/my-blogs", id: 1 },
-  { label: "Profile", path: "/profile", id: 2 },
-  { label: "Logout", path: "logout", id: 3 },
-];
-
-const loginSettings = [
-  { label: "Login", path: "sign in", id: 1 },
-  { label: "Register", path: "sign up", id: 2 },
-];
-
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { showNavbarModal } = useSelector((state: any) => state.modal);
@@ -78,6 +61,24 @@ const Navbar = () => {
       navigate(path);
     }
   };
+
+  const pages = [
+    { label: "Home", path: "/", id: 1 },
+    { label: "Contact", path: "/contact", id: 2 },
+    { label: "About", path: "/about", id: 3 },
+    currentUser && { label: "Write", path: "/write", id: 4 },
+  ].filter(Boolean);
+
+  const loggedInSettings = [
+    { label: "My Blogs", path: "/my-blogs", id: 1 },
+    { label: "Profile", path: "/profile", id: 2 },
+    { label: "Logout", path: "logout", id: 3 },
+  ];
+
+  const loginSettings = [
+    { label: "Login", path: "sign in", id: 1 },
+    { label: "Register", path: "sign up", id: 2 },
+  ];
 
   const handleLoginMenu = (path: string) => {
     setAnchorElUser(null);
