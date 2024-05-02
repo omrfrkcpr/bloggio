@@ -95,8 +95,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
     <div>
       <Form autoComplete="off">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
-          {registerFormFields.map((field) => (
-            <div className="relative">
+          {registerFormFields.map((field, index) => (
+            <div className="relative" key={index}>
               <AuthTextField
                 id={field.name}
                 name={field.name}

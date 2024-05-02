@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "../Commons/Logo";
+import Logo from "../Commons/Logo.tsx";
 import CustomTypography from "../Commons/CustomTypography";
 
 const pages = [
@@ -195,6 +195,7 @@ const Navbar = () => {
                   className="w-11 h-11 rounded-full cursor-pointer"
                   src="https://mighty.tools/mockmind-api/content/cartoon/9.jpg"
                   alt="user photo"
+                  width="30px"
                 />
               </IconButton>
             </Tooltip>
