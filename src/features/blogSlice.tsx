@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const blogSlice = createSlice({
-  name: "stock",
+  name: "bloggio",
 
   initialState: {
     categories: [],

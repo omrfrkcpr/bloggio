@@ -24,7 +24,7 @@ const useBlogCalls = () => {
       const { data } = await axiosWithToken(`${url}`);
       // console.log(data);
 
-      dispatch(getSuccess({ data: data.data, url }));
+      dispatch(getSuccess({ data: data?.data, url }));
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
