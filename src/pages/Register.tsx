@@ -2,9 +2,12 @@ import RegisterForm from "../components/Forms/RegisterForm";
 import { Formik } from "formik";
 import { SignupSchema } from "../components/Forms/RegisterForm";
 import useAuthCalls from "../hooks/useAuthCalls";
+import useShowModal from "../hooks/useShowModal";
 
 const Register = () => {
   const { register } = useAuthCalls();
+  const { toggleNavbarModal } = useShowModal();
+  const { toggleHeroModal } = useShowModal();
 
   return (
     <div>
@@ -22,6 +25,8 @@ const Register = () => {
         validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
           register(values);
+          toggleNavbarModal(false);
+          toggleHeroModal(false);
           actions.resetForm();
           actions.setSubmitting(false);
         }}

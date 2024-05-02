@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import pencil from "../../assets/pencil.png";
 import machine from "../../assets/machine.png";
 import { useEffect, useState } from "react";
 import AuthModal from "../Modals/AuthModal";
+import { useSelector } from "react-redux";
+import useShowModal from "../../hooks/useShowModal";
 
 const Hero = () => {
+  const { currentUser } = useSelector((state: any) => state.auth);
+  const { toggleHeroModal } = useShowModal();
+  const { showHeroModal } = useSelector((state: any) => state.modal);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -29,12 +34,14 @@ const Hero = () => {
             Follow your curiosity, connect through shared experiences
           </p>
         </div>
-        <button
-          onClick={() => setIsOpen((prevState) => !prevState)}
-          className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
-        >
-          Start writing
-        </button>
+        {!currentUser && (
+          <button
+            onClick={() => toggleHeroModal()}
+            className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
+          >
+            Start writing
+          </button>
+        )}
       </div>
 
       <div
@@ -53,10 +60,10 @@ const Hero = () => {
       >
         <img src={machine} alt="" width="320px" />
       </div>
-      {isOpen && (
+      {showHeroModal && (
         <AuthModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
+          isOpen={showHeroModal}
+          setIsOpen={toggleHeroModal}
           selectedFromType="sign up"
         />
       )}

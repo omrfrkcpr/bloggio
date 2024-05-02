@@ -34,12 +34,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
   const loginFormFields = [
     {
       name: "email",
-      label: "Your Email Address",
+      label: "Email",
       type: "email",
     },
     {
       name: "password",
-      label: "Your Password",
+      label: "Password",
       type: `${showPassword ? "text" : "password"}`,
     },
   ];

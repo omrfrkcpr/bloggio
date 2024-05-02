@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import Register from "../../pages/Register";
@@ -5,7 +6,7 @@ import Login from "../../pages/Login";
 
 interface AuthModalProps {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: any;
   selectedFromType: string;
 }
 

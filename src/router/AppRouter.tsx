@@ -14,6 +14,7 @@ import MyBlogs from "../pages/MyBlogs";
 import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
 import Write from "../pages/Write";
+import Contact from "../pages/Contact";
 
 const AppRouter = () => {
   return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/my-blogs" element={<MyBlogs />} />
           <Route path="/write" element={<PrivateRouter />}>
             <Route path="" element={<Write />} />
