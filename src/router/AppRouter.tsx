@@ -22,8 +22,8 @@ const AppRouter = () => {
       <Outlet />
       <Router>
         <Routes>
-          <Route path="/about" element={<About />} />
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/my-blogs" element={<MyBlogs />} />
           <Route path="/write" element={<PrivateRouter />}>
             <Route path="" element={<Write />} />

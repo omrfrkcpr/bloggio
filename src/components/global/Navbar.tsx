@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,12 +7,13 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-// import Avatar from "@mui/material/Avatar";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../commons/Logo";
 import CustomTypography from "../commons/CustomTypography";
+import { useSelector } from "react-redux";
 
 const pages = [
   { label: "Home", path: "/", id: 1 },
@@ -26,6 +28,7 @@ const settings = [
 ];
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state: any) => state.auth);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -186,17 +189,18 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar
-                  alt="Omer photo"
-                  src="/static/images/avatar/2.jpg"
-                  sx={{ width: "42px", height: "42px" }}
-                /> */}
-                <img
-                  className="w-11 h-11 rounded-full cursor-pointer"
-                  src="https://mighty.tools/mockmind-api/content/cartoon/9.jpg"
-                  alt="user photo"
-                  width="30px"
-                />
+                {currentUser?.image ? (
+                  <img
+                    className="w-11 h-11 rounded-full cursor-pointer"
+                    src={currentUser?.image}
+                  />
+                ) : (
+                  <Avatar
+                    alt={`${currentUser?.firstName?.toUpperCase()}`}
+                    src="/static/images/avatar/2.jpg"
+                    sx={{ width: "42px", height: "42px" }}
+                  />
+                )}
               </IconButton>
             </Tooltip>
             <Menu
@@ -217,10 +221,10 @@ const Navbar = () => {
             >
               <div className="px-4 py-3 text-center border-b-2 mb-2">
                 <span className="block text-sm text-gray-900 dark:text-white">
-                  Omer Sharp
+                  {`${currentUser?.firstName} ${currentUser?.lastName}`}
                 </span>
                 <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  omr@gmail.com
+                  {`${currentUser?.email}`}
                 </span>
               </div>
               {settings.map(({ label, path, id }) => (
