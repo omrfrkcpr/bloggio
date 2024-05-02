@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "../Commons/Logo.tsx";
+import Logo from "../Commons/Logo";
 import CustomTypography from "../Commons/CustomTypography";
 
 const pages = [
