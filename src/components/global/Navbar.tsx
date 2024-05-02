@@ -10,8 +10,8 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import Logo from "../Commons/Logo";
-import CustomTypography from "../Commons/CustomTypography";
+import Logo from "../commons/Logo";
+import CustomTypography from "../commons/CustomTypography";
 
 const pages = [
   { label: "Home", path: "/", id: 1 },

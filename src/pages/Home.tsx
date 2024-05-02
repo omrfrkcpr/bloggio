@@ -1,4 +1,4 @@
-import Hero from "../components/Commons/Hero";
+import Hero from "../components/commons/Hero";
 
 const Dashboard = () => {
   return (
