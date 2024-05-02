@@ -74,7 +74,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 }
               />
               {field.name === "password" && (
-                <div className="absolute top-4 right-3 sm:top-4 sm:right-3 md:top-[18px] md:right-3 xl:top-[20px] xl:right-3 color-black hover:color-gray">
+                <div className="absolute top-4 right-3 sm:top-4 sm:right-3 md:top-[18px] md:right-3 xl:top-[20px] xl:right-3 text-black hover:text-black/50">
                   {showPassword ? (
                     <FaRegEyeSlash
                       className="w-4 cursor-pointer"

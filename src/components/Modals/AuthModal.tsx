@@ -6,10 +6,15 @@ import Login from "../../pages/Login";
 interface AuthModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedFromType: string;
 }
 
-const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
-  const [formType, setFormType] = useState("sign up");
+const AuthModal: React.FC<AuthModalProps> = ({
+  isOpen,
+  setIsOpen,
+  selectedFromType,
+}) => {
+  const [formType, setFormType] = useState(selectedFromType || "sign up");
 
   const handleClose = () => {
     setIsOpen(false);
@@ -37,17 +42,17 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
               <button onClick={handleClose}>
                 <IoCloseOutline
                   size={26}
-                  className="opacity-100 hover:opacity-50"
+                  className="opacity-100 hover:opacity-50 text-black"
                 />
               </button>
             </div>
             <div className="flex flex-col justify-evenly items-center h-full">
-              <h2 className="text-2xl lg:text-3xl mb-4">
+              <h2 className="text-2xl lg:text-3xl mb-4 text-black">
                 {formType === "sign in" ? "Welcome Back" : "Join Bloggio"}
               </h2>
               <div className="text-center flex flex-col space-y-6">
                 {formType === "sign up" ? <Register /> : <Login />}
-                <span>
+                <span className="text-black">
                   {formType === "sign up"
                     ? "Already have an account?"
                     : "Don't have an account?"}{" "}
@@ -59,7 +64,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, setIsOpen }) => {
                   </button>
                 </span>
               </div>
-              <p className="text-xs md:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center">
+              <p className="text-xs md:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center text-black">
                 Click “<span className="capitalize">{formText()}</span>” to
                 agree to Bloggio’s{" "}
                 <span className="underline">Terms of Service</span> and

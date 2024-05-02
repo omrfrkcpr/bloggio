@@ -53,7 +53,13 @@ const Hero = () => {
       >
         <img src={machine} alt="" width="320px" />
       </div>
-      {isOpen && <AuthModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <AuthModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedFromType="sign up"
+        />
+      )}
     </div>
   );
 };

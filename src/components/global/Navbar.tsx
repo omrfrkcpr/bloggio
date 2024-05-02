@@ -14,6 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Logo from "../commons/Logo";
 import CustomTypography from "../commons/CustomTypography";
 import { useSelector } from "react-redux";
+import useAuthCalls from "../../hooks/useAuthCalls";
+import { useNavigate } from "react-router-dom";
+import AuthModal from "../Modals/AuthModal";
 
 const pages = [
   { label: "Home", path: "/", id: 1 },
@@ -21,14 +24,24 @@ const pages = [
   { label: "About", path: "/about", id: 3 },
 ];
 
-const settings = [
+const loggedInSettings = [
   { label: "My Blogs", path: "/my-blogs", id: 1 },
   { label: "Profile", path: "/profile", id: 2 },
-  { label: "Logout", path: "/logout", id: 3 },
+  { label: "Logout", path: "logout", id: 3 },
+];
+
+const loginSettings = [
+  { label: "Login", path: "sign in", id: 1 },
+  { label: "Register", path: "sign up", id: 2 },
 ];
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
+  const { logout } = useAuthCalls();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedFormType, setSelectedFormType] = React.useState("");
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -43,12 +56,28 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (path: string) => {
     setAnchorElNav(null);
+    if (path === "logout") {
+      logout();
+    } else {
+      navigate(path);
+    }
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (path: string) => {
     setAnchorElUser(null);
+    if (path === "logout") {
+      logout();
+    } else {
+      navigate(path);
+    }
+  };
+
+  const handleLoginMenu = (path: string) => {
+    setAnchorElUser(null);
+    setIsOpen(true);
+    setSelectedFormType(path);
   };
 
   return (
@@ -78,8 +107,6 @@ const Navbar = () => {
               textShadow: "2px 2px 8px #000000",
               textDecoration: "none",
             }}
-            component="a"
-            href="/"
             content="Bloggio"
           />
 
@@ -113,11 +140,9 @@ const Navbar = () => {
               }}
             >
               {pages.map(({ label, path, id }) => (
-                <MenuItem key={id} onClick={handleCloseNavMenu}>
+                <MenuItem key={id} onClick={() => handleCloseNavMenu(path)}>
                   <CustomTypography
                     textAlign="center"
-                    component="a"
-                    href={path}
                     sx={{
                       color: "black",
                       textTransform: "capitalize",
@@ -139,8 +164,6 @@ const Navbar = () => {
           <CustomTypography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -164,25 +187,24 @@ const Navbar = () => {
             }}
           >
             {pages.map(({ label, path, id }) => (
-              <a href={path} key={id}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
+              <Button
+                key={id}
+                onClick={() => handleCloseNavMenu(path)}
+                sx={{
+                  my: 2,
+                  color: "black",
+                  borderRadius: "20px",
+                  textTransform: "capitalize",
+                  fontWeight: 600,
+                  "&:hover": {
                     color: "black",
-                    borderRadius: "20px",
-                    textTransform: "capitalize",
-                    fontWeight: 600,
-                    "&:hover": {
-                      color: "black",
-                      backgroundColor: "white",
-                    },
-                    display: "block",
-                  }}
-                >
-                  {label}
-                </Button>
-              </a>
+                    backgroundColor: "white",
+                  },
+                  display: "block",
+                }}
+              >
+                {label}
+              </Button>
             ))}
           </Box>
 
@@ -196,7 +218,7 @@ const Navbar = () => {
                   />
                 ) : (
                   <Avatar
-                    alt={`${currentUser?.firstName?.toUpperCase()}`}
+                    alt={currentUser && `${currentUser?.firstName}`}
                     src="/static/images/avatar/2.jpg"
                     sx={{ width: "42px", height: "42px" }}
                   />
@@ -219,28 +241,41 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <div className="px-4 py-3 text-center border-b-2 mb-2">
-                <span className="block text-sm text-gray-900 dark:text-white">
-                  {`${currentUser?.firstName} ${currentUser?.lastName}`}
-                </span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  {`${currentUser?.email}`}
-                </span>
-              </div>
-              {settings.map(({ label, path, id }) => (
-                <MenuItem key={id} onClick={handleCloseUserMenu}>
-                  <CustomTypography
-                    component="a"
-                    href={path}
-                    textAlign="center"
-                    content={label}
-                  />
-                </MenuItem>
-              ))}
+              {currentUser && (
+                <div className="px-4 py-3 text-center border-b-2 mb-2">
+                  <span className="block text-sm text-gray-900 dark:text-white">
+                    {`${currentUser?.firstName} ${currentUser?.lastName}`}
+                  </span>
+                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                    {`${currentUser?.email}`}
+                  </span>
+                </div>
+              )}
+              {currentUser
+                ? loggedInSettings.map(({ label, path, id }) => (
+                    <MenuItem
+                      key={id}
+                      onClick={() => handleCloseUserMenu(path)}
+                    >
+                      <CustomTypography textAlign="center" content={label} />
+                    </MenuItem>
+                  ))
+                : loginSettings.map(({ label, id, path }) => (
+                    <MenuItem key={id} onClick={() => handleLoginMenu(path)}>
+                      <CustomTypography textAlign="center" content={label} />
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
+      {isOpen && (
+        <AuthModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selectedFromType={selectedFormType}
+        />
+      )}
     </AppBar>
   );
 };

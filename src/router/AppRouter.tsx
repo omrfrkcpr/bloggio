@@ -18,9 +18,9 @@ import Write from "../pages/Write";
 const AppRouter = () => {
   return (
     <>
-      <Navbar />
-      <Outlet />
       <Router>
+        <Navbar />
+        <Outlet />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

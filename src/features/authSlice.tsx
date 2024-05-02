@@ -17,12 +17,12 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, { payload }) => {
       state.loading = false;
-      state.currentUser = payload?.data?.username;
+      state.currentUser = payload?.data;
       state.token = payload?.token;
     },
     loginSuccess: (state, { payload }) => {
       state.loading = false;
-      state.currentUser = payload?.user?.username;
+      state.currentUser = payload?.user;
       // state.isAdmin = payload?.user?.isAdmin;
       state.token = payload?.token;
     },
