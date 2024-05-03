@@ -6,6 +6,7 @@ import AuthTextField from "../TextFields/AuthTextField";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
+import { RootState } from "../../app/store";
 
 interface LoginFormValues {
   email: string;
@@ -29,18 +30,20 @@ const LoginForm: React.FC<LoginFormProps> = ({
   handleBlur,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loading } = useSelector((state: any) => state.auth);
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   const loginFormFields = [
     {
       name: "email",
       label: "Email",
       type: "email",
+      id: 1,
     },
     {
       name: "password",
       label: "Password",
       type: `${showPassword ? "text" : "password"}`,
+      id: 2,
     },
   ];
 
@@ -53,7 +56,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <Form autoComplete="off">
         <div className="flex flex-col gap-3 lg:gap-4">
           {loginFormFields.map((field) => (
-            <div className="relative">
+            <div className="relative" key={field.id}>
               <AuthTextField
                 id={field.name}
                 name={field.name}

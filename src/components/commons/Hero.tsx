@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import AuthModal from "../Modals/AuthModal";
 import { useSelector } from "react-redux";
 import useShowModal from "../../hooks/useShowModal";
+import { RootState } from "../../app/store";
 
 const Hero = () => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleHeroModal } = useShowModal();
   const { showHeroModal } = useSelector((state: any) => state.modal);
   const [isLoaded, setIsLoaded] = useState(false);

@@ -18,10 +18,11 @@ import useAuthCalls from "../../hooks/useAuthCalls";
 import { useNavigate } from "react-router-dom";
 import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
+import { RootState } from "../../app/store";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
-  const { showNavbarModal } = useSelector((state: any) => state.modal);
+  const { showNavbarModal } = useSelector((state: RootState) => state.modal);
   const { logout } = useAuthCalls();
   const { toggleNavbarModal } = useShowModal();
   const { toggleHeroModal } = useShowModal();
