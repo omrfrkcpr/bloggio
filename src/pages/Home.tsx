@@ -1,13 +1,13 @@
 import Hero from "../components/commons/Hero";
-// import Blogs from "../layouts/Blogs";
+import Blogs from "../layouts/Blogs";
 
-const Dashboard = () => {
+const Home = () => {
   return (
     <div className="">
       <Hero />
-      {/* <Blogs /> */}
+      <Blogs />
     </div>
   );
 };
 
-export default Dashboard;
+export default Home;

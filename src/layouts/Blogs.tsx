@@ -7,7 +7,7 @@ import BlogCard from "../components/Cards/BlogCard";
 
 const Blogs = () => {
   const { getBlogData } = useBlogCalls();
-  const { blogs } = useSelector((state: any) => state.bloggio);
+  const { blogs } = useSelector((state: any) => state.blog);
   // const [initialState, setInitialState] = useState({
   //   _id: "",
   //   userId: "",
@@ -24,7 +24,7 @@ const Blogs = () => {
 
   useEffect(() => {
     getBlogData("blogs");
-  }, [getBlogData]);
+  }, []);
 
   return (
     <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">

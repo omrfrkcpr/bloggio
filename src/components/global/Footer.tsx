@@ -6,10 +6,7 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <section
-      className="absolute w-full bottom-0 p-2"
-      style={{ backgroundColor: "#b9d0f0" }}
-    >
+    <section className=" w-full p-2" style={{ backgroundColor: "#b9d0f0" }}>
       <footer className="relative w-full">
         <div className="mx-auto w-full px-6">
           <div className="flex w-full flex-col items-center justify-center py-3 md:flex-row md:justify-between">

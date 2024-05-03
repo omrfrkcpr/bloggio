@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const blogSlice = createSlice({
-  name: "bloggio",
+  name: "blog",
 
   initialState: {
     categories: [],
@@ -18,10 +18,7 @@ const blogSlice = createSlice({
       state.error = false;
     },
 
-    getSuccess: (
-      state,
-      { payload: { data, url } }: { payload: { data: any; url: string } }
-    ) => {
+    getSuccess: (state, { payload: { data, url } }) => {
       state.loading = false;
       state[url as keyof typeof state] = data;
     },
