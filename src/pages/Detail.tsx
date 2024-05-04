@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+// import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BlogAnalytics from "../components/commons/BlogAnalytics";
-import CommentForm from "../components/Forms/CommentForm";
+// import CommentForm from "../components/Forms/CommentForm";
 import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
 
 const Detail = () => {
-  const { currentUser } = useSelector((state: RootState) => state?.auth);
+  // const { currentUser } = useSelector((state: RootState) => state?.auth);
   const { getBlogDetails } = useBlogCalls();
   const { blogDetails } = useSelector((state: any) => state?.blog);
   // console.log("Blog Detail:", blogDetails);
@@ -19,7 +19,7 @@ const Detail = () => {
   // console.log("Blog ID:", id);
   const location = useLocation();
   const { state } = location;
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
   useEffect(() => {
     getBlogDetails(`blogs/${id}`);
@@ -111,7 +111,7 @@ const Detail = () => {
           {content}
         </p>
       </div>
-      {show && <CommentForm comments={comments} id={id || ""} />}
+      {/* {show && <CommentForm comments={comments} id={id || ""} />} */}
       {/* {currentUser?._id == userId && (
         <Box
           sx={{
