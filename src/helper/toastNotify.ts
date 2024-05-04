@@ -6,7 +6,19 @@ export const toastWarnNotify = (msg: string) => {
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+};
+
+export const toastInfoNotify = (msg: string) => {
+  toast.info(msg, {
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "colored",
@@ -18,7 +30,7 @@ export const toastSuccessNotify = (msg: string) => {
     autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "colored",
@@ -30,7 +42,7 @@ export const toastErrorNotify = (msg: string) => {
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     progress: undefined,
     theme: "colored",

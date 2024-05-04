@@ -7,15 +7,15 @@ import Login from "../../pages/Login";
 interface AuthModalProps {
   isOpen: boolean;
   setIsOpen: any;
-  selectedFromType: string;
+  selectedFormType: string;
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   setIsOpen,
-  selectedFromType,
+  selectedFormType,
 }) => {
-  const [formType, setFormType] = useState(selectedFromType || "sign up");
+  const [formType, setFormType] = useState(selectedFormType || "sign in");
 
   const handleClose = () => {
     setIsOpen(false);

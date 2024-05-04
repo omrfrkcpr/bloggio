@@ -6,12 +6,14 @@ import AuthModal from "../Modals/AuthModal";
 import { useSelector } from "react-redux";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
+import usePath from "../../hooks/usePath";
 
 const Hero = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleHeroModal } = useShowModal();
-  const { showHeroModal } = useSelector((state: any) => state.modal);
+  const { showHeroModal } = useSelector((store: RootState) => store.modal);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { getNavigatePath } = usePath();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -20,6 +22,11 @@ const Hero = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const handleStartClick = () => {
+    toggleHeroModal();
+    getNavigatePath("/write");
+  };
 
   return (
     <div
@@ -37,7 +44,7 @@ const Hero = () => {
         </div>
         {!currentUser && (
           <button
-            onClick={() => toggleHeroModal()}
+            onClick={handleStartClick}
             className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
           >
             Start writing
@@ -65,7 +72,7 @@ const Hero = () => {
         <AuthModal
           isOpen={showHeroModal}
           setIsOpen={toggleHeroModal}
-          selectedFromType="sign up"
+          selectedFormType="sign up"
         />
       )}
     </div>

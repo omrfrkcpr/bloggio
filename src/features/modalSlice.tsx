@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     showNavbarModal: false,
     showHeroModal: false,
+    showBlogCardModal: false,
   },
   reducers: {
     setShowNavbarModal(state, { payload }) {
@@ -13,9 +14,13 @@ const modalSlice = createSlice({
     setShowHeroModal(state, { payload }) {
       state.showHeroModal = payload;
     },
+    setShowBlogCardModal(state, { payload }) {
+      state.showHeroModal = payload;
+    },
   },
 });
 
-export const { setShowNavbarModal, setShowHeroModal } = modalSlice.actions;
+export const { setShowNavbarModal, setShowHeroModal, setShowBlogCardModal } =
+  modalSlice.actions;
 
 export default modalSlice.reducer;

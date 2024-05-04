@@ -24,15 +24,15 @@ const AppRouter = () => {
         <Outlet />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/my-blogs" element={<MyBlogs />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="" element={<PrivateRouter />}>
-            <Route path="/write" element={<Write />} />
-            <Route path="/blog-details/:id" element={<Detail />} />
+            <Route path="write" element={<Write />} />
+            <Route path="details/:id" element={<Detail />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="my-blogs" element={<MyBlogs />} />
           </Route>
           <Route path="*" element={<NotFound />} />
-          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
       <Footer />

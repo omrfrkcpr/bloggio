@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
+import { RootState } from "../app/store";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -17,6 +18,7 @@ const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector((store: any) => store.auth);
+  const { path } = useSelector((store: RootState) => store.path);
 
   const register = async (userInfo: object) => {
     dispatch(fetchStart());
@@ -41,6 +43,7 @@ const useAuthCall = () => {
       const { data } = await axios.post(`${BASE_URL}auth/login/`, userInfo);
       dispatch(loginSuccess(data));
       toastSuccessNotify("You're successfully logged in!");
+      navigate(path);
     } catch (error) {
       dispatch(fetchFail());
       toastErrorNotify(

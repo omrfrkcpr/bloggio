@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import authReducer from "../features/authSlice";
 import blogReducer from "../features/blogSlice";
 import modalReducer from "../features/modalSlice";
+import pathReducer from "../features/pathSlice";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ const store = configureStore({
     auth: persistedReducer,
     blog: blogReducer,
     modal: modalReducer,
+    path: pathReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

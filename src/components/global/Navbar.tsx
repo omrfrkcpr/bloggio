@@ -19,15 +19,16 @@ import { useNavigate } from "react-router-dom";
 import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
+import usePath from "../../hooks/usePath";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { showNavbarModal } = useSelector((state: RootState) => state.modal);
   const { logout } = useAuthCalls();
-  const { toggleNavbarModal } = useShowModal();
-  const { toggleHeroModal } = useShowModal();
+  const { toggleNavbarModal, toggleHeroModal } = useShowModal();
   const navigate = useNavigate();
   const [selectedFormType, setSelectedFormType] = React.useState("");
+  const { getNavigatePath } = usePath();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -81,10 +82,11 @@ const Navbar = () => {
     { label: "Register", path: "sign up", id: 2 },
   ];
 
-  const handleLoginMenu = (path: string) => {
+  const handleLoginMenu = (pathUrl: string) => {
     setAnchorElUser(null);
     toggleNavbarModal();
-    setSelectedFormType(path);
+    setSelectedFormType(pathUrl);
+    getNavigatePath("/");
   };
 
   const capitalizeWords = (text: string) => {
@@ -296,7 +298,7 @@ const Navbar = () => {
         <AuthModal
           isOpen={showNavbarModal}
           setIsOpen={toggleNavbarModal}
-          selectedFromType={selectedFormType}
+          selectedFormType={selectedFormType}
         />
       )}
     </>

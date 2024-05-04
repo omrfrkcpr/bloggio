@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
-import { setShowNavbarModal, setShowHeroModal } from "../features/modalSlice";
+import {
+  setShowNavbarModal,
+  setShowHeroModal,
+  setShowBlogCardModal,
+} from "../features/modalSlice";
+import { RootState } from "../app/store";
 
 const useShowModal = () => {
   const dispatch = useDispatch();
   const { showNavbarModal, showHeroModal } = useSelector(
-    (state: any) => state.modal
+    (state: RootState) => state.modal
   );
 
   const toggleNavbarModal = (payload?: boolean) => {
@@ -20,7 +25,13 @@ const useShowModal = () => {
     );
   };
 
-  return { toggleNavbarModal, toggleHeroModal };
+  const toggleBlogCardModal = (payload?: boolean) => {
+    dispatch(
+      setShowBlogCardModal(payload !== undefined ? payload : !showHeroModal)
+    );
+  };
+
+  return { toggleNavbarModal, toggleHeroModal, toggleBlogCardModal };
 };
 
 export default useShowModal;
