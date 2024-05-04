@@ -36,6 +36,10 @@ export const dateFormatter = (dateString: string) => {
 };
 
 export const calculateReadTime = (text: string) => {
+  if (!text) {
+    return 0;
+  }
+
   const wordCount = text.split(/\s+|[,.;!?]+/).length;
   const wordsPerMinute = 225;
   const readTime = Math.ceil(wordCount / wordsPerMinute);

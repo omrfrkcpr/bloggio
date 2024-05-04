@@ -6,7 +6,7 @@ interface AuthModalProps {
 
 interface BlogCardProps {
   _id?: string;
-  // userId: string;
+  userId?: string;
   // categoryId: string;
   title: string;
   content: string;
@@ -25,6 +25,8 @@ interface BlogAnalyticsProps {
   countOfVisitors: number;
   show?: ShowState;
   setShow?: React.Dispatch<React.SetStateAction<ShowState>>;
+  _id?: string;
+  userId?: string;
 }
 
 interface CommentFormProps {

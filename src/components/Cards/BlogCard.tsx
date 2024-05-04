@@ -22,7 +22,7 @@ import {
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
-  // userId,
+  userId,
   // categoryId,
   title,
   content,
@@ -72,7 +72,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       <li className="relative flex items-start justify-center gap-[20px]">
         <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px]">
           <div className="mb-4">
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-5">
               <div className="text-sm text-gray-600 flex items-center space-x-1">
                 <img src={openLock} alt="read-permission-status" width="12px" />
                 <span>Public</span>
@@ -131,6 +131,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 likes={likes}
                 comments={comments}
                 countOfVisitors={countOfVisitors}
+                _id={_id}
+                userId={userId}
               />
 
               <div className="space-x-2">
@@ -140,13 +142,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 >
                   Read More
                 </button>
-                <BookmarksIcon
-                  sx={{
-                    color: "#85b2f0",
-                    "&:hover": { color: "#B9D0F0" },
-                    cursor: "pointer",
-                  }}
-                />
               </div>
             </div>
           </div>
