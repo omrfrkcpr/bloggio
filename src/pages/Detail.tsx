@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { useLocation, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import BlogAnalytics from "../components/commons/BlogAnalytics";
 // import CommentForm from "../components/Forms/CommentForm";
 import { dateFormatter, calculateReadTime } from "../helper/functions";
