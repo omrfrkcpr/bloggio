@@ -3,7 +3,6 @@
 // import lock from "../../assets/lock.svg";
 import openLock from "../../assets/open-lock.svg";
 import Avatar from "@mui/material/Avatar";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import StarIcon from "@mui/icons-material/Star";
 import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
@@ -23,7 +22,6 @@ import {
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
   userId,
-  // categoryId,
   title,
   content,
   image,
@@ -54,7 +52,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const handleReadMore = () => {
     if (currentUser) {
       navigate(`/details/${_id}`, {
-        state: { randomFirstName, randomLastName, userImage },
+        state: { randomFirstName, randomLastName, userImage, categoryName },
       });
     } else {
       toggleBlogCardModal();
@@ -72,14 +70,14 @@ const BlogCard: React.FC<BlogCardProps> = ({
       <li className="relative flex items-start justify-center gap-[20px]">
         <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px]">
           <div className="mb-4">
-            <div className="flex justify-between space-x-5">
+            <div className="flex space-x-1 mb-1">
               <div className="text-sm text-gray-600 flex items-center space-x-1">
                 <img src={openLock} alt="read-permission-status" width="12px" />
                 <span>Public</span>
                 <StarIcon sx={{ fontSize: "15px", color: "orange" }} />
               </div>
               <div>
-                <span className="text-sm text-gray-900 font-bold">
+                <span className="text-sm bg-black/30 rounded-md py-[2px] px-2 text-white">
                   {categoryName}
                 </span>
               </div>

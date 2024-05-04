@@ -1,4 +1,4 @@
-import Hero from "../components/commons/Hero";
+import Hero from "../layouts/Hero";
 import Blogs from "../layouts/Blogs";
 
 const Home = () => {

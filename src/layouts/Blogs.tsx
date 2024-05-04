@@ -49,7 +49,7 @@ const Blogs = () => {
       </ul>
       <Stack
         sx={{
-          marginTop: "2rem",
+          margin: "2rem 0",
           display: "flex",
           alignItems: "center",
         }}

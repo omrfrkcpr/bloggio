@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import pencil from "../../assets/pencil.png";
-import machine from "../../assets/machine.png";
+import pencil from "../assets/pencil.png";
+import machine from "../assets/machine.png";
 import { useEffect, useState } from "react";
-import AuthModal from "../Modals/AuthModal";
+import AuthModal from "../components/Modals/AuthModal";
 import { useSelector } from "react-redux";
-import useShowModal from "../../hooks/useShowModal";
-import { RootState } from "../../app/store";
-import usePath from "../../hooks/usePath";
+import useShowModal from "../hooks/useShowModal";
+import { RootState } from "../app/store";
+import usePath from "../hooks/usePath";
 
 const Hero = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
