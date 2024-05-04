@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BlogAnalytics from "../components/commons/BlogAnalytics";
 import CommentForm from "../components/Forms/CommentForm";
@@ -15,6 +15,8 @@ const Detail = () => {
   // console.log("Blog Detail:", blogDetails);
   const { id } = useParams();
   // console.log("Blog ID:", id);
+  const location = useLocation();
+  const { state } = location;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,13 @@ const Detail = () => {
   }, []);
 
   const {
-    // userId,
+    randomFirstName = "",
+    randomLastName = "",
+    userImage = "",
+  } = state || {};
+
+  const {
+    userId,
     // categoryId,
     title,
     content,
@@ -39,7 +47,8 @@ const Detail = () => {
       <div>
         <h1>{title}</h1>
         <p>{content}</p>
-        <img src={image} alt={title} />
+        <img src={userImage} alt={title} width="50px" />
+        <h1>{`${randomFirstName} ${randomLastName}`}</h1>
         <BlogAnalytics
           show={show}
           setShow={setShow}
@@ -49,6 +58,20 @@ const Detail = () => {
         />
       </div>
       {show && <CommentForm comments={comments} id={id || ""} />}
+      {/* {currentUser?._id == userId && (
+        <Box
+          sx={{
+            marginTop: "2rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          gap={5}
+        >
+          <UpdateModal blog={blog} />
+          <DeleteModal blog={blog} />
+        </Box>
+      )} */}
     </>
   );
 };

@@ -5,8 +5,8 @@ import { setPath } from "../features/pathSlice";
 const usePath = () => {
   const dispatch = useDispatch();
 
-  const getNavigatePath = (payload?: string) => {
-    dispatch(setPath(payload));
+  const getNavigatePath = (pathUrl?: string, takeState?: any) => {
+    dispatch(setPath({ pathUrl, takeState }));
   };
 
   return { getNavigatePath };

@@ -5,10 +5,12 @@ const pathSlice = createSlice({
 
   initialState: {
     path: "",
+    additionalState: null,
   },
   reducers: {
-    setPath(state, { payload }) {
-      state.path = payload;
+    setPath(state, { payload: { pathUrl, takeState } }) {
+      state.path = pathUrl;
+      state.additionalState = takeState;
     },
   },
 });
