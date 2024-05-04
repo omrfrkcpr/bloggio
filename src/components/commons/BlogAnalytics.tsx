@@ -4,16 +4,12 @@ import CommentIcon from "@mui/icons-material/Comment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
 
-interface BlogAnalyticsProps {
-  likes: string[];
-  comments: string[];
-  countOfVisitors: number;
-}
-
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   likes,
   comments,
   countOfVisitors,
+  show,
+  setShow,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
 
@@ -29,7 +25,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         />
         <span className="text-sm">{likes?.length}</span>
       </p>
-      <p className="space-x-1">
+      <p className="space-x-1" onClick={() => setShow && setShow(!show)}>
         <CommentIcon
           sx={{
             fontSize: "1rem",

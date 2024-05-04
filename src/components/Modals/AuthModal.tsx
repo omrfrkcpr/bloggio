@@ -4,12 +4,6 @@ import { IoCloseOutline } from "react-icons/io5";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 
-interface AuthModalProps {
-  isOpen: boolean;
-  setIsOpen: any;
-  selectedFormType: string;
-}
-
 const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   setIsOpen,
@@ -18,7 +12,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
   const [formType, setFormType] = useState(selectedFormType || "sign in");
 
   const handleClose = () => {
-    setIsOpen(false);
+    setIsOpen && setIsOpen(false);
   };
 
   const handleOuterClick = (e: React.MouseEvent<HTMLDivElement>) => {

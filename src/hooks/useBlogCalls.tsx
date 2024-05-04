@@ -6,6 +6,7 @@ import {
   fetchStart,
   getBlogCommentSuccess,
   getSuccess,
+  getDetail,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastSuccessNotify } from "../helper/toastNotify";
@@ -91,12 +92,41 @@ const useBlogCalls = () => {
     }
   };
 
+  const getBlogDetails = async (url: string) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken(`${url}`);
+      // console.log(data);
+      dispatch(getDetail({ data: data?.data }));
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+  const postLike = async (url: string, id: string | undefined) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`${url}`);
+      // console.log(`Post Like: ${data}`);
+      if (id) {
+        getBlogDetails("blogs/" + id);
+      } else {
+        getBlogData("blogs");
+      }
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+  };
+
   return {
     deleteBlogData,
     putBlogData,
     postBlogData,
     getBlogData,
     getBlogComment,
+    getBlogDetails,
+    postLike,
   };
 };
 
