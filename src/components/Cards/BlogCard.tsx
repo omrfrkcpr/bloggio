@@ -3,9 +3,6 @@
 // import lock from "../../assets/lock.svg";
 import openLock from "../../assets/open-lock.svg";
 import Avatar from "@mui/material/Avatar";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import CommentIcon from "@mui/icons-material/Comment";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import StarIcon from "@mui/icons-material/Star";
 import { faker } from "@faker-js/faker";
@@ -16,6 +13,7 @@ import useShowModal from "../../hooks/useShowModal";
 import AuthModal from "../Modals/AuthModal";
 import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
+import BlogAnalytics from "../commons/BlogAnalytics";
 
 interface BlogCardProps {
   _id: string;
@@ -24,8 +22,8 @@ interface BlogCardProps {
   title: string;
   content: string;
   image: string;
-  comments: [];
-  likes: [];
+  comments: string[];
+  likes: string[];
   countOfVisitors: number;
   createdAt: string;
   categoryName: string;
@@ -190,32 +188,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
               </div>
             </div>
             <div className="flex space-x-4">
-              <div className="flex gap-4">
-                <p className="space-x-1">
-                  <FavoriteIcon
-                    sx={{
-                      fontSize: "1rem",
-                      cursor: "pointer",
-                      color: "#A1A1A1",
-                    }}
-                  />
-                  <span className="text-sm">{likes.length}</span>
-                </p>
-                <p className="space-x-1">
-                  <CommentIcon
-                    sx={{
-                      fontSize: "1rem",
-                      cursor: "pointer",
-                      color: "#A1A1A1",
-                    }}
-                  />
-                  <span className="text-sm">{comments.length}</span>
-                </p>
-                <p className="space-x-1">
-                  <VisibilityIcon sx={{ fontSize: "1rem", color: "#A1A1A1" }} />
-                  <span className="text-sm">{countOfVisitors}</span>
-                </p>
-              </div>
+              <BlogAnalytics
+                likes={likes}
+                comments={comments}
+                countOfVisitors={countOfVisitors}
+              />
               <div className="space-x-2">
                 <button
                   onClick={handleReadMore}
