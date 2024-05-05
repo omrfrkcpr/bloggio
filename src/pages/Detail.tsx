@@ -52,7 +52,7 @@ const Detail = () => {
     <div className="min-h-[85.2vh] flex justify-center">
       <div className="flex flex-col justify-center items-center lg:items-start p-5">
         <img src={image} alt="" className="w-[90%] max-w-[1000px] my-5" />
-        <h1 className="text-[1rem] md:text-[2rem] lg:text-[3rem] text-center mt-3 text-[#75a3e3]">
+        <h1 className="text-[1rem] md:text-[2rem] text-center mt-3 text-[#75a3e3]">
           {title}
         </h1>
         <h3 className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 ">

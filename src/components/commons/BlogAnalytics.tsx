@@ -4,7 +4,8 @@ import CommentIcon from "@mui/icons-material/Comment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../../hooks/useBlogCalls";
-import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+// import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   likes,
@@ -30,6 +31,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           sx={{
             fontSize: { xs: "0.8rem", md: "1rem" },
             cursor: "pointer",
+            "&:hover": { color: "black" },
             color:
               likes?.filter(
                 (like: string | unknown) => like === currentUser?._id
@@ -46,20 +48,24 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
             fontSize: { xs: "0.8rem", md: "1rem" },
             cursor: "pointer",
             color: "#A1A1A1",
+            "&:hover": { color: "black" },
           }}
         />
         <span className="text-[10px] md:text-[16px]">{comments?.length}</span>
       </p>
       <p className="space-x-1">
         <VisibilityIcon
-          sx={{ fontSize: { xs: "0.8rem", md: "1rem" }, color: "#A1A1A1" }}
+          sx={{
+            fontSize: { xs: "0.8rem", md: "1rem" },
+            color: "#A1A1A1",
+          }}
         />
         <span className="text-[10px] md:text-[16px]">{countOfVisitors}</span>
       </p>
-      <BookmarksIcon
+      <BookmarkAddOutlinedIcon
         sx={{
-          color: "#85b2f0",
-          "&:hover": { color: "#B9D0F0" },
+          color: "#A1A1A1",
+          "&:hover": { color: "black" },
           cursor: "pointer",
           width: { xs: "18px", md: "25px" },
           height: { xs: "18px", md: "25px" },

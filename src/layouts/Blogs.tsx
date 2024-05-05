@@ -7,7 +7,7 @@ import BlogCard from "../components/Cards/BlogCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-export const BlogsPerPage = 10;
+export const BlogsPerPage = 5;
 
 const Blogs = () => {
   const { getBlogData } = useBlogCalls();
