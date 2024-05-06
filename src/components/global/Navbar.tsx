@@ -24,6 +24,7 @@ import { loggedInSettings, loginSettings } from "../../helper/constants";
 import { capitalizeWords } from "../../helper/functions";
 import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -223,7 +224,10 @@ const Navbar = () => {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0, position: "relative" }}
+                >
                   {currentUser?.image ? (
                     <img
                       className="w-11 h-11 rounded-full cursor-pointer"
@@ -236,9 +240,13 @@ const Navbar = () => {
                         `${capitalizeWords(currentUser?.firstName)}`
                       }
                       src="/static/images/avatar/2.jpg"
-                      sx={{ width: "42px", height: "42px" }}
+                      sx={{ width: "42px", height: "42px", cursor: "pointer" }}
                     />
                   )}
+                  <IoIosArrowDown
+                    className="absolute -right-4 cursor-pointer"
+                    size={12}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -281,13 +289,27 @@ const Navbar = () => {
                         onClick={() => handleCloseUserMenu(path)}
                       >
                         {label === "Profile" ? (
-                          <User size={20} />
+                          <User
+                            size={18}
+                            className="mb-[0.1rem] text-gray-600"
+                          />
                         ) : label === "My Blogs" ? (
-                          <BookOpenText size={20} />
+                          <BookOpenText
+                            size={18}
+                            className="mb-[0.1rem] text-gray-600"
+                          />
                         ) : label === "Stats" ? (
-                          <ChartBar size={20} />
+                          <ChartBar
+                            size={18}
+                            className="mb-[0.1rem] text-gray-600"
+                          />
                         ) : (
-                          label === "Logout" && <SignOut size={20} />
+                          label === "Logout" && (
+                            <SignOut
+                              size={18}
+                              className="mb-[0.1rem] text-gray-600"
+                            />
+                          )
                         )}
                         <CustomTypography textAlign="center" content={label} />
                       </MenuItem>

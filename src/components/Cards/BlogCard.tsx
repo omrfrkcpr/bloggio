@@ -84,10 +84,16 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 </span>
               </div>
             </div>
-            <div className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-2 ">
+            <div
+              className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-2 cursor-pointer"
+              onClick={handleReadMore}
+            >
               {title}
             </div>
-            <p className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px]">
+            <p
+              className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px] cursor-pointer"
+              onClick={handleReadMore}
+            >
               {shortenText(content)}
             </p>
           </div>
@@ -139,10 +145,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 userId={userId}
               />
 
-              <div className="space-x-2 hidden md:block">
+              <div className="hidden md:flex items-center">
                 <button
                   onClick={handleReadMore}
-                  className="bg-[#85b2f0] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0]"
+                  className="bg-[#85b2f0] text-[10px] lg:text-[12px] xl:text-[14px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0]"
                 >
                   Read More
                 </button>
