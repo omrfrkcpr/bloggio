@@ -11,17 +11,22 @@ import { useSelector } from "react-redux";
 import useBlogCalls from "../hooks/useBlogCalls";
 import CreateModal from "../components/Modals/CreateModal";
 
+const initialNewBlog = {
+  categoryId: "",
+  title: "",
+  content: "",
+  image: "",
+  isPublish: true,
+};
+
 const Write = () => {
-  const [title, setTitle] = useState("");
-  const [categoryName, setCategoryName] = useState("");
-  const [imageUrl, setImageUrl] = useState<string>("");
+  const [newBlog, setNewBlog] = useState(initialNewBlog);
   const [imageFile, setImageFile] = useState<string>("");
   const [imageText, setImageText] = useState<string>("");
-  const [showPreview, setShowPreview] = useState(false);
-  const [content, setContent] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const { categories } = useSelector((state: RootState) => state.blog) as any;
   const { getBlogData, postBlogData } = useBlogCalls();
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     getBlogData("categories");
@@ -29,36 +34,14 @@ const Write = () => {
 
   function handleTitle(e: any) {
     const newTitle = e.target.value;
-    setTitle(newTitle);
+    setNewBlog({ ...initialNewBlog, title: newTitle });
   }
 
   async function handleSubmit(e: any) {
     e.preventDefault();
-
-    const newBlog = {
-      categoryId: categoryName,
-      title: title,
-      content: content,
-      image: imageUrl,
-      isPublish: true,
-    };
-
     await postBlogData("blogs", newBlog);
-
-    setContent("");
-    setTitle("");
-    setCategoryName("");
-    setImageUrl("");
-    setShowPreview(false);
+    setNewBlog(initialNewBlog);
   }
-
-  const checkAllFields = () => {
-    title && categoryName && content && imageUrl ? setShowPreview(true) : null;
-  };
-
-  useEffect(() => {
-    checkAllFields();
-  }, [title, categoryName, content, imageUrl]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -66,16 +49,16 @@ const Write = () => {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
-        setImageUrl(result);
+        setNewBlog({ ...initialNewBlog, image: result });
         setImageFile(result);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleImageUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setImageUrl(event.target.value);
-    setImageText(event.target.value);
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewBlog({ ...initialNewBlog, image: e.target.value });
+    setImageText(e.target.value);
   };
 
   const handleResetImage = () => {
@@ -84,7 +67,7 @@ const Write = () => {
     } else if (imageText) {
       setImageText("");
     }
-    setImageUrl("");
+    setNewBlog({ ...initialNewBlog, image: "" });
   };
 
   //Custom Tool Bar
@@ -139,7 +122,7 @@ const Write = () => {
                     <input
                       onChange={handleTitle}
                       type="text"
-                      value={title}
+                      value={newBlog.title}
                       name="title"
                       id="title"
                       autoComplete="given-name"
@@ -155,13 +138,13 @@ const Write = () => {
                     value={imageText}
                     onChange={handleImageUrlChange}
                     placeholder="Enter image URL..."
-                    required={!imageUrl}
+                    required={!newBlog?.image}
                   />
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    required={!imageUrl}
+                    required={!newBlog?.image}
                   />
                   {imageFile && (
                     <div>
@@ -186,7 +169,10 @@ const Write = () => {
                     name="category"
                     id="category"
                     onChange={(e) => {
-                      setCategoryName(e.target.value);
+                      setNewBlog({
+                        ...initialNewBlog,
+                        categoryId: e.target.value,
+                      });
                     }}
                   >
                     {categories.map((cat: any) => (
@@ -209,8 +195,13 @@ const Write = () => {
                   </label>
                   <ReactQuill
                     theme="snow"
-                    value={content}
-                    onChange={setContent}
+                    value={newBlog.content}
+                    onChange={() =>
+                      setNewBlog({
+                        ...initialNewBlog,
+                        content: newBlog.content,
+                      })
+                    }
                     modules={modules}
                     formats={formats}
                   />
@@ -223,54 +214,53 @@ const Write = () => {
                 <FaPlus className="w-5 h-5 mr-2" />
                 <span>Publish</span>
               </button>
-              <button onClick={() => setShowPreview(!showPreview)}>
-                Preview
-              </button>
             </form>
           </div>
-
           {/* Blog View */}
-          {showPreview && (
-            <div className=" blog-view w-full max-w-3xl p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
-              <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
-                Preview
-              </h2>
-              <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                {/* Title */}
-                <div className="sm:col-span-2">
-                  <h2 className="block text-sm font-medium leading-6 text-gray-900 mb-2 ">
-                    Blog Title
-                  </h2>
-                  <div className="mt-2">
-                    <p className="text-2xl font-bold">{title}</p>
-                  </div>
-                </div>
-                {/* Image */}
-                {imageFile && (
-                  <div>
-                    <img
-                      src={imageFile}
-                      alt="Uploaded"
-                      style={{ maxWidth: "100%", marginTop: "10px" }}
-                    />
-                  </div>
-                )}
-                {/* Category */}
-                <div className="sm:col-span-2">
-                  <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Blog Category
-                  </h2>
-                  <p>{categoryName}</p>
-                </div>
-                <div className="sm:col-span-full">
-                  <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Blog Content
-                  </h2>
-                  {parse(content)}
+          <div className=" blog-view w-full max-w-3xl p-8 my-6 bg-white border border-gray-200 rounded-lg shadow mx-auto">
+            <h2 className="text-3xl font-bold border-b border-gray-400 pb-2 mb-5 ">
+              Preview
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+              {/* Title */}
+              <div className="sm:col-span-2">
+                <h2 className="block text-sm font-medium leading-6 text-gray-900 mb-2 ">
+                  Blog Title
+                </h2>
+                <div className="mt-2">
+                  <p className="text-2xl font-bold">{newBlog.title}</p>
                 </div>
               </div>
+              {/* Image */}
+              {imageFile && (
+                <div>
+                  <img
+                    src={imageFile}
+                    alt="Uploaded"
+                    style={{ maxWidth: "100%", marginTop: "10px" }}
+                  />
+                </div>
+              )}
+              {/* Category */}
+              <div className="sm:col-span-2">
+                <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Blog Category
+                </h2>
+                <p>
+                  {newBlog.categoryId &&
+                    categories.find(
+                      (cat: any) => cat._id === newBlog.categoryId
+                    ).name}
+                </p>
+              </div>
+              <div className="sm:col-span-full">
+                <h2 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Blog Content
+                </h2>
+                {parse(newBlog.content)}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
       {isOpen && <CreateModal isOpen={isOpen} setIsOpen={setIsOpen} />}
