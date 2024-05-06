@@ -105,13 +105,14 @@ const Navbar = () => {
         >
           <Toolbar disableGutters>
             <Logo
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1, mt: "5px" }}
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
               width="50px"
             />
             <CustomTypography
               variant="h4"
               sx={{
                 mr: 2,
+                mb: 1,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Playfair Display",
                 fontWeight: 600,
@@ -123,7 +124,13 @@ const Navbar = () => {
               content="Bloggio"
             />
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                position: "relative",
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -196,8 +203,7 @@ const Navbar = () => {
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
                 justifyContent: "end",
-                marginRight: "1rem",
-                gap: 1,
+                marginRight: "0.2rem",
               }}
             >
               {pages.map(({ label, path, id }) => (
@@ -205,7 +211,7 @@ const Navbar = () => {
                   key={id}
                   onClick={() => handleCloseNavMenu(path)}
                   sx={{
-                    my: 2,
+                    my: 1,
                     color: "black",
                     borderRadius: "20px",
                     textTransform: "capitalize",
@@ -226,7 +232,11 @@ const Navbar = () => {
               <Tooltip title="Open settings">
                 <IconButton
                   onClick={handleOpenUserMenu}
-                  sx={{ p: 0, position: "relative" }}
+                  sx={{
+                    p: 0,
+                    position: "relative",
+                    marginRight: { xs: "1rem", md: "0" },
+                  }}
                 >
                   {currentUser?.image ? (
                     <img
@@ -244,7 +254,7 @@ const Navbar = () => {
                     />
                   )}
                   <IoIosArrowDown
-                    className="absolute -right-4 cursor-pointer"
+                    className="absolute -right-[0.9rem] cursor-pointer"
                     size={12}
                   />
                 </IconButton>
