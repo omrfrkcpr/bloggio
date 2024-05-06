@@ -34,7 +34,7 @@ const Write = () => {
 
   function handleTitle(e: any) {
     const newTitle = e.target.value;
-    setNewBlog({ ...initialNewBlog, title: newTitle });
+    setNewBlog((prevState) => ({ ...prevState, title: newTitle }));
   }
 
   async function handleSubmit(e: any) {
@@ -43,13 +43,15 @@ const Write = () => {
     setNewBlog(initialNewBlog);
   }
 
+  console.log(newBlog);
+
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
-        setNewBlog({ ...initialNewBlog, image: result });
+        setNewBlog((prevState) => ({ ...prevState, image: result }));
         setImageFile(result);
       };
       reader.readAsDataURL(file);
@@ -57,7 +59,7 @@ const Write = () => {
   };
 
   const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewBlog({ ...initialNewBlog, image: e.target.value });
+    setNewBlog((prevState) => ({ ...prevState, image: e.target.value }));
     setImageText(e.target.value);
   };
 
@@ -67,7 +69,7 @@ const Write = () => {
     } else if (imageText) {
       setImageText("");
     }
-    setNewBlog({ ...initialNewBlog, image: "" });
+    setNewBlog((prevState) => ({ ...prevState, image: "" }));
   };
 
   //Custom Tool Bar
@@ -138,13 +140,13 @@ const Write = () => {
                     value={imageText}
                     onChange={handleImageUrlChange}
                     placeholder="Enter image URL..."
-                    required={!newBlog?.image}
+                    required={!imageText && !imageFile}
                   />
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    required={!newBlog?.image}
+                    required={!imageText && !imageFile}
                   />
                   {imageFile && (
                     <div>
@@ -169,10 +171,10 @@ const Write = () => {
                     name="category"
                     id="category"
                     onChange={(e) => {
-                      setNewBlog({
-                        ...initialNewBlog,
+                      setNewBlog((prevState) => ({
+                        ...prevState,
                         categoryId: e.target.value,
-                      });
+                      }));
                     }}
                   >
                     {categories.map((cat: any) => (
@@ -196,11 +198,11 @@ const Write = () => {
                   <ReactQuill
                     theme="snow"
                     value={newBlog.content}
-                    onChange={() =>
-                      setNewBlog({
-                        ...initialNewBlog,
-                        content: newBlog.content,
-                      })
+                    onChange={(content) =>
+                      setNewBlog((prevState) => ({
+                        ...prevState,
+                        content: content,
+                      }))
                     }
                     modules={modules}
                     formats={formats}

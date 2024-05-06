@@ -23,7 +23,7 @@ const useBlogCalls = () => {
   const getBlogData = async (url: string) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}`);
+      const { data } = await axiosWithToken(`${url}?limit=300`);
       // console.log(data);
 
       dispatch(getSuccess({ data: data?.data, url }));

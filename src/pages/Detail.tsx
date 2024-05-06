@@ -49,7 +49,7 @@ const Detail = () => {
   );
 
   return (
-    <div className="min-h-[85.2vh] flex justify-center">
+    <div className="min-h-[88.1vh] h-auto flex justify-center">
       <div className="flex flex-col justify-center items-center lg:items-start p-5">
         <img src={image} alt="" className="w-[90%] max-w-[1000px] my-5" />
         <h1 className="text-[1rem] md:text-[2rem] text-center mt-3 text-[#75a3e3]">
