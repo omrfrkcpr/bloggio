@@ -67,29 +67,35 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
   return (
     <>
-      <li className="relative flex items-start justify-center gap-[20px]">
+      <li className="relative flex items-start justify-center gap-[15px] w-[95%] mx-auto">
         <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px]">
           <div className="mb-4">
             <div className="flex space-x-1 mb-1">
-              <div className="text-sm text-gray-600 flex items-center space-x-1">
+              <div className="text-[10px] lg:text-[12px]  text-gray-600 flex items-center space-x-1">
                 <img src={openLock} alt="read-permission-status" width="12px" />
                 <span>Public</span>
-                <StarIcon sx={{ fontSize: "15px", color: "orange" }} />
+                <StarIcon
+                  sx={{ fontSize: { xs: "12px", md: "15px" }, color: "orange" }}
+                />
               </div>
               <div>
-                <span className="text-sm bg-black/30 rounded-md py-[2px] px-2 text-white">
+                <span className="text-[10px] lg:text-[12px] bg-black/30 rounded-md py-[2px] px-2 text-white">
                   {categoryName}
                 </span>
               </div>
             </div>
-            <div className="text-gray-900 font-bold text-xl mb-2">{title}</div>
-            <p className="text-gray-700 text-base">{shortenText(content)}</p>
+            <div className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-2 ">
+              {title}
+            </div>
+            <p className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px]">
+              {shortenText(content)}
+            </p>
           </div>
           <div className="flex justify-between">
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               {isDicebearImage ? (
                 <img
-                  className="w-8 h-8 rounded-full mr-2 border-[.5px] border-gray"
+                  className="w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 border-[.5px] border-gray"
                   src={userImage}
                 />
               ) : (
@@ -98,8 +104,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
                     alt={`${randomFirstName} ${randomLastName}`}
                     src="/static/images/avatar/2.jpg"
                     sx={{
-                      width: "32px",
-                      height: "32px",
+                      width: { xs: "25px", md: "32px" },
+                      height: { xs: "25px", md: "32px" },
                       mr: 1,
                       backgroundColor: "#B9D0F0",
                     }}
@@ -108,8 +114,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
                   <Avatar
                     src="/static/images/avatar/2.jpg"
                     sx={{
-                      width: "32px",
-                      height: "32px",
+                      width: { xs: "25px", md: "32px" },
+                      height: { xs: "25px", md: "32px" },
                       mr: 1,
                       backgroundColor: "#B9D0F0",
                     }}
@@ -117,14 +123,14 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 )
               )}
               <div className="text-sm">
-                <p className="text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
-                <p className="text-gray-600 space-x-1">
+                <p className="text-[10px] lg:text-[12px] xl:text-[16px] text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
+                <p className="text-gray-600 space-x-1 text-[10px]  lg:text-[12px] xl:text-[14px] ">
                   <span>{dateFormatter(createdAt)} -</span>
                   <span>{`${calculateReadTime(content)} min read`}</span>
                 </p>
               </div>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-1 xl:space-x-4">
               <BlogAnalytics
                 likes={likes}
                 comments={comments}
@@ -133,10 +139,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 userId={userId}
               />
 
-              <div className="space-x-2">
+              <div className="space-x-2 hidden md:block">
                 <button
                   onClick={handleReadMore}
-                  className="bg-[#85b2f0] text-sm py-1 px-2 rounded-xl text-white hover:bg-[#B9D0F0]"
+                  className="bg-[#85b2f0] text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0]"
                 >
                   Read More
                 </button>

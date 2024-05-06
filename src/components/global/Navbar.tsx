@@ -22,6 +22,8 @@ import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
 import { loggedInSettings, loginSettings } from "../../helper/constants";
 import { capitalizeWords } from "../../helper/functions";
+import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
+import Search from "../commons/Search";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -181,12 +183,13 @@ const Navbar = () => {
                 fontFamily: "Playfair Display",
                 fontWeight: 600,
                 letterSpacing: ".1rem",
-                color: "inherit",
+                color: isActive ? "#B9D0F0" : "inherit",
                 textDecoration: "none",
-                textShadow: "1px 2px 1px #0000004a",
+                textShadow: isActive ? "" : "1px 2px 1px #0000004a",
               }}
               content="Bloggio"
             />
+            {currentUser && <Search />}
             <Box
               sx={{
                 flexGrow: 1,
@@ -270,8 +273,22 @@ const Navbar = () => {
                   ? loggedInSettings.map(({ label, path, id }) => (
                       <MenuItem
                         key={id}
+                        sx={{
+                          gap: 0.5,
+                          borderTop:
+                            label === "Logout" ? "2px solid #EEEEEE" : "",
+                        }}
                         onClick={() => handleCloseUserMenu(path)}
                       >
+                        {label === "Profile" ? (
+                          <User size={20} />
+                        ) : label === "My Blogs" ? (
+                          <BookOpenText size={20} />
+                        ) : label === "Stats" ? (
+                          <ChartBar size={20} />
+                        ) : (
+                          label === "Logout" && <SignOut size={20} />
+                        )}
                         <CustomTypography textAlign="center" content={label} />
                       </MenuItem>
                     ))

@@ -24,7 +24,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   };
 
   return (
-    <div className="flex gap-2 md:gap-4 items-center">
+    <div className="flex gap-[0.2rem] xl:gap-[0.5rem]  items-center">
       <p className="space-x-1">
         <FavoriteIcon
           onClick={handleLikeClick}

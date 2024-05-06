@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Hero />
       <Trending />
-      <div className="size py-7 flex flex-col-reverse lg:flex-row gap-[3rem] xl:gap-[7rem]">
+      <div className="size py-3 md:py-5 lg:py-7 flex flex-col-reverse lg:flex-row gap-[3rem] xl:gap-[7rem]">
         <div className="flex-[1.5]">
           <Blogs />
         </div>

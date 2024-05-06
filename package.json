@@ -15,6 +15,7 @@
     "@material-tailwind/react": "^2.1.9",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
+    "@phosphor-icons/react": "^2.1.5",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/quill": "^2.0.14",
     "@types/redux-persist": "^4.3.1",

@@ -30,7 +30,7 @@ const Hero = () => {
 
   return (
     <div
-      className="h-[450px] p-5 relative flex flex-wrap overflow-hidden bg-[#b9d0f0] px-4 md:px-[8rem] justify-center md:justify-start items-center pb-[10rem] md:pb-0 text-center md:text-left"
+      className="h-[300px] md:h-[450px] p-5 relative flex flex-wrap overflow-hidden bg-[#b9d0f0] px-4 md:px-[8rem] justify-center md:justify-start items-center pb-[10rem] md:pb-0 text-center md:text-left"
       id="hero"
     >
       <div className="flex flex-col space-y-8 md:space-y-4 w-[400px] xl:w-auto">

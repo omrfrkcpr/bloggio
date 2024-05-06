@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { useEffect } from "react";
-import { discoverActions } from "../helper/constants";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Discover = () => {
   const { categories } = useSelector((state: any) => state.blog);
@@ -20,18 +19,18 @@ const Discover = () => {
   };
 
   return (
-    <div className="sticky top-[6rem]">
-      <div className="border-b border-gray-400 pb-7">
-        <h2 className="font-semibold">
+    <div className="sticky top-[1rem] md:top-[3rem] lg:top-[6rem]">
+      <div className="border-b border-gray-400 pb-3 md:pb-5 lg:pb-7">
+        <h2 className="font-semibold text-[14px] md:text-[18px] lg:text-[22px]">
           Discover more of what are important to you.
         </h2>
-        <div className="my-2 flex items-center gap-3 flex-wrap">
+        <div className="my-1 md:my-2 flex items-center gap-1 md:gap-3 flex-wrap">
           {categories
             .slice(0, displayedCategories)
             .map(({ _id, name }: { _id: string; name: string }) => (
               <button
                 key={_id}
-                className="bg-gray-300 text-gray-600 hover:text-black  px-3 py-2 rounded-full"
+                className="bg-gray-300 text-gray-600 text-[10px] md:text-[14px] lg:text-[18px] hover:text-black px-2 md:px-3 py-1 md:py-2 rounded-full"
               >
                 {name}
               </button>
@@ -39,29 +38,12 @@ const Discover = () => {
           {categories.length > displayedCategories && (
             <button
               onClick={loadMoreCategories}
-              className="text-black text-sm py-3 underline hover:text-blue-400"
+              className="text-black  text-[10px] md:text-[14px] lg:text-[18px] py-3 underline hover:text-blue-400"
             >
               See more topics
             </button>
           )}
         </div>
-      </div>
-      <div className="flex items-center flex-wrap gap-3 leading-3 pt-8">
-        {discoverActions.map(
-          ({
-            id,
-            label,
-            path,
-          }: {
-            id: number;
-            label: string;
-            path: string;
-          }) => (
-            <Link to={path} key={id}>
-              <button>{label}</button>
-            </Link>
-          )
-        )}
       </div>
     </div>
   );
