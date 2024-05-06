@@ -11,12 +11,12 @@ export const loginSettings = [
 
 export const discoverActions = [
   { id: 1, label: "Help", path: "/help" },
-  { id: 1, label: "Status", path: "/help" },
-  { id: 1, label: "Writers", path: "/help" },
-  { id: 1, label: "Blog", path: "/help" },
-  { id: 1, label: "Careers", path: "/help" },
-  { id: 1, label: "Privacy", path: "/help" },
-  { id: 1, label: "Terms", path: "/help" },
-  { id: 1, label: "About", path: "/help" },
-  { id: 1, label: "Teams", path: "/help" },
+  { id: 2, label: "Status", path: "/status" },
+  { id: 3, label: "Authers", path: "/authers" },
+  { id: 4, label: "Blog", path: "/blog" },
+  { id: 5, label: "Careers", path: "/careers" },
+  { id: 6, label: "Privacy", path: "/privacy" },
+  { id: 7, label: "Terms", path: "/terms" },
+  { id: 8, label: "About", path: "/about" },
+  { id: 9, label: "Teams", path: "/teams" },
 ];
