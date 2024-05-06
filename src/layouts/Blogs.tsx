@@ -34,7 +34,7 @@ const Blogs = () => {
 
   return (
     <>
-      <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center p-8 max-w-[900px] mx-auto min-h-[43.8vh] h-auto">
+      <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] mx-auto min-h-[43.8vh] h-auto">
         {currentBlogs.map((blog: any) => {
           const category = categories.find(
             (cat: any) => cat?._id === blog?.categoryId

@@ -144,12 +144,13 @@ const BlogCard: React.FC<BlogCardProps> = ({
             </div>
           </div>
         </div>
-
-        <img
-          src={image}
-          alt="blog-img"
-          className="shadow-md rounded-lg bg-slate-50 object-cover w-[130px] h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[180px] m-auto"
-        />
+        <div className="flex items-center justify-center m-auto">
+          <img
+            src={image}
+            alt="blog-img"
+            className="shadow-md rounded-lg bg-slate-50 object-cover w-[130px] h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[180px] m-auto"
+          />
+        </div>
       </li>
       {showBlogCardModal && (
         <AuthModal
