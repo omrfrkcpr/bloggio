@@ -57,3 +57,12 @@ export const calculateReadTime = (text: string) => {
       return 20 + additionalTime;
   }
 };
+
+export const capitalizeWords = (text: string) => {
+  return text
+    .split(" ")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+};

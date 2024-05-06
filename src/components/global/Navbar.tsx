@@ -20,6 +20,8 @@ import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
+import { loggedInSettings, loginSettings } from "../../helper/constants";
+import { capitalizeWords } from "../../helper/functions";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -29,6 +31,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [selectedFormType, setSelectedFormType] = React.useState("");
   const { getNavigatePath } = usePath();
+  const [isActive, setIsActive] = React.useState(false);
+
+  const pages = [
+    { label: "Home", path: "/", id: 1 },
+    { label: "Contact", path: "/contact", id: 2 },
+    { label: "About", path: "/about", id: 3 },
+    currentUser && { label: "Write", path: "/write", id: 4 },
+  ].filter(Boolean);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -36,6 +46,13 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  React.useEffect(() => {
+    const scrollMe = () => {
+      window.scrollY > 250 ? setIsActive(true) : setIsActive(false);
+    };
+    window.addEventListener("scroll", scrollMe);
+  }, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -64,24 +81,6 @@ const Navbar = () => {
     }
   };
 
-  const pages = [
-    { label: "Home", path: "/", id: 1 },
-    { label: "Contact", path: "/contact", id: 2 },
-    { label: "About", path: "/about", id: 3 },
-    currentUser && { label: "Write", path: "/write", id: 4 },
-  ].filter(Boolean);
-
-  const loggedInSettings = [
-    { label: "My Blogs", path: "/my-blogs", id: 1 },
-    { label: "Profile", path: "/profile", id: 2 },
-    { label: "Logout", path: "logout", id: 3 },
-  ];
-
-  const loginSettings = [
-    { label: "Login", path: "sign in", id: 1 },
-    { label: "Register", path: "sign up", id: 2 },
-  ];
-
   const handleLoginMenu = (pathUrl: string) => {
     setAnchorElUser(null);
     toggleNavbarModal();
@@ -89,24 +88,16 @@ const Navbar = () => {
     getNavigatePath("/");
   };
 
-  const capitalizeWords = (text: string) => {
-    return text
-      .split(" ")
-      .map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-      })
-      .join(" ");
-  };
-
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Container
           maxWidth={false}
           sx={{
-            backgroundColor: "#b9d0f0",
+            backgroundColor: isActive ? "white" : "#b9d0f0",
             borderBottom: "1px solid black",
             padding: { sm: "0 1rem", md: "0.2rem 8rem" },
+            transition: "all 0.5s",
           }}
         >
           <Toolbar disableGutters>
