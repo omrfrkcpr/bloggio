@@ -1,41 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import useBlogCalls from "../hooks/useBlogCalls";
 import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
+import useBlogCalls from "../hooks/useBlogCalls";
 
-export const BlogsPerPage = 5;
+export const BlogsPerPage = 10;
 
 const Blogs = () => {
+  const navigate = useNavigate();
   const { getBlogData } = useBlogCalls();
-  const { blogs, categories } = useSelector((state: RootState) => state.blog);
+  const { blogs, categories, totalPage } = useSelector(
+    (state: RootState) => state.blog
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const indexOfLastBlog = currentPage * BlogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - BlogsPerPage;
-  const currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
+  // const indexOfLastBlog = currentPage * BlogsPerPage;
+  // const indexOfFirstBlog = indexOfLastBlog - BlogsPerPage;
+  // const currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  const totalPages = Math.ceil(blogs?.length / BlogsPerPage);
-
-  const onPageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+  const onPageChange = async (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setCurrentPage(page);
+    navigate(`/?page=${page}&limit=10`);
+    getBlogData("blogs", `/?page=${page}&limit=10`);
   };
-
-  useEffect(() => {
-    getBlogData("blogs");
-    getBlogData("categories");
-  }, []);
-
-  console.log("blogs:", blogs);
-  console.log("categories:", categories);
 
   return (
     <>
       <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] mx-auto min-h-[43.8vh] h-auto">
-        {currentBlogs.map((blog: any) => {
+        {blogs.map((blog: any) => {
           const category = categories.find(
             (cat: any) => cat?._id === blog?.categoryId
           ) as { name: string } | undefined;
@@ -55,7 +54,7 @@ const Blogs = () => {
         }}
       >
         <Pagination
-          count={totalPages}
+          count={totalPage}
           page={currentPage}
           color="primary"
           onChange={onPageChange}

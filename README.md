@@ -1,5 +1,11 @@
 # Bloggio
 
+Backend TODO:
+
+- implement database for stats based on userId (total likes-comments-visibility/bookmarks)
+- change request method for comment list (GET) ==> baseURL/comments/{blogId}
+- add also user firstname + lastname inside each blog object (response GET blogs)
+
 ## Description
 
 Project aims to create a Milestone Blog App.

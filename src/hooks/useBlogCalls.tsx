@@ -7,6 +7,7 @@ import {
   getBlogCommentSuccess,
   getSuccess,
   getDetail,
+  getPage,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastSuccessNotify } from "../helper/toastNotify";
@@ -20,13 +21,15 @@ const useBlogCalls = () => {
     return text.charAt(0).toUpperCase() + text.slice(1, -1);
   };
 
-  const getBlogData = async (url: string) => {
+  const getBlogData = async (url: string, search: string = "") => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}?limit=300`);
+      const { data } = await axiosWithToken(`${url}${search}`);
       // console.log(data);
-
       dispatch(getSuccess({ data: data?.data, url }));
+      if (url === "blogs") {
+        dispatch(getPage(data?.details?.pages?.total));
+      }
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

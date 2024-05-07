@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import useBlogCalls from "../hooks/useBlogCalls";
-import { useEffect } from "react";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
   const { categories } = useSelector((state: any) => state.blog);
-  const { getBlogData } = useBlogCalls();
   const [displayedCategories, setDisplayedCategories] = useState<number>(5);
 
-  useEffect(() => {
-    getBlogData("categories");
-  }, []);
+  console.log(categories);
 
   const loadMoreCategories = () => {
     setDisplayedCategories((prevCount) => prevCount + 5);

@@ -11,6 +11,8 @@ const blogSlice = createSlice({
     comments: [],
     loading: false,
     error: false,
+    // pagination
+    totalPage: 1,
   },
 
   reducers: {
@@ -19,14 +21,20 @@ const blogSlice = createSlice({
       state.error = false;
     },
 
-    getSuccess: (state, { payload: { data, url } }) => {
+    getSuccess: (state: { [key: string]: any }, { payload: { data, url } }) => {
       state.loading = false;
-      state[url as keyof typeof state] = data;
+      state[url] = data;
     },
+
+    getPage: (state, { payload }) => {
+      state.totalPage = payload;
+    },
+
     getDetail: (state, { payload: { data } }) => {
       state.loading = false;
       state.blogDetails = data;
     },
+
     getBlogCommentSuccess: (state, { payload }) => {
       state.loading = false;
       state.blogs = payload[0].data;
@@ -45,5 +53,6 @@ export const {
   getDetail,
   getBlogCommentSuccess,
   fetchFail,
+  getPage,
 } = blogSlice.actions;
 export default blogSlice.reducer;
