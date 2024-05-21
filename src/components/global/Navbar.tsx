@@ -93,7 +93,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="sticky" sx={{ zIndex: 30 }}>
         <Container
           maxWidth={false}
           sx={{
