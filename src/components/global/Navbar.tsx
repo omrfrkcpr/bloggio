@@ -20,7 +20,7 @@ import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
-import { loggedInSettings, loginSettings } from "../../helper/constants";
+import { loginSettings } from "../../helper/constants";
 import { capitalizeWords } from "../../helper/functions";
 import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
@@ -44,6 +44,13 @@ const Navbar = () => {
     { label: "About", path: "/about", id: 3 },
     currentUser && { label: "Write", path: "/write", id: 4 },
   ].filter(Boolean);
+
+  const loggedInSettings = [
+    { label: "My Blogs", path: "/my-blogs", id: 1 },
+    { label: "Profile", path: `/profile/${currentUser._id}`, id: 2 },
+    { label: "Stats", path: "/profile", id: 3 },
+    { label: "Logout", path: "logout", id: 4 },
+  ];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
