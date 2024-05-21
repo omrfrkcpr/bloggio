@@ -25,6 +25,7 @@ import { capitalizeWords } from "../../helper/functions";
 import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
 import { IoIosArrowDown } from "react-icons/io";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -35,6 +36,7 @@ const Navbar = () => {
   const [selectedFormType, setSelectedFormType] = React.useState("");
   const { getNavigatePath } = usePath();
   const [isActive, setIsActive] = React.useState(false);
+  const [searchModal, setSearchModal] = React.useState(false);
 
   const pages = [
     { label: "Home", path: "/", id: 1 },
@@ -141,6 +143,13 @@ const Navbar = () => {
               >
                 <MenuIcon />
               </IconButton>
+              <span
+                onClick={() => setSearchModal(!searchModal)}
+                className="hover:bg-black/5 d-flex justify-center items-center px-3 h-[50px] rounded-full"
+              >
+                <CiSearch className="text-black/50 mt-[0.8rem] text-[25px] cursor-pointer" />
+              </span>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -197,7 +206,7 @@ const Navbar = () => {
               }}
               content="Bloggio"
             />
-            {currentUser && <Search />}
+            <Search modal={searchModal} setModal={setSearchModal} />
             <Box
               sx={{
                 flexGrow: 1,
@@ -206,6 +215,12 @@ const Navbar = () => {
                 marginRight: "0.2rem",
               }}
             >
+              <span
+                onClick={() => setSearchModal(!searchModal)}
+                className="hover:bg-black/5 d-flex justify-center items-center px-2 mt-2 h-[40px] rounded-full"
+              >
+                <CiSearch className="text-2xl text-black/50 mt-[0.4rem] text-[25px] cursor-pointer" />
+              </span>
               {pages.map(({ label, path, id }) => (
                 <Button
                   key={id}
