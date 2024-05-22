@@ -60,8 +60,9 @@ const Profile = () => {
         <currentActive.comp />
       </div>
       {/* users details */}
+
       <CustomModal hidden={hidden} setModal={setModal}>
-        <div className="flex-[1] h-full border-[1.5px] border-gray-300 fixed p-[2rem] z-10 right-0 top-[58px] sm:top-[65px] lg:top-[71px] w-[18rem] ms-auto bg-white md:relative ">
+        <div className="flex-[1] border-[1.5px] border-gray-300 fixed p-[2rem] z-50 right-0 top-[58px] sm:top-[65px] lg:top-[71px] w-[18rem] min-h-[calc(100vh-57px)] md:min-h-[calc(100vh-71px)]  h-auto bg-white  ">
           {/* icons to close out modal */}
           <div className="pb-4 text-right">
             <button
