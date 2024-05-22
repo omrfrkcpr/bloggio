@@ -47,7 +47,7 @@ const Navbar = () => {
 
   const loggedInSettings = [
     { label: "My Blogs", path: "/my-blogs", id: 1 },
-    { label: "Profile", path: `/profile/${currentUser._id}`, id: 2 },
+    { label: "Profile", path: `/profile/${currentUser?._id}`, id: 2 },
     { label: "Stats", path: "/profile", id: 3 },
     { label: "Logout", path: "logout", id: 4 },
   ];
