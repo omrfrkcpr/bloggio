@@ -9,7 +9,9 @@ const Search = ({
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const hidden = modal ? "visible opacity-100" : "invisible opacity-0";
+  const hidden = modal
+    ? "visible translate-y-0"
+    : "invisible -translate-y-[100%]";
 
   return (
     <div className="relative">

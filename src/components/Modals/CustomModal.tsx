@@ -12,7 +12,7 @@ const CustomModal = ({
   return (
     <div
       onClick={() => setModal(false)}
-      className={`bg-white/50 fixed inset-0 z-50 ${hidden} transition-all duration-500`}
+      className={`bg-white/50 fixed inset-0 z-50 ${hidden}`}
     >
       <div onClick={(e) => e.stopPropagation()}> {children}</div>
     </div>
