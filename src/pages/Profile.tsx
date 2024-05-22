@@ -6,6 +6,7 @@ import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
 import { useState } from "react";
 import CustomModal from "../components/Modals/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
+import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 
 const Profile = () => {
@@ -59,8 +60,14 @@ const Profile = () => {
         </div>
         <currentActive.comp />
       </div>
+      {/* button to open side bar */}
+      <button
+        onClick={() => setModal(true)}
+        className="fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center md:hidden"
+      >
+        <IoSettingsSharp />
+      </button>
       {/* users details */}
-
       <CustomModal hidden={hidden} setModal={setModal}>
         <div className="flex-[1] border-[1.5px] border-gray-300 fixed p-[2rem] z-50 right-0 top-[58px] sm:top-[65px] lg:top-[71px] w-[18rem] min-h-[calc(100vh-57px)] md:min-h-[calc(100vh-71px)]  h-auto bg-white  ">
           {/* icons to close out modal */}
