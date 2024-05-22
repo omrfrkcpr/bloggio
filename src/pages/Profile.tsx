@@ -8,6 +8,7 @@ import CustomModal from "../components/Modals/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
+import EditProfile from "../components/ProfileActivities/EditProfile";
 
 const Profile = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -27,6 +28,7 @@ const Profile = () => {
   ];
   const [currentActive, setCurrentActive] = useState(activities[0]);
   const [modal, setModal] = useState(true);
+  const [editModal, setEditModal] = useState(true);
   const hidden = modal
     ? "translate-x-0 opacity-100 transition-all duration-500"
     : "translate-x-[100%] md:translate-0 opacity-0 transition-all duration-500";
@@ -85,12 +87,18 @@ const Profile = () => {
             <h2 className="capitalize py-8 font-bold">{`${
               currentUser?.firstName
             } ${currentUser?.lastName.toUpperCase()}`}</h2>
-            <button className="text-green-700 pt-6 text-sm w-fit">
+            <button
+              onClick={() => setEditModal(true)}
+              className="text-green-700 pt-6 text-sm w-fit hover:underline"
+            >
               Edit Profile
             </button>
           </div>
         </div>
       </CustomModal>
+      {editModal && (
+        <EditProfile editModal={editModal} setEditModal={setEditModal} />
+      )}
     </section>
   );
 };
