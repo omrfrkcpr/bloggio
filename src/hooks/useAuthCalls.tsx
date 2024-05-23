@@ -18,15 +18,15 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state: any) => state.auth);
   const { token } = useSelector((store: any) => store.auth);
   const { path } = useSelector((store: RootState) => store.path);
-  const { currentUser } = useSelector((state: any) => state.auth);
 
   const register = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(`${BASE_URL}users/`, userInfo);
-      console.log(data);
+      // console.log(data);
       dispatch(registerSuccess(data));
       navigate("/");
       toastSuccessNotify("You're successfully registered!");
@@ -42,8 +42,8 @@ const useAuthCall = () => {
   const updateUser = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.put(
-        `${BASE_URL}users/${currentUser._id}/`,
+      const { data } = await axios.patch(
+        `${BASE_URL}users/${currentUser?._id}/`,
         userInfo,
         {
           headers: {

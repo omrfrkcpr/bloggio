@@ -46,8 +46,9 @@ const Profile = () => {
               </h2>
             </div>
             <div className="flex items-center gap-3 mb-[4rem] border-b border-gray-300 ">
-              {activities.map((activity) => (
+              {activities.map((activity, index) => (
                 <div
+                  key={index}
                   className={`py-[0.5rem] ${
                     activity.title === currentActive.title
                       ? "border-b border-gray-500"
@@ -63,7 +64,7 @@ const Profile = () => {
                 </div>
               ))}
             </div>
-            <currentActive.comp />
+            <currentActive.comp setEditModal={setEditModal} />
           </div>
           {/* button to open side bar */}
           <button

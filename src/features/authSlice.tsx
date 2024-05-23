@@ -23,10 +23,7 @@ const authSlice = createSlice({
     updateSuccess: (state, { payload }) => {
       state.loading = false;
       state.error = false;
-      state.currentUser = {
-        ...state?.currentUser,
-        ...payload,
-      };
+      state.currentUser = payload?.data;
     },
     loginSuccess: (state, { payload }) => {
       state.loading = false;

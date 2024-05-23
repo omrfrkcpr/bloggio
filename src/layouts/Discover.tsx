@@ -7,7 +7,7 @@ const Discover = () => {
   const { categories } = useSelector((state: any) => state.blog);
   const [displayedCategories, setDisplayedCategories] = useState<number>(5);
 
-  console.log(categories);
+  // console.log(categories);
 
   const loadMoreCategories = () => {
     setDisplayedCategories((prevCount) => prevCount + 5);

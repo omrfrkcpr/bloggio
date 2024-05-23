@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { LiaTimesSolid } from "react-icons/lia";
 import CustomModal from "../Modals/CustomModal";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
@@ -14,17 +15,39 @@ const EditProfile = ({
   editModal: boolean;
   setEditModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const imgRef = useRef<HTMLInputElement | null>(null);
   const { currentUser } = useSelector((state: any) => state.auth);
-  const [imgUrl, setImgUrl] = useState(currentUser?.image || "");
   const { updateUser } = useAuthCalls();
   const [usernameLength, setUsernameLength] = useState(0);
   const [bioLength, setBioLength] = useState(0);
 
-  console.log(currentUser);
+  const initialFormData = {
+    username: "",
+    image: "",
+    bio: "",
+  };
 
-  const openFile = () => {
-    imgRef?.current?.click();
+  const [form, setForm] = useState(initialFormData);
+
+  useEffect(() => {
+    if (currentUser) {
+      setForm({
+        username: currentUser?.username || "",
+        image: currentUser?.image || "",
+        bio: currentUser?.bio || "",
+      });
+    } else {
+      setForm(initialFormData);
+    }
+  }, [currentUser]);
+
+  const saveForm = () => {
+    const updatedUser = {
+      ...currentUser,
+      ...form,
+    };
+    console.log("Updated User Data:", updatedUser);
+    updateUser(updatedUser);
+    setEditModal(false);
   };
 
   const btn =
@@ -43,42 +66,39 @@ const EditProfile = ({
         {/* body */}
         <section className="mt-6">
           <p className="pb-2 text-sm text-gray-500 mb-2">Photo</p>
+          <div className="flex justify-start mb-2">
+            <label htmlFor="userImg" className="text-sm pb-3">
+              Image URL:
+            </label>
+            <input
+              value={form?.image}
+              className=" h-[20px] ms-2 border-b-[1.5px] border-black outline-none"
+              id="userImg"
+              onChange={(e) => setForm({ ...form, image: e.target.value })}
+              accept="image/jpg, img/png, image/jpeg, image/JPEG, image/gif"
+              type="text"
+            />
+          </div>
           <div className="flex gap-[2rem]">
             <div className="w-[5rem]">
-              {imgUrl ? (
+              {form?.image ? (
                 <img
-                  className="h-[5rem] w-[5rem] object-fit border border-gray-400 rounded-full"
-                  src={imgUrl}
+                  className="min-h-[5rem] min-w-[5rem] object-fit border border-gray-400 rounded-full"
+                  src={form?.image}
                   alt="profile-img"
                 />
               ) : (
                 <Avatar sx={{ minWidth: "5rem", minHeight: "5rem" }} />
               )}
-
-              <input
-                onChange={(e) => {
-                  if (e?.target?.files) {
-                    setImgUrl(URL.createObjectURL(e.target.files[0]));
-                  }
-                }}
-                accept="image/jpg, img/png, image/jpeg, image/JPEG, image/gif"
-                ref={imgRef}
-                type="file"
-                hidden
-              />
             </div>
             <div>
-              <div className="flex gap-4 text-sm">
-                <button
-                  onClick={openFile}
-                  className="text-green-700 hover:text-green-200"
-                >
-                  Update
-                </button>
-                <button className="text-red-700 hover:text-red-200">
-                  Remove
-                </button>
-              </div>
+              <button
+                onClick={() => setForm({ ...form, image: "" })}
+                className="text-red-700 text-sm hover:underline "
+              >
+                Clear URL
+              </button>
+
               <p className="w-full sm:w-[20rem] text-gray-500 text-sm pt-2 ">
                 Recommended: Square JPG, PNG, or GIF, at least 1,000 Pixels per
                 side.
@@ -93,8 +113,10 @@ const EditProfile = ({
           </label>
           <input
             type="text"
+            value={form?.username}
             onChange={(e) => {
               setUsernameLength(e.target.value.length);
+              setForm({ ...form, username: e.target.value });
             }}
             id="username"
             placeholder="Username..."
@@ -111,8 +133,10 @@ const EditProfile = ({
             </label>
             <input
               type="text"
+              value={form?.bio}
               onChange={(e) => {
                 setBioLength(e.target.value.length);
+                setForm({ ...form, bio: e.target.value });
               }}
               id="bio"
               placeholder="Bio..."
@@ -120,7 +144,8 @@ const EditProfile = ({
               maxLength={160}
             />
             <p className="text-sm text-gray-600 pt-2 ">
-              Appears on your Profile and next to your stories. {bioLength}/160
+              Appears on your Profile and next to your stories. {bioLength}
+              /160
             </p>
           </section>
         </section>
@@ -128,10 +153,12 @@ const EditProfile = ({
         <div className="flex items-center justify-end gap-4 pt-[2rem]">
           <button
             className={`text-green-600 ${btn} hover:border-green-300 hover:text-green-300`}
+            onClick={() => setEditModal(false)}
           >
             Cancel
           </button>
           <button
+            onClick={saveForm}
             className={`text-white ${btn} bg-green-800 hover:bg-green-300 hover:border-green-300`}
           >
             Save

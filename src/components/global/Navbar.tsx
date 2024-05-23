@@ -21,7 +21,7 @@ import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
 import { loginSettings } from "../../helper/constants";
-import { capitalizeWords } from "../../helper/functions";
+import { capitalizeWords, maskEmail } from "../../helper/functions";
 import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
 import { IoIosArrowDown } from "react-icons/io";
@@ -298,7 +298,7 @@ const Navbar = () => {
                       )} ${currentUser?.lastName?.toUpperCase()}`}
                     </span>
                     <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                      {`${currentUser?.email}`}
+                      {`${maskEmail(currentUser?.email)}`}
                     </span>
                   </div>
                 )}
