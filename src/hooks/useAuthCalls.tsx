@@ -6,6 +6,7 @@ import {
   loginSuccess,
   logoutSuccess,
   registerSuccess,
+  updateSuccess,
 } from "../features/authSlice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ const useAuthCall = () => {
   const navigate = useNavigate();
   const { token } = useSelector((store: any) => store.auth);
   const { path } = useSelector((store: RootState) => store.path);
+  const { currentUser } = useSelector((state: any) => state.auth);
 
   const register = async (userInfo: object) => {
     dispatch(fetchStart());
@@ -32,6 +34,29 @@ const useAuthCall = () => {
       dispatch(fetchFail());
       toastErrorNotify(
         "The register request could not be performed, Please try again!"
+      );
+      console.log(error);
+    }
+  };
+
+  const updateUser = async (userInfo: object) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axios.put(
+        `${BASE_URL}users/${currentUser._id}/`,
+        userInfo,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+      dispatch(updateSuccess(data));
+      toastSuccessNotify("Your profile has been updated successfully!");
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify(
+        "The update request could not be performed, Please try again!"
       );
       console.log(error);
     }
@@ -73,7 +98,7 @@ const useAuthCall = () => {
     }
   };
 
-  return { register, login, logout };
+  return { register, login, logout, updateUser };
 };
 
 export default useAuthCall;

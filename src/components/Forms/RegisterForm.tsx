@@ -10,7 +10,7 @@ interface RegisterFormValues {
   lastName: string;
   email: string;
   password: string;
-  // image: string;
+  image: string;
   // bio: string;
   // city: string;
 }

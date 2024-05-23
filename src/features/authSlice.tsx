@@ -4,7 +4,7 @@ const authSlice = createSlice({
   name: "auth",
 
   initialState: {
-    currentUser: null,
+    currentUser: {},
     loading: false,
     error: false,
     token: null,
@@ -20,6 +20,14 @@ const authSlice = createSlice({
       state.currentUser = payload?.data;
       state.token = payload?.token;
     },
+    updateSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.error = false;
+      state.currentUser = {
+        ...state?.currentUser,
+        ...payload,
+      };
+    },
     loginSuccess: (state, { payload }) => {
       state.loading = false;
       state.currentUser = payload?.user;
@@ -28,7 +36,7 @@ const authSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.loading = false;
-      state.currentUser = null;
+      state.currentUser = {};
       // state.isAdmin = false;
       state.token = null;
     },
@@ -42,6 +50,7 @@ const authSlice = createSlice({
 export const {
   fetchStart,
   registerSuccess,
+  updateSuccess,
   loginSuccess,
   logoutSuccess,
   fetchFail,

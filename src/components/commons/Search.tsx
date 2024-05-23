@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CiSearch } from "react-icons/ci";
 import CustomModal from "../Modals/CustomModal";
-import { IoCloseOutline } from "react-icons/io5";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 const Search = ({
   modal,
@@ -9,39 +13,74 @@ const Search = ({
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [search, setSearch] = useState("");
+  const { blogs } = useSelector((state: RootState) => state.blog);
+  const navigate = useNavigate();
   const hidden = modal
     ? "visible translate-y-0"
     : "invisible -translate-y-[100%]";
 
+  const searchData =
+    blogs &&
+    blogs.filter((blog: any) =>
+      blog?.title.toLowerCase().includes(search.toLowerCase())
+    );
+
   return (
-    <div className="relative">
-      <CustomModal hidden={hidden} setModal={setModal}>
-        <div className="h-[100px] absolute top-0 w-full bg-white shadow-sm shadow-black/30 flex items-center justify-center">
-          <div className="absolute right-5 top-5">
-            <button onClick={() => setModal(!modal)}>
-              <IoCloseOutline
-                size={26}
-                className="opacity-100 hover:opacity-50 text-black"
-              />
-            </button>
-          </div>
-          <div
-            className={`absolute lg:relative left-4  w-[75%] mx-auto ${hidden} transition-all duration-500`}
-          >
-            <div className="flex items-center gap-1 bg-gray-100 px-2 mb-2 rounded-xl relative mt-[0.5rem] ms-8 md:ms-0 ">
-              <span>
-                <CiSearch className="text-2xl text-gray-400" />
-              </span>
-              <input
-                type="text"
-                placeholder="Search Blog"
-                className="bg-transparent outline-none py-[0.6rem] h-[40px] text-sm w-full text-gray-600"
-              />
-            </div>
+    <>
+      <CustomModal hidden={hidden} modal={modal} setModal={setModal}>
+        <div
+          className={`absolute sm:relative right-4 left-4 top-[4rem] sm:left-0 sm:top-0
+          ${
+            modal
+              ? "visible opacity-100"
+              : "invisible sm:visible sm:opacity-100 opacity-0"
+          }
+          transition-all duration-100`}
+        >
+          <div className="flex items-center gap-1 bg-gray-100 px-2 rounded-full relative z-10">
+            <span className="text-2xl text-gray-400">
+              <CiSearch />
+            </span>
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="bg-transparent outline-none py-[0.7rem] text-sm w-full text-black"
+              type="text"
+              placeholder="Search Medium"
+            />
+            {search !== "" && (
+              <div className="absolute right-0 left-0 top-full bg-white shadow rounded-sm">
+                {searchData.length > 0 ? (
+                  <>
+                    {searchData.slice(0, 5).map((blog: any, i) => (
+                      <div
+                        key={i}
+                        onClick={() => {
+                          navigate(`/blog/${blog?._id}`);
+                          setSearch("");
+                        }}
+                        className="p-2 hover:text-gray-700 cursor-pointer text-black"
+                      >
+                        <h2 className="line-clamp-1 capitalize text-sm ">
+                          {blog.title}
+                        </h2>
+                        <div
+                          className="text-xs text-gray-500 line-clamp-2"
+                          dangerouslySetInnerHTML={{ __html: blog.desc }}
+                        />
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <p className="text-sm text-gray-500 p-3">No Blog Found</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </CustomModal>
-    </div>
+    </>
   );
 };
 

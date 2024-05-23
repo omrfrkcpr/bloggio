@@ -51,7 +51,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
   const handleReadMore = () => {
     if (currentUser) {
-      navigate(`/details/${_id}`, {
+      navigate(`/blog/${_id}`, {
         state: { randomFirstName, randomLastName, userImage, categoryName },
       });
     } else {
@@ -59,7 +59,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       toastInfoNotify(
         "To read more, please register first or log in if you have an account."
       );
-      getNavigatePath(`/details/${_id}`, {
+      getNavigatePath(`/blog/${_id}`, {
         state: { randomFirstName, randomLastName, userImage },
       });
     }
