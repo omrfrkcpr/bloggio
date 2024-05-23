@@ -17,8 +17,6 @@ const EditProfile = ({
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { updateUser } = useAuthCalls();
-  const [usernameLength, setUsernameLength] = useState(0);
-  const [bioLength, setBioLength] = useState(0);
 
   const initialFormData = {
     username: "",
@@ -43,7 +41,9 @@ const EditProfile = ({
   const saveForm = () => {
     const updatedUser = {
       ...currentUser,
-      ...form,
+      image: form?.image,
+      username: form?.username,
+      bio: form?.bio,
     };
     console.log("Updated User Data:", updatedUser);
     updateUser(updatedUser);
@@ -115,7 +115,6 @@ const EditProfile = ({
             type="text"
             value={form?.username}
             onChange={(e) => {
-              setUsernameLength(e.target.value.length);
               setForm({ ...form, username: e.target.value });
             }}
             id="username"
@@ -125,7 +124,7 @@ const EditProfile = ({
           />
           <p className="text-sm text-gray-600 pt-2 ">
             Appears on your Profile page, as your byline, and in your responses.{" "}
-            {usernameLength}/20
+            {form?.username.length}/20
           </p>
           <section className="pt-[1rem] text-sm">
             <label className="pb-3 block" htmlFor="bio">
@@ -135,7 +134,6 @@ const EditProfile = ({
               type="text"
               value={form?.bio}
               onChange={(e) => {
-                setBioLength(e.target.value.length);
                 setForm({ ...form, bio: e.target.value });
               }}
               id="bio"
@@ -144,7 +142,8 @@ const EditProfile = ({
               maxLength={160}
             />
             <p className="text-sm text-gray-600 pt-2 ">
-              Appears on your Profile and next to your stories. {bioLength}
+              Appears on your Profile and next to your stories.{" "}
+              {form?.bio.length}
               /160
             </p>
           </section>
