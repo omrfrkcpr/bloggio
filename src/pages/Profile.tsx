@@ -97,8 +97,8 @@ const Profile = () => {
                 ) : (
                   <Avatar sx={{ width: "3.5rem", height: "3.5rem" }} />
                 )}
-                <h2 className="py-2 font-bold capitalize mt-4">
-                  {currentUser?.username}
+                <h2 className="py-2 font-bold mt-4">
+                  @{currentUser?.username}
                 </h2>
                 <p className="text-gray-500 first-letter:uppercase text-sm">
                   {currentUser?.bio}
