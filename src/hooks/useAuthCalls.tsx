@@ -42,7 +42,7 @@ const useAuthCall = () => {
   const updateUser = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.patch(
+      const { data } = await axios.put(
         `${BASE_URL}users/${currentUser?._id}/`,
         userInfo,
         {

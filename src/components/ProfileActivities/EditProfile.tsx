@@ -39,8 +39,10 @@ const EditProfile = ({
   }, [currentUser]);
 
   const saveForm = () => {
+    const myUser = { ...currentUser };
+    delete myUser.password;
     const updatedUser = {
-      ...currentUser,
+      ...myUser,
       image: form?.image,
       username: form?.username,
       bio: form?.bio,

@@ -23,7 +23,7 @@ const Detail = () => {
 
   useEffect(() => {
     getBlogDetails(`blogs/${id}`);
-  }, []);
+  }, [id]);
 
   const {
     randomFirstName = "",

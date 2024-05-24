@@ -42,7 +42,7 @@ const Profile = () => {
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>
               <h2 className="text-3xl sm:text-5xl font-bold capitalize mb-4">
-                {`${currentUser.firstName} ${currentUser.lastName}`}
+                {`${currentUser?.firstName} ${currentUser?.lastName}`}
               </h2>
             </div>
             <div className="flex items-center gap-3 mb-[4rem] border-b border-gray-300 ">

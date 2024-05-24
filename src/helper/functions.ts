@@ -1,4 +1,8 @@
 export const shortenText = (text: string) => {
+  if (!text) {
+    return "";
+  }
+
   const words = text.split(" ");
 
   let shortenedText = words.slice(0, 20).join(" ");
@@ -59,6 +63,10 @@ export const calculateReadTime = (text: string) => {
 };
 
 export const capitalizeWords = (text: string) => {
+  if (!text) {
+    return "";
+  }
+
   return text
     .split(" ")
     .map((word) => {
@@ -68,6 +76,10 @@ export const capitalizeWords = (text: string) => {
 };
 
 export const maskEmail = (email: string) => {
+  if (!email) {
+    return "";
+  }
+
   const [localPart, domainPart] = email.split("@");
 
   if (localPart.length <= 4) {
