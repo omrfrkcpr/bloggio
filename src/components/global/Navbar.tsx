@@ -212,7 +212,9 @@ const Navbar = () => {
               }}
               content="Bloggio"
             />
-            <Search modal={searchModal} setModal={setSearchModal} />
+            {currentUser && (
+              <Search modal={searchModal} setModal={setSearchModal} />
+            )}
             <Box
               sx={{
                 flexGrow: 1,
