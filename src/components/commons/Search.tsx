@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CiSearch } from "react-icons/ci";
 import CustomModal from "../Modals/CustomModal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
@@ -16,6 +16,7 @@ const Search = ({
   const [search, setSearch] = useState("");
   const { blogs } = useSelector((state: RootState) => state.blog);
   const navigate = useNavigate();
+  const searchRef = useRef<HTMLDivElement>(null);
   const hidden = modal
     ? "visible translate-y-0"
     : "invisible -translate-y-[100%]";
@@ -25,6 +26,22 @@ const Search = ({
     blogs.filter((blog: any) =>
       blog?.title.toLowerCase().includes(search.toLowerCase())
     );
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setSearch("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -38,7 +55,10 @@ const Search = ({
           }
           transition-all duration-100`}
         >
-          <div className="flex items-center gap-1 bg-gray-100 px-2 rounded-full relative z-10">
+          <div
+            ref={searchRef}
+            className="flex items-center gap-1 bg-gray-100 px-2 rounded-full relative z-10"
+          >
             <span className="text-2xl text-gray-400">
               <CiSearch />
             </span>
@@ -49,7 +69,7 @@ const Search = ({
               type="text"
               placeholder="Search Blog..."
             />
-            {search !== "" && (
+            {search && (
               <div className="absolute right-0 left-0 top-full bg-white shadow rounded-sm">
                 {searchData.length > 0 ? (
                   <>
