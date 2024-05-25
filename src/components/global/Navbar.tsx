@@ -15,7 +15,7 @@ import Logo from "../commons/Logo";
 import CustomTypography from "../commons/CustomTypography";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../../hooks/useAuthCalls";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
@@ -38,6 +38,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = React.useState(false);
   const [searchModal, setSearchModal] = React.useState(false);
   const { getBlogData } = useBlogCalls();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     getBlogData("blogs");
@@ -47,7 +48,8 @@ const Navbar = () => {
     { label: "Home", path: "/", id: 1 },
     { label: "Contact", path: "/contact", id: 2 },
     { label: "About", path: "/about", id: 3 },
-    currentUser && { label: "Write", path: "/write", id: 4 },
+    currentUser &&
+      pathname !== "/write" && { label: "Write", path: "/write", id: 4 },
   ].filter(Boolean);
 
   const loggedInSettings = [

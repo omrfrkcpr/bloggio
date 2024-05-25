@@ -10,7 +10,7 @@ import {
   getPage,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
-import { toastSuccessNotify } from "../helper/toastNotify";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const useBlogCalls = () => {
       } catch (error) {
         console.log(error);
         dispatch(fetchFail());
-        toastSuccessNotify(`${singularize(url)} could not be deleted!`);
+        toastErrorNotify(`${singularize(url)} could not be deleted!`);
       } finally {
         getBlogData(url);
       }
@@ -61,7 +61,7 @@ const useBlogCalls = () => {
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      toastSuccessNotify(`New ${singularize(url)} could not be created!`);
+      toastErrorNotify(`New ${singularize(url)} could not be created!`);
     }
   };
 
@@ -73,7 +73,7 @@ const useBlogCalls = () => {
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
-      toastSuccessNotify(`${singularize(url)} could not be updated!`);
+      toastErrorNotify(`${singularize(url)} could not be updated!`);
     } finally {
       getBlogData(url);
     }
