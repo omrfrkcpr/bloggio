@@ -15,6 +15,7 @@ import Footer from "../components/global/Footer";
 import Write from "../pages/Write";
 import Contact from "../pages/Contact";
 import Category from "../pages/Category";
+import Stats from "../pages/Stats";
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
             <Route path="write" element={<Write />} />
             <Route path="blog/:blogId" element={<Detail />} />
             <Route path="profile/:userId" element={<Profile />} />
+            <Route path="stats/:userId" element={<Stats />} />
           </Route>
           <Route path="/categories/:categoryId" element={<Category />} />
           <Route path="*" element={<NotFound />} />

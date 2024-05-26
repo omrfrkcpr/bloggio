@@ -22,7 +22,7 @@ import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
 import { loginSettings } from "../../helper/constants";
 import { capitalizeWords, maskEmail } from "../../helper/functions";
-import { BookOpenText, ChartBar, SignOut, User } from "@phosphor-icons/react";
+import { ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
 import { IoIosArrowDown } from "react-icons/io";
 import useBlogCalls from "../../hooks/useBlogCalls";
@@ -54,7 +54,7 @@ const Navbar = () => {
 
   const loggedInSettings = [
     { label: "Profile", path: `/profile/${currentUser?._id}`, id: 1 },
-    { label: "Stats", path: "/profile", id: 2 },
+    { label: "Stats", path: `/stats/${currentUser?._id}`, id: 2 },
     { label: "Logout", path: "logout", id: 3 },
   ];
 
@@ -318,11 +318,6 @@ const Navbar = () => {
                       >
                         {label === "Profile" ? (
                           <User
-                            size={18}
-                            className="mb-[0.1rem] text-gray-600"
-                          />
-                        ) : label === "My Blogs" ? (
-                          <BookOpenText
                             size={18}
                             className="mb-[0.1rem] text-gray-600"
                           />
