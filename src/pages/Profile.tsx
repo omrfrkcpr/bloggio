@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-import ProfileHome from "../components/ProfileActivities/ProfileHome";
-import ProfileLists from "../components/ProfileActivities/ProfileLists";
 import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
 import { useState } from "react";
 import CustomModal from "../components/Modals/CustomModal";
@@ -10,18 +8,20 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 import EditProfile from "../components/ProfileActivities/EditProfile";
 import Loading from "../components/commons/Loading";
+import MyBlogs from "../components/ProfileActivities/MyBlogs";
+import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
 
   const activities = [
     {
-      title: "Home",
-      comp: ProfileHome,
+      title: "My Blogs",
+      comp: MyBlogs,
     },
     {
-      title: "List",
-      comp: ProfileLists,
+      title: "Saved",
+      comp: SavedBlogs,
     },
     {
       title: "About",
@@ -45,7 +45,7 @@ const Profile = () => {
                 {`${currentUser?.firstName} ${currentUser?.lastName}`}
               </h2>
             </div>
-            <div className="flex items-center gap-3 mb-[4rem] border-b border-gray-300 ">
+            <div className="flex items-center mb-[4rem] border-b border-gray-300 ">
               {activities.map((activity, index) => (
                 <div
                   key={index}
@@ -57,7 +57,7 @@ const Profile = () => {
                 >
                   <button
                     onClick={() => setCurrentActive(activity)}
-                    className="w-[50px]"
+                    className="w-[75px]"
                   >
                     {activity.title}
                   </button>

@@ -53,10 +53,9 @@ const Navbar = () => {
   ].filter(Boolean);
 
   const loggedInSettings = [
-    { label: "My Blogs", path: "/my-blogs", id: 1 },
-    { label: "Profile", path: `/profile/${currentUser?._id}`, id: 2 },
-    { label: "Stats", path: "/profile", id: 3 },
-    { label: "Logout", path: "logout", id: 4 },
+    { label: "Profile", path: `/profile/${currentUser?._id}`, id: 1 },
+    { label: "Stats", path: "/profile", id: 2 },
+    { label: "Logout", path: "logout", id: 3 },
   ];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(

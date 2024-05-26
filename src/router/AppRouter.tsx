@@ -10,7 +10,6 @@ import NotFound from "../pages/NotFound";
 import Profile from "../pages/Profile";
 import Detail from "../pages/Detail";
 import PrivateRouter from "./PrivateRouter";
-import MyBlogs from "../pages/MyBlogs";
 import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
 import Write from "../pages/Write";
@@ -28,9 +27,8 @@ const AppRouter = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="" element={<PrivateRouter />}>
             <Route path="write" element={<Write />} />
-            <Route path="blog/:id" element={<Detail />} />
+            <Route path="blog/:blogId" element={<Detail />} />
             <Route path="profile/:userId" element={<Profile />} />
-            <Route path="my-blogs" element={<MyBlogs />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
