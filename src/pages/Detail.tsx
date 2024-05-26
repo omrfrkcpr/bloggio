@@ -33,7 +33,7 @@ const Detail = () => {
 
   useEffect(() => {
     getBlogDetails(`blogs/${path?.blogId || _id}`);
-  }, [path, path?.blogId, _id]);
+  }, [path, _id]);
 
   const {
     userId,
@@ -60,8 +60,12 @@ const Detail = () => {
         <Loading />
       ) : (
         <div className="min-h-[88.45vh] h-auto flex justify-center items-start">
-          <div className="flex flex-col justify-center items-center lg:items-start p-5 w-full max-w-[1200px] mx-auto">
-            <img src={image} alt="" className="w-[90%] max-w-[1000px] my-5" />
+          <div className="flex flex-col justify-center items-center lg:items-start p-5 w-full max-w-[1000px] mx-auto">
+            <img
+              src={image}
+              alt="blog-image"
+              className="w-[90%] max-w-[600px] my-5 mx-auto"
+            />
             <h1 className="text-[1rem] md:text-[2rem] text-center mt-3 text-[#75a3e3]">
               {title}
             </h1>
@@ -103,9 +107,11 @@ const Detail = () => {
                   <p className="text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
                   <p className="text-gray-600 space-x-1">
                     <span>{dateFormatter(createdAt)} -</span>
-                    <span>{`${calculateReadTime({
-                      __html: content,
-                    })} min read`}</span>
+                    <span>{`${calculateReadTime(
+                      {
+                        __html: content,
+                      } || content
+                    )} min read`}</span>
                   </p>
                 </div>
               </div>

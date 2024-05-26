@@ -149,7 +149,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 <p className="text-[10px] lg:text-[12px] xl:text-[16px] text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
                 <p className="text-gray-600 space-x-1 text-[10px]  lg:text-[12px] xl:text-[14px] ">
                   <span>{dateFormatter(createdAt)} -</span>
-                  <span>{`${calculateReadTime(content)} min read`}</span>
+                  <span>{`${calculateReadTime(
+                    content || {
+                      __html: content,
+                    }
+                  )} min read`}</span>
                 </p>
               </div>
             </div>

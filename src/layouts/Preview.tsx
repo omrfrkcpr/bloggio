@@ -9,6 +9,8 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { toastErrorNotify, toastWarnNotify } from "../helper/toastNotify";
 import { useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner.gif";
+import { FaCircleCheck } from "react-icons/fa6";
+import { RiSave3Fill } from "react-icons/ri";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -27,22 +29,24 @@ const Preview: React.FC<PreviewProps> = ({
   const [newCategory, setNewCategory] = useState<string>("");
   const [imgUrl, setImgUrl] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
-  const [desc, setDesc] = useState<string>("");
+  const [desc, setDesc] = useState<string>(description || "");
+  const [publishType, setPublishType] = useState<string>("");
   const [preview, setPreview] = useState({
     categoryId: "",
     title: title || "",
     content: description || "",
     image: "",
-    isPublish: "",
+    isPublish: true,
   });
 
   useEffect(() => {
     getBlogData("categories");
-  }, [categories]);
+  }, []);
 
   useEffect(() => {
     setDescription(desc);
-  }, [desc]);
+    setPreview((prev) => ({ ...prev, content: desc }));
+  }, [desc, setDescription]);
 
   const handleAddCategory = async () => {
     if (newCategory) {
@@ -55,11 +59,14 @@ const Preview: React.FC<PreviewProps> = ({
     }
   };
 
-  const btn = "px-2 py-1 !w-fit !text-white !rounded-full";
-
-  const handleSubmitNewBlog = () => {
+  const handleSubmitNewBlog = async () => {
     try {
-      if (preview?.title === "" || desc === "" || selectedCategory === "") {
+      if (
+        preview?.title === "" ||
+        preview?.content === "" ||
+        preview?.categoryId === "" ||
+        preview?.image === ""
+      ) {
         toastErrorNotify("All fields are required!");
         return;
       }
@@ -69,7 +76,7 @@ const Preview: React.FC<PreviewProps> = ({
         return;
       }
 
-      postBlogData("blogs", { ...preview, content: desc });
+      await postBlogData("blogs", { ...preview, content: desc });
       navigate("/");
       setIsOpen(false);
       setPreview({
@@ -77,16 +84,18 @@ const Preview: React.FC<PreviewProps> = ({
         title: "",
         content: "",
         image: "",
-        isPublish: "",
+        isPublish: true,
       });
     } catch (error: any) {
       toastErrorNotify(error.message);
     }
   };
 
+  console.log(preview);
+
   return (
     <>
-      <section className="absolute inset-0 bg-white z-30">
+      <section className="absolute inset-0 bg-white z-50">
         <div className="size my-[2rem]">
           <span
             onClick={() => setIsOpen(false)}
@@ -96,7 +105,7 @@ const Preview: React.FC<PreviewProps> = ({
           </span>
           {/* Preview text */}
           <div className="mt-[8rem] flex flex-col lg:flex-row gap-10">
-            <div className="flex-[1]">
+            <div className="flex-[1] mb-[10rem]">
               <h3 className="border-b text-2xl">Blog Preview</h3>
               <div className="mt-7">
                 <label htmlFor="blogImg">Image URL* :</label>
@@ -145,15 +154,15 @@ const Preview: React.FC<PreviewProps> = ({
                 />
                 <ReactQuill
                   theme="bubble"
-                  value={desc || preview?.content}
+                  value={desc}
                   onChange={setDesc}
                   placeholder="Write your new blog*..."
                   className="py-3 border-b border-gray-300"
                 />
                 <p className="text-gray-500 text-sm  pt-4">
                   <span className="font-bold">NOTE:</span> Changes here will
-                  effect how your blog appears in public places like Bloggio's
-                  homepage and in subscribers'inboxed - not the contents of the
+                  affect how your blog appears in public places like Bloggio's
+                  homepage and in subscribers' inboxes - not the contents of the
                   blog itself.
                 </p>
               </div>
@@ -174,7 +183,7 @@ const Preview: React.FC<PreviewProps> = ({
                   value={selectedCategory}
                   onChange={(e) => {
                     setSelectedCategory(e.target.value);
-                    setPreview({ ...preview, categoryId: selectedCategory });
+                    setPreview({ ...preview, categoryId: e.target.value });
                   }}
                   name="categories"
                   id="categories"
@@ -195,44 +204,78 @@ const Preview: React.FC<PreviewProps> = ({
                   New Category
                 </button>
               </div>
+
               <div className="flex gap-3 items-center mt-5 pt-5 border-t border-gray-400">
-                <button
+                <div
                   onClick={() => {
-                    setPreview({ ...preview, isPublish: "false" });
-                    handleSubmitNewBlog();
+                    setPublishType("draft");
+                    setPreview({ ...preview, isPublish: false });
                   }}
-                  className={`${btn} !w-[110px] bg-red-300 hover:bg-red-200`}
+                  className={`flex-[1] text-md flex h-[220px] flex-col gap-5 justify-start items-center border hover:border-black p-4 cursor-pointer ${
+                    publishType === "draft" ? "border-black" : "border-gray-300"
+                  }`}
                 >
-                  Draft
-                </button>
-                <button
+                  <p className="py-1 flex items-center justify-center text-md !text-white !rounded-full !w-[150px] bg-red-300 hover:bg-red-200 relative">
+                    Draft{" "}
+                    {publishType === "draft" && (
+                      <FaCircleCheck
+                        color="green"
+                        className="bg-white rounded-full absolute right-2"
+                      />
+                    )}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-bold">Draft : </span> A draft is a
+                    preliminary version of your blog post. It is saved privately
+                    and can be edited at any time. It is not visible to the
+                    public until you choose to publish it.
+                  </p>
+                </div>
+                <div
                   onClick={() => {
-                    setPreview({ ...preview, isPublish: "true" });
-                    handleSubmitNewBlog();
+                    setPreview({ ...preview, isPublish: true });
+                    setPublishType("publish");
                   }}
-                  className="px-3 py-1 !w-fit !text-white !rounded-full bg-blue-400 hover:bg-blue-300"
+                  className={`flex-[1] text-md flex h-[220px] flex-col gap-5 justify-start items-center border hover:border-black p-4 cursor-pointer ${
+                    publishType === "publish"
+                      ? "border-black"
+                      : "border-gray-300"
+                  }`}
                 >
-                  Publish Now
-                </button>
-                {!loading && (
+                  <p className="py-1 flex items-center justify-center text-md !w-[150px] !text-white !rounded-full bg-blue-400 hover:bg-blue-300 relative">
+                    Publish Now{" "}
+                    {publishType === "publish" && (
+                      <FaCircleCheck
+                        color="green"
+                        className="bg-white rounded-full absolute right-2"
+                      />
+                    )}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-bold">Publish Now: </span> Publishing
+                    makes your blog post visible to the public. Once published,
+                    readers can view and interact with your content.{" "}
+                  </p>
+                </div>
+                {loading && (
                   <div className="w-[30px]">
                     <img src={spinner} alt="loading-spinner" />
                   </div>
                 )}
               </div>
-              <div className="flex flex-col gap-5 mt-5">
-                <p className="text-sm text-gray-500">
-                  <span className="font-bold">Draft : </span> A draft is a
-                  preliminary version of your blog post. It is saved privately
-                  and can be edited at any time. It is not visible to the public
-                  until you choose to publish it.
-                </p>
-                <p className="text-sm text-gray-500">
-                  <span className="font-bold">Publish : </span> Publishing makes
-                  your blog post visible to the public. Once published, readers
-                  can view and interact with your content.{" "}
-                </p>
-              </div>
+              <button
+                onClick={handleSubmitNewBlog}
+                className="border bg-orange-600 hover:bg-orange-400 text-md px-2 py-1 rounded-full text-white transition-all duration-300 w-[150px] ms-auto mt-10 me-5 flex items-center justify-center gap-2 "
+              >
+                {loading ? (
+                  <div className="w-[30px]">
+                    <img src={spinner} alt="loading-spinner" />
+                  </div>
+                ) : (
+                  "Save"
+                )}{" "}
+                {!loading && <RiSave3Fill />}
+              </button>
             </div>
           </div>
         </div>

@@ -40,17 +40,17 @@ export const dateFormatter = (dateString: string) => {
   return formattedDate;
 };
 
-export const calculateReadTime = (desc: any) => {
-  if (!desc?._html) {
+export const calculateReadTime = (desc: any): number => {
+  const averageReading = 225;
+
+  if (!desc) {
     return 0;
   }
 
-  const averageReading = 225;
-
   const div = document.createElement("div");
-  div.innerHTML = desc._html;
+  div.innerHTML = typeof desc === "string" ? desc : desc._html || "";
 
-  const textContent = div.textContent || div.innerHTML;
+  const textContent = div.textContent || "";
   const words = textContent.trim().split(/\s+/);
   return Math.ceil(words.length / averageReading);
 };
