@@ -8,32 +8,29 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 import EditProfile from "../components/ProfileActivities/EditProfile";
 import Loading from "../components/commons/Loading";
-import MyBlogs from "../components/ProfileActivities/MyBlogs";
 import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { RootState } from "../app/store";
-import MyDrafts from "../components/ProfileActivities/MyDrafts";
+import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
   const { getBlogData } = useBlogCalls();
-  const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const activities = [
     {
       title: "My Blogs",
-      comp: MyBlogs,
+      comp: (props: any) => <PersonalBlogs {...props} blogType="myBlogs" />,
     },
     {
       title: "Drafts",
-      comp: MyDrafts,
+      comp: (props: any) => <PersonalBlogs {...props} blogType="drafts" />,
     },
     {
       title: "Saved",
-      comp: SavedBlogs,
+      comp: (props: any) => <SavedBlogs {...props} />,
     },
     {
       title: "About",
-      comp: ProfileAbout,
+      comp: (props: any) => <ProfileAbout {...props} />,
     },
   ];
   const [currentActive, setCurrentActive] = useState(activities[0]);
@@ -42,7 +39,8 @@ const Profile = () => {
 
   useEffect(() => {
     getBlogData("blogs");
-  }, [blogs, categories]);
+    getBlogData("categories");
+  }, []);
 
   return (
     <>
