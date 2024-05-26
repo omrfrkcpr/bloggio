@@ -4,7 +4,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { Bookmarks, Heart } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { RootState } from "../../app/store";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   likes,
@@ -13,16 +14,25 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   show,
   setShow,
   _id,
-  userId,
+  // userId,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
+  // const { saved } = useSelector((state: RootState) => state.blog); // TODO
   const { postLike } = useBlogCalls();
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (currentUser && likes?.includes(currentUser?._id)) {
+      setIsLiked(true);
+    }
+  }, [currentUser, likes]);
 
   const handleLikeClick = async () => {
-    await postLike(`blogs/${_id}/postLike`, userId);
+    await postLike(`blogs/${_id}/postLike`, _id);
     setIsLiked(true);
   };
+
+  // console.log(likes);
 
   return (
     <div className="flex gap-[0.2rem] xl:gap-[0.5rem]  items-center">
@@ -36,7 +46,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
               ? "fill"
               : "thin"
           }`}
-          className={`cursor-pointer hover:text-black hover:scale-125 ${
+          className={`cursor-pointer hover:scale-125 ${
             isLiked &&
             likes?.filter((like: string | unknown) => like === currentUser?._id)
               .length > 0 &&

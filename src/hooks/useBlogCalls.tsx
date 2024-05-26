@@ -131,16 +131,24 @@ const useBlogCalls = () => {
   //   }
   // };
 
-  const postLike = async (url: string, id: string | undefined) => {
+  const postLike = async (url: string, blogId: string | undefined) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`${url}`);
       // console.log(`Post Like: ${data}`);
-      if (id) {
-        getBlogDetails("blogs/" + id);
-      } else {
-        getBlogData("blogs");
-      }
+      getBlogData("blogs");
+      getBlogDetails(`blogs/${blogId}`);
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+  };
+
+  const getLike = async (url: string) => {
+    dispatch(fetchStart());
+    try {
+      await axiosWithToken.post(`${url}`);
+      // console.log(`Post Like: ${data}`);
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -155,6 +163,7 @@ const useBlogCalls = () => {
     getBlogComment,
     getBlogDetails,
     postLike,
+    getLike,
     // postSave,
     // deleteSave,
   };

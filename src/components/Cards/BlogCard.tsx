@@ -18,6 +18,8 @@ import {
   dateFormatter,
   calculateReadTime,
 } from "../../helper/functions";
+import { useEffect } from "react";
+import useBlogCalls from "../../hooks/useBlogCalls";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -32,8 +34,9 @@ const BlogCard: React.FC<BlogCardProps> = ({
   categoryName,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
-  const { showBlogCardModal } = useSelector((store: RootState) => store.modal);
+  const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
   const { toggleBlogCardModal } = useShowModal();
+  const { getBlogData } = useBlogCalls();
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();
 
@@ -52,7 +55,13 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const handleReadMore = () => {
     if (currentUser) {
       navigate(`/blog/${_id}`, {
-        state: { randomFirstName, randomLastName, userImage, categoryName },
+        state: {
+          randomFirstName,
+          randomLastName,
+          userImage,
+          categoryName,
+          _id,
+        },
       });
     } else {
       toggleBlogCardModal();
@@ -60,10 +69,14 @@ const BlogCard: React.FC<BlogCardProps> = ({
         "To read more, please register first or log in if you have an account."
       );
       getNavigatePath(`/blog/${_id}`, {
-        state: { randomFirstName, randomLastName, userImage },
+        state: { randomFirstName, randomLastName, userImage, _id },
       });
     }
   };
+
+  useEffect(() => {
+    getBlogData("categories");
+  }, []);
 
   return (
     <>
@@ -90,12 +103,16 @@ const BlogCard: React.FC<BlogCardProps> = ({
             >
               {title}
             </div>
-            <p
+            {/* <p
               className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px] cursor-pointer"
               onClick={handleReadMore}
             >
               {shortenText(content)}
-            </p>
+            </p> */}
+            <div
+              className="py-1 text-gray-500 line-clamp-2"
+              dangerouslySetInnerHTML={{ __html: shortenText(content) }}
+            />
           </div>
           <div className="flex justify-between">
             <div className="flex items-center justify-center">

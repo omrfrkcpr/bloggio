@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const shortenText = (text: string) => {
   if (!text) {
     return "";
@@ -39,27 +40,19 @@ export const dateFormatter = (dateString: string) => {
   return formattedDate;
 };
 
-export const calculateReadTime = (text: string) => {
-  if (!text) {
+export const calculateReadTime = (desc: any) => {
+  if (!desc?._html) {
     return 0;
   }
 
-  const wordCount = text.split(/\s+|[,.;!?]+/).length;
-  const wordsPerMinute = 225;
-  const readTime = Math.ceil(wordCount / wordsPerMinute);
-  let additionalTime;
+  const averageReading = 225;
 
-  switch (true) {
-    case readTime < 1:
-      return 1;
-    case readTime >= 1 && readTime <= 10:
-      return readTime;
-    case readTime > 10 && readTime <= 20:
-      return Math.ceil(readTime / 2) * 2;
-    default:
-      additionalTime = Math.ceil((readTime - 20) / 5) * 5;
-      return 20 + additionalTime;
-  }
+  const div = document.createElement("div");
+  div.innerHTML = desc._html;
+
+  const textContent = div.textContent || div.innerHTML;
+  const words = textContent.trim().split(/\s+/);
+  return Math.ceil(words.length / averageReading);
 };
 
 export const capitalizeWords = (text: string) => {
