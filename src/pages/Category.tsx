@@ -17,6 +17,9 @@ const Category = () => {
   };
 
   const categoryName = findCategoryName(categories, state?._id);
+  const filteredBlogs = blogs.filter(
+    (item: any) => item?.categoryId === state?._id
+  );
 
   return (
     <div className="max-w-[900px] mx-auto min-h-[88.4vh] h-auto p-5">
@@ -28,17 +31,21 @@ const Category = () => {
           </span>
         </h2>
       </div>
-      <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ">
-        {blogs
-          .filter((item: any) => item?.categoryId === state?._id)
-          .map((blog: any) => {
+      {filteredBlogs.length ? (
+        <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ">
+          {filteredBlogs.map((blog: any) => {
             return (
               <div key={blog?._id}>
                 <BlogCard {...blog} categoryName={categoryName} />
               </div>
             );
           })}
-      </ul>
+        </ul>
+      ) : (
+        <div className="text-center text-2xl text-gray-500 my-[3rem]">
+          <h2>No blog found in this category.</h2>
+        </div>
+      )}
     </div>
   );
 };
