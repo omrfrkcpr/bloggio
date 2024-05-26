@@ -14,6 +14,7 @@ import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
 import Write from "../pages/Write";
 import Contact from "../pages/Contact";
+import Category from "../pages/Category";
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
             <Route path="blog/:blogId" element={<Detail />} />
             <Route path="profile/:userId" element={<Profile />} />
           </Route>
+          <Route path="/categories/:categoryId" element={<Category />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

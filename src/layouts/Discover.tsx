@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
   const { categories } = useSelector((state: any) => state.blog);
   const [displayedCategories, setDisplayedCategories] = useState<number>(5);
-
+  const navigate = useNavigate();
   // console.log(categories);
 
   const loadMoreCategories = () => {
@@ -24,6 +25,11 @@ const Discover = () => {
             .slice(0, displayedCategories)
             .map(({ _id, name }: { _id: string; name: string }) => (
               <button
+                onClick={() =>
+                  navigate(`/categories/${name.toLowerCase()}`, {
+                    state: { _id },
+                  })
+                }
                 key={_id}
                 className="bg-gray-300 text-gray-600 text-[10px] md:text-[12px] lg:text-[14px] hover:text-black px-2 md:px-3 py-1 md:py-2 rounded-full"
               >
