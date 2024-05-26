@@ -33,3 +33,11 @@ interface CommentFormProps {
   comments: string[];
   id?: string;
 }
+
+interface PreviewProps {
+  setIsOpen: (isOpen: boolean) => void;
+  title: string;
+  setTitle: (title: string) => void;
+  description: string;
+  setDescription: (description: string) => void;
+}

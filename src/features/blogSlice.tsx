@@ -11,7 +11,6 @@ const blogSlice = createSlice({
     comments: [],
     loading: false,
     error: false,
-    // pagination
     totalPage: 1,
   },
 

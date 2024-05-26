@@ -1,68 +1,65 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { FaPlus } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactQuill from "react-quill";
-import parse from "html-react-parser";
-import { RootState } from "../app/store";
-import { useSelector } from "react-redux";
-import useBlogCalls from "../hooks/useBlogCalls";
-import CreateModal from "../components/Modals/CreateModal";
 import Preview from "../layouts/Preview";
-
-const initialNewBlog = {
-  categoryId: "",
-  title: "",
-  content: "",
-  image: "",
-  isPublish: true,
-};
+import { FaCircleArrowRight } from "react-icons/fa6";
+import { toastWarnNotify } from "../helper/toastNotify";
 
 const Write = () => {
-  const [newBlog, setNewBlog] = useState(initialNewBlog);
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-
-  const { categories } = useSelector((state: RootState) => state.blog) as any;
-  const { getBlogData, postBlogData } = useBlogCalls();
-
-  useEffect(() => {
-    getBlogData("categories");
-  }, []);
-
-  // console.log(newBlog);
 
   return (
     <>
-      <section className="min-h-[86.8vh] h-auto w-[90%] md:w-[80%] mx-auto max-w-[1000px]">
+      <section className="min-h-[86.8vh] h-auto w-[90%] md:w-[80%] mx-auto max-w-[1000px] relative">
         <div className="mt-5">
           <input
             type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            className="text-4xl outline-none w-full mt-[3rem]"
+            className="text-4xl outline-none w-full mt-[5rem]"
           />
           <ReactQuill
             theme="bubble"
             value={description}
             onChange={setDescription}
             placeholder="Write your new blog..."
-            className="write my-5"
+            className="write my-5 min-h-[65vh]"
           />
         </div>
-        {isOpen && (
-          <div>
-            <Preview isOpen={isOpen} setIsOpen={setIsOpen} />
-          </div>
-        )}
         <button
-          onClick={() => setIsOpen(true)}
-          className="py-2 px-3 bg-blue-200 hover:bg-blue-100"
+          onClick={() => {
+            if (title || description) {
+              setIsOpen(true);
+            } else {
+              toastWarnNotify(
+                "Before continuing, please write content for your new blog."
+              );
+            }
+          }}
+          className={`${
+            isOpen && "hidden"
+          } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}
         >
-          Publish
+          <span>Continue Publishing</span>
+          <FaCircleArrowRight />
         </button>
       </section>
+      {isOpen && (
+        <div>
+          <Preview
+            setIsOpen={setIsOpen}
+            title={title}
+            description={description}
+            setTitle={setTitle}
+            setDescription={setDescription}
+          />
+        </div>
+      )}
     </>
   );
 };
