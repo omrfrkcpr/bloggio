@@ -6,8 +6,9 @@ import {
   fetchStart,
   getBlogCommentSuccess,
   getSuccess,
-  getDetail,
-  getPage,
+  getDetailSuccess,
+  getPageSuccess,
+  // getSavedSuccess,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
@@ -28,7 +29,7 @@ const useBlogCalls = () => {
       // console.log(data);
       dispatch(getSuccess({ data: data?.data, url }));
       if (url === "blogs") {
-        dispatch(getPage(data?.details?.pages?.total));
+        dispatch(getPageSuccess(data?.details?.pages?.total));
       }
     } catch (error) {
       console.log(error);
@@ -100,11 +101,35 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken(`${url}`);
       // console.log(data);
-      dispatch(getDetail({ data: data?.data }));
+      dispatch(getDetailSuccess({ data: data?.data }));
     } catch (error) {
       dispatch(fetchFail());
     }
   };
+
+  // const postSave = async(blogId: string) => {
+  //   dispatch(fetchStart());
+  //   try {
+  //     const {data} = axiosWithToken.put(`blogs/${blogId}/save`);
+  //     getBlogData("blogs");
+  //     getBlogData("blogs/saved");
+  //   } catch (error) {
+  //     dispatch(fetchFail());
+  //     console.log(error);
+  //   }
+  // };
+
+  // const deleteSave = async(blogId: string) => {
+  //   dispatch(fetchStart());
+  //   try {
+  //     const {data} = axiosWithToken.delete(`blogs/${blogId}/save`);
+  //     getBlogData("blogs");
+  //     getBlogData("blogs/saved");
+  //   } catch (error) {
+  //     dispatch(fetchFail());
+  //     console.log(error);
+  //   }
+  // };
 
   const postLike = async (url: string, id: string | undefined) => {
     dispatch(fetchStart());
@@ -130,6 +155,8 @@ const useBlogCalls = () => {
     getBlogComment,
     getBlogDetails,
     postLike,
+    // postSave,
+    // deleteSave,
   };
 };
 

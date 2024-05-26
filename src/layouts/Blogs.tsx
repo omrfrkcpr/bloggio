@@ -17,11 +17,6 @@ const Blogs = () => {
     (state: RootState) => state.blog
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  // const indexOfLastBlog = currentPage * BlogsPerPage;
-  // const indexOfFirstBlog = indexOfLastBlog - BlogsPerPage;
-  // const currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
-
   const onPageChange = async (
     _event: React.ChangeEvent<unknown>,
     page: number

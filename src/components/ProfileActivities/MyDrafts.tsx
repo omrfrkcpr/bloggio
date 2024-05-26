@@ -7,8 +7,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useBlogCalls from "../../hooks/useBlogCalls";
 
-const SavedBlogs = () => {
-  const { blogs, categories, totalPage, saved } = useSelector(
+const MyDrafts = () => {
+  const { blogs, categories, totalPage } = useSelector(
     (state: RootState) => state.blog
   );
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -21,7 +21,7 @@ const SavedBlogs = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    navigate(`/profile/${currentUser._id}/?page=${page}&limit=10`);
+    navigate(`/profile/${currentUser?._id}/?page=${page}&limit=10`);
     getBlogData("blogs", `/?page=${page}&limit=10`); // TODO : Fix this (it should be /blogs/${currentUser._id})
   };
 
@@ -29,9 +29,8 @@ const SavedBlogs = () => {
     <>
       <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] mx-auto min-h-[43.8vh] h-auto">
         {blogs
-          .filter(
-            (blog: any) => blog?._id === saved.map((blog: any) => blog?._id)
-          )
+          .filter((blog: any) => blog?.userId === currentUser?._id)
+          .filter((blog: any) => blog?.isPublished === "false")
           .map((blog: any) => {
             const category = categories.find(
               (cat: any) => cat?._id === blog?.categoryId
@@ -62,4 +61,4 @@ const SavedBlogs = () => {
   );
 };
 
-export default SavedBlogs;
+export default MyDrafts;

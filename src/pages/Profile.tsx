@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomModal from "../components/Modals/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -10,14 +10,22 @@ import EditProfile from "../components/ProfileActivities/EditProfile";
 import Loading from "../components/commons/Loading";
 import MyBlogs from "../components/ProfileActivities/MyBlogs";
 import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
+import useBlogCalls from "../hooks/useBlogCalls";
+import { RootState } from "../app/store";
+import MyDrafts from "../components/ProfileActivities/MyDrafts";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
-
+  const { getBlogData } = useBlogCalls();
+  const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const activities = [
     {
       title: "My Blogs",
       comp: MyBlogs,
+    },
+    {
+      title: "Drafts",
+      comp: MyDrafts,
     },
     {
       title: "Saved",
@@ -31,6 +39,10 @@ const Profile = () => {
   const [currentActive, setCurrentActive] = useState(activities[0]);
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+
+  useEffect(() => {
+    getBlogData("blogs");
+  }, [blogs, categories]);
 
   return (
     <>
