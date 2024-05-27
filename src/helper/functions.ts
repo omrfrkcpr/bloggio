@@ -86,3 +86,11 @@ export const maskEmail = (email: string) => {
 
   return `${maskedLocalPart}@${domainPart}`;
 };
+
+export const getCategoryName = (
+  categoryId: string,
+  categories: any
+): string => {
+  const category = categories.find((cat: any) => cat?._id === categoryId);
+  return category ? category?.name : "";
+};

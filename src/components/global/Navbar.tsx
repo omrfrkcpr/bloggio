@@ -221,7 +221,7 @@ const Navbar = () => {
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
                 justifyContent: "end",
-                marginRight: "0.2rem",
+                margin: "0 0.5rem",
               }}
             >
               {pages.map(({ label, path, id }) => (
@@ -258,7 +258,7 @@ const Navbar = () => {
                 >
                   {currentUser?.image ? (
                     <img
-                      className="w-11 h-11 rounded-full cursor-pointer"
+                      className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                     />
                   ) : (
@@ -268,7 +268,7 @@ const Navbar = () => {
                         `${capitalizeWords(currentUser?.firstName)}`
                       }
                       src="/static/images/avatar/2.jpg"
-                      sx={{ width: "42px", height: "42px", cursor: "pointer" }}
+                      sx={{ width: "44px", height: "42px", cursor: "pointer" }}
                     />
                   )}
                   <IoIosArrowDown

@@ -103,7 +103,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
               {shortenText(content)}
             </p> */}
             <div
-              className="py-1 text-gray-500 line-clamp-2"
+              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px]"
               dangerouslySetInnerHTML={{ __html: shortenText(content) }}
             />
           </div>
