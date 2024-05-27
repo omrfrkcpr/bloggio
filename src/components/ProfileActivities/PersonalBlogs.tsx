@@ -42,7 +42,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
 
   useEffect(() => {
     getBlogData("blogs", `?author=${currentUser?._id}`);
-  }, [getBlogData, currentUser?._id]);
+  }, [currentUser?._id]);
 
   return (
     <>

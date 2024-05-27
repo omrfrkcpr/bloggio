@@ -23,7 +23,7 @@ const Blogs = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    navigate(`/?page=${page}&limit=${BlogsPerPage}`);
+    await navigate(`/?page=${page}&limit=${BlogsPerPage}`);
     getBlogData("blogs", `/?page=${page}&limit=${BlogsPerPage}`);
   };
 

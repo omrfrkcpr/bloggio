@@ -42,7 +42,7 @@ const Navbar = () => {
 
   React.useEffect(() => {
     getBlogData("blogs");
-  }, [getBlogData]);
+  }, []);
 
   const pages = [
     { label: "Home", path: "/", id: 1 },
