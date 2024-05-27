@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import React from 'react'
 import { useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import useShowModal from "../hooks/useShowModal";
 import usePath from "../hooks/usePath";
+import { useState, useEffect } from "react";
 
 const Trending = () => {
   const { blogs } = useSelector((state: RootState) => state.blog);
@@ -22,11 +24,17 @@ const Trending = () => {
   const { toggleBlogCardModal } = useShowModal();
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();
+  const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
 
-  const trendBlogs = blogs
-    ?.slice()
-    .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
-    .slice(0, 10);
+  const getTrendBlogs = (arr: any[]) =>
+    arr
+      ?.slice()
+      .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
+      .slice(0, 10);
+
+  useEffect(() => {
+    setTrendBlogs(getTrendBlogs(blogs));
+  }, [blogs]);
 
   const randomFirstName = faker.person.firstName();
   const randomLastName = faker.person.lastName();
