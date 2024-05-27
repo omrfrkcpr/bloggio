@@ -41,7 +41,7 @@ export const dateFormatter = (dateString: string) => {
 };
 
 export const calculateReadTime = (desc: any): number => {
-  const averageReading = 225;
+  const averageReading = 150;
 
   if (!desc) {
     return 0;
