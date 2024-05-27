@@ -37,12 +37,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();
 
-  const randomFirstName = faker.person.firstName();
-  const randomLastName = faker.person.lastName();
+  const randomFirstName = faker.person.firstName(); // TODO
+  const randomLastName = faker.person.lastName(); // TODO
 
   const userImage = currentUser?.image
     ? currentUser?.image
-    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`;
+    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`; // TODO
 
   // checking userImage response data
   const isDicebearImage = userImage.startsWith(

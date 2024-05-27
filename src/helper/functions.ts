@@ -94,3 +94,9 @@ export const getCategoryName = (
   const category = categories.find((cat: any) => cat?._id === categoryId);
   return category ? category?.name : "";
 };
+
+export const getTrendBlogs = (arr: any) =>
+  arr
+    ?.slice()
+    .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
+    .slice(0, 10);

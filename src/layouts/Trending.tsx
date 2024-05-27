@@ -18,6 +18,7 @@ import useShowModal from "../hooks/useShowModal";
 import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
+import { getTrendBlogs } from "../helper/functions";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -27,12 +28,6 @@ const Trending = () => {
   const navigate = useNavigate();
   const { trendings } = useSelector((state: RootState) => state.blog);
   const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
-
-  const getTrendBlogs = (arr: any) =>
-    arr
-      ?.slice()
-      .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
-      .slice(0, 10);
 
   useEffect(() => {
     getTrendsData();
@@ -47,12 +42,12 @@ const Trending = () => {
     setTrendBlogs(getTrendBlogs(trendings));
   }, [countOfVisitorsArray]);
 
-  const randomFirstName = faker.person.firstName();
-  const randomLastName = faker.person.lastName();
+  const randomFirstName = faker.person.firstName(); // TODO
+  const randomLastName = faker.person.lastName(); // TODO
 
   const userImage = currentUser?.image
     ? currentUser?.image
-    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`;
+    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`; // TODO
 
   const handleClickMore = (blogId: string) => {
     if (currentUser) {

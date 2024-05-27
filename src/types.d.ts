@@ -41,3 +41,17 @@ interface PreviewProps {
   description: string;
   setDescription: (description: string) => void;
 }
+
+interface FormTextFieldProps {
+  name?: string;
+  label?: string;
+  type?: string;
+  id?: string;
+  autoComplete?: string;
+  variant?: string;
+  value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  helperText?: string;
+  error?: boolean;
+}

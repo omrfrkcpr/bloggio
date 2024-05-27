@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     getBlogData("blogs");
     getBlogData("categories");
-  }, []);
+  }, [getBlogData]);
 
   // console.log("blogs:", blogs);
   // console.log("categories:", categories);

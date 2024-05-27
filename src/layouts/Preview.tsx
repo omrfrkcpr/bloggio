@@ -41,7 +41,7 @@ const Preview: React.FC<PreviewProps> = ({
 
   useEffect(() => {
     getBlogData("categories");
-  }, []);
+  }, [getBlogData]);
 
   useEffect(() => {
     setDescription(desc);

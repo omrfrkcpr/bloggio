@@ -7,17 +7,15 @@ import { useEffect, useState } from "react";
 
 const Category = () => {
   const { state } = useLocation();
-  const { blogs, categories } = useSelector(
-    (state: RootState) => state.blog
-  );
+  const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   // console.log(state._id);
 
   useEffect(() => {
-    if (state._id) {
-      setSelectedCategory(state._id);
+    if (state?._id) {
+      setSelectedCategory(state?._id);
     }
-  }, []);
+  }, [state?._id]);
 
   const findCategoryName = (array: Array<string>, id: string) => {
     const category = array.find((cat: any) => cat?._id === id) as

@@ -2,19 +2,6 @@
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
-interface FormTextFieldProps {
-  name?: string;
-  label?: string;
-  type?: string;
-  id?: string;
-  autoComplete?: string;
-  variant?: string;
-  value?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  helperText?: string;
-  error?: boolean;
-}
 
 const CustomTextField = styled(TextField)({
   "& .MuiInputBase-input": {
