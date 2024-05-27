@@ -8,6 +8,7 @@ const blogSlice = createSlice({
     categories: [],
     blogs: [],
     blogDetails: [],
+    trendings: [],
     comments: [],
     saved: [],
     loading: false,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
@@ -23,13 +23,13 @@ const Blogs = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    navigate(`/?page=${page}&limit=10`);
-    getBlogData("blogs", `/?page=${page}&limit=10`);
+    navigate(`/?page=${page}&limit=${BlogsPerPage}`);
+    getBlogData("blogs", `/?page=${page}&limit=${BlogsPerPage}`);
   };
 
-  useEffect(() => {
-    getBlogData("blogs", `/?page=1&limit=10`);
-  }, []);
+  // useEffect(() => {
+  //   getBlogData("blogs", `/?page=1&limit=${BlogsPerPage}`);
+  // }, []);
 
   return (
     <>

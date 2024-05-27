@@ -16,25 +16,36 @@ import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import useShowModal from "../hooks/useShowModal";
 import usePath from "../hooks/usePath";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import useBlogCalls from "../hooks/useBlogCalls";
 
 const Trending = () => {
-  const { blogs } = useSelector((state: RootState) => state.blog);
   const { currentUser } = useSelector((state: any) => state.auth);
   const { toggleBlogCardModal } = useShowModal();
   const { getNavigatePath } = usePath();
+  const { getTrendsData } = useBlogCalls();
   const navigate = useNavigate();
+  const { trendings } = useSelector((state: RootState) => state.blog);
   const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
 
-  const getTrendBlogs = (arr: any[]) =>
+  const getTrendBlogs = (arr: any) =>
     arr
       ?.slice()
       .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
       .slice(0, 10);
 
   useEffect(() => {
-    setTrendBlogs(getTrendBlogs(blogs));
-  }, [blogs]);
+    getTrendsData();
+  }, []);
+
+  const countOfVisitorsArray = useMemo(
+    () => trendings.map((trend: any) => trend?.countOfVisitors),
+    [trendings]
+  );
+
+  useEffect(() => {
+    setTrendBlogs(getTrendBlogs(trendings));
+  }, [countOfVisitorsArray]);
 
   const randomFirstName = faker.person.firstName();
   const randomLastName = faker.person.lastName();

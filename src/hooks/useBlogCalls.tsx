@@ -37,6 +37,18 @@ const useBlogCalls = () => {
     }
   };
 
+  const getTrendsData = async () => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken("blogs/?page=1&limit=500");
+      // console.log(data);
+      dispatch(getSuccess({ data: data?.data, url: "trendings" }));
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchFail());
+    }
+  };
+
   const deleteBlogData = async (url: string, id: string) => {
     if (confirm("Are you sure?")) {
       dispatch(fetchStart());
@@ -162,6 +174,7 @@ const useBlogCalls = () => {
     getBlogData,
     getBlogComment,
     getBlogDetails,
+    getTrendsData,
     postLike,
     getLike,
     // postSave,
