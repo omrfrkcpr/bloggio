@@ -57,10 +57,13 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           {likes?.length}
         </span>
       </p>
-      <p className="space-x-1" onClick={() => setShow && setShow(!show)}>
+      <p
+        className="space-x-1 flex items-center justify-center"
+        onClick={() => setShow && setShow(!show)}
+      >
         <CommentIcon
           sx={{
-            fontSize: { xs: "0.8rem", md: "1rem" },
+            fontSize: { xs: "0.8rem", md: "0.9rem" },
             cursor: "pointer",
             color: "#A1A1A1",
             "&:hover": { color: "black" },
@@ -70,10 +73,10 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           {comments?.length}
         </span>
       </p>
-      <p className="space-x-1">
+      <p className="space-x-1 flex items-center justify-center">
         <VisibilityIcon
           sx={{
-            fontSize: { xs: "0.8rem", md: "1rem" },
+            fontSize: { xs: "0.8rem", md: "0.9rem" },
             color: "#A1A1A1",
           }}
         />
@@ -82,7 +85,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         </span>
       </p>
       <Bookmarks
-        className="text-[0.8rem] md:text-[1rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
+        className="text-[0.8rem] md:text-[0.9rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
         size={24}
         weight="thin"
         // weight="fill"

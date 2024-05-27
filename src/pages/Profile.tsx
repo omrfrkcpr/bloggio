@@ -47,7 +47,7 @@ const Profile = () => {
       {loading ? (
         <Loading />
       ) : (
-        <section className="flex gap-[4rem] relative mx-[4rem] min-h-[88.6vh] h-auto">
+        <section className="flex gap-[1rem] relative mx-[2rem] min-h-[88.6vh] h-auto">
           {/* users activities */}
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>
@@ -79,7 +79,7 @@ const Profile = () => {
           {/* button to open side bar */}
           <button
             onClick={() => setModal(true)}
-            className="fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center md:hidden"
+            className="fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center lg:hidden"
           >
             <IoSettingsSharp />
           </button>
@@ -87,15 +87,15 @@ const Profile = () => {
           <CustomModal modal={modal} hidden="" setModal={setModal}>
             <div
               className={`flex-[1] max-w-[400px] border-l border-gray-300 p-[2rem] z-10
-        fixed -right-4 bottom-0 top-14 w-[18rem] bg-white md:sticky
-        ${modal ? "translate-x-0" : "translate-x-[100%] md:translate-x-0"}
+        fixed -right-4 bottom-0 top-14 w-[18rem] bg-white lg:sticky
+        ${modal ? "translate-x-0" : "translate-x-[100%] lg:translate-x-0"}
         transition-all duration-500`}
             >
               {/* icons to close out modal */}
               <div className="pb-4 text-right">
                 <button
                   onClick={() => setModal(false)}
-                  className="inline-block md:hidden"
+                  className="inline-block lg:hidden"
                 >
                   <LiaTimesSolid />
                 </button>
