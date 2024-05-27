@@ -26,12 +26,12 @@ const Trending = () => {
   const { getNavigatePath } = usePath();
   const { getTrendsData } = useBlogCalls();
   const navigate = useNavigate();
-  const { trendings } = useSelector((state: RootState) => state.blog);
+  const { trendings, blogs } = useSelector((state: RootState) => state.blog);
   const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
 
   useEffect(() => {
     getTrendsData();
-  }, []);
+  }, [blogs]);
 
   const countOfVisitorsArray = useMemo(
     () => trendings.map((trend: any) => trend?.countOfVisitors),
@@ -72,7 +72,7 @@ const Trending = () => {
 
   return (
     <div className="py-5">
-      <h2 className="text-2xl font-bold mb-5 text-center border-b border-gray-300 w-[95%] max-w-[1600px] mx-auto">
+      <h2 className="text-2xl font-bold mb-5 text-center border-b border-gray-300 w-[95%] max-w-[1600px] mx-auto text-gray-800">
         Trending
       </h2>
       <Swiper

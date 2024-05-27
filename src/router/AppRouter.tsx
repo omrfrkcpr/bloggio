@@ -8,7 +8,6 @@ import About from "../pages/About";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Profile from "../pages/Profile";
-import Detail from "../pages/Detail";
 import PrivateRouter from "./PrivateRouter";
 import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
@@ -16,6 +15,7 @@ import Write from "../pages/Write";
 import Contact from "../pages/Contact";
 import Category from "../pages/Category";
 import Stats from "../pages/Stats";
+import SingleBlog from "../pages/SingleBlog";
 
 const AppRouter = () => {
   return (
@@ -29,7 +29,7 @@ const AppRouter = () => {
           <Route path="contact" element={<Contact />} />
           <Route path="" element={<PrivateRouter />}>
             <Route path="write" element={<Write />} />
-            <Route path="blog/:blogId" element={<Detail />} />
+            <Route path="blog/:blogId" element={<SingleBlog />} />
             <Route path="profile/:userId" element={<Profile />} />
             <Route path="stats/:userId" element={<Stats />} />
           </Route>

@@ -11,7 +11,7 @@ import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
 import Loading from "../components/commons/Loading";
 
-const Detail = () => {
+const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
   const { getBlogDetails } = useBlogCalls();
   const { blogDetails, loading } = useSelector((state: any) => state?.blog);
@@ -64,15 +64,15 @@ const Detail = () => {
             <img
               src={image}
               alt="blog-image"
-              className="w-[90%] max-w-[600px] my-5 mx-auto"
+              className="w-[100%] max-w-[600px] my-5 mx-auto"
             />
-            <h1 className="text-[1rem] md:text-[2rem] text-center mt-3 text-[#75a3e3]">
+            <h1 className="text-[1rem] md:text-[2rem] w-[100%] text-center mt-3 text-[#75a3e3]">
               {title}
             </h1>
-            <h3 className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 ">
+            <h3 className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto ">
               {categoryId?.name || categoryName}
             </h3>
-            <div className="flex justify-between space-x-5 w-[90%] max-w-[1000px] mt-4">
+            <div className="flex justify-between space-x-5 w-[100%] max-w-[1000px] mt-4">
               <div className="flex items-center">
                 {isDicebearImage ? (
                   <img
@@ -126,7 +126,7 @@ const Detail = () => {
               </div>
             </div>
             <div
-              className="w-[90%] max-w-[1000px] my-5 text-[12px] md:text-[1rem] lg:text-[1.2rem]"
+              className="w-[100%] max-w-[1000px] my-5 text-[12px] md:text-[1rem] lg:text-[1.2rem]"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </div>
@@ -151,4 +151,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default SingleBlog;
