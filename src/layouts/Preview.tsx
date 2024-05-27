@@ -91,7 +91,7 @@ const Preview: React.FC<PreviewProps> = ({
     }
   };
 
-  console.log(preview);
+  // console.log(preview);
 
   return (
     <>

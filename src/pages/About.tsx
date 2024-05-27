@@ -1,5 +1,7 @@
+import Development from "../components/commons/Development";
+
 const About = () => {
-  return <div>About</div>;
+  return <Development />;
 };
 
 export default About;

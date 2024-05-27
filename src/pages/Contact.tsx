@@ -1,5 +1,7 @@
+import Development from "../components/commons/Development";
+
 const Contact = () => {
-  return <div>Contact</div>;
+  return <Development />;
 };
 
 export default Contact;

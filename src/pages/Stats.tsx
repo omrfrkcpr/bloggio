@@ -1,5 +1,7 @@
+import Development from "../components/commons/Development";
+
 const Stats = () => {
-  return <div>Stats</div>;
+  return <Development />;
 };
 
 export default Stats;
