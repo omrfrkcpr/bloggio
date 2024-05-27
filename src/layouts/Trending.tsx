@@ -18,7 +18,7 @@ import useShowModal from "../hooks/useShowModal";
 import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { getTrendBlogs } from "../helper/functions";
+import { formatNum, getTrendBlogs } from "../helper/functions";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -128,7 +128,7 @@ const Trending = () => {
                       }}
                     />
                     <span className="text-[12px] xl:text-[16px]">
-                      {countOfVisitors}
+                      {formatNum(countOfVisitors)}
                     </span>
                   </p>
                   <button

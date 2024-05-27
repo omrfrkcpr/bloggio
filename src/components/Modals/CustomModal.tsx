@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import React from "react";
 
-const CustomModal = ({
+const CustomModal: React.FC<CustomModalProps> = ({
   children,
   setModal,
   hidden,
   modal,
-}: {
-  children: React.ReactNode;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  hidden: string;
-  modal: boolean;
 }) => {
   return (
     <>

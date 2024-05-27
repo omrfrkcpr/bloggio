@@ -12,7 +12,7 @@ import useShowModal from "../../hooks/useShowModal";
 import AuthModal from "../Modals/AuthModal";
 import { RootState } from "../../app/store";
 import usePath from "../../hooks/usePath";
-import BlogAnalytics from "../commons/BlogAnalytics";
+import BlogAnalytics from "../Blog/BlogAnalytics";
 import {
   shortenText,
   dateFormatter,

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { Bookmarks, Heart } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import BlogShare from "./BlogShare";
+import { formatNum } from "../../helper/functions";
 // import { RootState } from "../../app/store";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
@@ -54,7 +56,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           }`}
         />
         <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {likes?.length}
+          {formatNum(likes?.length)}
         </span>
       </p>
       <p
@@ -70,7 +72,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           }}
         />
         <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {comments?.length}
+          {formatNum(comments?.length)}
         </span>
       </p>
       <p className="space-x-1 flex items-center justify-center">
@@ -81,7 +83,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           }}
         />
         <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {countOfVisitors}
+          {formatNum(countOfVisitors)}
         </span>
       </p>
       <Bookmarks
@@ -90,6 +92,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         weight="thin"
         // weight="fill"
       />
+      <BlogShare />
     </div>
   );
 };

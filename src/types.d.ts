@@ -55,3 +55,23 @@ interface FormTextFieldProps {
   helperText?: string;
   error?: boolean;
 }
+
+interface DropDownProps {
+  children: React.ReactNode;
+  size: string;
+  showDrop: boolean;
+  setShowDrop: (value: boolean) => void;
+}
+
+interface CustomButtonProps {
+  click: () => void;
+  icon: JSX.Element;
+  title: string;
+}
+
+interface CustomModalProps {
+  children: React.ReactNode;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  hidden: string;
+  modal: boolean;
+}
