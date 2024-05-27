@@ -62,6 +62,7 @@ const Trending = () => {
         Trending
       </h2>
       <Swiper
+        // swiper configurations
         modules={[Navigation, Pagination, A11y, Autoplay]}
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000 }}
@@ -104,7 +105,7 @@ const Trending = () => {
                     {title}
                   </h3>
                 </div>
-                <div className="px-4 py-1 flex items-center text-gray-600 justify-between border-t border-gray-300 bg-[#bed9fd7a]">
+                <div className="px-4 py-1 flex items-center text-gray-600 justify-between border-t border-gray-300 bg-[#b9d0f071]">
                   <p className="space-x-1 flex items-center justify-center">
                     <VisibilityIcon
                       sx={{
