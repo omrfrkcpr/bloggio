@@ -18,8 +18,6 @@ import {
   dateFormatter,
   calculateReadTime,
 } from "../../helper/functions";
-import { useEffect } from "react";
-import useBlogCalls from "../../hooks/useBlogCalls";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -36,7 +34,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const { currentUser } = useSelector((state: any) => state.auth);
   const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
   const { toggleBlogCardModal } = useShowModal();
-  const { getBlogData } = useBlogCalls();
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();
 
@@ -73,10 +70,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
       });
     }
   };
-
-  useEffect(() => {
-    getBlogData("categories");
-  }, []);
 
   return (
     <>
