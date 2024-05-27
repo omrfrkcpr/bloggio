@@ -79,8 +79,8 @@ const Trending = () => {
         // swiper configurations
         modules={[Navigation, Pagination, A11y, Autoplay]}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000 }}
-        className="w-[95%] h-[300px] max-w-[1600px] border-b border-gray-300"
+        autoplay={{ delay: 3000 }}
+        className="w-[95%] h-[240px] xl:h-[280px] max-w-[1600px] border-b border-gray-300"
         breakpoints={{
           300: {
             slidesPerView: 2,
@@ -104,7 +104,7 @@ const Trending = () => {
           const { _id, title, image, countOfVisitors } = blog;
           return (
             <SwiperSlide key={_id}>
-              <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[250px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
+              <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[190px] xl:h-[230px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
                 <div>
                   <img
                     onClick={() => handleClickMore(_id)}
@@ -114,7 +114,7 @@ const Trending = () => {
                   />
                   <h3
                     onClick={() => handleClickMore(_id)}
-                    className="text-[12px] xl:text-[16px] font-semibold px-4 py-2 cursor-pointer"
+                    className="text-[12px] xl:text-[16px] font-semibold px-4 py-2 cursor-pointer text-center"
                   >
                     {title}
                   </h3>

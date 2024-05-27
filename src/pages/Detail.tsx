@@ -33,7 +33,7 @@ const Detail = () => {
 
   useEffect(() => {
     getBlogDetails(`blogs/${path?.blogId || _id}`);
-  }, [getBlogDetails, path?.blogId, _id]);
+  }, [path, _id]);
 
   const {
     userId,

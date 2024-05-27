@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
@@ -27,14 +27,14 @@ const Blogs = () => {
     getBlogData("blogs", `/?page=${page}&limit=${BlogsPerPage}`);
   };
 
-  // useEffect(() => {
-  //   getBlogData("blogs", `/?page=1&limit=${BlogsPerPage}`);
-  // }, []);
+  useEffect(() => {
+    getBlogData("blogs", `/?page=1&limit=${BlogsPerPage}`);
+  }, []);
 
   return (
     <>
       <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto">
-        {blogs.map((blog: any) => {
+        {blogs.slice(0, 10).map((blog: any) => {
           const categoryName = getCategoryName(blog?.categoryId, categories);
           return (
             <div key={blog?._id}>
