@@ -7,21 +7,29 @@ import { Bookmarks, Heart } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import BlogShare from "./BlogShare";
 import { formatNum } from "../../helper/functions";
+import { RootState } from "../../app/store";
+import useShowModal from "../../hooks/useShowModal";
+import { toastErrorNotify } from "../../helper/toastNotify";
+import { useLocation, useNavigate } from "react-router-dom";
 // import { RootState } from "../../app/store";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   likes,
   comments,
   countOfVisitors,
-  show,
-  setShow,
   _id,
   // userId,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   // const { saved } = useSelector((state: RootState) => state.blog); // TODO
+  const { toggleCommentsModal } = useShowModal();
+  const { showCommentsModal } = useSelector((state: RootState) => state.modal);
+  const navigate = useNavigate();
+  const location = useLocation();
   const { postLike } = useBlogCalls();
   const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  // console.log(location.pathname);
 
   useEffect(() => {
     if (currentUser && likes?.includes(currentUser?._id)) {
@@ -32,6 +40,23 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   const handleLikeClick = async () => {
     await postLike(`blogs/${_id}/postLike`, _id);
     setIsLiked(true);
+  };
+
+  const handleGoComments = async () => {
+    const path = location?.pathname.includes(_id as string);
+    if (currentUser) {
+      if (!path && !showCommentsModal) {
+        await navigate(`blog/${_id}`);
+      }
+      setTimeout(
+        () => {
+          toggleCommentsModal();
+        },
+        !path ? 1000 : 0
+      );
+    } else {
+      toastErrorNotify("Please login to see blog comments.");
+    }
   };
 
   // console.log(likes);
@@ -59,11 +84,9 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           {formatNum(likes?.length)}
         </span>
       </p>
-      <p
-        className="space-x-1 flex items-center justify-center"
-        onClick={() => setShow && setShow(!show)}
-      >
+      <p className="space-x-1 flex items-center justify-center">
         <CommentIcon
+          onClick={handleGoComments}
           sx={{
             fontSize: { xs: "0.8rem", md: "0.9rem" },
             cursor: "pointer",

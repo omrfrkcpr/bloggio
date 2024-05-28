@@ -81,7 +81,7 @@ const Trending = () => {
         modules={[Navigation, Pagination, A11y, Autoplay]}
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
-        className="w-[95%] h-[240px] xl:h-[280px] max-w-[1600px] border-b border-gray-300"
+        className="w-[95%] h-[280px] max-w-[1600px] border-b border-gray-300"
         breakpoints={{
           300: {
             slidesPerView: 2,
@@ -105,7 +105,7 @@ const Trending = () => {
           const { _id, title, image, countOfVisitors } = blog;
           return (
             <SwiperSlide key={_id}>
-              <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[190px] xl:h-[230px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
+              <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[220px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
                 <div>
                   <CustomImage
                     onClick={() => handleClickMore(_id)}
@@ -115,7 +115,7 @@ const Trending = () => {
                   />
                   <h3
                     onClick={() => handleClickMore(_id)}
-                    className="text-[12px] xl:text-[16px] font-semibold px-4 py-2 cursor-pointer text-center"
+                    className="text-[12px] font-semibold px-4 py-2 cursor-pointer text-center"
                   >
                     {title}
                   </h3>
@@ -134,7 +134,7 @@ const Trending = () => {
                   </p>
                   <button
                     onClick={() => handleClickMore(_id)}
-                    className="hover:underline font-semibold text-black/60 text-[12px] xl:text-[16px]"
+                    className="hover:underline font-semibold text-black/60 text-[12px]"
                   >
                     More...
                   </button>

@@ -11,6 +11,7 @@ import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
 import Loading from "../components/commons/Loading";
 import CustomImage from "../components/commons/CustomImage";
+import BlogComments from "../components/Blog/BlogComments";
 
 const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
@@ -134,21 +135,7 @@ const SingleBlog = () => {
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </div>
-          {/* {show && <CommentForm comments={comments} id={id || ""} />} */}
-          {/* {currentUser?._id == userId && (
-        <Box
-          sx={{
-            marginTop: "2rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          gap={5}
-        >
-          <UpdateModal blog={blog} />
-          <DeleteModal blog={blog} />
-        </Box>
-      )} */}
+          <BlogComments blogId={_id || path?.blogId} />
         </div>
       )}
     </>

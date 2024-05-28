@@ -6,7 +6,7 @@ interface AuthModalProps {
 
 interface CustomModalProps {
   children: React.ReactNode;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setModal: (modal: boolean) => void;
   hidden: string;
   modal: boolean;
 }
@@ -50,8 +50,6 @@ interface BlogAnalyticsProps {
   likes: string[];
   comments: string[];
   countOfVisitors: number;
-  show?: ShowState;
-  setShow?: React.Dispatch<React.SetStateAction<ShowState>>;
   _id?: string;
   userId?: string;
 }
@@ -92,6 +90,31 @@ interface DropDownProps {
 
 interface CustomButtonProps {
   click: () => void;
-  icon: JSX.Element;
+  icon: JSX.Element | undefined;
   title: string;
+}
+
+interface BlogCommentsProps {
+  blogId: string;
+}
+
+interface UserIdProps {
+  _id: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+}
+
+interface CommentProps {
+  _id: string;
+  blogId: string;
+  userId: UserIdProps;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface BlogCommentCardProps {
+  commentData: CommentProps;
+  blogId: string;
 }

@@ -37,7 +37,6 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const { toggleBlogCardModal } = useShowModal();
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();
-
   const randomFirstName = faker.person.firstName(); // TODO
   const randomLastName = faker.person.lastName(); // TODO
 
