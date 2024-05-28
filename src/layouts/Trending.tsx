@@ -19,6 +19,7 @@ import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { formatNum, getTrendBlogs } from "../helper/functions";
+import CustomImage from "../components/commons/CustomImage";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -106,11 +107,11 @@ const Trending = () => {
             <SwiperSlide key={_id}>
               <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[190px] xl:h-[230px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
                 <div>
-                  <img
+                  <CustomImage
                     onClick={() => handleClickMore(_id)}
                     src={image}
                     alt={title}
-                    className="w-full h-30 h-[100px] object-fit cursor-pointer"
+                    className="w-[100vw] h-20 xl:h-[100px] object-fit cursor-pointer"
                   />
                   <h3
                     onClick={() => handleClickMore(_id)}

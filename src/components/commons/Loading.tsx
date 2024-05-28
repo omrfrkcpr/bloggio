@@ -1,9 +1,10 @@
 import loadingGif from "../../assets/Loading.gif";
+import CustomImage from "./CustomImage";
 
 const Loading = () => {
   return (
     <div className="fixed inset-0 grid place-items-center bg-white z-30">
-      <img src={loadingGif} alt="loading-gif" className="w-[20rem]" />
+      <CustomImage src={loadingGif} alt="loading-gif" className="w-[20rem]" />
     </div>
   );
 };

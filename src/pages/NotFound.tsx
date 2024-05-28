@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import CustomImage from "../components/commons/CustomImage";
 
 const NotFound = () => {
   return (
     <div className="absolute inset-0 bg-[#B9D0F0] z-50 grid place-items-center place-content-center gap-4 pb-10 px-5 text-center">
-      <img
+      <CustomImage
         src="https://static-00.iconduck.com/assets.00/emoji-sad-icon-2048x2048-edxdqlqa.png"
         alt="404-not-found"
         className="w-[75px] md:w-[150px]"

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import CustomImage from "./CustomImage";
 
 const Development = () => {
   return (
     <div className="absolute inset-0 bg-white z-20 grid place-items-center place-content-center gap-4 pb-10 px-5 text-center">
-      <img
+      <CustomImage
         src="https://akvopedia.org/s_wiki/images/0/02/Icon_under_development.png"
         alt="404-not-found"
         className="w-[150px] md:w-[300px]"

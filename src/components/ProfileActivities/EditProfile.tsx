@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
+import CustomImage from "../commons/CustomImage";
 
 const EditProfile = ({
   editModal,
@@ -84,7 +85,7 @@ const EditProfile = ({
           <div className="flex gap-[2rem]">
             <div className="w-[5rem]">
               {form?.image ? (
-                <img
+                <CustomImage
                   className="min-h-[5rem] min-w-[5rem] object-fit border border-gray-400 rounded-full"
                   src={form?.image}
                   alt="profile-img"

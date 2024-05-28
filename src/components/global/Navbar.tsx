@@ -26,6 +26,7 @@ import { ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
 import { IoIosArrowDown } from "react-icons/io";
 import useBlogCalls from "../../hooks/useBlogCalls";
+import CustomImage from "../commons/CustomImage";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -279,7 +280,7 @@ const Navbar = () => {
                   }}
                 >
                   {currentUser?.image ? (
-                    <img
+                    <CustomImage
                       className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                     />

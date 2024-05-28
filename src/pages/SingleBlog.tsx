@@ -10,6 +10,7 @@ import BlogAnalytics from "../components/Blog/BlogAnalytics";
 import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
 import Loading from "../components/commons/Loading";
+import CustomImage from "../components/commons/CustomImage";
 
 const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
@@ -61,11 +62,13 @@ const SingleBlog = () => {
       ) : (
         <div className="min-h-[88.45vh] h-auto flex justify-center items-start">
           <div className="flex flex-col justify-center items-center lg:items-start p-5 w-full max-w-[1000px] mx-auto">
-            <img
-              src={image}
-              alt="blog-image"
-              className="w-[100%] max-w-[600px] my-5 mx-auto"
-            />
+            <div className="mx-auto">
+              <CustomImage
+                src={image}
+                alt="blog-image"
+                className="w-[100vw] max-w-[600px] max-h-[400px] my-5 mx-auto"
+              />
+            </div>
             <h1 className="text-[1rem] md:text-[2rem] w-[100%] text-center mt-3 text-[#75a3e3]">
               {title}
             </h1>
@@ -75,9 +78,10 @@ const SingleBlog = () => {
             <div className="flex justify-between space-x-5 w-[100%] max-w-[1000px] mt-4">
               <div className="flex items-center">
                 {isDicebearImage ? (
-                  <img
+                  <CustomImage
                     className="w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 border-[.5px] border-gray"
                     src={userImage}
+                    alt="user-image"
                   />
                 ) : (
                   (

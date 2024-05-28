@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState, useCallback } from "react";
 import pencil from "../assets/pencil.png";
-import machine from "../assets/machine.png";
-import { useEffect, useState } from "react";
+import typewriter from "../assets/typewriter.png";
 import AuthModal from "../components/Modals/AuthModal";
 import { useSelector } from "react-redux";
 import useShowModal from "../hooks/useShowModal";
 import { RootState } from "../app/store";
 import usePath from "../hooks/usePath";
+import CustomImage from "../components/commons/CustomImage";
 
-const Hero = () => {
+const Hero: React.FC = React.memo(() => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleHeroModal } = useShowModal();
   const { showHeroModal } = useSelector((store: RootState) => store.modal);
@@ -23,10 +23,10 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleStartClick = () => {
+  const handleStartClick = useCallback(() => {
     toggleHeroModal();
     getNavigatePath("/write");
-  };
+  }, [toggleHeroModal, getNavigatePath]);
 
   return (
     <div
@@ -59,14 +59,24 @@ const Hero = () => {
           isLoaded ? "md:translate-y-0" : "md:translate-y-[110%]"
         }`}
       >
-        <img src={pencil} alt="" />
+        <CustomImage
+          src={pencil}
+          alt="pencil"
+          className="w-[100px] md:w-[300px]"
+          loading="lazy"
+        />
       </div>
       <div
         className={`hidden lg:block absolute bottom-5 right-[4rem] xl:right-[8rem] lg:transition-transform lg:duration-[2s] ${
           isLoaded ? "lg:translate-x-0" : "lg:translate-x-[140%]"
         }`}
       >
-        <img src={machine} alt="" width="320px" />
+        <CustomImage
+          src={typewriter}
+          alt="typewriter"
+          width="320px"
+          loading="lazy"
+        />
       </div>
       {showHeroModal && (
         <AuthModal
@@ -77,6 +87,6 @@ const Hero = () => {
       )}
     </div>
   );
-};
+});
 
 export default Hero;

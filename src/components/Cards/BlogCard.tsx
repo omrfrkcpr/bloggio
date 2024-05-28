@@ -18,6 +18,7 @@ import {
   dateFormatter,
   calculateReadTime,
 } from "../../helper/functions";
+import CustomImage from "../commons/CustomImage";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -78,7 +79,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <div className="mb-4">
             <div className="flex space-x-1 mb-1">
               <div className="text-[10px] lg:text-[12px]  text-gray-600 flex items-center space-x-1">
-                <img src={openLock} alt="read-permission-status" width="12px" />
+                <CustomImage
+                  src={openLock}
+                  alt="read-permission-status"
+                  width="12px"
+                />
                 <span>Public</span>
                 <StarIcon
                   sx={{ fontSize: { xs: "12px", md: "15px" }, color: "orange" }}
@@ -110,9 +115,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <div className="flex justify-between">
             <div className="flex items-center justify-center">
               {isDicebearImage ? (
-                <img
+                <CustomImage
                   className="w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 border-[.5px] border-gray"
                   src={userImage}
+                  alt="user-image"
                 />
               ) : (
                 (
@@ -171,7 +177,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           </div>
         </div>
         <div className="flex items-center justify-center m-auto">
-          <img
+          <CustomImage
             src={image}
             alt="blog-img"
             className="shadow-md rounded-lg bg-slate-50 object-cover w-[130px] h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[180px] m-auto"

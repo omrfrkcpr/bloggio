@@ -11,6 +11,7 @@ import Loading from "../components/commons/Loading";
 import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
+import CustomImage from "../components/commons/CustomImage";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
@@ -103,7 +104,7 @@ const Profile = () => {
               {/* profile details */}
               <div className="sticky top-7 flex flex-col justify-between">
                 {currentUser?.image ? (
-                  <img src={currentUser?.image} alt="user-image" />
+                  <CustomImage src={currentUser?.image} alt="user-image" />
                 ) : (
                   <Avatar sx={{ width: "3.5rem", height: "3.5rem" }} />
                 )}

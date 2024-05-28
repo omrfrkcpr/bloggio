@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner.gif";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
+import CustomImage from "../components/commons/CustomImage";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -41,7 +42,7 @@ const Preview: React.FC<PreviewProps> = ({
 
   useEffect(() => {
     getBlogData("categories");
-  }, [getBlogData]);
+  }, []);
 
   useEffect(() => {
     setDescription(desc);
@@ -134,7 +135,7 @@ const Preview: React.FC<PreviewProps> = ({
                 </span>
 
                 {imgUrl && (
-                  <img
+                  <CustomImage
                     src={imgUrl}
                     alt="blog-img"
                     className="absolute w-full h-full"
@@ -257,19 +258,14 @@ const Preview: React.FC<PreviewProps> = ({
                     readers can view and interact with your content.{" "}
                   </p>
                 </div>
-                {loading && (
-                  <div className="w-[30px]">
-                    <img src={spinner} alt="loading-spinner" />
-                  </div>
-                )}
               </div>
               <button
-                onClick={handleSubmitNewBlog}
+                onClick={() => handleSubmitNewBlog()}
                 className="border bg-orange-600 hover:bg-orange-400 text-md px-2 py-1 rounded-full text-white transition-all duration-300 w-[150px] ms-auto mt-10 me-5 flex items-center justify-center gap-2 "
               >
                 {loading ? (
                   <div className="w-[30px]">
-                    <img src={spinner} alt="loading-spinner" />
+                    <CustomImage src={spinner} alt="loading-spinner" />
                   </div>
                 ) : (
                   "Save"
