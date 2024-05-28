@@ -4,6 +4,33 @@ interface AuthModalProps {
   selectedFormType?: string;
 }
 
+interface CustomModalProps {
+  children: React.ReactNode;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  hidden: string;
+  modal: boolean;
+}
+
+interface LogoProps {
+  sx?:
+    | { [key: string]: string }
+    | {
+        display?: string | { [key: string]: string };
+        mr?: number | string;
+      };
+  width?: string;
+}
+
+interface HeaderProps {
+  textAlign?: string;
+  variant?: string;
+  sx?: {
+    [key: string]: string | number | Record<string, string | number>;
+  };
+  content?: string;
+  noWrap?: boolean;
+}
+
 interface BlogCardProps {
   _id?: string;
   userId?: string;
@@ -67,11 +94,4 @@ interface CustomButtonProps {
   click: () => void;
   icon: JSX.Element;
   title: string;
-}
-
-interface CustomModalProps {
-  children: React.ReactNode;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  hidden: string;
-  modal: boolean;
 }

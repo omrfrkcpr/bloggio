@@ -2,20 +2,9 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-interface HeaderProps {
-  textAlign?: string;
-  variant?: string;
-  sx?: {
-    [key: string]: string | number | Record<string, string | number>;
-  };
-  content?: string;
-  noWrap?: boolean;
-}
-
 const CustomTypography: React.FC<HeaderProps> = ({
   variant,
   sx,
-
   noWrap,
   content,
   textAlign,
@@ -32,4 +21,6 @@ const CustomTypography: React.FC<HeaderProps> = ({
   );
 };
 
-export default CustomTypography;
+const MemoizedCustomTypography = React.memo(CustomTypography);
+
+export default MemoizedCustomTypography;

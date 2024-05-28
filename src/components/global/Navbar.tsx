@@ -39,25 +39,6 @@ const Navbar = () => {
   const [searchModal, setSearchModal] = React.useState(false);
   const { getBlogData } = useBlogCalls();
   const { pathname } = useLocation();
-
-  React.useEffect(() => {
-    getBlogData("blogs");
-  }, []);
-
-  const pages = [
-    { label: "Home", path: "/", id: 1 },
-    { label: "Contact", path: "/contact", id: 2 },
-    { label: "About", path: "/about", id: 3 },
-    currentUser &&
-      pathname !== "/write" && { label: "Write", path: "/write", id: 4 },
-  ].filter(Boolean);
-
-  const loggedInSettings = [
-    { label: "Profile", path: `/profile/${currentUser?._id}`, id: 1 },
-    { label: "Stats", path: `/stats/${currentUser?._id}`, id: 2 },
-    { label: "Logout", path: "logout", id: 3 },
-  ];
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -66,45 +47,86 @@ const Navbar = () => {
   );
 
   React.useEffect(() => {
+    getBlogData("blogs");
+  }, []);
+
+  React.useEffect(() => {
     const scrollMe = () => {
       window.scrollY > 250 ? setIsActive(true) : setIsActive(false);
     };
     window.addEventListener("scroll", scrollMe);
   }, []);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  const pages = React.useMemo(
+    () =>
+      [
+        { label: "Home", path: "/", id: 1 },
+        { label: "Contact", path: "/contact", id: 2 },
+        { label: "About", path: "/about", id: 3 },
+        currentUser &&
+          pathname !== "/write" && { label: "Write", path: "/write", id: 4 },
+      ].filter(Boolean),
+    [currentUser, pathname]
+  );
 
-  const handleCloseNavMenu = (path: string) => {
-    setAnchorElNav(null);
-    if (path === "logout") {
-      logout();
-    } else {
-      navigate(path);
-    }
-  };
+  const loggedInSettings = React.useMemo(
+    () => [
+      { label: "Profile", path: `/profile/${currentUser?._id}`, id: 1 },
+      { label: "Stats", path: `/stats/${currentUser?._id}`, id: 2 },
+      { label: "Logout", path: "logout", id: 3 },
+    ],
+    [currentUser]
+  );
 
-  const handleCloseUserMenu = (path: string) => {
-    setAnchorElUser(null);
-    if (path === "logout") {
-      logout();
-      toggleHeroModal(false);
-      toggleNavbarModal(false);
-    } else {
-      navigate(path);
-    }
-  };
+  const handleOpenNavMenu = React.useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorElNav(event.currentTarget);
+    },
+    []
+  );
 
-  const handleLoginMenu = (pathUrl: string) => {
-    setAnchorElUser(null);
-    toggleNavbarModal();
-    setSelectedFormType(pathUrl);
-    getNavigatePath("/");
-  };
+  const handleOpenUserMenu = React.useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorElUser(event.currentTarget);
+    },
+    []
+  );
+
+  const handleCloseNavMenu = React.useCallback(
+    (path: string) => {
+      setAnchorElNav(null);
+      if (path === "logout") {
+        logout();
+      } else {
+        navigate(path);
+      }
+    },
+    [logout, navigate]
+  );
+
+  const handleCloseUserMenu = React.useCallback(
+    (path: string) => {
+      setAnchorElUser(null);
+      if (path === "logout") {
+        logout();
+        toggleHeroModal(false);
+        toggleNavbarModal(false);
+      } else {
+        navigate(path);
+      }
+    },
+    [logout, navigate, toggleHeroModal, toggleNavbarModal]
+  );
+
+  const handleLoginMenu = React.useCallback(
+    (pathUrl: string) => {
+      setAnchorElUser(null);
+      toggleNavbarModal();
+      setSelectedFormType(pathUrl);
+      getNavigatePath("/");
+    },
+    [toggleNavbarModal, getNavigatePath]
+  );
 
   return (
     <>
