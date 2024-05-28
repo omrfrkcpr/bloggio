@@ -57,7 +57,7 @@ const Search = ({
         >
           <div
             ref={searchRef}
-            className="flex items-center gap-1 bg-gray-100 px-2 rounded-full relative z-10"
+            className="flex items-center gap-1 bg-gray-100 px-2 rounded-full relative z-10 me-2"
           >
             <span className="text-2xl text-gray-400">
               <CiSearch />
@@ -65,7 +65,7 @@ const Search = ({
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent outline-none py-[0.7rem] text-sm w-full text-black"
+              className="bg-transparent outline-none py-[0.5rem] text-sm w-full text-black"
               type="text"
               placeholder="Search Blog..."
             />

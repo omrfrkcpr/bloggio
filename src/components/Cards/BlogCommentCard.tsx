@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { dateFormatter } from "../../helper/functions";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
@@ -19,6 +19,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   const [more, setMore] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [editComment, setEditComment] = useState<string>("");
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
   const { _id, userId, comment, createdAt, updatedAt } = commentData;
 
@@ -47,6 +48,22 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(event.target as Node)
+      ) {
+        setDrop(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropDownRef]);
+
   return (
     <section className="border-b">
       {!isEdit ? (
@@ -65,7 +82,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                 </p>
               </div>
               <div className="relative">
-                {currentUser && currentUser?.uid === userId && (
+                {currentUser?._id === userId?._id && (
                   <>
                     <button
                       onClick={() => setDrop(!drop)}
@@ -73,17 +90,19 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                     >
                       <BiDotsHorizontalRounded />
                     </button>
-                    <DropDown
-                      showDrop={drop}
-                      setShowDrop={setDrop}
-                      size="w-[10rem]"
-                    >
-                      <Button
-                        click={editCommentText}
-                        title="Edit this response"
-                      />
-                      <Button click={removeComment} title="Delete" />
-                    </DropDown>
+                    <div ref={dropDownRef}>
+                      <DropDown
+                        showDrop={drop}
+                        setShowDrop={setDrop}
+                        size="w-[10rem]"
+                      >
+                        <Button
+                          click={editCommentText}
+                          title="Edit this response"
+                        />
+                        <Button click={removeComment} title="Delete" />
+                      </DropDown>
+                    </div>
                   </>
                 )}
               </div>
@@ -99,7 +118,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
           </p>
         </>
       ) : (
-        <div className="bg-white shadows p-4">
+        <div className="bg-white shadows p-4 z-50">
           <textarea
             value={editComment}
             onChange={(e) => setEditComment(e.target.value)}
@@ -107,12 +126,15 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
             className="w-full resize-none outline-none text-sm"
           ></textarea>
           <div className="flex items-center justify-end gap-2">
-            <button onClick={() => setIsEdit(false)} className="w-fit text-sm">
+            <button
+              onClick={() => setIsEdit((prevState) => !prevState)}
+              className="w-fit text-sm"
+            >
               Cancel
             </button>
             <button
               onClick={handleEdit}
-              className="btn !text-white !bg-green-700 !rounded-full !text-xs"
+              className="px-2 py-1 !text-white !bg-green-700 hover:bg-green-300 !rounded-full !text-xs"
             >
               {loading ? "Updating..." : "Update"}
             </button>

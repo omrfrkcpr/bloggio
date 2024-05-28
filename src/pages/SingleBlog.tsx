@@ -15,7 +15,7 @@ import BlogComments from "../components/Blog/BlogComments";
 
 const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
-  const { getBlogDetails } = useBlogCalls();
+  const { getBlogDetails, getBlogData } = useBlogCalls();
   const { blogDetails, loading } = useSelector((state: any) => state?.blog);
   // console.log("Blog Detail:", blogDetails);
   const location = useLocation();
@@ -36,6 +36,10 @@ const SingleBlog = () => {
   useEffect(() => {
     getBlogDetails(`blogs/${path?.blogId || _id}`);
   }, [path, _id]);
+
+  useEffect(() => {
+    getBlogData("comments");
+  }, []);
 
   const {
     userId,

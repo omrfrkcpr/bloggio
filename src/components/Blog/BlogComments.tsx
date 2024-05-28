@@ -10,6 +10,8 @@ import { LiaTimesSolid } from "react-icons/lia";
 import Loading from "../commons/Loading";
 import { toastErrorNotify } from "../../helper/toastNotify";
 import BlogCommentCard from "../Cards/BlogCommentCard";
+import { capitalizeWords } from "../../helper/functions";
+import { Avatar } from "@mui/material";
 
 const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
   const { toggleCommentsModal } = useShowModal();
@@ -68,11 +70,21 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
         {currentUser && (
           <div className="shadows p-3 my-5 overflow-hidden">
             <div className="flex items-center gap-2 mb-5">
-              <img
-                className="w-[2rem] h-[2rem] object-cover rounded-full"
-                src={currentUser?.image || "/profile.jpg"}
-                alt="user-img"
-              />
+              {currentUser?.image ? (
+                <img
+                  className="w-[2rem] h-[2rem] rounded-full object-cover"
+                  src={currentUser?.image}
+                  alt="user-image"
+                />
+              ) : (
+                <Avatar
+                  alt={
+                    currentUser && `${capitalizeWords(currentUser?.firstName)}`
+                  }
+                  src="/static/images/avatar/2.jpg"
+                  sx={{ width: "32px", height: "32px" }}
+                />
+              )}
               <h3 className="text-sm">{currentUser?.username}</h3>
             </div>
             <textarea

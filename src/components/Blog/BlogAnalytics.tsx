@@ -46,7 +46,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
     const path = location?.pathname.includes(_id as string);
     if (currentUser) {
       if (!path && !showCommentsModal) {
-        await navigate(`blog/${_id}`);
+        await navigate(`/blog/${_id}`);
       }
       setTimeout(
         () => {

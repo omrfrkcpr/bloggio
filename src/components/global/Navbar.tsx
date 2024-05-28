@@ -26,7 +26,6 @@ import { ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "../commons/Search";
 import { IoIosArrowDown } from "react-icons/io";
 import useBlogCalls from "../../hooks/useBlogCalls";
-import CustomImage from "../commons/CustomImage";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -143,7 +142,11 @@ const Navbar = () => {
         >
           <Toolbar disableGutters>
             <Logo
-              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+                mt: "6px",
+              }}
               width="50px"
             />
             <CustomTypography
@@ -216,7 +219,7 @@ const Navbar = () => {
               sx={{
                 display: { xs: "flex", md: "none" },
                 mr: 1,
-                mt: "5px",
+                mt: "12px",
               }}
               width="40px"
             />
@@ -280,7 +283,7 @@ const Navbar = () => {
                   }}
                 >
                   {currentUser?.image ? (
-                    <CustomImage
+                    <img
                       className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                       alt="user-image"
