@@ -66,7 +66,7 @@ const SingleBlog = () => {
               <CustomImage
                 src={image}
                 alt="blog-image"
-                className="w-[100vw] max-w-[600px] max-h-[400px] my-5 mx-auto"
+                className="w-[100vw] max-h-[400px] my-5 mx-auto"
               />
             </div>
             <h1 className="text-[1rem] md:text-[2rem] w-[100%] text-center mt-3 text-[#75a3e3]">

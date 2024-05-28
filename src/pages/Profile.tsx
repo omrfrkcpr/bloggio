@@ -16,6 +16,7 @@ import CustomImage from "../components/commons/CustomImage";
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
   const { getBlogData } = useBlogCalls();
+
   const activities = [
     {
       title: "My Blogs",
