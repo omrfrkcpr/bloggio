@@ -8,6 +8,7 @@ const DropDown: React.FC<DropDownProps> = ({
   setShowDrop,
 }) => {
   const dropRef = useRef(null);
+
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
       if (
@@ -27,7 +28,7 @@ const DropDown: React.FC<DropDownProps> = ({
       {showDrop && (
         <div
           ref={dropRef}
-          className={`shadows flex flex-col absolute right-0 top-[2rem] bg-white ${size}`}
+          className={`shadows flex flex-col absolute right-0 top-[2rem] z-50 bg-white ${size}`}
         >
           {children}
         </div>
