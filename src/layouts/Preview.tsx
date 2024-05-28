@@ -135,7 +135,7 @@ const Preview: React.FC<PreviewProps> = ({
                 </span>
 
                 {imgUrl && (
-                  <CustomImage
+                  <img
                     src={imgUrl}
                     alt="blog-img"
                     className="absolute w-full h-full"

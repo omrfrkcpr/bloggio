@@ -283,6 +283,7 @@ const Navbar = () => {
                     <CustomImage
                       className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
+                      alt="user-image"
                     />
                   ) : (
                     <Avatar

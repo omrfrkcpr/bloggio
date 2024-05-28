@@ -59,7 +59,7 @@ const Hero: React.FC = React.memo(() => {
           isLoaded ? "md:translate-y-0" : "md:translate-y-[110%]"
         }`}
       >
-        <CustomImage
+        <img
           src={pencil}
           alt="pencil"
           className="w-[100px] md:w-[300px]"
