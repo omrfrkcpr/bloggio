@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CustomModal from "../components/Modals/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -12,37 +12,54 @@ import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 import CustomImage from "../components/commons/CustomImage";
+import { Link, useLocation } from "react-router-dom";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
   const { getBlogData } = useBlogCalls();
+  const location: any = useLocation();
 
-  const activities = [
-    {
-      title: "My Blogs",
-      comp: (props: any) => <PersonalBlogs {...props} blogType="myBlogs" />,
-    },
-    {
-      title: "Drafts",
-      comp: (props: any) => <PersonalBlogs {...props} blogType="drafts" />,
-    },
-    {
-      title: "Saved",
-      comp: (props: any) => <SavedBlogs {...props} />,
-    },
-    {
-      title: "About",
-      comp: (props: any) => <ProfileAbout {...props} />,
-    },
-  ];
+  const basePath = useMemo(
+    () =>
+      !location?.pathname.includes(currentUser?._id)
+        ? currentUser?._id
+        : `/profile/${currentUser?._id}`,
+    [location, currentUser]
+  );
+
+  const activities = useMemo(
+    () => [
+      {
+        title: "My Blogs",
+        comp: (props: any) => <PersonalBlogs {...props} blogType="myBlogs" />,
+        path: `${basePath}/?my-blogs`,
+      },
+      {
+        title: "Drafts",
+        comp: (props: any) => <PersonalBlogs {...props} blogType="drafts" />,
+        path: `${basePath}/?drafts`,
+      },
+      {
+        title: "Saved",
+        comp: (props: any) => <SavedBlogs {...props} />,
+        path: `${basePath}/?saved`,
+      },
+      {
+        title: "About",
+        comp: (props: any) => <ProfileAbout {...props} />,
+        path: `${basePath}/?about`,
+      },
+    ],
+    [basePath]
+  );
   const [currentActive, setCurrentActive] = useState(activities[0]);
-  const [modal, setModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
+  const [editModal, setEditModal] = useState<boolean>(false);
 
   useEffect(() => {
-    getBlogData("blogs");
+    getBlogData("blogs", `?author=${currentUser?._id}`);
     getBlogData("categories");
-  }, []);
+  }, [currentUser]);
 
   return (
     <>
@@ -67,12 +84,14 @@ const Profile = () => {
                       : ""
                   }`}
                 >
-                  <button
-                    onClick={() => setCurrentActive(activity)}
-                    className="w-[75px]"
-                  >
-                    {activity.title}
-                  </button>
+                  <Link to={activity.path}>
+                    <button
+                      onClick={() => setCurrentActive(activity)}
+                      className="w-[75px]"
+                    >
+                      {activity.title}
+                    </button>
+                  </Link>
                 </div>
               ))}
             </div>
