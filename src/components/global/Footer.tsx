@@ -1,10 +1,11 @@
 import { Typography } from "@material-tailwind/react";
 import Logo from "../commons/Logo";
 import SocialMedia from "../commons/SocialMedia";
+import React from "react";
 
 const currentYear = new Date().getFullYear();
 
-const Footer = () => {
+const Footer: React.FC = React.memo(() => {
   return (
     <section className=" w-full p-2" style={{ backgroundColor: "#b9d0f0" }}>
       <footer className="relative w-full">
@@ -35,6 +36,6 @@ const Footer = () => {
       </footer>
     </section>
   );
-};
+});
 
 export default Footer;
