@@ -7,7 +7,6 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import { RootState } from "../../app/store";
-import CustomButton from "../commons/CustomButton";
 
 interface LoginFormValues {
   email: string;
@@ -96,11 +95,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
           ))}
         </div>
         {!loading ? (
-          <CustomButton
+          <button
             type="submit"
-            className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef] w-[90px] mx-auto"
-            title="Sign In"
-          />
+            className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
+          >
+            Sign In
+          </button>
         ) : (
           <div className="bg-[#76a9f0] w-[68px] h-[28px] lg:w-[78px] lg:h-[36px] text-white rounded-xl mt-6 flex items-center justify-center mx-auto">
             <CircularProgress sx={{ color: "white", padding: "0.8rem" }} />
