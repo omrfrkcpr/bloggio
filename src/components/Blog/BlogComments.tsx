@@ -93,7 +93,7 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
                 setCommentPrev({ ...commentPrev, comment: e.target.value })
               }
               placeholder="What are your thoughts?"
-              className="w-full outline-none resize-none text-sm border px-2 pt-4"
+              className="w-full outline-none resize-none scrollbar-hide text-sm border px-2 pt-4"
             ></textarea>
             <div className="flex items-center justify-end gap-4 mt-[1rem]">
               <button
