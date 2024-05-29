@@ -67,7 +67,6 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
             click={() => toggleCommentsModal()}
             className="text-xl cursor-pointer"
             icon={<LiaTimesSolid />}
-            title=""
           />
         </div>
         {/* comment form  */}
@@ -106,14 +105,12 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
                   toggleCommentsModal();
                 }}
                 className="text-sm cursor-pointer"
-                icon={undefined}
                 title="Cancel"
               />
               <CustomButton
                 click={() => writeComment()}
                 className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full cursor-pointer"
                 title="Response"
-                icon={undefined}
               />
             </div>
           </div>

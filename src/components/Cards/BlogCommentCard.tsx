@@ -134,7 +134,6 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               <CustomButton
                 click={() => setMore(!more)}
                 title={more ? "...less" : "...more"}
-                icon={undefined}
                 className="cursor-pointer hover:underline"
               />
             )}
@@ -153,14 +152,12 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               click={() => setIsEdit(false)}
               className="w-fit text-sm cursor-pointer"
               title="Cancel"
-              icon={undefined}
             />
 
             <CustomButton
               click={handleEdit}
               className="px-2 py-1 text-white bg-orange-600 hover:bg-orange-300 !rounded-full text-xs cursor-pointer"
               title={loading ? "Updating..." : "Update"}
-              icon={undefined}
             />
           </div>
         </div>
