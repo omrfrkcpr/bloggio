@@ -6,7 +6,7 @@ import {
   fetchStart,
   getBlogCommentSuccess,
   getSuccess,
-  getDetailSuccess,
+  getSingleBlogSuccess,
   getPageSuccess,
   // getSavedSuccess,
 } from "../features/blogSlice";
@@ -78,10 +78,10 @@ const useBlogCalls = () => {
     }
   };
 
-  const putBlogData = async (url: string, info: object) => {
+  const putBlogData = async (url: string, info: object, blogId: string) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`${url}/${(info as any)?._id}`, info);
+      await axiosWithToken.put(`${url}/${blogId}`, info);
       toastSuccessNotify(`${singularize(url)} ist successfully updated!`);
     } catch (error) {
       console.log(error);
@@ -126,12 +126,12 @@ const useBlogCalls = () => {
     }
   };
 
-  const getBlogDetails = async (url: string) => {
+  const getSingleBlog = async (url: string) => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken(`${url}`);
       // console.log(data);
-      dispatch(getDetailSuccess({ data: data?.data }));
+      dispatch(getSingleBlogSuccess({ data: data?.data }));
     } catch (error) {
       dispatch(fetchFail());
     }
@@ -167,7 +167,7 @@ const useBlogCalls = () => {
       await axiosWithToken.post(`${url}`);
       // console.log(`Post Like: ${data}`);
       getBlogData("blogs");
-      getBlogDetails(`blogs/${blogId}`);
+      getSingleBlog(`blogs/${blogId}`);
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -192,7 +192,7 @@ const useBlogCalls = () => {
     postBlogData,
     getBlogData,
     getBlogComment,
-    getBlogDetails,
+    getSingleBlog,
     getTrendsData,
     postLike,
     getLike,

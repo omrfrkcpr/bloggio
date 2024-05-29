@@ -66,6 +66,10 @@ interface PreviewProps {
   setTitle: (title: string) => void;
   description: string;
   setDescription: (description: string) => void;
+  image?: string | undefined;
+  category?: string | any;
+  type: string;
+  blogId?: string | undefined;
 }
 
 interface FormTextFieldProps {
@@ -128,4 +132,24 @@ interface BlogSettingsProps {
   onClick?: () => void;
   component?: React.ElementType;
   extraProps?: any;
+}
+
+interface BlogState {
+  randomFirstName?: string;
+  randomLastName?: string;
+  userImage?: string;
+  categoryName?: string;
+  _id?: string;
+}
+
+interface Blog {
+  userId: string;
+  categoryId: { name: string };
+  title: string;
+  content: string;
+  image: string;
+  comments: any[];
+  likes: any[];
+  countOfVisitors: number;
+  createdAt: string;
 }

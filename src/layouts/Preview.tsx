@@ -20,13 +20,17 @@ const Preview: React.FC<PreviewProps> = ({
   setTitle,
   description,
   setDescription,
+  image,
+  category,
+  type,
+  blogId,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { categories, loading } = useSelector(
     (state: RootState) => state.blog
   ) as any;
   const navigate = useNavigate();
-  const { getBlogData, postBlogData } = useBlogCalls();
+  const { getBlogData, postBlogData, putBlogData } = useBlogCalls();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
   const [imgUrl, setImgUrl] = useState<string>("");
@@ -45,10 +49,20 @@ const Preview: React.FC<PreviewProps> = ({
     getBlogData("categories");
   }, []);
 
+  console.log(category);
+
   useEffect(() => {
     setDescription(desc);
     setPreview((prev) => ({ ...prev, content: desc }));
-  }, [desc, setDescription]);
+    if (image) {
+      setPreview((prev) => ({ ...prev, image }));
+      setImgUrl(image);
+    }
+    if (category) {
+      setPreview((prev) => ({ ...prev, categoryId: category?._id }));
+      setSelectedCategory(category?._id);
+    }
+  }, [desc, setDescription, image, category]);
 
   const handleAddCategory = async () => {
     if (newCategory) {
@@ -78,7 +92,12 @@ const Preview: React.FC<PreviewProps> = ({
         return;
       }
 
-      await postBlogData("blogs", { ...preview, content: desc });
+      if (type === "Update" && blogId) {
+        await putBlogData("blogs", { ...preview, content: desc }, blogId);
+      } else if (type === "Save") {
+        await postBlogData("blogs", { ...preview, content: desc });
+      }
+
       navigate("/");
       setIsOpen(false);
       setPreview({
@@ -266,7 +285,7 @@ const Preview: React.FC<PreviewProps> = ({
                     <CustomImage src={spinner} alt="loading-spinner" />
                   </div>
                 ) : (
-                  "Save"
+                  type
                 )}{" "}
                 {!loading && <RiSave3Fill />}
               </button>

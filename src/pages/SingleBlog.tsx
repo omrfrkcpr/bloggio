@@ -15,13 +15,13 @@ import BlogComments from "../components/Blog/BlogComments";
 
 const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
-  const { getBlogDetails, getBlogData } = useBlogCalls();
-  const { blogDetails, loading } = useSelector((state: any) => state?.blog);
-  // console.log("Blog Detail:", blogDetails);
+  const { getSingleBlog, getBlogData } = useBlogCalls();
+  const { singleBlog, loading } = useSelector((state: any) => state?.blog);
+  // console.log("Single Blog:", singleBlog);
   const location = useLocation();
   const { state } = location;
   // const [show, setShow] = useState(false);
-  const path = useParams();
+  const path = useParams<{ blogId: string }>();
 
   // console.log(path?.blogId);
 
@@ -34,7 +34,7 @@ const SingleBlog = () => {
   } = state || {};
 
   useEffect(() => {
-    getBlogDetails(`blogs/${path?.blogId || _id}`);
+    getSingleBlog(`blogs/${path?.blogId || _id}`);
   }, [path, _id]);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const SingleBlog = () => {
     likes,
     countOfVisitors,
     createdAt,
-  } = blogDetails;
+  } = singleBlog || {};
 
   const isDicebearImage = userImage.startsWith(
     "https://api.dicebear.com/8.x/avataaars/svg?seed="

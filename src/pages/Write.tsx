@@ -59,6 +59,7 @@ const Write = () => {
             description={description}
             setTitle={setTitle}
             setDescription={setDescription}
+            type="Save"
           />
         </div>
       )}

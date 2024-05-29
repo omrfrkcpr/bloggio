@@ -1,21 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import Preview from "../layouts/Preview";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { toastWarnNotify } from "../helper/toastNotify";
 import CustomButton from "../components/commons/CustomButton";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useBlogCalls from "../hooks/useBlogCalls";
 
 const EditBlog = () => {
+  const { getSingleBlog } = useBlogCalls();
+  const { singleBlog } = useSelector((state: any) => state.blog);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const { blogId } = useParams();
 
-  console.log(blogId);
+  useEffect(() => {
+    getSingleBlog(`blogs/${blogId}`);
+  }, [blogId]);
+
+  useEffect(() => {
+    if (singleBlog) {
+      setTitle(singleBlog?.title);
+      setDescription(singleBlog?.content);
+      setImage(singleBlog?.image);
+      setCategory(singleBlog?.categoryId);
+    }
+  }, [singleBlog]);
 
   return (
     <>
@@ -49,9 +66,9 @@ const EditBlog = () => {
             }}
             className={`${
               isOpen && "hidden"
-            } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}
+            } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#ee9f30] text-white  hover:bg-[#f0c281] rounded-full transition-all duration-500`}
             icon={<FaCircleArrowRight />}
-            title="Continue Publishing"
+            title="Continue Updating"
           />
         </section>
       )}
@@ -63,6 +80,10 @@ const EditBlog = () => {
             description={description}
             setTitle={setTitle}
             setDescription={setDescription}
+            image={image}
+            category={category}
+            type="Update"
+            blogId={blogId}
           />
         </div>
       )}

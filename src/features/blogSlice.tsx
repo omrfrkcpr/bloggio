@@ -7,7 +7,7 @@ const blogSlice = createSlice({
   initialState: {
     categories: [],
     blogs: [],
-    blogDetails: [],
+    singleBlog: [],
     trendings: [],
     comments: [],
     saved: [],
@@ -28,9 +28,9 @@ const blogSlice = createSlice({
     getPageSuccess: (state, { payload }) => {
       state.totalPage = payload;
     },
-    getDetailSuccess: (state, { payload: { data } }) => {
+    getSingleBlogSuccess: (state, { payload: { data } }) => {
       state.loading = false;
-      state.blogDetails = data;
+      state.singleBlog = data;
     },
     getSavedSuccess: (state, { payload: { data } }) => {
       state.loading = false;
@@ -51,7 +51,7 @@ const blogSlice = createSlice({
 export const {
   fetchStart,
   getSuccess,
-  getDetailSuccess,
+  getSingleBlogSuccess,
   getSavedSuccess,
   getBlogCommentSuccess,
   fetchFail,
