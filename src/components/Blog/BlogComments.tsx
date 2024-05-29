@@ -12,6 +12,7 @@ import { toastErrorNotify } from "../../helper/toastNotify";
 import BlogCommentCard from "../Cards/BlogCommentCard";
 import { capitalizeWords } from "../../helper/functions";
 import { Avatar } from "@mui/material";
+import CustomButton from "../commons/CustomButton";
 
 const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
   const { toggleCommentsModal } = useShowModal();
@@ -62,9 +63,12 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
           <h3 className="text-xl font-bold">
             Comments ({commentsData?.length})
           </h3>
-          <button onClick={() => toggleCommentsModal()} className="text-xl">
-            <LiaTimesSolid />
-          </button>
+          <CustomButton
+            click={() => toggleCommentsModal()}
+            className="text-xl cursor-pointer"
+            icon={<LiaTimesSolid />}
+            title=""
+          />
         </div>
         {/* comment form  */}
         {currentUser && (
@@ -96,18 +100,21 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
               className="w-full outline-none resize-none scrollbar-hide text-sm border px-2 pt-4"
             ></textarea>
             <div className="flex items-center justify-end gap-4 mt-[1rem]">
-              <button
-                onClick={() => setCommentPrev({ ...commentPrev, comment: "" })}
-                className="text-sm"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => writeComment()}
-                className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full"
-              >
-                Response
-              </button>
+              <CustomButton
+                click={() => {
+                  setCommentPrev({ ...commentPrev, comment: "" });
+                  toggleCommentsModal();
+                }}
+                className="text-sm cursor-pointer"
+                icon={undefined}
+                title="Cancel"
+              />
+              <CustomButton
+                click={() => writeComment()}
+                className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full cursor-pointer"
+                title="Response"
+                icon={undefined}
+              />
             </div>
           </div>
         )}

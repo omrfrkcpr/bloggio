@@ -7,6 +7,7 @@ import useShowModal from "../hooks/useShowModal";
 import { RootState } from "../app/store";
 import usePath from "../hooks/usePath";
 import CustomImage from "../components/commons/CustomImage";
+import CustomButton from "../components/commons/CustomButton";
 
 const Hero: React.FC = React.memo(() => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
@@ -43,15 +44,13 @@ const Hero: React.FC = React.memo(() => {
           </p>
         </div>
         {!currentUser && (
-          <button
-            onClick={handleStartClick}
+          <CustomButton
+            click={handleStartClick}
             className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
-          >
-            Start writing
-          </button>
+            title="Start writing"
+          />
         )}
       </div>
-
       <div
         className={`w-[300px] md:w-[100px] rotate-90 md:rotate-0 absolute -bottom-52 md:bottom-0 left-0 md:left-[70%] lg:left-[50%] transition-transform duration-[3s] ${
           isLoaded ? "translate-x-0" : "-translate-x-[120%]"

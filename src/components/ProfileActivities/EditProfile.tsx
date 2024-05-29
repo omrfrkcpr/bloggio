@@ -8,6 +8,7 @@ import { Avatar } from "@mui/material";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
 import CustomImage from "../commons/CustomImage";
+import CustomButton from "../commons/CustomButton";
 
 const EditProfile = ({
   editModal,
@@ -62,9 +63,11 @@ const EditProfile = ({
         {/* head */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Profile Information</h2>
-          <button onClick={() => setEditModal(false)} className="text-xl">
-            <LiaTimesSolid />
-          </button>
+          <CustomButton
+            click={() => setEditModal(false)}
+            className="text-xl"
+            icon={<LiaTimesSolid />}
+          />
         </div>
         {/* body */}
         <section className="mt-6">
@@ -95,13 +98,11 @@ const EditProfile = ({
               )}
             </div>
             <div>
-              <button
-                onClick={() => setForm({ ...form, image: "" })}
-                className="text-red-700 text-sm hover:underline "
-              >
-                Clear URL
-              </button>
-
+              <CustomButton
+                click={() => setForm({ ...form, image: "" })}
+                className="text-red-700 text-sm hover:text-red-300"
+                title="Clear URL"
+              />
               <p className="w-full sm:w-[20rem] text-gray-500 text-sm pt-2 ">
                 Recommended: Square JPG, PNG, or GIF, at least 1,000 Pixels per
                 side.
@@ -153,18 +154,16 @@ const EditProfile = ({
         </section>
         {/* Profile Edit Buttons */}
         <div className="flex items-center justify-end gap-4 pt-[2rem]">
-          <button
+          <CustomButton
             className={`text-green-600 ${btn} hover:border-green-300 hover:text-green-300`}
-            onClick={() => setEditModal(false)}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={saveForm}
+            click={() => setEditModal(false)}
+            title="Cancel"
+          />
+          <CustomButton
+            click={saveForm}
             className={`text-white ${btn} bg-green-800 hover:bg-green-300 hover:border-green-300`}
-          >
-            Save
-          </button>
+            title="Save"
+          />
         </div>
       </div>
     </CustomModal>

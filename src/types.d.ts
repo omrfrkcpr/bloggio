@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface AuthModalProps {
   isOpen?: boolean;
   setIsOpen?: (value: boolean) => void;
@@ -90,9 +91,13 @@ interface DropDownProps {
 }
 
 interface CustomButtonProps {
-  click: () => void;
-  icon: JSX.Element | undefined;
-  title: string;
+  click?: () => void;
+  icon?: JSX.Element | undefined;
+  title?: string;
+  className?: string | undefined;
+  key?: string | number;
+  type?: string | undefined;
+  disabled?: boolean;
 }
 
 interface BlogCommentsProps {
@@ -118,4 +123,13 @@ interface CommentProps {
 interface BlogCommentCardProps {
   commentData: CommentProps;
   blogId: string;
+}
+
+interface ShareButtonProps {
+  key: string;
+  title: string;
+  icon: JSX.Element;
+  onClick: () => void;
+  component?: React.ElementType;
+  extraProps?: any;
 }

@@ -20,6 +20,7 @@ import { useState, useEffect, useMemo } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { formatNum, getTrendBlogs } from "../helper/functions";
 import CustomImage from "../components/commons/CustomImage";
+import CustomButton from "../components/commons/CustomButton";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -132,12 +133,11 @@ const Trending = () => {
                       {formatNum(countOfVisitors)}
                     </span>
                   </p>
-                  <button
-                    onClick={() => handleClickMore(_id)}
+                  <CustomButton
+                    click={() => handleClickMore(_id)}
                     className="hover:underline font-semibold text-black/60 text-[12px]"
-                  >
-                    More...
-                  </button>
+                    title="More..."
+                  />
                 </div>
               </div>
             </SwiperSlide>

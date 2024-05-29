@@ -19,6 +19,7 @@ import {
   calculateReadTime,
 } from "../../helper/functions";
 import CustomImage from "../commons/CustomImage";
+import CustomButton from "../commons/CustomButton";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -165,12 +166,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
               />
 
               <div className="hidden md:flex items-center">
-                <button
-                  onClick={handleReadMore}
+                <CustomButton
+                  click={handleReadMore}
                   className="bg-[#85b2f0] text-[10px] lg:text-[12px] xl:text-[14px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0]"
-                >
-                  Read More
-                </button>
+                  title="Read More"
+                />
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../components/commons/CustomButton";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
@@ -24,25 +25,23 @@ const Discover = () => {
           {categories
             .slice(0, displayedCategories)
             .map(({ _id, name }: { _id: string; name: string }) => (
-              <button
-                onClick={() =>
+              <CustomButton
+                click={() =>
                   navigate(`/categories/${name.toLowerCase()}`, {
                     state: { _id },
                   })
                 }
                 key={_id}
                 className="bg-gray-300 text-gray-600 text-[10px] md:text-[12px] lg:text-[14px] hover:text-black px-2 md:px-3 py-1 md:py-2 rounded-full"
-              >
-                {name}
-              </button>
+                title={name}
+              />
             ))}
           {categories.length > displayedCategories && (
-            <button
-              onClick={loadMoreCategories}
-              className="text-black text-[10px] md:text-[12px] lg:text-[14px] py-3 underline hover:text-blue-400"
-            >
-              See more topics
-            </button>
+            <CustomButton
+              click={loadMoreCategories}
+              className="text-black text-[10px] md:text-[12px] lg:text-[14px] py-3 underline hover:text-gray-600"
+              title="See more topics"
+            />
           )}
         </div>
       </div>

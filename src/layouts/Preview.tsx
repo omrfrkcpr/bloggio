@@ -12,6 +12,7 @@ import spinner from "../assets/spinner.gif";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
 import CustomImage from "../components/commons/CustomImage";
+import CustomButton from "../components/commons/CustomButton";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -108,7 +109,7 @@ const Preview: React.FC<PreviewProps> = ({
           <div className="mt-[8rem] flex flex-col lg:flex-row gap-10">
             <div className="flex-[1] mb-[10rem]">
               <h3 className="border-b text-2xl">Blog Preview</h3>
-              <div className="mt-7">
+              <div className="mt-7 flex">
                 <label htmlFor="blogImg">Image URL* :</label>
                 <input
                   value={imgUrl}
@@ -120,12 +121,11 @@ const Preview: React.FC<PreviewProps> = ({
                   id="blogImg"
                   className="border-b-[1px] border-gray-400 ms-1 outline-none"
                 />
-                <button
-                  onClick={() => setImgUrl("")}
-                  className="text-red-400 border-[1px] border-red-400 ms-4 text-sm px-2 py-1 rounded-full hover:bg-red-300 hover:text-white transition-all duration-300"
-                >
-                  Clear URL
-                </button>
+                <CustomButton
+                  click={() => setImgUrl("")}
+                  className="text-red-400 border-[1px] border-red-400 ms-2 text-sm px-2 py-1 rounded-full hover:bg-red-300 hover:text-white transition-all duration-300 w-[85px]"
+                  title="Clear URL"
+                />
               </div>
               <div className="w-full h-[200px] object-cover bg-gray-100 my-3 flex flex-col items-center justify-center bg-cover bg-no-repeat relative text-gray-400 text-center">
                 <span className="underline">Blog Image</span>
@@ -198,14 +198,12 @@ const Preview: React.FC<PreviewProps> = ({
                     </option>
                   ))}
                 </select>
-                <button
-                  onClick={() => setShow(true)}
+                <CustomButton
+                  click={() => setShow(true)}
                   className="border border-green-500 hover:bg-green-500 text-sm px-2 py-1 rounded-full text-green-500 hover:text-white transition-all duration-300"
-                >
-                  New Category
-                </button>
+                  title="New Category"
+                />
               </div>
-
               <div className="flex gap-3 items-center mt-5 pt-5 border-t border-gray-400">
                 <div
                   onClick={() => {
@@ -261,7 +259,7 @@ const Preview: React.FC<PreviewProps> = ({
               </div>
               <button
                 onClick={() => handleSubmitNewBlog()}
-                className="border bg-orange-600 hover:bg-orange-400 text-md px-2 py-1 rounded-full text-white transition-all duration-300 w-[150px] ms-auto mt-10 me-5 flex items-center justify-center gap-2 "
+                className="border bg-orange-600 hover:bg-orange-400 text-md px-2 py-1 rounded-full text-white transition-all duration-300 w-[150px] ms-auto mt-10 me-5 flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <div className="w-[30px]">
@@ -287,27 +285,25 @@ const Preview: React.FC<PreviewProps> = ({
           <div
             className={`flex-[1] max-w-[400px] shadow-xl p-[2rem] z-50
         absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[18rem] bg-white 
-        ${show ? "translate-x-0" : "translate-x-[100%] md:translate-x-0"}
-        transition-all duration-500`}
+        transition-all duration-500 border-1 border-black`}
           >
-            <div className="absolute right-5 top-5">
-              <button onClick={() => setShow(false)}>
-                <LiaTimesSolid />
-              </button>
-            </div>
+            <CustomButton
+              click={() => setShow(false)}
+              className="absolute right-5 top-5 text-black hover:text-gray-600"
+              icon={<LiaTimesSolid />}
+            />
             <input
               type="text"
               value={newCategory}
               onChange={(e) => setNewCategory(e.target.value)}
-              placeholder="Category Name"
-              className="border-b-[1px] border-gray-400 w-full mt-5 outline-none text-lg"
+              placeholder="New Category Name"
+              className="border-b-[1px] border-gray-400 w-full mt-5 outline-none text-md"
             />
-            <button
-              onClick={handleAddCategory}
-              className="bg-blue-200 py-1 px-2 mt-5 mx-auto hover:bg-blue-100"
-            >
-              Add Category
-            </button>
+            <CustomButton
+              click={handleAddCategory}
+              className="bg-blue-200 py-1 px-2 mt-5 mx-auto hover:bg-blue-100 w-[105px] text-sm"
+              title="Add Category"
+            />
           </div>
         </CustomModal>
       )}

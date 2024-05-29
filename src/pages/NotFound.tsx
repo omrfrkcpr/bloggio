@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CustomImage from "../components/commons/CustomImage";
+import CustomButton from "../components/commons/CustomButton";
 
 const NotFound = () => {
   return (
@@ -20,9 +21,10 @@ const NotFound = () => {
         But dont worry, you can find plenty of other things on our homepage.
       </p>
       <Link to="/">
-        <button className="bg-[#2563EB] hover:bg-[#2564ebc0] rounded-md text-white/80 font-bold text-sm md:text-md py-1 px-2 md:py-2 md:px-3">
-          Back to homepage
-        </button>
+        <CustomButton
+          className="bg-[#2563EB] hover:bg-[#2564ebc0] rounded-md text-white/80 font-bold text-sm md:text-md py-1 px-2 md:py-2 md:px-3"
+          title="Back to homepage"
+        />
       </Link>
     </div>
   );

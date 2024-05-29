@@ -6,6 +6,7 @@ import ReactQuill from "react-quill";
 import Preview from "../layouts/Preview";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { toastWarnNotify } from "../helper/toastNotify";
+import CustomButton from "../components/commons/CustomButton";
 
 const Write = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +33,8 @@ const Write = () => {
               className="write my-5 min-h-[65vh]"
             />
           </div>
-          <button
-            onClick={() => {
+          <CustomButton
+            click={() => {
               if (title || description) {
                 setIsOpen(true);
               } else {
@@ -45,10 +46,9 @@ const Write = () => {
             className={`${
               isOpen && "hidden"
             } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}
-          >
-            <span>Continue Publishing</span>
-            <FaCircleArrowRight />
-          </button>
+            icon={<FaCircleArrowRight />}
+            title="Continue Publishing"
+          />
         </section>
       )}
       {isOpen && (

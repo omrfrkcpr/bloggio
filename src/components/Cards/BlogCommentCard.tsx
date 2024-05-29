@@ -8,6 +8,9 @@ import { RootState } from "../../app/store";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { toastWarnNotify } from "../../helper/toastNotify";
 import { Avatar } from "@mui/material";
+import { MdDelete } from "react-icons/md";
+import { MdModeEdit } from "react-icons/md";
+import CustomButton from "../commons/CustomButton";
 
 const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,
@@ -95,24 +98,30 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               <div className="relative">
                 {currentUser?._id === userId?._id && (
                   <>
-                    <button
-                      onClick={() => setDrop(!drop)}
-                      className="text-2xl hover:opacity-70"
-                    >
-                      <BiDotsHorizontalRounded />
-                    </button>
-
+                    <CustomButton
+                      click={() => setDrop(!drop)}
+                      className="text-2xl hover:opacity-70 cursor-pointer"
+                      icon={<BiDotsHorizontalRounded />}
+                      title=""
+                    />
                     <DropDown
                       showDrop={drop}
                       setShowDrop={setDrop}
                       size="w-[10rem]"
                       ref={dropDownRef}
                     >
-                      <Button
+                      <CustomButton
                         click={editCommentText}
                         title="Edit this response"
+                        icon={<MdModeEdit />}
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer"
                       />
-                      <Button click={removeComment} title="Delete" />
+                      <CustomButton
+                        click={removeComment}
+                        title="Delete"
+                        icon={<MdDelete />}
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer"
+                      />
                     </DropDown>
                   </>
                 )}
@@ -122,9 +131,12 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
           <p className="py-4 text-sm">
             {more ? comment : comment.substring(0, 100)}
             {comment.length > 100 && (
-              <button onClick={() => setMore(!more)}>
-                {more ? "...less" : "...more"}
-              </button>
+              <CustomButton
+                click={() => setMore(!more)}
+                title={more ? "...less" : "...more"}
+                icon={undefined}
+                className="cursor-pointer hover:underline"
+              />
             )}
           </p>
         </>
@@ -137,15 +149,19 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
             className="w-full resize-none outline-none text-sm"
           ></textarea>
           <div className="flex items-center justify-end gap-2">
-            <button onClick={() => setIsEdit(false)} className="w-fit text-sm">
-              Cancel
-            </button>
-            <button
-              onClick={handleEdit}
-              className="px-2 py-1 !text-white !bg-green-700 hover:bg-green-300 !rounded-full !text-xs"
-            >
-              {loading ? "Updating..." : "Update"}
-            </button>
+            <CustomButton
+              click={() => setIsEdit(false)}
+              className="w-fit text-sm cursor-pointer"
+              title="Cancel"
+              icon={undefined}
+            />
+
+            <CustomButton
+              click={handleEdit}
+              className="px-2 py-1 text-white bg-green-700 hover:bg-green-300 !rounded-full text-xs cursor-pointer"
+              title={loading ? "Updating..." : "Update"}
+              icon={undefined}
+            />
           </div>
         </div>
       )}
@@ -154,14 +170,3 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 };
 
 export default BlogCommentCard;
-
-const Button = ({ click, title }: { click: () => void; title: string }) => {
-  return (
-    <button
-      onClick={click}
-      className="p-2 hover:bg-gray-200 text-black/80 w-full text-sm text-left"
-    >
-      {title}
-    </button>
-  );
-};

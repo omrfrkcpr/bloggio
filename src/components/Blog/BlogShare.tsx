@@ -16,7 +16,7 @@ import {
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
 import CustomButton from "../commons/CustomButton";
 
-const BlogShare = () => {
+const BlogShare: React.FC = () => {
   const [showDrop, setShowDrop] = useState(false);
   const path = window.location.href;
   const dropDownRef = useRef<HTMLDivElement>(null);
@@ -48,45 +48,84 @@ const BlogShare = () => {
     };
   }, [dropDownRef]);
 
+  const shareButtons: ShareButtonProps[] = [
+    {
+      key: "copy-link",
+      title: "Copy Link",
+      icon: <BiLink />,
+      onClick: copyLink,
+    },
+    {
+      key: "share-twitter",
+      title: "Share On Twitter",
+      icon: <BiLogoTwitter />,
+      onClick: () => {},
+      component: TwitterShareButton,
+      extraProps: { url: path },
+    },
+    {
+      key: "share-facebook",
+      title: "Share On Facebook",
+      icon: <BiLogoFacebookCircle />,
+      onClick: () => {},
+      component: FacebookShareButton,
+      extraProps: { url: path },
+    },
+    {
+      key: "share-linkedin",
+      title: "Share On LinkedIn",
+      icon: <BiLogoLinkedinSquare />,
+      onClick: () => {},
+      component: LinkedinShareButton,
+      extraProps: { url: path },
+    },
+  ];
+
   return (
     <div className="relative" ref={dropDownRef}>
-      <button
-        onClick={() => setShowDrop(!showDrop)}
+      <CustomButton
+        click={() => setShowDrop(!showDrop)}
         className="grid place-items-center"
-      >
-        <CiShare1
-          className="text-[0.8rem] md:text-[0.9rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
-          size={24}
-        />
-      </button>
+        title=""
+        icon={
+          <CiShare1
+            className="text-[0.8rem] md:text-[0.9rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
+            size={24}
+          />
+        }
+      />
       <DropDown
         showDrop={showDrop}
         setShowDrop={setShowDrop}
         size="w-[12rem]"
         ref={dropDownRef}
       >
-        <CustomButton click={copyLink} title="Copy Link" icon={<BiLink />} />
-        <TwitterShareButton url={path}>
-          <CustomButton
-            click={() => {}}
-            title="Share On Twitter"
-            icon={<BiLogoTwitter />}
-          />
-        </TwitterShareButton>
-        <FacebookShareButton url={path}>
-          <CustomButton
-            click={() => {}}
-            title="Share On Facebook"
-            icon={<BiLogoFacebookCircle />}
-          />
-        </FacebookShareButton>
-        <LinkedinShareButton url={path}>
-          <CustomButton
-            click={() => {}}
-            title="Share On LinkedIn"
-            icon={<BiLogoLinkedinSquare />}
-          />
-        </LinkedinShareButton>
+        {shareButtons.map(
+          ({ key, title, icon, onClick, component: Component, extraProps }) => {
+            if (Component) {
+              return (
+                <Component key={key} {...extraProps}>
+                  <CustomButton
+                    click={onClick}
+                    title={title}
+                    icon={icon}
+                    className="share-button"
+                  />
+                </Component>
+              );
+            } else {
+              return (
+                <CustomButton
+                  key={key}
+                  click={onClick}
+                  title={title}
+                  icon={icon}
+                  className="share-button"
+                />
+              );
+            }
+          }
+        )}
       </DropDown>
     </div>
   );

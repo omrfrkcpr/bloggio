@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import AuthTextField from "../TextFields/AuthTextField";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import CustomButton from "../commons/CustomButton";
 
 interface RegisterFormValues {
   username: string;
@@ -151,13 +152,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
             </div>
           ))}
         </div>
-        <button
+        <CustomButton
           type="submit"
           disabled={isSubmitting}
-          className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
-        >
-          {isSubmitting ? "Loading..." : "Sign Up"}
-        </button>
+          className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef] w-[90px] mx-auto"
+          title={isSubmitting ? "Loading..." : "Sign Up"}
+        />
       </Form>
     </div>
   );

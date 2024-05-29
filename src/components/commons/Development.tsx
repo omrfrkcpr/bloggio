@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CustomImage from "./CustomImage";
+import CustomButton from "./CustomButton";
 
 const Development = () => {
   return (
@@ -10,9 +11,10 @@ const Development = () => {
         className="w-[150px] md:w-[300px]"
       />
       <Link to="/">
-        <button className="bg-[#2563EB] hover:bg-[#2564ebc0] rounded-md text-white/80 font-bold text-sm md:text-md py-1 px-2 md:py-2 md:px-3">
-          Back to homepage
-        </button>
+        <CustomButton
+          className="bg-[#2563EB] hover:bg-[#2564ebc0] rounded-md text-white/80 font-bold text-sm md:text-md py-1 px-2 md:py-2 md:px-3"
+          title="Back to homepage"
+        />
       </Link>
     </div>
   );

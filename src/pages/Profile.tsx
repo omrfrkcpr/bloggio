@@ -13,6 +13,7 @@ import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 import CustomImage from "../components/commons/CustomImage";
 import { Link, useLocation } from "react-router-dom";
+import CustomButton from "../components/commons/CustomButton";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
@@ -85,12 +86,11 @@ const Profile = () => {
                   }`}
                 >
                   <Link to={activity.path}>
-                    <button
-                      onClick={() => setCurrentActive(activity)}
-                      className="w-[75px]"
-                    >
-                      {activity.title}
-                    </button>
+                    <CustomButton
+                      click={() => setCurrentActive(activity)}
+                      className="w-[75px] text-center"
+                      title={activity.title}
+                    />
                   </Link>
                 </div>
               ))}
@@ -98,28 +98,26 @@ const Profile = () => {
             <currentActive.comp setEditModal={setEditModal} />
           </div>
           {/* button to open side bar */}
-          <button
-            onClick={() => setModal(true)}
-            className="fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center lg:hidden"
-          >
-            <IoSettingsSharp />
-          </button>
+          <CustomButton
+            click={() => setModal(true)}
+            className="fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black hover:bg-black/70 text-white grid place-items-center lg:hidden"
+            icon={<IoSettingsSharp />}
+          />
           {/* users details */}
           <CustomModal modal={modal} hidden="" setModal={setModal}>
             <div
               className={`flex-[1] max-w-[400px] border-l border-gray-300 p-[2rem] z-10
-        fixed -right-4 bottom-0 top-14 w-[18rem] bg-white lg:sticky
+        fixed -right-4 bottom-0 top-14 mb-[76px] md:mb-0 w-[18rem] bg-white lg:sticky
         ${modal ? "translate-x-0" : "translate-x-[100%] lg:translate-x-0"}
         transition-all duration-500`}
             >
               {/* icons to close out modal */}
               <div className="pb-4 text-right">
-                <button
-                  onClick={() => setModal(false)}
+                <CustomButton
+                  click={() => setModal(false)}
                   className="inline-block lg:hidden"
-                >
-                  <LiaTimesSolid />
-                </button>
+                  icon={<LiaTimesSolid />}
+                />
               </div>
               {/* profile details */}
               <div className="sticky top-7 flex flex-col justify-between">
@@ -134,12 +132,11 @@ const Profile = () => {
                 <p className="text-gray-500 first-letter:uppercase text-sm">
                   {currentUser?.bio}
                 </p>
-                <button
-                  onClick={() => setEditModal(true)}
+                <CustomButton
+                  click={() => setEditModal(true)}
                   className="text-green-700 pt-6 text-sm w-fit hover:underline"
-                >
-                  Edit Profile
-                </button>
+                  title="Edit Profile"
+                />
               </div>
             </div>
           </CustomModal>
