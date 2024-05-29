@@ -20,6 +20,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useBlogCalls from "../../hooks/useBlogCalls";
 
 interface BlogSettingsProps {
   key: string;
@@ -40,6 +41,7 @@ const BlogSettings = ({
   const [showDrop, setShowDrop] = useState(false);
   const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
   const { currentUser } = useSelector((state: any) => state.auth);
+  const { deleteBlogData } = useBlogCalls();
   const path = window?.location?.href;
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
@@ -122,6 +124,12 @@ const BlogSettings = ({
           key: "delete-blog",
           title: "Delete blog ⭐",
           icon: <RiDeleteBin6Fill className="text-[#c1413d]" />,
+          onClick: async () => {
+            if (blogId) {
+              await deleteBlogData("blogs", blogId);
+              setShowDrop(false);
+            }
+          },
         }
       );
     }
