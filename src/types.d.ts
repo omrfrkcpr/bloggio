@@ -100,10 +100,6 @@ interface CustomButtonProps {
   disabled?: boolean;
 }
 
-interface BlogCommentsProps {
-  blogId: string;
-}
-
 interface UserIdProps {
   _id: string;
   username: string;
@@ -129,7 +125,7 @@ interface ShareButtonProps {
   key: string;
   title: string;
   icon: JSX.Element;
-  onClick: () => void;
+  onClick?: () => void;
   component?: React.ElementType;
   extraProps?: any;
 }

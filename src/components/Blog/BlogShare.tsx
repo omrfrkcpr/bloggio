@@ -16,18 +16,22 @@ import {
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
 import CustomButton from "../commons/CustomButton";
 
-const BlogShare: React.FC = () => {
+const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
   const [showDrop, setShowDrop] = useState(false);
-  const path = window.location.href;
+  const path = window?.location?.href;
   const dropDownRef = useRef<HTMLDivElement>(null);
+
+  // console.log(path);
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(path);
+      await navigator.clipboard.writeText(
+        path.includes("/blog/") ? path : path + `blog/${blogId}`
+      );
       toastSuccessNotify("Link has been copied");
-      setShowDrop(false);
     } catch (error: any) {
       toastErrorNotify(error?.message);
+    } finally {
       setShowDrop(false);
     }
   };
@@ -59,7 +63,6 @@ const BlogShare: React.FC = () => {
       key: "share-twitter",
       title: "Share On Twitter",
       icon: <BiLogoTwitter />,
-      onClick: () => {},
       component: TwitterShareButton,
       extraProps: { url: path },
     },
@@ -67,7 +70,6 @@ const BlogShare: React.FC = () => {
       key: "share-facebook",
       title: "Share On Facebook",
       icon: <BiLogoFacebookCircle />,
-      onClick: () => {},
       component: FacebookShareButton,
       extraProps: { url: path },
     },
@@ -75,7 +77,6 @@ const BlogShare: React.FC = () => {
       key: "share-linkedin",
       title: "Share On LinkedIn",
       icon: <BiLogoLinkedinSquare />,
-      onClick: () => {},
       component: LinkedinShareButton,
       extraProps: { url: path },
     },
@@ -106,7 +107,6 @@ const BlogShare: React.FC = () => {
               return (
                 <Component key={key} {...extraProps}>
                   <CustomButton
-                    click={onClick}
                     title={title}
                     icon={icon}
                     className="share-button"

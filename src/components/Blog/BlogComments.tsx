@@ -14,7 +14,7 @@ import { capitalizeWords } from "../../helper/functions";
 import { Avatar } from "@mui/material";
 import CustomButton from "../commons/CustomButton";
 
-const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
+const BlogComments = ({ blogId }: { blogId: string }) => {
   const { toggleCommentsModal } = useShowModal();
   const { showCommentsModal } = useSelector((state: RootState) => state.modal);
   const { currentUser } = useSelector((state: any) => state.auth);

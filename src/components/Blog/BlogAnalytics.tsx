@@ -115,7 +115,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         weight="thin"
         // weight="fill"
       />
-      <BlogShare />
+      <BlogShare blogId={_id}/>
     </div>
   );
 };
