@@ -18,7 +18,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   comments,
   countOfVisitors,
   _id,
-  // userId,
+  userId,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   // const { saved } = useSelector((state: RootState) => state.blog); // TODO
@@ -114,7 +114,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           </span>
         </p>
       ))}
-      <BlogSettings blogId={_id} />
+      <BlogSettings blogId={_id} userId={userId} />
     </div>
   );
 };

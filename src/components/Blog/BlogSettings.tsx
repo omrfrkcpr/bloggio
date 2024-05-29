@@ -10,19 +10,37 @@ import {
 import {
   BiLink,
   BiLogoFacebookCircle,
-  BiLogoTwitter,
   BiLogoLinkedinSquare,
 } from "react-icons/bi";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
 import CustomButton from "../commons/CustomButton";
 import { Bookmarks } from "@phosphor-icons/react";
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
-const BlogSettings = ({ blogId }: { blogId: string | undefined }) => {
+interface BlogSettingsProps {
+  key: string;
+  title: string;
+  icon: JSX.Element;
+  onClick?: () => void;
+  component?: React.ComponentType<any>;
+  extraProps?: Record<string, any>;
+}
+
+const BlogSettings = ({
+  blogId,
+  userId,
+}: {
+  blogId: string | undefined;
+  userId: string | undefined;
+}) => {
   const [showDrop, setShowDrop] = useState(false);
+  const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
+  const { currentUser } = useSelector((state: any) => state.auth);
   const path = window?.location?.href;
   const dropDownRef = useRef<HTMLDivElement>(null);
-
-  // console.log(path);
 
   const copyLink = async () => {
     try {
@@ -53,45 +71,59 @@ const BlogSettings = ({ blogId }: { blogId: string | undefined }) => {
     };
   }, [dropDownRef]);
 
-  const settingButtons: BlogSettingsProps[] = [
-    {
-      key: "copy-link",
-      title: "Copy Link",
-      icon: <BiLink />,
-      onClick: copyLink,
-    },
-    {
-      key: "share-twitter",
-      title: "Share On Twitter",
-      icon: <BiLogoTwitter />,
-      component: TwitterShareButton,
-      extraProps: { url: path },
-    },
-    {
-      key: "share-facebook",
-      title: "Share On Facebook",
-      icon: <BiLogoFacebookCircle />,
-      component: FacebookShareButton,
-      extraProps: { url: path },
-    },
-    {
-      key: "share-linkedin",
-      title: "Share On LinkedIn",
-      icon: <BiLogoLinkedinSquare />,
-      component: LinkedinShareButton,
-      extraProps: { url: path },
-    },
-    {
-      key: "save-blog",
-      title: "Save blog",
-      icon: (
-        <Bookmarks
-          weight="thin"
-          // weight="fill"
-        />
-      ),
-    },
-  ];
+  useEffect(() => {
+    const initialButtons: BlogSettingsProps[] = [
+      {
+        key: "copy-link",
+        title: "Copy Link",
+        icon: <BiLink />,
+        onClick: copyLink,
+      },
+      {
+        key: "share-twitter",
+        title: "Share On X",
+        icon: <FaSquareXTwitter className="text-black" />,
+        component: TwitterShareButton,
+        extraProps: { url: path },
+      },
+      {
+        key: "share-facebook",
+        title: "Share On Facebook",
+        icon: <BiLogoFacebookCircle className="text-[#365899]" />,
+        component: FacebookShareButton,
+        extraProps: { url: path },
+      },
+      {
+        key: "share-linkedin",
+        title: "Share On LinkedIn",
+        icon: <BiLogoLinkedinSquare className="text-[#0A66C2]" />,
+        component: LinkedinShareButton,
+        extraProps: { url: path },
+      },
+      {
+        key: "save-blog",
+        title: "Save blog",
+        icon: <Bookmarks weight="thin" />,
+      },
+    ];
+
+    if (currentUser?._id === userId) {
+      initialButtons.push(
+        {
+          key: "edit-blog",
+          title: "Edit blog ⭐",
+          icon: <FaRegEdit className="text-[#c1713d]" />,
+        },
+        {
+          key: "delete-blog",
+          title: "Delete blog ⭐",
+          icon: <RiDeleteBin6Fill className="text-[#c1413d]" />,
+        }
+      );
+    }
+
+    setSettingButtons(initialButtons);
+  }, [currentUser, userId]);
 
   return (
     <div className="relative" ref={dropDownRef}>
@@ -109,7 +141,7 @@ const BlogSettings = ({ blogId }: { blogId: string | undefined }) => {
       <DropDown
         showDrop={showDrop}
         setShowDrop={setShowDrop}
-        size="w-[12rem]"
+        size="w-[11rem]"
         ref={dropDownRef}
       >
         {settingButtons.map(
