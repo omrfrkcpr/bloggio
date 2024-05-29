@@ -59,7 +59,12 @@ const BlogShare = () => {
           size={24}
         />
       </button>
-      <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[12rem]">
+      <DropDown
+        showDrop={showDrop}
+        setShowDrop={setShowDrop}
+        size="w-[12rem]"
+        ref={dropDownRef}
+      >
         <CustomButton click={copyLink} title="Copy Link" icon={<BiLink />} />
         <TwitterShareButton url={path}>
           <CustomButton

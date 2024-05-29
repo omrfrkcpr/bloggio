@@ -60,7 +60,7 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
         {/* header  */}
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold">
-            Responses({commentsData.length})
+            Comments ({commentsData?.length})
           </h3>
           <button onClick={() => toggleCommentsModal()} className="text-xl">
             <LiaTimesSolid />
@@ -111,12 +111,12 @@ const BlogComments: React.FC<BlogCommentsProps> = ({ blogId }) => {
             </div>
           </div>
         )}
-        {commentsData && commentsData?.length === 0 ? (
+        {commentsData && !commentsData?.length ? (
           <p>This post has no comments</p>
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
             {commentsData &&
-              commentsData?.map((commentData: any) =>
+              commentsData?.map((commentData: CommentProps) =>
                 loading ? (
                   <Loading />
                 ) : (

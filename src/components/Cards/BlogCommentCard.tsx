@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { dateFormatter } from "../../helper/functions";
+import { capitalizeWords, dateFormatter } from "../../helper/functions";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import DropDown from "../commons/DropDown";
 import { RootState } from "../../app/store";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { toastWarnNotify } from "../../helper/toastNotify";
+import { Avatar } from "@mui/material";
 
 const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,
@@ -14,7 +15,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { loading } = useSelector((state: RootState) => state.blog);
-  const { deleteBlogData, putBlogData } = useBlogCalls();
+  const { deleteBlogData, putCommentData } = useBlogCalls();
   const [drop, setDrop] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -24,8 +25,8 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   const { _id, userId, comment, createdAt, updatedAt } = commentData;
 
   const removeComment = async () => {
-    if (window.confirm("Are you sure you want to delete your comment"))
-      await deleteBlogData("comments", _id);
+    await deleteBlogData("comments", _id);
+    setDrop(false);
   };
 
   const editCommentText = () => {
@@ -36,7 +37,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 
   const handleEdit = async () => {
     if (editComment) {
-      await putBlogData("comments", {
+      await putCommentData("comments", _id, {
         blogId,
         comment: editComment,
       });
@@ -68,12 +69,22 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
     <section className="border-b">
       {!isEdit ? (
         <>
-          <div className="flex items-center gap-5">
-            <img
-              className="w-[2rem] h-[2rem] object-cover rounded-full"
-              src={currentUser?.image || "/profile.jpg"}
-              alt="user-img"
-            />
+          <div className="flex items-center gap-2">
+            {currentUser?.image ? (
+              <img
+                className="w-[2rem] h-[2rem] rounded-full object-cover"
+                src={currentUser?.image}
+                alt="user-image"
+              />
+            ) : (
+              <Avatar
+                alt={
+                  currentUser && `${capitalizeWords(currentUser?.firstName)}`
+                }
+                src="/static/images/avatar/2.jpg"
+                sx={{ width: "32px", height: "32px" }}
+              />
+            )}
             <div className="flex-1 flex justify-between">
               <div>
                 <h2 className="text-sm">{currentUser?.username}</h2>
@@ -90,19 +101,19 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                     >
                       <BiDotsHorizontalRounded />
                     </button>
-                    <div ref={dropDownRef}>
-                      <DropDown
-                        showDrop={drop}
-                        setShowDrop={setDrop}
-                        size="w-[10rem]"
-                      >
-                        <Button
-                          click={editCommentText}
-                          title="Edit this response"
-                        />
-                        <Button click={removeComment} title="Delete" />
-                      </DropDown>
-                    </div>
+
+                    <DropDown
+                      showDrop={drop}
+                      setShowDrop={setDrop}
+                      size="w-[10rem]"
+                      ref={dropDownRef}
+                    >
+                      <Button
+                        click={editCommentText}
+                        title="Edit this response"
+                      />
+                      <Button click={removeComment} title="Delete" />
+                    </DropDown>
                   </>
                 )}
               </div>
@@ -126,10 +137,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
             className="w-full resize-none outline-none text-sm"
           ></textarea>
           <div className="flex items-center justify-end gap-2">
-            <button
-              onClick={() => setIsEdit((prevState) => !prevState)}
-              className="w-fit text-sm"
-            >
+            <button onClick={() => setIsEdit(false)} className="w-fit text-sm">
               Cancel
             </button>
             <button

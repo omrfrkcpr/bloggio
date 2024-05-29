@@ -86,6 +86,7 @@ interface DropDownProps {
   size: string;
   showDrop: boolean;
   setShowDrop: (value: boolean) => void;
+  ref: React.RefObject<HTMLDivElement>;
 }
 
 interface CustomButtonProps {
