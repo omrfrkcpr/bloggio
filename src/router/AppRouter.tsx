@@ -16,6 +16,7 @@ import Contact from "../pages/Contact";
 import Category from "../pages/Category";
 import Stats from "../pages/Stats";
 import SingleBlog from "../pages/SingleBlog";
+import EditBlog from "../pages/EditBlog";
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
           <Route path="" element={<PrivateRouter />}>
             <Route path="write" element={<Write />} />
             <Route path="blog/:blogId" element={<SingleBlog />} />
+            <Route path="blog/:blogId/edit" element={<EditBlog />} />
             <Route path="profile/:userId" element={<Profile />} />
             <Route path="stats/:userId" element={<Stats />} />
           </Route>

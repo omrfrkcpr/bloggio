@@ -19,6 +19,7 @@ import { Bookmarks } from "@phosphor-icons/react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface BlogSettingsProps {
   key: string;
@@ -40,6 +41,7 @@ const BlogSettings = ({
   const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
   const { currentUser } = useSelector((state: any) => state.auth);
   const path = window?.location?.href;
+  const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
 
   const copyLink = async () => {
@@ -113,6 +115,8 @@ const BlogSettings = ({
           key: "edit-blog",
           title: "Edit blog ⭐",
           icon: <FaRegEdit className="text-[#c1713d]" />,
+          onClick: () =>
+            navigate(`/blog/${blogId}/edit`, { state: { blogId } }),
         },
         {
           key: "delete-blog",
@@ -123,7 +127,7 @@ const BlogSettings = ({
     }
 
     setSettingButtons(initialButtons);
-  }, [currentUser, userId]);
+  }, [currentUser, userId, path]);
 
   return (
     <div className="relative" ref={dropDownRef}>
