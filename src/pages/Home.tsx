@@ -20,7 +20,7 @@ const Home = () => {
     <div>
       <Hero />
       <Trending />
-      <div className="size py-3 md:py-5 lg:py-7 flex flex-col-reverse lg:flex-row gap-[3rem]">
+      <div className="size py-3 md:py-5 lg:py-7 mb-[10rem] flex flex-col-reverse lg:flex-row gap-[3rem]">
         <div className="flex-[1.5]">
           <Blogs />
         </div>
