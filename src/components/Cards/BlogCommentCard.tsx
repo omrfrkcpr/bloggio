@@ -102,7 +102,6 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                       click={() => setDrop(!drop)}
                       className="text-2xl hover:opacity-70 cursor-pointer"
                       icon={<BiDotsHorizontalRounded />}
-                      title=""
                     />
                     <DropDown
                       showDrop={drop}

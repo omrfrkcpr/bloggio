@@ -134,7 +134,6 @@ const BlogSettings = ({
       <CustomButton
         click={() => setShowDrop(!showDrop)}
         className="grid place-items-center"
-        title=""
         icon={
           <BsThreeDotsVertical
             className="cursor-pointer text-[#a1a1a1] hover:text-black"
