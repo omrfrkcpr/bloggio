@@ -121,7 +121,7 @@ interface BlogCommentCardProps {
   blogId: string;
 }
 
-interface ShareButtonProps {
+interface BlogSettingsProps {
   key: string;
   title: string;
   icon: JSX.Element;

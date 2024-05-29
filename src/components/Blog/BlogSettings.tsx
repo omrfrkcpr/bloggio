@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import DropDown from "../commons/DropDown";
-import { CiShare1 } from "react-icons/ci";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -15,8 +15,9 @@ import {
 } from "react-icons/bi";
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
 import CustomButton from "../commons/CustomButton";
+import { Bookmarks } from "@phosphor-icons/react";
 
-const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
+const BlogSettings = ({ blogId }: { blogId: string | undefined }) => {
   const [showDrop, setShowDrop] = useState(false);
   const path = window?.location?.href;
   const dropDownRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,7 @@ const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
     };
   }, [dropDownRef]);
 
-  const shareButtons: ShareButtonProps[] = [
+  const settingButtons: BlogSettingsProps[] = [
     {
       key: "copy-link",
       title: "Copy Link",
@@ -80,6 +81,16 @@ const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
       component: LinkedinShareButton,
       extraProps: { url: path },
     },
+    {
+      key: "save-blog",
+      title: "Save blog",
+      icon: (
+        <Bookmarks
+          weight="thin"
+          // weight="fill"
+        />
+      ),
+    },
   ];
 
   return (
@@ -89,9 +100,9 @@ const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
         className="grid place-items-center"
         title=""
         icon={
-          <CiShare1
-            className="text-[0.8rem] md:text-[0.9rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
-            size={24}
+          <BsThreeDotsVertical
+            className="cursor-pointer text-[#a1a1a1] hover:text-black"
+            size={18}
           />
         }
       />
@@ -101,7 +112,7 @@ const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
         size="w-[12rem]"
         ref={dropDownRef}
       >
-        {shareButtons.map(
+        {settingButtons.map(
           ({ key, title, icon, onClick, component: Component, extraProps }) => {
             if (Component) {
               return (
@@ -131,4 +142,4 @@ const BlogShare = ({ blogId }: { blogId: string | undefined }) => {
   );
 };
 
-export default BlogShare;
+export default BlogSettings;

@@ -3,9 +3,9 @@ import CommentIcon from "@mui/icons-material/Comment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../../hooks/useBlogCalls";
-import { Bookmarks, Heart } from "@phosphor-icons/react";
+import { Heart } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import BlogShare from "./BlogShare";
+import BlogSettings from "./BlogSettings";
 import { formatNum } from "../../helper/functions";
 import { RootState } from "../../app/store";
 import useShowModal from "../../hooks/useShowModal";
@@ -61,30 +61,23 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
 
   // console.log(likes);
 
-  return (
-    <div className="flex gap-[0.2rem] xl:gap-[0.5rem]  items-center">
-      <p className="space-x-1 flex items-center">
+  const analytics = [
+    {
+      key: "likes",
+      icon: (
         <Heart
           onClick={handleLikeClick}
-          weight={`${
-            isLiked &&
-            likes?.filter((like: string | unknown) => like === currentUser?._id)
-              .length > 0
-              ? "fill"
-              : "thin"
-          }`}
+          weight={isLiked && likes.includes(currentUser?._id) ? "fill" : "thin"}
           className={`cursor-pointer hover:scale-125 ${
-            isLiked &&
-            likes?.filter((like: string | unknown) => like === currentUser?._id)
-              .length > 0 &&
-            "text-red-500"
+            isLiked && likes.includes(currentUser?._id) && "text-red-500"
           }`}
         />
-        <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {formatNum(likes?.length)}
-        </span>
-      </p>
-      <p className="space-x-1 flex items-center justify-center">
+      ),
+      count: likes?.length,
+    },
+    {
+      key: "comments",
+      icon: (
         <CommentIcon
           onClick={handleGoComments}
           sx={{
@@ -94,28 +87,34 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
             "&:hover": { color: "black" },
           }}
         />
-        <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {formatNum(comments?.length)}
-        </span>
-      </p>
-      <p className="space-x-1 flex items-center justify-center">
+      ),
+      count: comments?.length,
+    },
+    {
+      key: "visitors",
+      icon: (
         <VisibilityIcon
           sx={{
             fontSize: { xs: "0.8rem", md: "0.9rem" },
             color: "#A1A1A1",
           }}
         />
-        <span className="text-[10px] md:text-[12px] lg:text-[16px]">
-          {formatNum(countOfVisitors)}
-        </span>
-      </p>
-      <Bookmarks
-        className="text-[0.8rem] md:text-[0.9rem] cursor-pointer text-[#a1a1a1] hover:text-black hover:scale-125"
-        size={24}
-        weight="thin"
-        // weight="fill"
-      />
-      <BlogShare blogId={_id}/>
+      ),
+      count: countOfVisitors,
+    },
+  ];
+
+  return (
+    <div className="flex gap-[0.2rem] items-center">
+      {analytics.map(({ key, icon, count }) => (
+        <p key={key} className="space-x-1 flex items-center">
+          {icon}
+          <span className="text-[10px] md:text-[12px] lg:text-[16px]">
+            {formatNum(count)}
+          </span>
+        </p>
+      ))}
+      <BlogSettings blogId={_id} />
     </div>
   );
 };
