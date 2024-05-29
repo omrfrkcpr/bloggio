@@ -95,7 +95,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                   {dateFormatter(updatedAt || createdAt)}
                 </p>
               </div>
-              <div className="relative">
+              <div className="relative" ref={dropDownRef}>
                 {currentUser?._id === userId?._id && (
                   <>
                     <CustomButton
@@ -114,13 +114,13 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                         click={editCommentText}
                         title="Edit this response"
                         icon={<MdModeEdit />}
-                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer"
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer hover:bg-gray-100"
                       />
                       <CustomButton
                         click={removeComment}
                         title="Delete"
                         icon={<MdDelete />}
-                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer"
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer hover:bg-gray-100"
                       />
                     </DropDown>
                   </>
@@ -158,7 +158,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 
             <CustomButton
               click={handleEdit}
-              className="px-2 py-1 text-white bg-green-700 hover:bg-green-300 !rounded-full text-xs cursor-pointer"
+              className="px-2 py-1 text-white bg-orange-600 hover:bg-orange-300 !rounded-full text-xs cursor-pointer"
               title={loading ? "Updating..." : "Update"}
               icon={undefined}
             />
