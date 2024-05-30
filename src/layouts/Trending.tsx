@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { GiChart } from "react-icons/gi";
+
 import useShowModal from "../hooks/useShowModal";
 import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
@@ -74,8 +76,8 @@ const Trending = () => {
 
   return (
     <div className="py-5">
-      <h2 className="text-2xl font-bold mb-5 text-center border-b border-gray-300 w-[95%] max-w-[1600px] mx-auto text-gray-800">
-        Trending
+      <h2 className="text-xl font-bold mb-5 mx-auto border-b border-gray-300 w-[92%] max-w-[1600px] text-gray-600 flex gap-2 items-center">
+        <GiChart /> Trending on Bloggio
       </h2>
       <Swiper
         // swiper configurations
