@@ -10,7 +10,9 @@ const AuthModal: React.FC<AuthModalProps> = ({
   setIsOpen,
   selectedFormType,
 }) => {
-  const [formType, setFormType] = useState(selectedFormType || "sign in");
+  const [formType, setFormType] = useState<string>(
+    selectedFormType || "sign in"
+  );
 
   const handleClose = () => {
     setIsOpen && setIsOpen(false);
@@ -39,7 +41,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
               icon={
                 <IoCloseOutline
                   size={26}
-                  className="opacity-100 hover:opacity-50 text-black cursor-pointer"
+                  className="opacity-100 hover:opacity-50 text-black"
                 />
               }
               className="absolute right-3 top-3"

@@ -100,7 +100,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                   <>
                     <CustomButton
                       click={() => setDrop(!drop)}
-                      className="text-2xl hover:opacity-70 cursor-pointer"
+                      className="text-2xl hover:opacity-70"
                       icon={<BiDotsHorizontalRounded />}
                     />
                     <DropDown
@@ -113,13 +113,13 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                         click={editCommentText}
                         title="Edit this response"
                         icon={<MdModeEdit />}
-                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer hover:bg-gray-100"
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2  hover:bg-gray-100"
                       />
                       <CustomButton
                         click={removeComment}
                         title="Delete"
                         icon={<MdDelete />}
-                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2 cursor-pointer hover:bg-gray-100"
+                        className="text-gray-600 text-sm hover:text-black gap-1 flex items-center justify-start py-2 px-2  hover:bg-gray-100"
                       />
                     </DropDown>
                   </>
@@ -133,7 +133,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               <CustomButton
                 click={() => setMore(!more)}
                 title={more ? "...less" : "...more"}
-                className="cursor-pointer hover:underline"
+                className="hover:underline"
               />
             )}
           </p>
@@ -149,13 +149,13 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
           <div className="flex items-center justify-end gap-2">
             <CustomButton
               click={() => setIsEdit(false)}
-              className="w-fit text-sm cursor-pointer"
+              className="w-fit text-sm"
               title="Cancel"
             />
 
             <CustomButton
               click={handleEdit}
-              className="px-2 py-1 text-white bg-orange-600 hover:bg-orange-300 !rounded-full text-xs cursor-pointer"
+              className="px-2 py-1 text-white bg-orange-600 hover:bg-orange-300 !rounded-full text-xs"
               title={loading ? "Updating..." : "Update"}
             />
           </div>

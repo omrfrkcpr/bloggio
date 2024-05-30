@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   touched,
   handleBlur,
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { loading } = useSelector((state: RootState) => state.auth);
 
   const loginFormFields = [

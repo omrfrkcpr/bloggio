@@ -65,7 +65,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
           </h3>
           <CustomButton
             click={() => toggleCommentsModal()}
-            className="text-xl cursor-pointer"
+            className="text-xl"
             icon={<LiaTimesSolid />}
           />
         </div>
@@ -104,12 +104,12 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
                   setCommentPrev({ ...commentPrev, comment: "" });
                   toggleCommentsModal();
                 }}
-                className="text-sm cursor-pointer"
+                className="text-sm"
                 title="Cancel"
               />
               <CustomButton
                 click={() => writeComment()}
-                className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full cursor-pointer"
+                className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full"
                 title="Response"
               />
             </div>
