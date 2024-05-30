@@ -17,6 +17,7 @@ import {
   shortenText,
   dateFormatter,
   calculateReadTime,
+  findCategoryName,
 } from "../../helper/functions";
 import CustomImage from "../commons/CustomImage";
 import CustomButton from "../commons/CustomButton";
@@ -32,9 +33,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
   countOfVisitors,
   createdAt,
   categoryName,
+  categoryId,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
+  const { categories } = useSelector((state: RootState) => state.blog);
   const { toggleBlogCardModal } = useShowModal();
   const { getNavigatePath } = usePath();
   const navigate = useNavigate();

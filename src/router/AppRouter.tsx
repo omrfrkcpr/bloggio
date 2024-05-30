@@ -35,7 +35,7 @@ const AppRouter = () => {
             <Route path="profile/:userId" element={<Profile />} />
             <Route path="stats/:userId" element={<Stats />} />
           </Route>
-          <Route path="/categories/:categoryId" element={<FilterCategory />} />
+          <Route path="/categories" element={<FilterCategory />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

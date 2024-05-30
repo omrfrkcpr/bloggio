@@ -35,7 +35,7 @@ interface HeaderProps {
 interface BlogCardProps {
   _id?: string;
   userId?: string;
-  // categoryId: string;
+  categoryId: string;
   title: string;
   content: string;
   image: string;
@@ -43,7 +43,7 @@ interface BlogCardProps {
   likes: string[];
   countOfVisitors: number;
   createdAt: string;
-  categoryName: string;
+  categoryName?: string | undefined;
 }
 
 type ShowState = boolean;

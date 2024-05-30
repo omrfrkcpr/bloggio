@@ -113,3 +113,11 @@ export const singularize = (text: string) => {
   // blogs => Blog
   return text.charAt(0).toUpperCase() + text.slice(1, -1);
 };
+
+
+export const findCategoryName = (array: Array<string>, id: string) => {
+  const category = array.find((cat: any) => cat?._id === id) as
+    | { name: string }
+    | undefined;
+  return category ? category?.name : "";
+};

@@ -1,33 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
+import useBlogCalls from "../hooks/useBlogCalls";
+import { findCategoryName } from "../helper/functions";
 
 const FilterCategory = () => {
   const { state } = useLocation();
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  // console.log(state._id);
+  const { getBlogData } = useBlogCalls();
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    state?._id || ""
+  );
+  const navigate = useNavigate();
+
+  // console.log(state?._id);
 
   useEffect(() => {
-    if (state?._id) {
-      setSelectedCategory(state?._id);
-    }
-  }, [state?._id]);
-
-  const findCategoryName = (array: Array<string>, id: string) => {
-    const category = array.find((cat: any) => cat?._id === id) as
-      | { name: string }
-      | undefined;
-    return category ? category?.name : "";
-  };
+    getBlogData("categories");
+  }, []);
 
   const categoryName = findCategoryName(categories, selectedCategory);
-  const filteredBlogs = blogs.filter(
-    (item: any) => item?.categoryId === selectedCategory
-  );
+
+  useEffect(() => {
+    getBlogData(
+      "blogs",
+      `?filter[categoryId]=${selectedCategory || state?._id}`
+    );
+    if (selectedCategory) {
+      navigate(`/categories?filter=${categoryName.toLowerCase()}`, {
+        state: { selectedCategory },
+      });
+    }
+  }, [selectedCategory]);
 
   return (
     <div className="max-w-[900px] mx-auto min-h-[88.4vh] h-auto p-5">
@@ -55,12 +62,18 @@ const FilterCategory = () => {
           ))}
         </select>
       </div>
-      {filteredBlogs.length ? (
-        <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ">
-          {filteredBlogs.map((blog: any) => {
+      {blogs.length ? (
+        <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center mb-[18rem]">
+          {blogs.map((blog: any) => {
             return (
               <div key={blog?._id}>
-                <BlogCard {...blog} categoryName={categoryName} />
+                <BlogCard
+                  {...blog}
+                  categoryName={
+                    findCategoryName(categories, blog?.categoryId) ||
+                    categoryName
+                  }
+                />
               </div>
             );
           })}
