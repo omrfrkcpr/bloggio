@@ -9,7 +9,7 @@ import BlogSettings from "./BlogSettings";
 import { formatNum } from "../../helper/functions";
 import { RootState } from "../../app/store";
 import useShowModal from "../../hooks/useShowModal";
-import { toastErrorNotify } from "../../helper/toastNotify";
+import { toastInfoNotify } from "../../helper/toastNotify";
 import { useLocation, useNavigate } from "react-router-dom";
 // import { RootState } from "../../app/store";
 
@@ -38,8 +38,12 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   }, [currentUser, likes]);
 
   const handleLikeClick = async () => {
-    await postLike(`blogs/${_id}/postLike`, _id);
-    setIsLiked(true);
+    if (currentUser) {
+      await postLike(`blogs/${_id}/postLike`, _id);
+      setIsLiked(true);
+    } else {
+      toastInfoNotify("Please login to like a blog.");
+    }
   };
 
   const handleGoComments = async () => {
@@ -55,7 +59,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         !path ? 1000 : 0
       );
     } else {
-      toastErrorNotify("Please login to see blog comments.");
+      toastInfoNotify("Please login to see blog comments.");
     }
   };
 

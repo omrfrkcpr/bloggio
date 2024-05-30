@@ -78,21 +78,17 @@ const Navbar = () => {
     [currentUser]
   );
 
-  const handleOpenNavMenu = React.useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu: (event: React.MouseEvent<HTMLElement>) => void =
+    React.useCallback((event: React.MouseEvent<HTMLElement>) => {
       setAnchorElNav(event.currentTarget);
-    },
-    []
-  );
+    }, []);
 
-  const handleOpenUserMenu = React.useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu: (event: React.MouseEvent<HTMLElement>) => void =
+    React.useCallback((event: React.MouseEvent<HTMLElement>) => {
       setAnchorElUser(event.currentTarget);
-    },
-    []
-  );
+    }, []);
 
-  const handleCloseNavMenu = React.useCallback(
+  const handleCloseNavMenu: (path: string) => void = React.useCallback(
     (path: string) => {
       setAnchorElNav(null);
       if (path === "logout") {
@@ -104,7 +100,7 @@ const Navbar = () => {
     [logout, navigate]
   );
 
-  const handleCloseUserMenu = React.useCallback(
+  const handleCloseUserMenu: (path: string) => void = React.useCallback(
     (path: string) => {
       setAnchorElUser(null);
       if (path === "logout") {
@@ -328,7 +324,7 @@ const Navbar = () => {
                       )} ${currentUser?.lastName?.toUpperCase()}`}
                     </span>
                     <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                      {`${maskEmail(currentUser?.email)}`}
+                      {maskEmail(currentUser?.email)}
                     </span>
                   </div>
                 )}
