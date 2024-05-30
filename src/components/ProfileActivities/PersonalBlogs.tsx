@@ -40,7 +40,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
 
   return (
     <>
-      {currentBlogs ? (
+      {currentBlogs.length ? (
         <div>
           <ul className="grid grid-cols-1 gap-y-5 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto">
             {currentBlogs.map((blog: any) => {
@@ -55,23 +55,29 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
               );
             })}
           </ul>
-          <Stack
-            sx={{
-              margin: "2rem 0",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              color="primary"
-              onChange={onPageChange}
-            />
-          </Stack>
+          {currentBlogs.length ? (
+            <Stack
+              sx={{
+                margin: "2rem 0",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                color="primary"
+                onChange={onPageChange}
+              />
+            </Stack>
+          ) : (
+            <></>
+          )}
         </div>
       ) : (
-        <div>No Blog Found</div>
+        <div className="p-5">
+          No {blogType === "myBlogs" ? "Published" : "Draft"} Blog Found...
+        </div>
       )}
     </>
   );
