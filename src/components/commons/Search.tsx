@@ -73,24 +73,35 @@ const Search = ({
               <div className="absolute right-0 left-0 top-full bg-white shadow rounded-sm">
                 {searchData.length > 0 ? (
                   <>
-                    {searchData.slice(0, 5).map((blog: any, i) => (
-                      <div
-                        key={i}
-                        onClick={() => {
-                          navigate(`/blog/${blog?._id}`);
-                          setSearch("");
-                        }}
-                        className="p-2 hover:text-gray-700 cursor-pointer text-black"
-                      >
-                        <h2 className="line-clamp-1 capitalize text-sm ">
-                          {blog.title}
-                        </h2>
-                        <div
-                          className="text-xs text-gray-500 line-clamp-2"
-                          dangerouslySetInnerHTML={{ __html: blog.desc }}
-                        />
-                      </div>
-                    ))}
+                    {searchData
+                      .slice(0, 3)
+                      .map(
+                        (
+                          {
+                            _id,
+                            title,
+                            content,
+                          }: { _id: string; title: string; content: any },
+                          i
+                        ) => (
+                          <div
+                            key={i}
+                            onClick={() => {
+                              navigate(`/blog/${_id}`);
+                              setSearch("");
+                            }}
+                            className="p-2 hover:bg-gray-200 cursor-pointer text-black"
+                          >
+                            <h2 className="line-clamp-1 capitalize text-sm font-semibold">
+                              {title}
+                            </h2>
+                            <div
+                              className="text-xs text-gray-500 line-clamp-2"
+                              dangerouslySetInnerHTML={{ __html: content }}
+                            />
+                          </div>
+                        )
+                      )}
                   </>
                 ) : (
                   <p className="text-sm text-gray-500 p-3">No Blog Found</p>

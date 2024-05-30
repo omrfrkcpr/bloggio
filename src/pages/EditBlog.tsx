@@ -66,7 +66,7 @@ const EditBlog = () => {
             }}
             className={`${
               isOpen && "hidden"
-            } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#ee9f30] text-white  hover:bg-[#f0c281] rounded-full transition-all duration-500`}
+            } flex gap-2 items-center justify-center absolute top-5 z-20 right-0 py-2 px-3 bg-[#ee9f30] text-white  hover:bg-[#f0c281] rounded-full transition-all duration-500`}
             icon={<FaCircleArrowRight />}
             title="Continue Updating"
           />

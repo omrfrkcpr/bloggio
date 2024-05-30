@@ -6,7 +6,11 @@ import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
 import CustomModal from "../components/Modals/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
-import { toastErrorNotify, toastWarnNotify } from "../helper/toastNotify";
+import {
+  toastErrorNotify,
+  toastInfoNotify,
+  toastWarnNotify,
+} from "../helper/toastNotify";
 import { useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner.gif";
 import { FaCircleCheck } from "react-icons/fa6";
@@ -83,12 +87,12 @@ const Preview: React.FC<PreviewProps> = ({
         preview?.categoryId === "" ||
         preview?.image === ""
       ) {
-        toastErrorNotify("All fields are required!");
+        toastInfoNotify("All fields are required!");
         return;
       }
 
       if (preview.title.length < 15) {
-        toastErrorNotify("Title must be at least 15 letters!");
+        toastInfoNotify("Title must be at least 15 letters!");
         return;
       }
 
@@ -148,7 +152,7 @@ const Preview: React.FC<PreviewProps> = ({
               </div>
               <div className="w-full h-[200px] object-cover bg-gray-100 my-3 flex flex-col items-center justify-center bg-cover bg-no-repeat relative text-gray-400 text-center">
                 <span className="underline">Blog Image</span>
-                <span className="text-sm">
+                <span className="text-sm px-4">
                   Represents your blog content. Recommended to use a rectangular
                   PNG, JPG, JPEG or GIF with a size of at least 1000 pixels.
                 </span>

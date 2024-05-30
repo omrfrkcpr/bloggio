@@ -12,15 +12,11 @@ import {
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
+import { singularize } from "../helper/functions";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
   const axiosWithToken = useAxios();
-
-  const singularize = (text: string) => {
-    // blogs => Blog
-    return text.charAt(0).toUpperCase() + text.slice(1, -1);
-  };
 
   const getBlogData = async (url: string, search: string = "") => {
     dispatch(fetchStart());
@@ -55,10 +51,14 @@ const useBlogCalls = () => {
       try {
         await axiosWithToken.delete(`${url}/${id}`);
         toastSuccessNotify(`${singularize(url)} is successfully deleted!`);
-      } catch (error) {
+      } catch (error: any) {
         console.log(error);
         dispatch(fetchFail());
-        toastErrorNotify(`${singularize(url)} could not be deleted!`);
+        toastErrorNotify(
+          `${singularize(url)} could not be deleted! ${
+            error.message && error.message
+          }`
+        );
       } finally {
         getBlogData(url);
       }
@@ -71,10 +71,14 @@ const useBlogCalls = () => {
       await axiosWithToken.post(`${url}`, info);
       getBlogData(url); // only if we post it successfully
       toastSuccessNotify(`New ${singularize(url)} is successfully created!`);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`New ${singularize(url)} could not be created!`);
+      toastErrorNotify(
+        `New ${singularize(url)} could not be created! ${
+          error.message && error.message
+        }`
+      );
     }
   };
 
@@ -83,10 +87,14 @@ const useBlogCalls = () => {
     try {
       await axiosWithToken.put(`${url}/${blogId}`, info);
       toastSuccessNotify(`${singularize(url)} ist successfully updated!`);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`${singularize(url)} could not be updated!`);
+      toastErrorNotify(
+        `${singularize(url)} could not be updated! ${
+          error.message && error.message
+        }`
+      );
     } finally {
       getBlogData(url);
     }
@@ -101,10 +109,12 @@ const useBlogCalls = () => {
     try {
       await axiosWithToken.put(`${url}/${commentId}`, info);
       toastSuccessNotify(`Comment ist successfully updated!`);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(`Comment could not be updated!`);
+      toastErrorNotify(
+        `Comment could not be updated! ${error.message && error.message}`
+      );
     } finally {
       getBlogData(url);
     }

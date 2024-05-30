@@ -108,3 +108,8 @@ export const getTrendBlogs = (arr: any) =>
     ?.slice()
     .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
     .slice(0, 10);
+
+export const singularize = (text: string) => {
+  // blogs => Blog
+  return text.charAt(0).toUpperCase() + text.slice(1, -1);
+};

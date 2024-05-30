@@ -45,7 +45,7 @@ const Write = () => {
             }}
             className={`${
               isOpen && "hidden"
-            } flex gap-2 items-center justify-center absolute top-5 z-50 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}
+            } flex gap-2 items-center justify-center absolute top-5 z-20 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}
             icon={<FaCircleArrowRight />}
             title="Continue Publishing"
           />
