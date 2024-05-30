@@ -37,7 +37,7 @@ const EditBlog = () => {
   return (
     <>
       {!isOpen && (
-        <section className="min-h-[86.8vh] h-full w-[90%] md:w-[80%] mx-auto max-w-[1000px] relative">
+        <section className="min-h-[78vh] h-full w-[90%] md:w-[80%] mb-[5rem] mx-auto max-w-[1000px] relative">
           <div className="mt-5">
             <input
               type="text"
