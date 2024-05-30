@@ -71,7 +71,7 @@ const Search = ({
             />
             {search && (
               <div className="absolute right-0 left-0 top-full bg-white shadow rounded-sm">
-                {searchData.length > 0 ? (
+                {searchData.length ? (
                   <>
                     {searchData
                       .slice(0, 3)
