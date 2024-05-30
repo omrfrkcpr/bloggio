@@ -5,7 +5,7 @@ import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
 
-const Category = () => {
+const FilterCategory = () => {
   const { state } = useLocation();
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -74,4 +74,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default FilterCategory;

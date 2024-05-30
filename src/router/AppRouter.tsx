@@ -13,7 +13,7 @@ import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
 import Write from "../pages/Write";
 import Contact from "../pages/Contact";
-import Category from "../pages/Category";
+import FilterCategory from "../pages/FilterCategory";
 import Stats from "../pages/Stats";
 import SingleBlog from "../pages/SingleBlog";
 import EditBlog from "../pages/EditBlog";
@@ -35,7 +35,7 @@ const AppRouter = () => {
             <Route path="profile/:userId" element={<Profile />} />
             <Route path="stats/:userId" element={<Stats />} />
           </Route>
-          <Route path="/categories/:categoryId" element={<Category />} />
+          <Route path="/categories/:categoryId" element={<FilterCategory />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
