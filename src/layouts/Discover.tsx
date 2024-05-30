@@ -32,10 +32,7 @@ const Discover = () => {
                     `/categories?filter=${findCategoryName(
                       categories,
                       _id
-                    ).toLowerCase()}`,
-                    {
-                      state: { _id },
-                    }
+                    ).toLowerCase()}`
                   )
                 }
                 key={_id}

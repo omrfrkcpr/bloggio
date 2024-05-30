@@ -5,18 +5,28 @@ import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { findCategoryName } from "../helper/functions";
+import {
+  findCategoryId,
+  findCategoryName,
+  getCapitalizedFilterValue,
+} from "../helper/functions";
 import CustomButton from "../components/commons/CustomButton";
 
 const FilterCategory = () => {
-  const { state } = useLocation();
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const { getBlogData } = useBlogCalls();
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    state?._id || ""
-  );
+  const { search } = useLocation();
   const [displayCount, setDisplayCount] = useState<number>(3);
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  // console.log(search);
+
+  useEffect(() => {
+    setSelectedCategory(
+      findCategoryId(categories, getCapitalizedFilterValue(search))
+    );
+  }, [search, categories]);
 
   useEffect(() => {
     getBlogData("categories");
@@ -27,12 +37,13 @@ const FilterCategory = () => {
   useEffect(() => {
     getBlogData(
       "blogs",
-      `?filter[categoryId]=${selectedCategory || state?._id}`
+      `?filter[categoryId]=${
+        selectedCategory ||
+        findCategoryId(categories, getCapitalizedFilterValue(search))
+      }`
     );
     if (selectedCategory) {
-      navigate(`/categories?filter=${categoryName.toLowerCase()}`, {
-        state: { selectedCategory },
-      });
+      navigate(`/categories?filter=${categoryName.toLowerCase()}`);
     }
     setDisplayCount(3); // Reset display count when category changes;
   }, [selectedCategory]);

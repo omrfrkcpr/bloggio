@@ -114,10 +114,34 @@ export const singularize = (text: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1, -1);
 };
 
-
 export const findCategoryName = (array: Array<string>, id: string) => {
   const category = array.find((cat: any) => cat?._id === id) as
     | { name: string }
     | undefined;
   return category ? category?.name : "";
 };
+
+export const findCategoryId = (array: Array<string>, categoryName: string) => {
+  const category = array.find((cat: any) => cat?.name === categoryName) as
+    | { _id: string }
+    | undefined;
+  return category ? category?._id : "";
+};
+
+// Func for getting categoryName from search query
+export function getCapitalizedFilterValue(text: string) {
+  const filterIndex = text.indexOf("filter=");
+  if (filterIndex === -1) {
+    return "";
+  }
+  const startIndex = filterIndex + "filter=".length;
+  let endIndex = text.indexOf(" ", startIndex);
+  if (endIndex === -1) {
+    endIndex = text.length;
+  }
+
+  const word = text.substring(startIndex, endIndex);
+  const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+
+  return capitalizedWord;
+}

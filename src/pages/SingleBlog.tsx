@@ -130,7 +130,7 @@ const SingleBlog = () => {
                   comments={comments}
                   countOfVisitors={countOfVisitors}
                   _id={path?.blogId}
-                  userId={userId}
+                  userId={userId?._id}
                 />
               </div>
             </div>

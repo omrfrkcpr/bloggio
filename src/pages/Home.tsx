@@ -9,7 +9,7 @@ const Home = () => {
   const { getBlogData } = useBlogCalls();
 
   useEffect(() => {
-    getBlogData("blogs");
+    // getBlogData("blogs");
     getBlogData("categories");
   }, []);
 

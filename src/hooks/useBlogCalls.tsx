@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchFail,
   fetchStart,
@@ -13,10 +13,13 @@ import {
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
 import { singularize } from "../helper/functions";
+import { useLocation } from "react-router-dom";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
   const axiosWithToken = useAxios();
+  const { pathname } = useLocation();
+  const { currentUser } = useSelector((state: any) => state.auth);
 
   const getBlogData = async (url: string, search: string = "") => {
     dispatch(fetchStart());
@@ -60,7 +63,11 @@ const useBlogCalls = () => {
           }`
         );
       } finally {
-        getBlogData(url);
+        if (pathname.includes("profile")) {
+          getBlogData("blogs", `?author=${currentUser?._id}`);
+        } else {
+          getBlogData(url);
+        }
       }
     }
   };
