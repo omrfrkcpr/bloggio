@@ -152,7 +152,7 @@ const BlogSettings = ({
       <DropDown
         showDrop={showDrop}
         setShowDrop={setShowDrop}
-        size="w-[11rem]"
+        size="w-[8.5rem] md:w-[11rem]"
         ref={dropDownRef}
       >
         {settingButtons.map(

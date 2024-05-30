@@ -64,7 +64,11 @@ const FilterCategory = () => {
       </div>
       {blogs.length ? (
         <>
-          <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center mb-[18rem]">
+          <ul
+            className={`grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ${
+              displayCount < blogs.length ? "mb-[80px]" : "mb-[300px]"
+            }`}
+          >
             {blogs.slice(0, displayCount).map((blog: any) => {
               return (
                 <div key={blog?._id}>
@@ -81,7 +85,7 @@ const FilterCategory = () => {
             {displayCount < blogs.length && (
               <CustomButton
                 click={handleShowMore}
-                className="text-sm border text-black border-gray-500 hover:bg-gray-100 rounded-full px-4 py-2 mt-4 w-[130px] text-center mx-auto"
+                className="text-sm border text-black border-gray-500 hover:bg-gray-100 rounded-full px-2 py-1 xl:px-4 xl:py-2 mt-4 w-[100px] xl:w-[130px] text-center mx-auto"
                 title="Show More"
               />
             )}

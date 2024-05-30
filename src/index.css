@@ -7,7 +7,7 @@
 }
 
 .share-button {
-  @apply p-2 hover:bg-gray-200 text-gray-600 hover:text-black/80 w-full text-sm text-left cursor-pointer flex gap-2;
+  @apply p-2 hover:bg-gray-200 text-gray-600 hover:text-black/80 w-full text-[10px] md:text-sm text-left cursor-pointer flex gap-1 md:gap-2 items-center;
 }
 
 .shadows {
