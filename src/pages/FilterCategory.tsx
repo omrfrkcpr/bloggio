@@ -6,6 +6,7 @@ import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { findCategoryName } from "../helper/functions";
+import CustomButton from "../components/commons/CustomButton";
 
 const FilterCategory = () => {
   const { state } = useLocation();
@@ -14,9 +15,8 @@ const FilterCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     state?._id || ""
   );
+  const [displayCount, setDisplayCount] = useState<number>(3);
   const navigate = useNavigate();
-
-  // console.log(state?._id);
 
   useEffect(() => {
     getBlogData("categories");
@@ -34,17 +34,17 @@ const FilterCategory = () => {
         state: { selectedCategory },
       });
     }
+    setDisplayCount(3); // Reset display count when category changes;
   }, [selectedCategory]);
+
+  const handleShowMore = () => {
+    setDisplayCount((prevCount) => prevCount + 3);
+  };
 
   return (
     <div className="max-w-[900px] mx-auto min-h-[88.4vh] h-auto p-5">
       <div className="text-center text-4xl text-gray-500 my-[3rem] flex justify-center gap-2">
-        <h2>
-          Category:
-          {/* <span className="font-bold text-black/80 underline">
-            {categoryName}
-          </span> */}
-        </h2>
+        <h2>Category:</h2>
         <select
           name="allCategories"
           id="allCategories"
@@ -63,21 +63,30 @@ const FilterCategory = () => {
         </select>
       </div>
       {blogs.length ? (
-        <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center mb-[18rem]">
-          {blogs.map((blog: any) => {
-            return (
-              <div key={blog?._id}>
-                <BlogCard
-                  {...blog}
-                  categoryName={
-                    findCategoryName(categories, blog?.categoryId) ||
-                    categoryName
-                  }
-                />
-              </div>
-            );
-          })}
-        </ul>
+        <>
+          <ul className="grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center mb-[18rem]">
+            {blogs.slice(0, displayCount).map((blog: any) => {
+              return (
+                <div key={blog?._id}>
+                  <BlogCard
+                    {...blog}
+                    categoryName={
+                      findCategoryName(categories, blog?.categoryId) ||
+                      categoryName
+                    }
+                  />
+                </div>
+              );
+            })}
+            {displayCount < blogs.length && (
+              <CustomButton
+                click={handleShowMore}
+                className="text-sm border text-black border-gray-500 hover:bg-gray-100 rounded-full px-4 py-2 mt-4 w-[130px] text-center mx-auto"
+                title="Show More"
+              />
+            )}
+          </ul>
+        </>
       ) : (
         <div className="text-center text-2xl text-gray-500 my-[3rem]">
           <h2>No blog found in this category.</h2>
