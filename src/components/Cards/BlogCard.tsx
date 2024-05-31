@@ -98,7 +98,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                     `/categories?filter=${(categoryName || "").toLowerCase()}`
                   )
                 }
-                className="text-[10px] lg:text-[12px] bg-gray-500 hover:bg-gray-400 rounded-md py-[2px] px-2 text-white"
+                className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
                 title={categoryName}
               />
             </div>
