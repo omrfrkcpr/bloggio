@@ -22,15 +22,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useBlogCalls from "../../hooks/useBlogCalls";
 
-interface BlogSettingsProps {
-  key: string;
-  title: string;
-  icon: JSX.Element;
-  onClick?: () => void;
-  component?: React.ComponentType<any>;
-  extraProps?: Record<string, any>;
-}
-
 const BlogSettings = ({
   blogId,
   userId,

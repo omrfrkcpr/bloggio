@@ -2,7 +2,6 @@
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
-
 const CustomTextField = styled(TextField)({
   "& .MuiInputBase-input": {
     height: "0.8rem",
@@ -30,18 +29,18 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-const FormTextField: React.FC<FormTextFieldProps> = ({
+const FormTextField: React.FC<AuthTextFieldProps> = ({
+  id,
   name,
   label,
   type,
-  id,
   autoComplete,
   variant,
   value,
   onChange,
   onBlur,
-  helperText,
   error,
+  helperText,
 }) => {
   return (
     <CustomTextField

@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import symbol from "../../assets/symbol.png";
-import CustomImage from "./CustomImage";
+import CustomImage from "../commons/CustomImage";
 
 const Logo: React.FC<LogoProps> = ({ sx, width }) => {
   return (

@@ -78,7 +78,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px]">
           <div className="mb-4">
             <div className="flex space-x-1 mb-1">
-              <div className="text-[10px] lg:text-[12px]  text-gray-600 flex items-center space-x-1">
+              <div
+                onClick={handleReadMore}
+                className="text-[10px] lg:text-[12px]  text-gray-600 flex items-center space-x-1 cursor-pointer"
+              >
                 <CustomImage
                   src={openLock}
                   alt="read-permission-status"
@@ -89,18 +92,21 @@ const BlogCard: React.FC<BlogCardProps> = ({
                   sx={{ fontSize: { xs: "12px", md: "15px" }, color: "orange" }}
                 />
               </div>
-              <div>
-                <span className="text-[10px] lg:text-[12px] bg-black/30 rounded-md py-[2px] px-2 text-white">
-                  {categoryName}
-                </span>
-              </div>
+              <CustomButton
+                click={() =>
+                  navigate(
+                    `/categories?filter=${(categoryName || "").toLowerCase()}`
+                  )
+                }
+                className="text-[10px] lg:text-[12px] bg-gray-500 hover:bg-gray-400 rounded-md py-[2px] px-2 text-white"
+                title={categoryName}
+              />
             </div>
-            <div
+            <CustomButton
               className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-2 cursor-pointer"
-              onClick={handleReadMore}
-            >
-              {title}
-            </div>
+              click={handleReadMore}
+              title={title}
+            />
             {/* <p
               className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px] cursor-pointer"
               onClick={handleReadMore}
@@ -108,7 +114,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
               {shortenText(content)}
             </p> */}
             <div
-              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px]"
+              onClick={handleReadMore}
+              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
               dangerouslySetInnerHTML={{ __html: shortenText(content) }}
             />
           </div>
@@ -156,7 +163,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 </p>
               </div>
             </div>
-            <div className="flex space-x-1 xl:space-x-2">
+            <div className="flex space-x-1 xl:space-x-2 justify-between items-center">
               <BlogAnalytics
                 likes={likes}
                 comments={comments}
@@ -164,22 +171,22 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 _id={_id}
                 userId={userId}
               />
-
-              <div className="hidden md:flex items-center">
-                <CustomButton
-                  click={handleReadMore}
-                  className="bg-[#85b2f0] text-[10px] xl:text-[14px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0] grid place-content-center text-center"
-                  title="Read More"
-                />
-              </div>
+              <CustomButton
+                click={handleReadMore}
+                className="bg-[#85b2f0] text-[10px] xl:text-[14px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0] md:flex items-center justify-center text-center hidden"
+                title="Read More"
+              />
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-center m-auto">
+        <div
+          onClick={handleReadMore}
+          className="flex items-center justify-center m-auto"
+        >
           <CustomImage
             src={image}
             alt="blog-img"
-            className="shadow-md rounded-lg bg-slate-50 object-fit w-[130px] h-[60px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto"
+            className="shadow-md rounded-lg bg-slate-50 object-fit w-[130px] h-[60px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
           />
         </div>
       </li>

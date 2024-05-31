@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
-import Logo from "../commons/Logo";
-import SocialMedia from "../commons/SocialMedia";
+import Logo from "./Logo";
+import SocialMedia from "./SocialMedia";
 import React from "react";
 
 const currentYear = new Date().getFullYear();
