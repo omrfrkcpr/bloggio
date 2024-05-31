@@ -42,7 +42,7 @@ const FilterCategory = () => {
         findCategoryId(categories, getCapitalizedFilterValue(search))
       }`
     );
-    if (selectedCategory) {
+    if (selectedCategory && !search.includes(categoryName.toLowerCase())) {
       navigate(`/categories?filter=${categoryName.toLowerCase()}`);
     }
     setDisplayCount(3); // Reset display count when category changes;
