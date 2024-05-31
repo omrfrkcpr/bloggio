@@ -19,6 +19,9 @@ const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
   const { getBlogData } = useBlogCalls();
   const location: any = useLocation();
+  const { search } = useLocation();
+
+  // console.log(search)
 
   const basePath = useMemo(
     () =>
@@ -56,6 +59,18 @@ const Profile = () => {
   const [currentActive, setCurrentActive] = useState(activities[0]);
   const [modal, setModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (search.includes("my-blogs")) {
+      setCurrentActive(activities[0]);
+    } else if (search.includes("drafts")) {
+      setCurrentActive(activities[1]);
+    } else if (search.includes("saved")) {
+      setCurrentActive(activities[2]);
+    } else if (search.includes("about")) {
+      setCurrentActive(activities[3]);
+    }
+  }, [search]);
 
   useEffect(() => {
     getBlogData("blogs", `?author=${currentUser?._id}`);

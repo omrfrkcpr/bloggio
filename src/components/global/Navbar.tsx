@@ -280,7 +280,7 @@ const Navbar = () => {
                 >
                   {currentUser?.image ? (
                     <img
-                      className="w-[44px] h-11 rounded-full cursor-pointer"
+                      className="w-[52px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                       alt="user-image"
                     />

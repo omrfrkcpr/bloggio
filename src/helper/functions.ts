@@ -145,3 +145,15 @@ export function getCapitalizedFilterValue(text: string) {
 
   return capitalizedWord;
 }
+
+export function extractProfileId(url: string) {
+  const profilePath = "profile/";
+  const startIndex = url.indexOf(profilePath) + profilePath.length;
+  const endIndex = url.indexOf("/", startIndex);
+
+  if (endIndex === -1) {
+    return url.slice(startIndex);
+  } else {
+    return url.slice(startIndex, endIndex);
+  }
+}
