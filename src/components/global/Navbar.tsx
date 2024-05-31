@@ -276,11 +276,12 @@ const Navbar = () => {
                     p: 0,
                     position: "relative",
                     marginRight: { xs: "1rem", md: "0" },
+                    minWidth: "44px",
                   }}
                 >
                   {currentUser?.image ? (
                     <img
-                      className="w-[52px] h-11 rounded-full cursor-pointer"
+                      className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                       alt="user-image"
                     />
@@ -291,7 +292,11 @@ const Navbar = () => {
                         `${capitalizeWords(currentUser?.firstName)}`
                       }
                       src="/static/images/avatar/2.jpg"
-                      sx={{ width: "44px", height: "42px", cursor: "pointer" }}
+                      sx={{
+                        minWidth: "44px",
+                        height: "42px",
+                        cursor: "pointer",
+                      }}
                     />
                   )}
                   <IoIosArrowDown
