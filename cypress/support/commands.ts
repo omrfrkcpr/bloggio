@@ -24,6 +24,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
 //
 // declare global {
 //   namespace Cypress {
@@ -35,3 +36,38 @@
 //     }
 //   }
 // }
+Cypress.Commands.add("login", () => {
+  cy.visit("/");
+  cy.get('[data-test="user-menu-icon"]').click();
+  cy.get('[data-test="user-menu"]').should("be.visible");
+  cy.get("[data-test=login-menu-item-login]").click();
+  cy.get("[data-test=login-form]").should("be.visible");
+  cy.get("[data-test=login-email]").type("john.doe@example.com");
+  cy.get("[data-test=login-password]").type("Password123!");
+  cy.get("[data-test=login-submit]").click();
+  cy.get("[data-test=login-form]").should("not.exist");
+  cy.get('[data-test="toast-message"]').should(
+    "contain",
+    "You're successfully logged in!"
+  );
+});
+
+Cypress.Commands.add("register", () => {
+  cy.visit("/");
+  cy.get('[data-test="user-menu-icon"]').click();
+  cy.get('[data-test="user-menu"]').should("be.visible");
+  cy.get("[data-test=login-menu-item-register]").click();
+  cy.get("[data-test=register-form]").should("be.visible");
+  cy.get("[data-test=register-firstName]").type("John");
+  cy.get("[data-test=register-lastName]").type("Doe");
+  cy.get("[data-test=register-username]").type("johndoe");
+  cy.get("[data-test=register-email]").type("john.doe@example.com");
+  cy.get("[data-test=register-password]").type("Password123!");
+  cy.get("[data-test=register-confirmPassword]").type("Password123!");
+  cy.get("[data-test=register-submit]").click();
+  cy.get("[data-test=register-form]").should("not.exist");
+  cy.get('[data-test="toast-message"]').should(
+    "contain",
+    "You're successfully registered!"
+  );
+});

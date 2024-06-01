@@ -52,7 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   };
 
   return (
-    <div>
+    <div data-test="login-form">
       <Form autoComplete="off">
         <div className="flex flex-col gap-3 lg:gap-4">
           {loginFormFields.map((field) => (
@@ -75,6 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     errors[field.name as keyof LoginFormValues]) ||
                   undefined
                 }
+                data-test={`login-${field.name}`}
               />
               {field.name === "password" && (
                 <div className="absolute top-4 right-3 sm:top-4 sm:right-3 md:top-[18px] md:right-3 xl:top-[20px] xl:right-3 text-black hover:text-black/50">
@@ -82,11 +83,13 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     <FaRegEyeSlash
                       className="w-4 cursor-pointer"
                       onClick={handlePasswordVisibility}
+                      data-test="toggle-password-visibility"
                     />
                   ) : (
                     <FaRegEye
                       className="w-4 cursor-pointer"
                       onClick={handlePasswordVisibility}
+                      data-test="toggle-password-visibility"
                     />
                   )}
                 </div>
@@ -98,6 +101,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <button
             type="submit"
             className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
+            data-test="login-submit"
           >
             Sign In
           </button>

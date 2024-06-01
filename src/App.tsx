@@ -12,7 +12,7 @@ function App() {
           <AppRouter />
         </PersistGate>
       </Provider>
-      <ToastContainer />
+      <ToastContainer data-test="toast-message" />
     </>
   );
 }

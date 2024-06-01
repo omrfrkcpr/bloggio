@@ -144,6 +144,7 @@ const Navbar = () => {
                 mt: "6px",
               }}
               width="50px"
+              data-test="logo"
             />
             <CustomTypography
               variant="h4"
@@ -159,6 +160,7 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
               content="Bloggio"
+              data-test="bloggioTitle"
             />
 
             <Box
@@ -175,6 +177,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="default"
+                data-test="menuIcon"
               >
                 <MenuIcon />
               </IconButton>
@@ -196,6 +199,7 @@ const Navbar = () => {
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
+                data-test="mobileMenu"
               >
                 {pages.map(({ label, path, id }) => (
                   <MenuItem key={id} onClick={() => handleCloseNavMenu(path)}>
@@ -206,6 +210,7 @@ const Navbar = () => {
                         textTransform: "capitalize",
                       }}
                       content={label}
+                      data-test={`mobileMenuItem-${label.toLowerCase()}`}
                     />
                   </MenuItem>
                 ))}
@@ -218,6 +223,7 @@ const Navbar = () => {
                 mt: "12px",
               }}
               width="40px"
+              data-test="logoMobile"
             />
             <CustomTypography
               variant="h5"
@@ -234,9 +240,14 @@ const Navbar = () => {
                 textShadow: isActive ? "" : "1px 2px 1px #0000004a",
               }}
               content="Bloggio"
+              data-test="bloggioTitleMobile"
             />
             {currentUser && (
-              <Search modal={searchModal} setModal={setSearchModal} />
+              <Search
+                modal={searchModal}
+                setModal={setSearchModal}
+                data-test="search"
+              />
             )}
             <Box
               sx={{
@@ -245,6 +256,7 @@ const Navbar = () => {
                 justifyContent: "end",
                 margin: "0 0.5rem",
               }}
+              data-test="desktopMenu"
             >
               {pages.map(({ label, path, id }) => (
                 <Button
@@ -262,6 +274,7 @@ const Navbar = () => {
                     },
                     display: "block",
                   }}
+                  data-test={`desktopMenuItem-${label.toLowerCase()}`}
                 >
                   {label}
                 </Button>
@@ -278,12 +291,14 @@ const Navbar = () => {
                     marginRight: { xs: "1rem", md: "0" },
                     minWidth: "44px",
                   }}
+                  data-test="userMenuIcon"
                 >
                   {currentUser?.image ? (
                     <img
                       className="w-[44px] h-11 rounded-full cursor-pointer"
                       src={currentUser?.image}
                       alt="user-image"
+                      data-test="userImage"
                     />
                   ) : (
                     <Avatar
@@ -297,11 +312,13 @@ const Navbar = () => {
                         height: "42px",
                         cursor: "pointer",
                       }}
+                      data-test="userAvatar"
                     />
                   )}
                   <IoIosArrowDown
                     className="absolute -right-[0.9rem] cursor-pointer"
                     size={12}
+                    data-test="userMenuArrow"
                   />
                 </IconButton>
               </Tooltip>
@@ -320,9 +337,13 @@ const Navbar = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                data-test="userMenu"
               >
                 {currentUser && (
-                  <div className="px-4 py-3 text-center border-b-2 mb-2">
+                  <div
+                    className="px-4 py-3 text-center border-b-2 mb-2"
+                    data-test="userInfo"
+                  >
                     <span className="block text-sm text-gray-900 dark:text-white">
                       {`${capitalizeWords(
                         currentUser?.firstName
@@ -343,6 +364,7 @@ const Navbar = () => {
                             label === "Logout" ? "2px solid #EEEEEE" : "",
                         }}
                         onClick={() => handleCloseUserMenu(path)}
+                        data-test={`userMenuItem-${label.toLowerCase()}`}
                       >
                         {label === "Profile" ? (
                           <User
@@ -366,7 +388,11 @@ const Navbar = () => {
                       </MenuItem>
                     ))
                   : loginSettings.map(({ label, id, path }) => (
-                      <MenuItem key={id} onClick={() => handleLoginMenu(path)}>
+                      <MenuItem
+                        key={id}
+                        onClick={() => handleLoginMenu(path)}
+                        data-test={`loginMenuItem-${label.toLowerCase()}`}
+                      >
                         <CustomTypography textAlign="center" content={label} />
                       </MenuItem>
                     ))}
@@ -380,6 +406,7 @@ const Navbar = () => {
           isOpen={showNavbarModal}
           setIsOpen={toggleNavbarModal}
           selectedFormType={selectedFormType}
+          data-test="authModal"
         />
       )}
     </>

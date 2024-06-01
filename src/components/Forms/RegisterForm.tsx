@@ -11,8 +11,6 @@ interface RegisterFormValues {
   email: string;
   password: string;
   image: string;
-  // bio: string;
-  // city: string;
 }
 
 interface RegisterFormProps extends FormikProps<RegisterFormValues> {
@@ -69,9 +67,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       type: "text",
     },
     { name: "email", label: "Enter Email", type: "email" },
-    // { name: "image", label: "Image Url", type: "text" },
-    // { name: "bio", label: "Your Bio", type: "text" },
-    // { name: "city", label: "Your City", type: "text" },
     {
       name: "password",
       label: "Enter Password",
@@ -93,7 +88,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   };
 
   return (
-    <div>
+    <div data-test="register-form">
       <Form autoComplete="off">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
           {registerFormFields.map((field, index) => (
@@ -120,6 +115,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
                     errors[field.name as keyof RegisterFormValues]) ||
                   undefined
                 }
+                data-test={`register-${field.name}`}
               />
               {(field.name === "password" ||
                 field.name === "confirmPassword") && (
@@ -129,22 +125,26 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
                       <FaRegEyeSlash
                         className="w-4 cursor-pointer"
                         onClick={handlePasswordVisibility}
+                        data-test="toggle-password-visibility"
                       />
                     ) : (
                       <FaRegEye
                         className="w-4 cursor-pointer"
                         onClick={handlePasswordVisibility}
+                        data-test="toggle-password-visibility"
                       />
                     )
                   ) : showConfirmPassword ? (
                     <FaRegEyeSlash
                       className="w-4 cursor-pointer"
                       onClick={handleConfirmPasswordVisibility}
+                      data-test="toggle-confirm-password-visibility"
                     />
                   ) : (
                     <FaRegEye
                       className="w-4 cursor-pointer"
                       onClick={handleConfirmPasswordVisibility}
+                      data-test="toggle-confirm-password-visibility"
                     />
                   )}
                 </div>
@@ -156,6 +156,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           type="submit"
           disabled={isSubmitting}
           className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
+          data-test="register-submit"
         >
           {isSubmitting ? "Loading..." : "Sign Up"}
         </button>
