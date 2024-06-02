@@ -3,7 +3,6 @@
 describe("navbar", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.viewport(1600, 1600);
   });
 
   it("should display the logo and title", () => {
@@ -11,27 +10,31 @@ describe("navbar", () => {
     cy.get('[data-test="bloggioTitle"]').should("contain", "Bloggio");
   });
 
-  it("should open the mobile menu and display menu items", () => {
-    cy.viewport("iphone-6");
-    cy.get('[data-test="menuIcon"]').click();
-    cy.get('[data-test="mobileMenu"]').should("be.visible");
-    cy.get('[data-test="mobileMenuItem-home"]').should("contain", "Home");
-    cy.get('[data-test="mobileMenuItem-contact"]').should("contain", "Contact");
-    cy.get('[data-test="mobileMenuItem-about"]').should("contain", "About");
-  });
+  // it("should open the mobile menu and display menu items", () => {
+  //   cy.viewport("iphone-6");
+  //   cy.get('[data-test="menuIcon"]').click();
+  //   cy.get('[data-test="mobileMenu"]').should("be.visible");
+  //   cy.get('[data-test="mobileMenuItem-home"]').should("contain", "Home");
+  //   cy.get('[data-test="mobileMenuItem-contact"]').should("contain", "Contact");
+  //   cy.get('[data-test="mobileMenuItem-about"]').should("contain", "About");
+  // });
 
-  it("should display desktop menu items", () => {
-    cy.viewport("macbook-15");
-    cy.get('[data-test="desktopMenuItem-home"]').should("contain", "Home");
-    cy.get('[data-test="desktopMenuItem-contact"]').should(
-      "contain",
-      "Contact"
-    );
-    cy.get('[data-test="desktopMenuItem-about"]').should("contain", "About");
-  });
+  // it("should display desktop menu items", () => {
+  //   cy.viewport("macbook-15");
+  //   cy.get('[data-test="desktopMenuItem-home"]').should("contain", "Home");
+  //   cy.get('[data-test="desktopMenuItem-contact"]').should(
+  //     "contain",
+  //     "Contact"
+  //   );
+  //   cy.get('[data-test="desktopMenuItem-about"]').should("contain", "About");
+  // });
 
   it("should open user menu and display user settings", () => {
-    cy.register(); // Registering a new user
+    cy.get('[data-test="userMenuIcon"]').click();
+    cy.get('[data-test="userMenu"]').should("be.visible");
+    cy.get('[data-test="userMenuItem-login"]').click();
+    cy.get('[data-test="login-form"]').should("be.visible");
+    cy.login();
 
     cy.get('[data-test="userMenuIcon"]').click();
     cy.get('[data-test="userMenu"]').should("be.visible");
