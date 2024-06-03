@@ -3,7 +3,6 @@ describe("login", () => {
     cy.visit("/");
   });
   it("should login an existing user", () => {
-    cy.viewport(500, 800);
     cy.get('[data-test="userMenuIcon"]').click({ force: true });
     cy.get('[data-test="userMenu"]').should("be.visible");
     cy.get('[data-test="loginMenuItem-login"]').click({ force: true });
@@ -15,6 +14,7 @@ describe("login", () => {
     cy.get("[data-test=login-form]").should("not.exist");
     cy.get('[data-test="userMenuIcon"]').click({ force: true });
     cy.get('[data-test="userMenu"]').should("be.visible");
-    cy.get('[data-test="userMenuItem-logout"]').should("contain", "Logout");
+    cy.get('[data-test="userMenuItem-logout"]').should("be.visible");
+    cy.get('[data-test="bloggioTitle"]').click({ force: true });
   });
 });

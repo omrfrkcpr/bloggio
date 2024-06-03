@@ -73,8 +73,11 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           onClick={handleLikeClick}
           weight={isLiked && likes.includes(currentUser?._id) ? "fill" : "thin"}
           className={`cursor-pointer hover:scale-125 ${
-            isLiked && likes.includes(currentUser?._id) && "text-red-500"
+            isLiked && likes.includes(currentUser?._id)
+              ? "text-red-500"
+              : "text-[#A1A1A1]"
           }`}
+          data-test="heart-icon"
         />
       ),
       count: likes?.length,
@@ -90,6 +93,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
             color: "#A1A1A1",
             "&:hover": { color: "black" },
           }}
+          data-test="comment-icon"
         />
       ),
       count: comments?.length,
@@ -109,7 +113,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   ];
 
   return (
-    <div className="flex gap-[0.2rem] items-center">
+    <div className="flex gap-[0.2rem] items-center" data-test="blog-analytics">
       {analytics.map(({ key, icon, count }) => (
         <p key={key} className="space-x-1 flex items-center">
           {icon}

@@ -35,34 +35,4 @@ describe("navbar", () => {
     );
     cy.get('[data-test="desktopMenuItem-about"]').should("contain", "About");
   });
-
-  // it("should open user menu and display user settings", () => {
-  //   cy.get('[data-test="userMenuIcon"]').click();
-  //   cy.get('[data-test="userMenu"]').should("be.visible");
-  //   cy.get('[data-test="userMenuItem-login"]').click();
-  //   cy.get('[data-test="login-form"]').should("be.visible");
-  //   cy.login();
-
-  //   cy.get('[data-test="userMenuIcon"]').click();
-  //   cy.get('[data-test="userMenu"]').should("be.visible");
-  //   cy.get('[data-test="userInfo"]').should("contain", "John Doe");
-  //   cy.get('[data-test="userInfo"]').should("contain", "j***@example.com");
-  //   cy.get('[data-test="userMenuItem-profile"]').should("contain", "Profile");
-  //   cy.get('[data-test="userMenuItem-stats"]').should("contain", "Stats");
-  //   cy.get('[data-test="userMenuItem-logout"]').should("contain", "Logout");
-  // });
-
-  // it("should log out the user", () => {
-  //   cy.login(); // Logging in an existing user
-
-  //   cy.get('[data-test="userMenuIcon"]').click();
-  //   cy.get('[data-test="userMenuItem-logout"]').click();
-  //   cy.get('[data-test="userMenu"]').should("not.exist");
-  // });
-
-  // it("should open login modal", () => {
-  //   cy.get('[data-test="userMenu-icon"]').click();
-  //   cy.get('[data-test="loginMenuItem-login"]').click();
-  //   cy.get('[data-test="login-form"]').should("be.visible");
-  // });
 });

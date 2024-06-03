@@ -36,10 +36,13 @@ const Hero: React.FC = React.memo(() => {
     >
       <div className="flex flex-col space-y-8 md:space-y-4 w-[400px] xl:w-auto">
         <div>
-          <h1 className="text-3xl md:text-5xl text-black">
+          <h1
+            className="text-3xl md:text-5xl text-black"
+            data-test="projectSlogan"
+          >
             Explore, Learn, Share
           </h1>
-          <p className="text-md md:text-lg text-black">
+          <p className="text-md md:text-lg text-black" data-test="projectDesc">
             Follow your curiosity, connect through shared experiences
           </p>
         </div>
@@ -48,6 +51,7 @@ const Hero: React.FC = React.memo(() => {
             click={handleStartClick}
             className="bg-black hover:bg-black/70 text-white px-4 py-1 rounded-[30px] w-[120px] mx-auto md:mx-0"
             title="Start writing"
+            alt="startWriting"
           />
         )}
       </div>
@@ -63,6 +67,7 @@ const Hero: React.FC = React.memo(() => {
           alt="pencil"
           className="w-[100px] md:w-[300px]"
           loading="lazy"
+          data-test="pencil"
         />
       </div>
       <div

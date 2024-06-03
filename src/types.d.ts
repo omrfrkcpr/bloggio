@@ -55,6 +55,7 @@ interface CustomButtonProps {
   key?: string | number;
   type?: string;
   disabled?: boolean;
+  alt?: string;
 }
 
 /* ---------------------------------- */

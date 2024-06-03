@@ -8,7 +8,6 @@ describe("register", () => {
   });
 
   it("should register a new user", () => {
-    cy.viewport(500, 800);
     cy.get('[data-test="userMenuIcon"]').click();
     cy.get('[data-test="userMenu"]').should("be.visible");
     cy.get('[data-test="loginMenuItem-register"]').click();

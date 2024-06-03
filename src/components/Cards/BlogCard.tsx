@@ -175,6 +175,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 click={handleReadMore}
                 className="bg-[#85b2f0] text-[10px] xl:text-[14px] py-[0.1rem] md:py-[0.5rem] lg:py-1 px-[0.5rem] md:px-[0.8rem] lg:px-1 rounded-xl text-white hover:bg-[#B9D0F0] md:flex items-center justify-center text-center hidden"
                 title="Read More"
+                alt="readMore-blog"
               />
             </div>
           </div>

@@ -127,7 +127,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               </div>
             </div>
           </div>
-          <p className="py-4 text-sm">
+          <p className="py-4 text-sm" data-test="comment">
             {more ? comment : comment.substring(0, 100)}
             {comment.length > 100 && (
               <CustomButton

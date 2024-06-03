@@ -74,10 +74,16 @@ const SingleBlog = () => {
                 className="w-[100vw] max-h-[400px] my-5 mx-auto"
               />
             </div>
-            <h1 className="text-[1rem] md:text-[2rem] w-[100%] text-center mt-3 text-[#75a3e3]">
+            <h1
+              className="text-[1rem] md:text-[2rem] w-[100%] text-center mt-3 text-[#75a3e3]"
+              data-test="blog-title"
+            >
               {title}
             </h1>
-            <h3 className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto ">
+            <h3
+              className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto"
+              data-test="blog-category"
+            >
               {categoryId?.name || categoryName}
             </h3>
             <div className="flex justify-between space-x-5 w-[100%] max-w-[1000px] mt-4">
@@ -113,8 +119,14 @@ const SingleBlog = () => {
                   )
                 )}
                 <div className="text-[10px] md:text-[16px]">
-                  <p className="text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
-                  <p className="text-gray-600 space-x-1">
+                  <p
+                    className="text-gray-900 leading-none"
+                    data-test="blog-userInfo"
+                  >{`${randomFirstName} ${randomLastName}`}</p>
+                  <p
+                    className="text-gray-600 space-x-1"
+                    data-test="blog-details"
+                  >
                     <span>{dateFormatter(createdAt)} -</span>
                     <span>{`${calculateReadTime(
                       {
@@ -137,6 +149,7 @@ const SingleBlog = () => {
             <div
               className="w-[100%] max-w-[1000px] my-5 text-[12px] md:text-[1rem] lg:text-[1.2rem]"
               dangerouslySetInnerHTML={{ __html: content }}
+              data-test="blog-description"
             />
           </div>
           <BlogComments blogId={_id || path?.blogId} />

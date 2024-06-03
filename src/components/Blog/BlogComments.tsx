@@ -56,17 +56,20 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
         className={`fixed top-0 right-0 bottom-0 z-50 bg-white w-[22rem] shadows p-5
     overflow-y-auto transition-all duration-500
     ${showCommentsModal ? "translate-x-0" : "translate-x-[23rem]"}
+    
   `}
+        data-test="commentsSection"
       >
         {/* header  */}
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold">
+          <h3 className="text-xl font-bold" data-test="commentsSection-title">
             Comments ({commentsData?.length})
           </h3>
           <CustomButton
             click={() => toggleCommentsModal()}
             className="text-xl"
             icon={<LiaTimesSolid />}
+            alt="toggleCommentsModal"
           />
         </div>
         {/* comment form  */}
@@ -97,6 +100,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
               }
               placeholder="What are your thoughts?"
               className="w-full outline-none resize-none scrollbar-hide text-sm border px-2 pt-4"
+              data-test="comment-textArea"
             ></textarea>
             <div className="flex items-center justify-end gap-4 mt-[1rem]">
               <CustomButton
@@ -111,6 +115,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
                 click={() => writeComment()}
                 className="px-2 py-1 !text-xs !bg-green-700 hover:bg-green-300 !text-white !rounded-full"
                 title="Response"
+                alt="responseBlog"
               />
             </div>
           </div>

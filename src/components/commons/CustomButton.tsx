@@ -5,9 +5,14 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   icon,
   title,
   className,
+  alt,
 }) => {
   return (
-    <div onClick={click} className={`${className} cursor-pointer`}>
+    <div
+      onClick={click}
+      className={`${className} cursor-pointer`}
+      data-test={alt}
+    >
       {icon && <span className="text-[1.2rem]">{icon}</span>}
       {title}
     </div>

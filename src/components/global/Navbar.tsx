@@ -364,6 +364,7 @@ const Navbar = () => {
                             label === "Logout" ? "2px solid #EEEEEE" : "",
                         }}
                         onClick={() => handleCloseUserMenu(path)}
+                        data-test={`userMenuItem-${label.toLowerCase()}`}
                       >
                         {label === "Profile" ? (
                           <User
@@ -383,11 +384,7 @@ const Navbar = () => {
                             />
                           )
                         )}
-                        <CustomTypography
-                          textAlign="center"
-                          content={label}
-                          alt={`userMenuItem-${label.toLowerCase()}`}
-                        />
+                        <CustomTypography textAlign="center" content={label} />
                       </MenuItem>
                     ))
                   : loginSettings.map(({ label, id, path }) => (
