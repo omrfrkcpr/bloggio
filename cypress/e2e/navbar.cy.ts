@@ -5,13 +5,13 @@ describe("navbar", () => {
     cy.visit("/");
   });
 
-  it("should display the logo and title", () => {
+  it("should display the mobile logo and title", () => {
     cy.viewport(500, 800);
     cy.get('[data-test="logoMobile"]').should("be.visible");
     cy.get('[data-test="bloggioTitleMobile"]').should("contain", "Bloggio");
   });
 
-  it("should display the logo and title", () => {
+  it("should display the desktop logo and title", () => {
     cy.viewport("macbook-16");
     cy.get('[data-test="logo"]').should("be.visible");
     cy.get('[data-test="bloggioTitle"]').should("contain", "Bloggio");
