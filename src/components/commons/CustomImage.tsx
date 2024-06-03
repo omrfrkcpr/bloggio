@@ -2,7 +2,6 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-
 const CustomImage: React.FC<CustomImageProps> = ({
   src,
   alt,
@@ -16,6 +15,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
       className={className}
       {...props}
       effect="blur"
+      data-test={alt}
     />
   </div>
 );

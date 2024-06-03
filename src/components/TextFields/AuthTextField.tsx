@@ -41,6 +41,7 @@ const FormTextField: React.FC<AuthTextFieldProps> = ({
   onBlur,
   error,
   helperText,
+  alt,
 }) => {
   return (
     <CustomTextField
@@ -58,6 +59,7 @@ const FormTextField: React.FC<AuthTextFieldProps> = ({
       helperText={helperText || ""}
       error={error || false}
       sx={{ width: "100%" }}
+      data-test={alt}
     />
   );
 };

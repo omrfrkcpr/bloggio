@@ -115,7 +115,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
                     errors[field.name as keyof RegisterFormValues]) ||
                   undefined
                 }
-                data-test={`register-${field?.name}`}
+                alt={`register-${field?.name}`}
               />
               {(field.name === "password" ||
                 field.name === "confirmPassword") && (

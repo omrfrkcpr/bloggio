@@ -8,6 +8,7 @@ const CustomTypography: React.FC<HeaderProps> = ({
   noWrap,
   content,
   textAlign,
+  alt,
 }) => {
   return (
     <Typography
@@ -15,6 +16,7 @@ const CustomTypography: React.FC<HeaderProps> = ({
       noWrap={noWrap}
       sx={sx}
       textAlign={textAlign as any}
+      data-test={alt}
     >
       {content}
     </Typography>

@@ -144,7 +144,7 @@ const Navbar = () => {
                 mt: "6px",
               }}
               width="50px"
-              data-test="logo"
+              alt="logo"
             />
             <CustomTypography
               variant="h4"
@@ -160,7 +160,7 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
               content="Bloggio"
-              data-test="bloggioTitle"
+              alt="bloggioTitle"
             />
 
             <Box
@@ -210,7 +210,7 @@ const Navbar = () => {
                         textTransform: "capitalize",
                       }}
                       content={label}
-                      data-test={`mobileMenuItem-${label.toLowerCase()}`}
+                      alt={`mobileMenuItem-${label.toLowerCase()}`}
                     />
                   </MenuItem>
                 ))}
@@ -223,7 +223,7 @@ const Navbar = () => {
                 mt: "12px",
               }}
               width="40px"
-              data-test="logoMobile"
+              alt="logoMobile"
             />
             <CustomTypography
               variant="h5"
@@ -240,7 +240,7 @@ const Navbar = () => {
                 textShadow: isActive ? "" : "1px 2px 1px #0000004a",
               }}
               content="Bloggio"
-              data-test="bloggioTitleMobile"
+              alt="bloggioTitleMobile"
             />
             {currentUser && (
               <Search
@@ -364,7 +364,6 @@ const Navbar = () => {
                             label === "Logout" ? "2px solid #EEEEEE" : "",
                         }}
                         onClick={() => handleCloseUserMenu(path)}
-                        data-test={`userMenuItem-${label.toLowerCase()}`}
                       >
                         {label === "Profile" ? (
                           <User
@@ -384,7 +383,11 @@ const Navbar = () => {
                             />
                           )
                         )}
-                        <CustomTypography textAlign="center" content={label} />
+                        <CustomTypography
+                          textAlign="center"
+                          content={label}
+                          alt={`userMenuItem-${label.toLowerCase()}`}
+                        />
                       </MenuItem>
                     ))
                   : loginSettings.map(({ label, id, path }) => (
@@ -393,7 +396,11 @@ const Navbar = () => {
                         onClick={() => handleLoginMenu(path)}
                         data-test={`loginMenuItem-${label.toLowerCase()}`}
                       >
-                        <CustomTypography textAlign="center" content={label} />
+                        <CustomTypography
+                          textAlign="center"
+                          content={label}
+                          alt={label.toLowerCase()}
+                        />
                       </MenuItem>
                     ))}
               </Menu>

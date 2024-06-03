@@ -25,6 +25,7 @@ interface CustomModalProps {
 interface LogoProps {
   sx?: SxType;
   width?: string;
+  alt?: string;
 }
 
 interface HeaderProps {
@@ -33,6 +34,7 @@ interface HeaderProps {
   sx?: SxType;
   content?: string;
   noWrap?: boolean;
+  alt?: string;
 }
 
 /* ---------------------------------- */
@@ -171,6 +173,7 @@ interface AuthTextFieldProps {
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   helperText?: string;
   error?: boolean;
+  alt?: string;
 }
 
 /* ---------------------------------- */
