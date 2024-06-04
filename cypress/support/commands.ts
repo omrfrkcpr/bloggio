@@ -53,7 +53,9 @@ Cypress.Commands.add("login", () => {
   cy.get('[data-test="userMenuIcon"]').click({ force: true });
   cy.get('[data-test="userMenu"]').should("be.visible");
   cy.get('[data-test="userMenuItem-logout"]').should("be.visible");
-  cy.get('[data-test="bloggioTitle"]').click({ force: true });
+  cy.wait(3000);
+  cy.get('[data-test="userMenuIcon"]').click({ force: true });
+  cy.wait(3000);
 });
 
 Cypress.Commands.add("logout", () => {

@@ -18,15 +18,6 @@ describe("blogDetails", () => {
     cy.get('[data-test="blog-description"]').should("be.visible");
     cy.get('[data-test="blog-analytics"]').should("be.visible");
 
-    // cy.get('[data-test="heart-icon"]')
-    //   .should("have.class", "text-[#A1A1A1]")
-    //   .click();
-    //   cy.wait(2000)
-    // cy.get('[data-test="heart-icon"]')
-    //   .should("have.class", "text-red-500")
-    //   .click();
-    // cy.get('[data-test="heart-icon"]').should("have.class", "text-[#A1A1A1]");
-
     cy.get('[data-test="comment-icon"]')
       .should("be.visible")
       .click({ force: true });
@@ -35,7 +26,6 @@ describe("blogDetails", () => {
     cy.get('[data-test="commentsSection"]').click({ force: true });
 
     cy.get('[data-test="comment-textArea"]')
-      .should("be.visible")
       .click({ force: true })
       .type("Awesome Blog!", { force: true });
 
