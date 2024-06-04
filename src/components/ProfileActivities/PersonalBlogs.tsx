@@ -22,7 +22,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
   useEffect(() => {
     if (search.includes("my-blogs")) {
       setType("myBlogs");
-    } else {
+    } else if (search.includes("drafts")) {
       setType("drafts");
     }
   }, [search]);

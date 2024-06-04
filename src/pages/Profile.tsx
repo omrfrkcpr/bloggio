@@ -36,22 +36,22 @@ const Profile = () => {
       {
         title: "My Blogs",
         comp: (props: any) => <PersonalBlogs {...props} blogType="myBlogs" />,
-        path: `${basePath}/?my-blogs`,
+        path: `${basePath}?my-blogs`,
       },
       {
         title: "Drafts",
         comp: (props: any) => <PersonalBlogs {...props} blogType="drafts" />,
-        path: `${basePath}/?drafts`,
+        path: `${basePath}?drafts`,
       },
       {
         title: "Saved",
         comp: (props: any) => <SavedBlogs {...props} />,
-        path: `${basePath}/?saved`,
+        path: `${basePath}?saved`,
       },
       {
         title: "About",
         comp: (props: any) => <ProfileAbout {...props} />,
-        path: `${basePath}/?about`,
+        path: `${basePath}?about`,
       },
     ],
     [basePath]
@@ -102,7 +102,6 @@ const Profile = () => {
                 >
                   <Link to={activity.path}>
                     <CustomButton
-                      click={() => setCurrentActive(activity)}
                       className="w-[75px] text-center"
                       title={activity.title}
                     />
