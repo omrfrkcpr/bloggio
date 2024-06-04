@@ -55,7 +55,7 @@ const EditProfile = ({
   };
 
   const btn =
-    "border border-green-600 py-2 px-5 rounded-full transition-all duration-200";
+    "border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200";
 
   return (
     <CustomModal modal={editModal} hidden="" setModal={setEditModal}>

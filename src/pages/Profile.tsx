@@ -14,6 +14,10 @@ import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 import CustomImage from "../components/commons/CustomImage";
 import { Link, useLocation } from "react-router-dom";
 import CustomButton from "../components/commons/CustomButton";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
+import EditAccount from "../components/ProfileActivities/EditAccount";
+import { dateFormatter } from "../helper/functions";
 
 const Profile = () => {
   const { currentUser, loading } = useSelector((state: any) => state.auth);
@@ -58,7 +62,8 @@ const Profile = () => {
   );
   const [currentActive, setCurrentActive] = useState(activities[0]);
   const [modal, setModal] = useState<boolean>(false);
-  const [editModal, setEditModal] = useState<boolean>(false);
+  const [editProfileModal, setEditProfileModal] = useState<boolean>(false);
+  const [editAccountModal, setEditAccountModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (search.includes("my-blogs")) {
@@ -82,7 +87,7 @@ const Profile = () => {
       {loading ? (
         <Loading />
       ) : (
-        <section className="flex gap-[1rem] relative mx-[2rem] min-h-[88.6vh] h-auto">
+        <section className="flex gap-[1rem] relative mx-[2rem] min-h-[88.8vh] h-auto">
           {/* users activities */}
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>
@@ -109,7 +114,7 @@ const Profile = () => {
                 </div>
               ))}
             </div>
-            <currentActive.comp setEditModal={setEditModal} />
+            <currentActive.comp setEditModal={setEditProfileModal} />
           </div>
           {/* button to open side bar */}
           <CustomButton
@@ -121,7 +126,7 @@ const Profile = () => {
           <CustomModal modal={modal} hidden="" setModal={setModal}>
             <div
               className={`flex-[1] max-w-[400px] border-l border-gray-300 p-[2rem] z-10
-        fixed -right-4 bottom-0 top-14 mb-[76px] md:mb-0 w-[18rem] bg-white lg:sticky
+        fixed -right-4 bottom-0 top-14 mb-[76px] md:mb-0 w-[18rem] h-[100vh] lg:h-[88.6vh] bg-white lg:sticky
         ${modal ? "translate-x-0" : "translate-x-[100%] lg:translate-x-0"}
         transition-all duration-500`}
             >
@@ -147,15 +152,35 @@ const Profile = () => {
                   {currentUser?.bio}
                 </p>
                 <CustomButton
-                  click={() => setEditModal(true)}
-                  className="text-green-700 pt-6 text-sm w-fit hover:underline"
+                  click={() => setEditProfileModal(true)}
+                  className="text-green-700 pt-6 text-sm w-fit hover:underline flex justify-center items-center gap-1"
                   title="Edit Profile"
+                  icon={<FaRegUser size={17} />}
                 />
+                <CustomButton
+                  click={() => setEditAccountModal(true)}
+                  className="text-green-700 pt-2 text-sm w-fit hover:underline flex justify-center items-center gap-1"
+                  title="Account"
+                  icon={<IoSettingsOutline />}
+                />
+                <p className="text-gray-500 first-letter:uppercase text-sm pt-[5rem]">
+                  {`Joined on ${dateFormatter(currentUser?.createdAt)}`}
+                </p>
               </div>
             </div>
           </CustomModal>
-          {editModal && (
-            <EditProfile editModal={editModal} setEditModal={setEditModal} />
+          {editProfileModal && (
+            <EditProfile
+              editModal={editProfileModal}
+              setEditModal={setEditProfileModal}
+            />
+          )}
+          {editAccountModal && (
+            <EditAccount
+              editModal={editAccountModal}
+              setEditModal={setEditAccountModal}
+              setEditProfileModal={setEditProfileModal}
+            />
           )}
         </section>
       )}

@@ -49,7 +49,13 @@ const useBlogCalls = () => {
   };
 
   const deleteBlogData = async (url: string, id: string) => {
-    if (confirm(`Are you sure you want to delete this ${singularize(url)}?`)) {
+    if (
+      confirm(
+        `Are you sure you want to delete this ${
+          url === "users" ? "Account" : singularize(url)
+        }?`
+      )
+    ) {
       dispatch(fetchStart());
       try {
         await axiosWithToken.delete(`${url}/${id}`);
