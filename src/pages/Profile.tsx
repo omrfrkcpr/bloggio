@@ -95,7 +95,7 @@ const Profile = () => {
                 {`${currentUser?.firstName} ${currentUser?.lastName}`}
               </h2>
             </div>
-            <div className="flex items-center mb-[4rem] border-b border-gray-300 ">
+            <div className="flex items-center mb-[2rem] border-b border-gray-300 ">
               {activities.map((activity, index) => (
                 <div
                   key={index}

@@ -65,8 +65,8 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
   return (
     <>
       {currentBlogs.length ? (
-        <div>
-          <ul className="grid grid-cols-1 gap-y-5 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto">
+        <div className=" min-h-[43.8vh]">
+          <ul className="grid grid-cols-1 gap-y-[3rem] items-start justify-center max-w-[900px] h-auto">
             {currentBlogs.map((blog: any) => {
               const category = categories.find(
                 (cat: any) => cat?._id === blog?.categoryId
@@ -82,7 +82,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
           {currentBlogs.length ? (
             <Stack
               sx={{
-                margin: "2rem 0",
+                margin: "5rem 0",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -99,7 +99,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
           )}
         </div>
       ) : (
-        <div className="p-5">
+        <div className="p-5 bg-gray-200 h-[30px] grid place-content-center place-items-center rounded-xl">
           No {type === "myBlogs" ? "Published" : "Draft"} Blog Found...
         </div>
       )}
