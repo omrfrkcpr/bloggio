@@ -21,8 +21,8 @@ import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { formatNum, getTrendBlogs } from "../helper/functions";
-import CustomImage from "../components/commons/CustomImage";
-import CustomButton from "../components/commons/CustomButton";
+import CustomImage from "../utils/CustomImage";
+import CustomButton from "../utils/CustomButton";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);

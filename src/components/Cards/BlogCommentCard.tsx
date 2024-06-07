@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { capitalizeWords, dateFormatter } from "../../helper/functions";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import DropDown from "../commons/DropDown";
+import DropDown from "../../utils/DropDown";
 import { RootState } from "../../app/store";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { toastWarnNotify } from "../../helper/toastNotify";
 import { Avatar } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { MdModeEdit } from "react-icons/md";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 
 const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,

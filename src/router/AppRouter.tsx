@@ -17,7 +17,7 @@ import FilterCategory from "../pages/FilterCategory";
 // import Stats from "../pages/Stats";
 import SingleBlog from "../pages/SingleBlog";
 import EditBlog from "../pages/EditBlog";
-import Development from "../components/commons/Development";
+import Development from "../components/global/Development";
 
 const AppRouter = () => {
   return (

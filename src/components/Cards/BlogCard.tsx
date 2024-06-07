@@ -18,8 +18,8 @@ import {
   dateFormatter,
   calculateReadTime,
 } from "../../helper/functions";
-import CustomImage from "../commons/CustomImage";
-import CustomButton from "../commons/CustomButton";
+import CustomImage from "../../utils/CustomImage";
+import CustomButton from "../../utils/CustomButton";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,

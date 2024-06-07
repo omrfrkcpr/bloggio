@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { LiaTimesSolid } from "react-icons/lia";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../../utils/CustomModal";
 import { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
 const EditAccountModal = ({

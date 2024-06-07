@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 
 const ProfileAbout = ({
   setEditModal,

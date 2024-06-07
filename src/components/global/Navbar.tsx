@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "./Logo";
-import CustomTypography from "../commons/CustomTypography";
+import CustomTypography from "../../utils/CustomTypography";
 import { useSelector } from "react-redux";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ import usePath from "../../hooks/usePath";
 import { loginSettings } from "../../helper/constants";
 import { capitalizeWords, maskEmail } from "../../helper/functions";
 import { ChartBar, SignOut, User } from "@phosphor-icons/react";
-import Search from "../commons/Search";
+import Search from "./Search";
 import { IoIosArrowDown } from "react-icons/io";
 import useBlogCalls from "../../hooks/useBlogCalls";
 

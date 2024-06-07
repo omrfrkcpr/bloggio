@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CiSearch } from "react-icons/ci";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../../utils/CustomModal";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";

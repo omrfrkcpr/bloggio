@@ -1,4 +1,4 @@
-import Development from "../components/commons/Development";
+import Development from "../components/global/Development";
 
 const Stats = () => {
   return <Development />;

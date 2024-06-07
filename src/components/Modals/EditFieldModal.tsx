@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction } from "react";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../../utils/CustomModal";
 import TextField from "@mui/material/TextField";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 
 const EditFieldModal = ({
   fieldToEdit,

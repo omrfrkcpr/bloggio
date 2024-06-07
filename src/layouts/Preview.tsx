@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
-import CustomModal from "../components/Modals/CustomModal";
+import CustomModal from "../utils/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import {
   toastErrorNotify,
@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner.gif";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
-import CustomImage from "../components/commons/CustomImage";
-import CustomButton from "../components/commons/CustomButton";
+import CustomImage from "../utils/CustomImage";
+import CustomButton from "../utils/CustomButton";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,

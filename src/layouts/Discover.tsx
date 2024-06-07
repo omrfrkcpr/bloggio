@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/commons/CustomButton";
+import CustomButton from "../utils/CustomButton";
 import { findCategoryName } from "../helper/functions";
 // import { Link } from "react-router-dom";
 

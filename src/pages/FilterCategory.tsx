@@ -10,7 +10,7 @@ import {
   findCategoryName,
   getCapitalizedFilterValue,
 } from "../helper/functions";
-import CustomButton from "../components/commons/CustomButton";
+import CustomButton from "../utils/CustomButton";
 
 const FilterCategory = () => {
   const { blogs, categories } = useSelector((state: RootState) => state.blog);

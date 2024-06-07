@@ -9,8 +9,8 @@ import BlogAnalytics from "../components/Blog/BlogAnalytics";
 // import CommentForm from "../components/Forms/CommentForm";
 import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
-import Loading from "../components/commons/Loading";
-import CustomImage from "../components/commons/CustomImage";
+import Loading from "../components/global/Loading";
+import CustomImage from "../utils/CustomImage";
 import BlogComments from "../components/Blog/BlogComments";
 
 const SingleBlog = () => {

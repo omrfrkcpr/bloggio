@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
-import DropDown from "../commons/DropDown";
+import DropDown from "../../utils/DropDown";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   FacebookShareButton,
@@ -14,7 +14,7 @@ import {
 } from "react-icons/bi";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 import { Bookmarks } from "@phosphor-icons/react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";

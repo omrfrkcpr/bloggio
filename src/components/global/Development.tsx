@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import CustomImage from "./CustomImage";
-import CustomButton from "./CustomButton";
+import CustomImage from "../../utils/CustomImage";
+import CustomButton from "../../utils/CustomButton";
 
 const Development = () => {
   return (

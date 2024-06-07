@@ -1,19 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
 import { useEffect, useMemo, useState } from "react";
-import CustomModal from "../components/Modals/CustomModal";
+import CustomModal from "../utils/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 import EditProfile from "../components/ProfileActivities/EditProfile";
-import Loading from "../components/commons/Loading";
+import Loading from "../components/global/Loading";
 import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
-import CustomImage from "../components/commons/CustomImage";
+import CustomImage from "../utils/CustomImage";
 import { Link, useLocation } from "react-router-dom";
-import CustomButton from "../components/commons/CustomButton";
+import CustomButton from "../utils/CustomButton";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import EditAccount from "../components/ProfileActivities/EditAccount";

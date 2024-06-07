@@ -5,14 +5,14 @@ import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
 import { useState } from "react";
 import useBlogCalls from "../../hooks/useBlogCalls";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../../utils/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
-import Loading from "../commons/Loading";
+import Loading from "../global/Loading";
 import { toastErrorNotify } from "../../helper/toastNotify";
 import BlogCommentCard from "../Cards/BlogCommentCard";
 import { capitalizeWords } from "../../helper/functions";
 import { Avatar } from "@mui/material";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 
 const BlogComments = ({ blogId }: { blogId: string }) => {
   const { toggleCommentsModal } = useShowModal();

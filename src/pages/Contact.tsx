@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import CustomButton from "../components/commons/CustomButton";
+import CustomButton from "../utils/CustomButton";
 
 interface FormData {
   email: string;

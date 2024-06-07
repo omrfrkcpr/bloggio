@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import useShowModal from "../hooks/useShowModal";
 import { RootState } from "../app/store";
 import usePath from "../hooks/usePath";
-import CustomImage from "../components/commons/CustomImage";
-import CustomButton from "../components/commons/CustomButton";
+import CustomImage from "../utils/CustomImage";
+import CustomButton from "../utils/CustomButton";
 
 const Hero: React.FC = React.memo(() => {
   const { currentUser } = useSelector((state: RootState) => state.auth);

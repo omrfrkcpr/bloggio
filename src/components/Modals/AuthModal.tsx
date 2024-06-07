@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
-import CustomButton from "../commons/CustomButton";
+import CustomButton from "../../utils/CustomButton";
 
 const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,

@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { LiaTimesSolid } from "react-icons/lia";
-import CustomModal from "../Modals/CustomModal";
+import CustomModal from "../../utils/CustomModal";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
-import CustomImage from "../commons/CustomImage";
-import CustomButton from "../commons/CustomButton";
+import CustomImage from "../../utils/CustomImage";
+import CustomButton from "../../utils/CustomButton";
 
 const EditProfile = ({
   editModal,

@@ -6,7 +6,7 @@ import ReactQuill from "react-quill";
 import Preview from "../layouts/Preview";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { toastWarnNotify } from "../helper/toastNotify";
-import CustomButton from "../components/commons/CustomButton";
+import CustomButton from "../utils/CustomButton";
 
 const Write = () => {
   const [isOpen, setIsOpen] = useState(false);
