@@ -75,7 +75,7 @@ const Profile = () => {
     } else if (search.includes("about")) {
       setCurrentActive(activities[3]);
     }
-  }, [search]);
+  }, [search, activities]);
 
   useEffect(() => {
     getBlogData("blogs", `?author=${currentUser?._id}`);
