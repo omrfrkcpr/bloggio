@@ -36,7 +36,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/omrfrkcpr/bloggio">
-    <img src="./src/assets/symbol.png" alt="Logo" width="80" height="80">
+    <img src="./src/assets/symbol.png" alt="Logo" width="120" height="80">
   </a>
 
 <h3 align="center">Bloggio</h3>
@@ -86,8 +86,6 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,8 +186,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 [EMAIL](omerrfarukcapur@gmail.com)
-
-Project Link: [https://github.com/omrfrkcpr/bloggio](https://github.com/omrfrkcpr/bloggio)
+[Repo Link](https://github.com/omrfrkcpr/bloggio)
+[Demo Link](https://bloggio.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -202,6 +200,3 @@ Project Link: [https://github.com/omrfrkcpr/bloggio](https://github.com/omrfrkcp
 - []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
