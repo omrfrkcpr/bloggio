@@ -9,11 +9,15 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
+<div align="center">
+
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
+</div>
 
 [contributors-shield]: https://img.shields.io/github/contributors/omrfrkcpr/bloggio.svg?style=flat-square&color=blue
 [contributors-url]: https://github.com/omrfrkcpr/bloggio/graphs/contributors
