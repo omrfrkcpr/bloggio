@@ -212,7 +212,7 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 ## Contact
 
-[EMAIL](omerrfarukcapur@gmail.com)<br />
+[Send a Email](omerrfarukcapur@gmail.com)<br />
 [Repo Link](https://github.com/omrfrkcpr/bloggio)<br />
 [Demo Link](https://bloggio.vercel.app/)
 
