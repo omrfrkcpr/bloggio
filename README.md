@@ -177,7 +177,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcpr/bloggio/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -185,8 +185,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-[EMAIL](omerrfarukcapur@gmail.com)
-[Repo Link](https://github.com/omrfrkcpr/bloggio)
+[EMAIL](omerrfarukcapur@gmail.com)<br />
+[Repo Link](https://github.com/omrfrkcpr/bloggio)<br />
 [Demo Link](https://bloggio.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
