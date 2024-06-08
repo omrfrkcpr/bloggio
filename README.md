@@ -9,11 +9,11 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Forks][https://img.shields.io/github/forks/omrfrkcpr/bloggio.svg?style=for-the-badge]][https://github.com/omrfrkcpr/bloggio/network/members]
-[![Stargazers][https://img.shields.io/github/stars/omrfrkcpr/bloggio.svg?style=for-the-badge]][https://github.com/omrfrkcpr/bloggio/stargazers]
-[![Issues][https://img.shields.io/github/issues/omrfrkcpr/bloggio.svg?style=for-the-badge]][https://github.com/omrfrkcpr/bloggio/issues]
-[![MIT License][https://img.shields.io/github/license/omrfrkcpr/bloggio.svg?style=for-the-badge]][https://github.com/omrfrkcpr/bloggio/blob/master/LICENSE.txt]
-[![LinkedIn][https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555]][https://linkedin.com/in/omrfrkcpr]
+[![Forks][forks-shield]][https://github.com/omrfrkcpr/bloggio/network/members]
+[![Stargazers][stars-shield]][https://github.com/omrfrkcpr/bloggio/stargazers]
+[![Issues][issues-shield]][https://github.com/omrfrkcpr/bloggio/issues]
+[![MIT License][license-shield]][https://github.com/omrfrkcpr/bloggio/blob/master/LICENSE.txt]
+[![LinkedIn][linkedin-shield]][https://linkedin.com/in/omrfrkcpr]
 
 <!-- PROJECT LOGO -->
 <br />
