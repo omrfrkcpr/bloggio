@@ -15,17 +15,17 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[contributors-shield]: https://img.shields.io/github/contributors/omrfrkcpr/bloggio.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/omrfrkcpr/bloggio.svg?style=flat-square&color=blue
 [contributors-url]: https://github.com/omrfrkcpr/bloggio/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/omrfrkcpr/bloggio.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/omrfrkcpr/bloggio.svg?style=flat-square&color=blueviolet
 [forks-url]: https://github.com/omrfrkcpr/bloggio/network/members
-[stars-shield]: https://img.shields.io/github/stars/omrfrkcpr/bloggio.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/omrfrkcpr/bloggio.svg?style=flat-square&color=brightgreen
 [stars-url]: https://github.com/omrfrkcpr/bloggio/stargazers
-[issues-shield]: https://img.shields.io/github/issues/omrfrkcpr/bloggio.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/omrfrkcpr/bloggio.svg?style=flat-square&color=red
 [issues-url]: https://github.com/omrfrkcpr/bloggio/issues
-[license-shield]: https://img.shields.io/github/license/omrfrkcpr/bloggio.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/omrfrkcpr/bloggio.svg?style=flat-square&color=yellow
 [license-url]: https://github.com/omrfrkcpr/bloggio/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&color=blue
 [linkedin-url]: https://linkedin.com/in/omrfrkcpr
 
 <!-- PROJECT LOGO -->
