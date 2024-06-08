@@ -66,7 +66,10 @@ const EditAccountModal = ({
 
   return (
     <CustomModal modal={editModal} hidden="" setModal={setEditModal}>
-      <div className="center w-[95%] md:w-[45rem] bg-white mx-auto shadows my-[1rem] z-10 mb-[3rem] p-[2rem]">
+      <div
+        className="center w-[95%] md:w-[45rem] bg-white mx-auto shadows my-[1rem] z-10 mb-[3rem] p-[2rem]"
+        data-test="edit-account-modal"
+      >
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Account Settings</h2>
           <CustomButton
@@ -94,6 +97,7 @@ const EditAccountModal = ({
                     }
                     className="text-gray-500 hover:text-black text-[12px] md:text-sm"
                     title={form[key as keyof typeof form] || ""}
+                    alt={`edit-${key}`}
                   />
                 </div>
               )
@@ -129,6 +133,7 @@ const EditAccountModal = ({
               click={() => setPasswordModal(true)}
               className="text-red-300 hover:text-red-600 text-[12px] md:text-sm"
               title="Change Password"
+              alt="change-password"
             />
             <p className="text-[10px] md:text-[12px] text-gray-600 ">
               Recommended to change your password every 6 months
@@ -139,6 +144,7 @@ const EditAccountModal = ({
               click={handleDeleteAccount}
               className="text-red-300 hover:text-red-600 text-[12px] md:text-sm"
               title="Delete Account"
+              alt="delete-account"
             />
             <p className="text-[10px] md:text-[12px] text-gray-600 ">
               Permanently delete your account and all of your content.

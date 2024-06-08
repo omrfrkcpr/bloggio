@@ -157,12 +157,14 @@ const Profile = () => {
                   className="text-green-700 pt-6 text-sm w-fit hover:underline flex justify-center items-center gap-1"
                   title="Edit Profile"
                   icon={<FaRegUser size={17} />}
+                  alt="edit-profile"
                 />
                 <CustomButton
                   click={() => setEditAccountModal(true)}
                   className="text-green-700 pt-2 text-sm w-fit hover:underline flex justify-center items-center gap-1"
                   title="Account"
                   icon={<IoSettingsOutline />}
+                  alt="edit-account"
                 />
                 <p className="text-gray-500 first-letter:uppercase text-sm pt-[5rem]">
                   {`Joined on ${dateFormatter(currentUser?.createdAt)}`}
