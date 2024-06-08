@@ -28,7 +28,7 @@
 [issues-shield]: https://img.shields.io/github/issues/omrfrkcpr/bloggio.svg?style=flat-square&color=red
 [issues-url]: https://github.com/omrfrkcpr/bloggio/issues
 [license-shield]: https://img.shields.io/github/license/omrfrkcpr/bloggio.svg?style=flat-square&color=yellow
-[license-url]: https://github.com/omrfrkcpr/bloggio/blob/master/LICENSE.txt
+[license-url]: https://github.com/omrfrkcpr/bloggio/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&color=blue
 [linkedin-url]: https://linkedin.com/in/omrfrkcpr
 
