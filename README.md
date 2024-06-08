@@ -92,8 +92,35 @@
 ### Built With
 
 <p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,redux,ts,tailwind,materialui,nodejs,cypress,postman,vercel,vite" />
+  <a href="https://react.dev/">
+    <img src="https://skillicons.dev/icons?i=react" />
+  </a>
+  <a href="https://redux.js.org/">
+    <img src="https://skillicons.dev/icons?i=redux" />
+  </a>
+  <a href="https://www.typescriptlang.org/">
+    <img src="https://skillicons.dev/icons?i=ts" />
+  </a>
+  <a href="https://tailwindcss.com/">
+    <img src="https://skillicons.dev/icons?i=tailwind" />
+  </a>
+  <a href="https://mui.com/">
+    <img src="https://skillicons.dev/icons?i=materialui" />
+  </a>
+  <a href="https://nodejs.org/en">
+    <img src="https://skillicons.dev/icons?i=nodejs" />
+  </a>
+  <a href="https://www.cypress.io/">
+    <img src="https://skillicons.dev/icons?i=cypress" />
+  </a>
+  <a href="https://www.postman.com/">
+    <img src="https://skillicons.dev/icons?i=postman" />
+  </a>
+  <a href="https://vercel.com/">
+    <img src="https://skillicons.dev/icons?i=vercel" />
+  </a>
+  <a href="https://vitejs.dev/">
+    <img src="https://skillicons.dev/icons?i=vite" />
   </a>
 </p>
 
