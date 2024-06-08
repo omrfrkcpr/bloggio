@@ -1,275 +1,249 @@
-# Bloggio
+<a name="readme-top"></a>
 
-Backend TODO:
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-- implement database for stats based on userId (total likes-comments-visibility/bookmarks)
-- add new subcollection into each blog response (bookmarks : ["userId", ...]) like (Likes or Comments)
-- change request method for comment list (GET) ==> baseURL/comments/{blogId}
-- add also user firstname + lastname inside each blog object (response GET blogs)
-- change adding method (reverse) ==> new contents must be added at the top of the old contents (as prependChild)
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Description
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-Project aims to create a Milestone Blog App.
+  <h3 align="center">Best-README-Template</h3>
 
-## Project Skeleton
+  <p align="center">
+    An awesome README template to jumpstart your projects!
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-```
-Bloggio
-|----readme.md
-├── src
-|    ├── index.css
-|    ├── index.js
-|    ├── App.css
-|    ├── App.js
-|    ├── app
-|    │   └── store.jsx
-|    ├── assets
-|    │   ├── about.png
-|    ├── components
-|    │   ├── auth
-|    │   │   ├── LoginFom.jsx
-|    │   │   └── RegisterForm.jsx
-|    │   ├── blog
-|    │   │   ├── Card.jsx
-|    │   │   ├── CommentCard.jsx
-|    │   │   ├── CommentForm.jsx
-|    │   │   ├── DeleteModal.jsx
-|    │   │   └── UpdateModal.jsx
-|    │   ├── FooTer.jsx
-|    │   ├── NavBar.jsx
-|    ├── features
-|    │   ├── authSlice.jsx
-|    │   └── blogSlice.jsx
-|    ├── helper
-|    │   └── ToastNotify.jsx
-|    ├── hooks
-|    │   ├── useAuthCalls.jsx
-|    │   ├── useAxios.jsx
-|    │   └── useBlogCalls.jsx
-|    ├── pages
-|    │   ├── About.jsx
-|    │   ├── Dashboard.jsx
-|    │   ├── Detail.jsx
-|    │   ├── Login.jsx
-|    │   ├── NewBlog.jsx
-|    │   ├── NotFound.jsx
-|    │   ├── Profile.jsx
-|    │   └── Register.jsx
-|    └── router
-|        ├── AppRouter.jsx
-|        └── PrivateRouter.jsx
-```
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Expected Outcome
+<!-- ABOUT THE PROJECT -->
 
-## Objective
+## About The Project
 
-Build a Milestone Blog App using ReactJS.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-### At the end of the project, following topics are to be covered;
+There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
-- HTML
+Here's why:
 
-- CSS
+- Your time should be focused on creating something amazing. A project that solves a problem and helps others
+- You shouldn't be doing the same tasks over and over like creating a README from scratch
+- You should implement DRY principles to the rest of your life :smile:
 
-- JS
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
 
-- ReactJS
+Use the `BLANK_README.md` to get started.
 
-### At the end of the project, students will be able to;
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- improve coding skills within HTML & CSS & JS & ReactJS & Django.
+### Built With
 
-- use git commands (push, pull, commit, add etc.) and Github as Version Control System.
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-## Bonus
+- [![Next][Next.js]][Next-url]
+- [![React][React.js]][React-url]
+- [![Tailwindcss][Tailwindcss.com]][(https://tailwindcss.com/)]
+- [![Typescript][Typescript]][(https://www.typescriptlang.org/)]
+- [![Angular][Angular.io]][Angular-url]
+- [![Svelte][Svelte.dev]][Svelte-url]
+- [![Laravel][Laravel.com]][Laravel-url]
+- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+- [![JQuery][JQuery.com]][JQuery-url]
 
-- [React Helmet](https://www.npmjs.com/package/react-helmet)
-- [Open Graph](https://medium.com/@muhammederdinc/open-graph-protokol%C3%BC-nedir-2c61f1454526)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Demo
+<!-- GETTING STARTED -->
 
-[Milestone Blog App](https://milestone-blogapp-cw.vercel.app/)
+## Getting Started
 
-**<p align="center">&#9786; Happy Coding &#9997;</p>**
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
-## API
+### Prerequisites
 
-- Kendi linkinizi StockAppte olduğu gibi yine aynı adresten bu sefer Select application kısmında Blogapp-NodeJs Apıyi seçerek alabileceksiniz.
-- Authentication işlemleri StockApp ile aynı :
+This is an example of how to list things you need to use the software and how to install them.
 
-```
-  login => auth/login/
-  register => users/
-  logout => auth/logout/
-```
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-- Post Read/List
+### Installation
 
-```javascript
-    // Pagination yapısı backend tarafından ayarlandı. page bilgisi gelen response ta var oradan kaç sayfa olduğunu yakalayabilirsiniz. Default olarak her sayfada 25 veri sergileniyor. Bunu manuel olarak istek atarken ayarlayabilirsiniz. Örneğin;
-    //?page=1&limit=10
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-  endpoints => blogs?page=1
-  method: GET
-  no authentication
-  comments, countOfVisitors ve likes bilgileri response da dönüyor buradan alarak sayıları/uzunluklarını kullanabilirsiniz.
-```
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = "ENTER YOUR API";
+   ```
 
-- Post Create
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```javascript
-  endpoints => blogs
-  method: POST
-  headers: {"Authorization":`Token ${yourtoken}`}
+<!-- USAGE EXAMPLES -->
 
-  body: {
-      "title": "Topkapı Sarayı",
-      "content": "Topkapı Sarayı (Osmanlı Türkçesi: طوپقپو سرايى), İstanbul Sarayburnu'nda, Osmanlı             İmparatorluğu'nun 600 yıllık tarihinin 400 yılı boyunca, devletin idare merkezi olarak kullanılan ve Osmanlı padişahlarının yaşadığı saraydır. Bir zamanlar içinde 4.000'e yakın insan yaşamıştır.\n Topkapı Sarayı Fatih Sultan Mehmed tarafından 1478’de yaptırılmış, Abdülmecid’in Dolmabahçe Sarayı’nı yaptırmasına kadar yaklaşık 380 sene boyunca devletin idare merkezi ve Osmanlı padişahlarının resmi ikâmetgâhı olmuştur. Kuruluş yıllarında yaklaşık 700.000 m²'lik bir alanda yer alan sarayın bugünkü alanı 80.000 m²'dir.\nopkapı Sarayı, saray halkının Dolmabahçe Sarayı, Yıldız Sarayı ve diğer saraylarda yaşamaya başlaması ile birlikte boşaltılmıştır. Padişahlar tarafından terk edildikten sonra da içinde birçok görevlinin yaşadığı Topkapı Sarayı hiçbir zaman önemini kaybetmemiştir. Saray zaman zaman onarılmıştır. Ramazan ayı içerisinde padişah ve ailesi tarafından ziyaret edilen Kutsal Emanetler'in bulunduğu Hırka-i Saadet Dairesi’nin her yıl bakımının yapılmasına ayrı bir önem verilmiştir.",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Topkapi_Palace_Seen_From_Harem.JPG/270px-Topkapi_Palace_Seen_From_Harem.JPG",
-      "categoryId": "6591ef8d26959a81bce92d5a",
-      "isPublished": "true"
-}
-    // yukarıdaki verileri göndermeniz yeterli olacaktır
-.
-    category endpoints => "categories"
-    isPublished => {
-      "false":"draft",
-      "true":"published"
-    }
+## Usage
 
-```
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-- Post Update
+_For more examples, please refer to the [Documentation](https://example.com)_
 
-```json
-  endpoints => blogs/{post_id} //blogs/6596a348fe3c4517336492eb
-  method: PUT
-  headers: {"Authorization":`Token ${yourtoken}`}
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-  body: {
-      "_id": "6596a348fe3c4517336492eb",
-      "userId": "6596a2a7fe3c4517336492ce",
-      "categoryId": "6591ef8d26959a81bce92d5a",
-      "title": "Topkapı Sarayı!",
-      "content": "Topkapı Sarayı (Osmanlı Türkçesi: طوپقپو سرايى), İstanbul Sarayburnu'nda, Osmanlı İmparatorluğu'nun 600 yıllık tarihinin 400 yılı boyunca, devletin idare merkezi olarak kullanılan ve Osmanlı padişahlarının yaşadığı saraydır. Bir zamanlar içinde 4.000'e yakın insan yaşamıştır.\n Topkapı Sarayı Fatih Sultan Mehmed tarafından 1478’de yaptırılmış, Abdülmecid’in Dolmabahçe Sarayı’nı yaptırmasına kadar yaklaşık 380 sene boyunca devletin idare merkezi ve Osmanlı padişahlarının resmi ikâmetgâhı olmuştur. Kuruluş yıllarında yaklaşık 700.000 m²'lik bir alanda yer alan sarayın bugünkü alanı 80.000 m²'dir.\nopkapı Sarayı, saray halkının Dolmabahçe Sarayı, Yıldız Sarayı ve diğer saraylarda yaşamaya başlaması ile birlikte boşaltılmıştır. Padişahlar tarafından terk edildikten sonra da içinde birçok görevlinin yaşadığı Topkapı Sarayı hiçbir zaman önemini kaybetmemiştir. Saray zaman zaman onarılmıştır. Ramazan ayı içerisinde padişah ve ailesi tarafından ziyaret edilen Kutsal Emanetler'in bulunduğu Hırka-i Saadet Dairesi’nin her yıl bakımının yapılmasına ayrı bir önem verilmiştir.",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Topkapi_Palace_Seen_From_Harem.JPG/270px-Topkapi_Palace_Seen_From_Harem.JPG",
-      "isPublish": true
-}
+<!-- ROADMAP -->
 
-    category endpoints => "categories"
-    isPublished => {
-      "false":"draft",
-      "true":"published"
-    }
-```
+## Roadmap
 
-- Post Delete
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+  - [ ] Chinese
+  - [ ] Spanish
 
-```javascript
-  endpoints => blogs/{post_id} // blogs/6596a348fe3c4517336492eb
-  method: DELETE
-  headers: {"Authorization":`Token ${yourtoken}`}
-```
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
-- Comments Create
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```javascript
-  endpoints => comments
-  method: POST
-  headers: {"Authorization":`Token ${yourtoken}`}
+<!-- CONTRIBUTING -->
 
-  body:{
-      "blogId": "6596a348fe3c4517336492eb",
-      "comment": "Comment 1"
-  }
+## Contributing
 
-```
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- Likes Create or UnLike
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-```json
-  endpoints => blogs/{post_id}/postLike // blogs/6596a348fe3c4517336492eb/postLike
-  method: POST
-  headers: {"Authorization":`Token ${yourtoken}`}
-```
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- Get Post Detail
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```json
-  endpoints => blogs/${post.id} // blogs/6591ef8d26959a81bce92d5d
-  method: GET
-  headers: {"Authorization":`Token ${yourtoken}`}
-```
+<!-- LICENSE -->
 
-- User Blogs
+## License
 
-```json
-  endpoints => blogs?author=${user.id} // blogs?author=6596a2a7fe3c4517336492ce
-  method: GET
-  headers: {"Authorization":`Token ${yourtoken}`}
-```
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-### Sample Response
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- All Blogs
-| Buradan gelen veriler içinde toplamda kaç sayfa olduğu bilgisi yer alıyor ona göre pagination işlemi yapabilirsiniz.
+<!-- CONTACT -->
 
-  <img src="./allblogs.png" width="900px" />
-<br>
+## Contact
 
-- Single Blogs
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
-| Bloğa ait comments verileri detail isteği attığınızda response olarak dönüyor. Ayrıca singleblogs için get isteği attığınızda görüntülenme sayısı da backend tarafından artırılıyor.
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
-```json
-{
-  "error": false,
-  "data": {
-    "_id": "6596c9b7fe3c451733649382",
-    "userId": {
-      "_id": "6596a2a7fe3c4517336492ce",
-      "username": "TestUser",
-      "firstName": "test9999",
-      "lastName": "9999test"
-    },
-    "categoryId": {
-      "_id": "6591ef8d26959a81bce92d5a",
-      "name": "World",
-      "createdAt": "2023-12-31T22:47:41.846Z",
-      "updatedAt": "2023-12-31T22:47:41.846Z",
-      "__v": 0
-    },
-    "title": "Topkapı Sarayı",
-    "content": "Topkapı Sarayı (Osmanlı Türkçesi: طوپقپو سرايى), İstanbul Sarayburnu'nda, Osmanlı İmparatorluğu'nun 600 yıllık tarihinin 400 yılı boyunca, devletin idare merkezi olarak kullanılan ve Osmanlı padişahlarının yaşadığı saraydır. Bir zamanlar içinde 4.000'e yakın insan yaşamıştır. Topkapı Sarayı Fatih Sultan Mehmed tarafından 1478’de yaptırılmış, Abdülmecid’in Dolmabahçe Sarayı’nı yaptırmasına kadar yaklaşık 380 sene boyunca devletin idare merkezi ve Osmanlı padişahlarının resmi ikâmetgâhı olmuştur. Kuruluş yıllarında yaklaşık 700.000 m²'lik bir alanda yer alan sarayın bugünkü alanı 80.000 m²'dir. opkapı Sarayı, saray halkının Dolmabahçe Sarayı, Yıldız Sarayı ve diğer saraylarda yaşamaya başlaması ile birlikte boşaltılmıştır. Padişahlar tarafından terk edildikten sonra da içinde birçok görevlinin yaşadığı Topkapı Sarayı hiçbir zaman önemini kaybetmemiştir. Saray zaman zaman onarılmıştır. Ramazan ayı içerisinde padişah ve ailesi tarafından ziyaret edilen Kutsal Emanetler'in bulunduğu Hırka-i Saadet Dairesi’nin her yıl bakımının yapılmasına ayrı bir önem verilmiştir.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Topkapi_Palace_Seen_From_Harem.JPG/270px-Topkapi_Palace_Seen_From_Harem.JPG",
-    "isPublish": true,
-    "comments": [
-      {
-        "_id": "6596cbdafe3c4517336493a6",
-        "blogId": "6596c9b7fe3c451733649382",
-        "userId": {
-          "_id": "6596a2a7fe3c4517336492ce",
-          "username": "TestUser",
-          "firstName": "test9999",
-          "lastName": "9999test"
-        },
-        "comment": "Comment 1",
-        "createdAt": "2024-01-04T15:16:42.405Z",
-        "updatedAt": "2024-01-04T15:16:42.405Z",
-        "__v": 0
-      }
-    ],
-    "likes": ["6596a2a7fe3c4517336492ce"],
-    "countOfVisitors": 0,
-    "createdAt": "2024-01-04T15:07:35.639Z",
-    "updatedAt": "2024-01-04T15:16:42.408Z",
-    "__v": 1
-  }
-}
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Postman Documentation
+<!-- ACKNOWLEDGMENTS -->
 
-[View Postman Documentation](https://documenter.getpostman.com/view/19994125/2s9YsGhYRx)
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+- [Malven's Grid Cheatsheet](https://grid.malven.co/)
+- [Img Shields](https://shields.io)
+- [GitHub Pages](https://pages.github.com)
+- [Font Awesome](https://fontawesome.com)
+- [React Icons](https://react-icons.github.io/react-icons/search)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com
