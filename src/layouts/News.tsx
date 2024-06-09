@@ -14,7 +14,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NewsList from "../components/News/NewsList";
 
-const News = () => {
+const News = ({ categoryName }: { categoryName: string }) => {
   const { news, loading, totalResults } = useSelector(
     (state: any) => state.news
   );
@@ -32,14 +32,16 @@ const News = () => {
   };
 
   useEffect(() => {
-    getNewsData(page);
+    getNewsData(categoryName, page);
   }, [page]);
 
   return (
     <div className="hidden lg:block mt-6 max-h-[680px]">
-      <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center gap-2 justify-start">
+      <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center  justify-start gap-2">
         <GiWorld />
-        Top Tech News
+        <span className="capitalize">
+          Top {categoryName === "technology" ? "Tech" : categoryName} News
+        </span>
       </h2>
       {loading ? (
         <div className="my-5">

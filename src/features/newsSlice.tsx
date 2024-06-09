@@ -7,7 +7,7 @@ const newsSlice = createSlice({
     loading: false,
     news: [],
     error: false,
-    totalResults: 0,
+    totalPage: 0,
   },
   reducers: {
     fetchStart: (state) => {
@@ -18,9 +18,9 @@ const newsSlice = createSlice({
       state.loading = false;
       state.news = data;
     },
-    getTotalResult: (state, { payload: data }) => {
+    getTotalPage: (state, { payload: data }) => {
       state.loading = false;
-      state.totalResults = data?.data;
+      state.totalPage = data?.data;
     },
     fetchFail: (state) => {
       state.loading = false;
@@ -29,7 +29,7 @@ const newsSlice = createSlice({
   },
 });
 
-export const { fetchStart, getNews, getTotalResult, fetchFail } =
+export const { fetchStart, getNews, getTotalPage, fetchFail } =
   newsSlice.actions;
 
 export default newsSlice.reducer;

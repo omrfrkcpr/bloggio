@@ -51,7 +51,7 @@ const Discover = () => {
           )}
         </div>
       </div>
-      <News />
+      <News categoryName="technology" />
     </div>
   );
 };

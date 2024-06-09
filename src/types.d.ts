@@ -200,17 +200,11 @@ interface DropDownProps {
 /*                News                */
 /* ---------------------------------- */
 
-interface Source {
-  id: string;
-  name: string;
-}
 interface Article {
   author?: string;
-  title: string;
-  description: string;
+  title?: string;
+  source?: stiring;
+  image?: string;
   url?: string;
-  urlToImage?: string;
-  publishedAt?: string;
-  content?: string;
-  source: Source;
+  published_at?: string;
 }

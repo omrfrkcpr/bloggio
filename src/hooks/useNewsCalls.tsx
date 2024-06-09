@@ -6,27 +6,29 @@ import {
   fetchFail,
   fetchStart,
   getNews,
-  getTotalResult,
+  getTotalPage,
 } from "../features/newsSlice";
 
 const useNewsCalls = () => {
   const dispatch = useDispatch();
 
-  const getNewsData = async (pageNum: number) => {
+  const pageLimit = 5;
+
+  const getNewsData = async (categoryName: string, pageNum: number) => {
     dispatch(fetchStart());
     try {
       const { data } = await axios(
-        `${
-          import.meta.env.VITE_NYT_BASE_URL
-        }?fq=news_desk:("Technology")&page=${pageNum}&api-key=${
-          import.meta.env.VITE_NYT_API_KEY
-        }`
+        `${import.meta.env.VITE_MEDIASTACK_BASE_URL}?access_key=${
+          import.meta.env.VITE_MEDIASTACK_API_KEY
+        }&categories=${categoryName}&offset=${
+          (pageNum - 1) * pageLimit
+        }&limit=${pageLimit}`
       );
-      // console.log(data);
-      dispatch(getNews({ data: data?.response?.docs }));
-      dispatch(getTotalResult({ data: data?.response?.meta?.hits }));
+      console.log(data?.data);
+      dispatch(getNews({ data: data?.data }));
+      dispatch(getTotalPage({ data: data?.pagination?.total / pageLimit }));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       dispatch(fetchFail());
     }
   };
