@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useCallback } from "react";
 import pencil from "../assets/pencil.png";
 import typewriter from "../assets/typewriter.png";
@@ -10,7 +11,7 @@ import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 
 const Hero: React.FC = React.memo(() => {
-  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const { currentUser } = useSelector((state: any) => state.auth);
   const { toggleHeroModal } = useShowModal();
   const { showHeroModal } = useSelector((store: RootState) => store.modal);
   const [isLoaded, setIsLoaded] = useState(false);

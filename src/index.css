@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .size {
-  @apply w-[95%] md:w-[90%] mx-auto max-w-[1600px];
+  @apply w-[95%] mx-auto max-w-[1600px];
 }
 
 .share-button {

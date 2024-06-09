@@ -195,3 +195,17 @@ interface DropDownProps {
   setShowDrop: (value: boolean) => void;
   ref: React.RefObject<HTMLDivElement>;
 }
+
+/* ---------------------------------- */
+/*                News                */
+/* ---------------------------------- */
+
+interface Article {
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
+}

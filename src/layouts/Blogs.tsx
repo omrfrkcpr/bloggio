@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -33,7 +34,7 @@ const Blogs = () => {
 
   return (
     <>
-      <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto">
+      <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto ">
         {blogs.slice(0, 10).map((blog: any) => {
           const categoryName = getCategoryName(blog?.categoryId, categories);
           return (

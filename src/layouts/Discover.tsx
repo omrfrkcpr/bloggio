@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../utils/CustomButton";
 import { findCategoryName } from "../helper/functions";
+
+import News from "./News";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
@@ -19,7 +21,7 @@ const Discover = () => {
   return (
     <div className="sticky top-[1rem] md:top-[3rem] lg:top-[6rem]">
       <div className="border-b border-gray-400 pb-3 md:pb-5 lg:pb-7">
-        <h2 className="font-semibold text-[10px] md:text-[14px] lg:text-[18px]">
+        <h2 className="font-semibold text-[10px] md:text-[14px] lg:text-[16px] mb-4">
           Discover more of what are important to you.
         </h2>
         <div className="my-1 md:my-2 flex items-center gap-1 md:gap-3 flex-wrap">
@@ -49,6 +51,7 @@ const Discover = () => {
           )}
         </div>
       </div>
+      <News />
     </div>
   );
 };

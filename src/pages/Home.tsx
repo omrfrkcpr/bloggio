@@ -1,30 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Hero from "../layouts/Hero";
 import Blogs from "../layouts/Blogs";
 import Trending from "../layouts/Trending";
 import Discover from "../layouts/Discover";
 import { useEffect } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
+import useNewsCalls from "../hooks/useNewsCalls";
 
 const Home = () => {
   const { getBlogData } = useBlogCalls();
+  const { getNewsData } = useNewsCalls();
 
   useEffect(() => {
-    // getBlogData("blogs");
     getBlogData("categories");
+    getNewsData("us", 1);
   }, []);
-
-  // console.log("blogs:", blogs);
-  // console.log("categories:", categories);
 
   return (
     <div>
       <Hero />
       <Trending />
-      <div className="size py-3 md:py-5 lg:py-7 mb-[10rem] flex flex-col-reverse lg:flex-row gap-[3rem]">
-        <div className="flex-[1.5]">
+      <div className="size py-3 md:py-5 lg:py-7 mb-[10rem] flex flex-col-reverse lg:flex-row gap-[2rem]">
+        <div className="flex-[1.5] lg:border-r-[1px] lg:pe-4 lg:border-gray-300">
           <Blogs />
         </div>
-        <div className="flex-[0.5] relative">
+        <div className="flex-[0.6] relative">
           <Discover />
         </div>
       </div>
