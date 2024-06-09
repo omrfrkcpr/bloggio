@@ -12,31 +12,19 @@ import {
 const useNewsCalls = () => {
   const dispatch = useDispatch();
 
-  const getNewsData = async (countryCode: string, pageNum: number) => {
+  const getNewsData = async (pageNum: number) => {
     dispatch(fetchStart());
     try {
       const { data } = await axios(
         `${
-          import.meta.env.VITE_NEWSAPI_BASE_URL
-        }&country=${countryCode}&page=${pageNum}&pageSize=5&apiKey=${
-          import.meta.env.VITE_NEWSAPI_API_KEY
+          import.meta.env.VITE_NYT_BASE_URL
+        }?fq=news_desk:("Technology")&page=${pageNum}&api-key=${
+          import.meta.env.VITE_NYT_API_KEY
         }`
       );
       // console.log(data);
-      const filteredData = data?.articles.filter((article: Article) => {
-        const { title, description } = article;
-        return title !== "[Removed]" && description !== "[Removed]";
-      });
-
-      const removedDataNumber = data?.articles.filter((article: Article) => {
-        const { title, description } = article;
-        return title === "[Removed]" || description === "[Removed]";
-      });
-
-      dispatch(getNews({ data: filteredData }));
-      dispatch(
-        getTotalResult({ data: data?.totalResults - removedDataNumber.length })
-      );
+      dispatch(getNews({ data: data?.response?.docs }));
+      dispatch(getTotalResult({ data: data?.response?.meta?.hits }));
     } catch (error) {
       // console.log(error);
       dispatch(fetchFail());

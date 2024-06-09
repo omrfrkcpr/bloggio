@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     getBlogData("categories");
-    getNewsData("us", 1);
+    getNewsData(1);
   }, []);
 
   return (

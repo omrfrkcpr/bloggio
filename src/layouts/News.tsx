@@ -12,7 +12,6 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import NewsButtons from "../components/News/NewsButtons";
 import NewsList from "../components/News/NewsList";
 
 const News = () => {
@@ -20,7 +19,6 @@ const News = () => {
     (state: any) => state.news
   );
   const { getNewsData } = useNewsCalls();
-  const [selectedCountry, setSelectedCountry] = useState<string>("us");
   const [page, setPage] = useState<number>(1);
 
   // console.log(news);
@@ -34,19 +32,15 @@ const News = () => {
   };
 
   useEffect(() => {
-    getNewsData(selectedCountry, page);
-  }, [selectedCountry, page]);
+    getNewsData(page);
+  }, [page]);
 
   return (
-    <div className="hidden lg:block  mt-6">
+    <div className="hidden lg:block mt-6 max-h-[680px]">
       <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center gap-2 justify-start">
         <GiWorld />
         Top Tech News
       </h2>
-      <NewsButtons
-        selectedCountry={selectedCountry}
-        setSelectedCountry={setSelectedCountry}
-      />
       {loading ? (
         <div className="my-5">
           <img

@@ -40,6 +40,28 @@ export const dateFormatter = (dateString: string) => {
   return formattedDate;
 };
 
+export function timeFormatter(dateString: string) {
+  const date: any = new Date(dateString);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // 0'dan 12'ye dönüştürme
+  const formattedTime = `${hours}:${
+    minutes < 10 ? "0" + minutes : minutes
+  }${ampm}`;
+
+  return `${formattedDate} - ${formattedTime}`;
+}
+
 export const calculateReadTime = (desc: any): number => {
   const averageReading = 150;
 
