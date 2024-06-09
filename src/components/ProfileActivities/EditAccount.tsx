@@ -19,7 +19,7 @@ const EditAccount = ({
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { deleteBlogData } = useBlogCalls();
-  const { updateUser } = useAuthCalls();
+  const { updateUser, logout } = useAuthCalls();
 
   const initialFormData = useMemo(
     () => ({
@@ -60,6 +60,8 @@ const EditAccount = ({
     const { _id } = currentUser;
     await deleteBlogData("users", _id);
     setEditProfileModal(false);
+    setEditModal(false);
+    logout(false);
   };
 
   const validateForm = () => {

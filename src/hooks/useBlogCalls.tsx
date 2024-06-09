@@ -59,14 +59,18 @@ const useBlogCalls = () => {
       dispatch(fetchStart());
       try {
         await axiosWithToken.delete(`${url}/${id}`);
-        toastSuccessNotify(`${singularize(url)} is successfully deleted!`);
+        toastSuccessNotify(
+          `${
+            url === "users" ? "Account" : singularize(url)
+          } is successfully deleted!`
+        );
       } catch (error: any) {
         console.log(error);
         dispatch(fetchFail());
         toastErrorNotify(
-          `${singularize(url)} could not be deleted! ${
-            error.message && error.message
-          }`
+          `${
+            url === "users" ? "Account" : singularize(url)
+          } could not be deleted! ${error.message && error.message}`
         );
       } finally {
         if (pathname.includes("profile")) {

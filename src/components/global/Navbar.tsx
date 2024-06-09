@@ -92,7 +92,7 @@ const Navbar = () => {
     (path: string) => {
       setAnchorElNav(null);
       if (path === "logout") {
-        logout();
+        logout(true);
       } else {
         navigate(path);
       }
@@ -104,7 +104,7 @@ const Navbar = () => {
     (path: string) => {
       setAnchorElUser(null);
       if (path === "logout") {
-        logout();
+        logout(true);
         toggleHeroModal(false);
         toggleNavbarModal(false);
       } else {

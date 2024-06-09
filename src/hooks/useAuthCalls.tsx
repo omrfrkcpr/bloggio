@@ -78,7 +78,7 @@ const useAuthCall = () => {
     }
   };
 
-  const logout = async () => {
+  const logout = async (showNotify: boolean) => {
     dispatch(fetchStart());
     try {
       await axios.get(`${BASE_URL}auth/logout/`, {
@@ -87,13 +87,14 @@ const useAuthCall = () => {
         },
       });
       dispatch(logoutSuccess());
-      toastSuccessNotify("You're successfully logged out!");
+      showNotify && toastSuccessNotify("You're successfully logged out!");
       navigate("/");
     } catch (error) {
       dispatch(fetchFail());
-      toastErrorNotify(
-        "The logout request could not be performed, Please try again!"
-      );
+      showNotify &&
+        toastErrorNotify(
+          "The logout request could not be performed, Please try again!"
+        );
       console.log(error);
     }
   };
