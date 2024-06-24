@@ -111,12 +111,12 @@ const BlogCard: React.FC<BlogCardProps> = ({
               className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px] cursor-pointer"
               onClick={handleReadMore}
             >
-              {shortenText(content)}
+              {shortenText(content,20)}
             </p> */}
             <div
               onClick={handleReadMore}
               className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
-              dangerouslySetInnerHTML={{ __html: shortenText(content) }}
+              dangerouslySetInnerHTML={{ __html: shortenText(content,20) }}
             />
           </div>
           <div className="flex justify-between">

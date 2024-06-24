@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const shortenText = (text: string) => {
+export const shortenText = (text: string, length: number) => {
   if (!text) {
     return "";
   }
 
   const words = text.split(" ");
 
-  let shortenedText = words.slice(0, 20).join(" ");
+  let shortenedText = words.slice(0, length).join(" ");
 
-  if (words.length > 20) {
+  if (words.length > length) {
     shortenedText += "...";
   }
 
@@ -45,12 +45,26 @@ export function formatPublish(dateString: string) {
     return "";
   }
 
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const date = new Date(dateString);
-
   const day = date.getDate();
-  const month = date.toLocaleString("en-US", { month: "long" });
+  const month = months[date.getMonth()];
 
-  return `${day} ${month}`;
+  return `${month} ${day}`;
 }
 
 export const calculateReadTime = (desc: any): number => {

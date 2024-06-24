@@ -12,21 +12,25 @@ import {
 const useNewsCalls = () => {
   const dispatch = useDispatch();
 
-  const pageLimit = 5;
+  const pageLimit = 3;
 
   const getNewsData = async (categoryName: string, pageNum: number) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios(
-        `${import.meta.env.VITE_MEDIASTACK_BASE_URL}?access_key=${
-          import.meta.env.VITE_MEDIASTACK_API_KEY
-        }&categories=${categoryName}&offset=${
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_WORLD_NEWS_API_BASE_URL}?text=
+         ${categoryName}&language=en&offset=${
           (pageNum - 1) * pageLimit
-        }&limit=${pageLimit}`
+        }&number=${pageLimit}`,
+        {
+          headers: {
+            "x-api-key": import.meta.env.VITE_WORLD_NEWS_API_KEY,
+          },
+        }
       );
       console.log(data?.data);
-      dispatch(getNews({ data: data?.data }));
-      dispatch(getTotalPage({ data: data?.pagination?.total / pageLimit }));
+      dispatch(getNews({ data: data?.news }));
+      dispatch(getTotalPage({ data: data?.available / pageLimit }));
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

@@ -36,11 +36,11 @@ const News = ({ categoryName }: { categoryName: string }) => {
   }, [page]);
 
   return (
-    <div className="hidden lg:block mt-6 max-h-[680px]">
-      <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center  justify-start gap-2">
+    <div className="hidden lg:block mt-6 max-h-[680px] mx-auto">
+      <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center justify-start md:justify-center gap-2">
         <GiWorld />
         <span className="capitalize">
-          Top {categoryName === "technology" ? "Tech" : categoryName} News
+          Top {categoryName === "software" ? "Tech" : categoryName} News
         </span>
       </h2>
       {loading ? (

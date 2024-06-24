@@ -201,10 +201,13 @@ interface DropDownProps {
 /* ---------------------------------- */
 
 interface Article {
+  id?: string;
   author?: string;
-  title?: string;
-  source?: stiring;
+  title: string;
+  text?: string;
+  summary: string;
   image?: string;
   url?: string;
-  published_at?: string;
+  publish_date?: string;
+  authors?: string[];
 }
