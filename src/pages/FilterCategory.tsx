@@ -12,10 +12,13 @@ import {
 } from "../helper/functions";
 import CustomButton from "../utils/CustomButton";
 import News from "../layouts/News";
+import useNewsCalls from "../hooks/useNewsCalls";
 
 const FilterCategory = () => {
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const { getBlogData } = useBlogCalls();
+  const { getNewsData } = useNewsCalls();
+
   const { search } = useLocation();
   const [displayCount, setDisplayCount] = useState<number>(3);
   const navigate = useNavigate();
@@ -29,11 +32,12 @@ const FilterCategory = () => {
     );
   }, [search, categories]);
 
+  const categoryName = findCategoryName(categories, selectedCategory);
+
   useEffect(() => {
     getBlogData("categories");
+    getNewsData(categoryName, 1);
   }, []);
-
-  const categoryName = findCategoryName(categories, selectedCategory);
 
   useEffect(() => {
     getBlogData(
@@ -110,7 +114,7 @@ const FilterCategory = () => {
           </div>
         )}
         <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-l border-gray-400 ps-4">
-          <News categoryName={categoryName.toLowerCase()} />
+          <News categoryName={categoryName} />
         </div>
       </div>
     </div>
