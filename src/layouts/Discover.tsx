@@ -20,7 +20,7 @@ const Discover = () => {
 
   return (
     <div className="sticky top-[1rem] md:top-[3rem] lg:top-[6rem]">
-      <div className="border-b border-gray-400 pb-3 md:pb-5 lg:pb-7">
+      <div className="border-b border-gray-400 pb-3 md:pb-5 lg:pb-7 mb-6">
         <h2 className="font-semibold text-[10px] md:text-[14px] lg:text-[16px] mb-4">
           Discover more of what are important to you.
         </h2>

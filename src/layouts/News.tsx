@@ -33,10 +33,10 @@ const News = ({ categoryName }: { categoryName: string }) => {
 
   useEffect(() => {
     getNewsData(categoryName, page);
-  }, [page]);
+  }, [page, categoryName]);
 
   return (
-    <div className="hidden lg:block mt-6 max-h-[680px] mx-auto">
+    <div className="hidden lg:block max-h-[680px] mx-auto">
       <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center justify-start md:justify-center gap-2">
         <GiWorld />
         <span className="capitalize">
