@@ -47,7 +47,7 @@
     <a href="https://github.com/omrfrkcpr/bloggio"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://bloggio.vercel.app/">View Demo</a>
+    <a href="https://bloggio.de/">View Demo</a>
     ·
     <a href="https://github.com/omrfrkcpr/bloggio/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
@@ -214,7 +214,7 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 [Send a Email](omerrfarukcapur@gmail.com)<br />
 [Repo Link](https://github.com/omrfrkcpr/bloggio)<br />
-[Demo Link](https://bloggio.vercel.app/)
+[Demo Link](https://bloggio.de/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
