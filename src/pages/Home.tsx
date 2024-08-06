@@ -24,7 +24,7 @@ const Home = () => {
         <div className="flex-[1.5] lg:border-r-[1px] lg:pe-4 lg:border-gray-300">
           <Blogs />
         </div>
-        <div className="flex-[0.6] relative max-w-[400px]">
+        <div className="flex-[0.6] relative lg:max-w-[400px]">
           <Discover />
         </div>
       </div>

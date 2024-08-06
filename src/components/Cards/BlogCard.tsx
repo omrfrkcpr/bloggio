@@ -74,8 +74,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
   return (
     <>
-      <li className="relative flex items-start justify-center gap-[15px] w-[95%] mx-auto">
-        <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px]">
+      <li className="relative flex items-start justify-center gap-[15px] w-[100%] mx-auto">
+        <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px] md:w-[650px]">
           <div className="mb-4">
             <div className="flex space-x-1 mb-1">
               <div
@@ -116,7 +116,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             <div
               onClick={handleReadMore}
               className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
-              dangerouslySetInnerHTML={{ __html: shortenText(content,20) }}
+              dangerouslySetInnerHTML={{ __html: shortenText(content, 20) }}
             />
           </div>
           <div className="flex justify-between">
@@ -187,7 +187,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <CustomImage
             src={image}
             alt="blog-img"
-            className="shadow-md rounded-lg bg-slate-50 object-fit w-[130px] h-[60px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
+            className="shadow-md rounded-lg bg-slate-50 object-fit w-[150px] h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
           />
         </div>
       </li>
