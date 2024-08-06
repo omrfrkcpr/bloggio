@@ -98,9 +98,13 @@ const Trending = () => {
             slidesPerView: 4,
             spaceBetween: 15,
           },
-          1400: {
+          1200: {
             slidesPerView: 5,
             spaceBetween: 20,
+          },
+          1600: {
+            slidesPerView: 6,
+            spaceBetween: 0,
           },
         }}
       >
@@ -108,7 +112,7 @@ const Trending = () => {
           const { _id, title, image, countOfVisitors } = blog;
           return (
             <SwiperSlide key={_id}>
-              <div className="rounded-lg shadow-lg overflow-hidden w-[180px] h-[220px] xl:w-[250px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
+              <div className="rounded-lg shadow-lg overflow-hidden w-[160px] h-[220px] xl:w-[190px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
                 <div>
                   <CustomImage
                     onClick={() => handleClickMore(_id)}
