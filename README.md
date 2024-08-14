@@ -36,7 +36,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/omrfrkcpr/bloggio">
-    <img src="./src/assets/symbol.png" alt="Logo" width="120" height="80">
+    <img src="https://bloggio.s3.eu-north-1.amazonaws.com/bloggio-assets/symbol.png" alt="Logo" width="120" height="80">
   </a>
 
 <h3 align="center">Bloggio</h3>
