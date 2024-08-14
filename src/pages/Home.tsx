@@ -5,15 +5,15 @@ import Trending from "../layouts/Trending";
 import Discover from "../layouts/Discover";
 import { useEffect } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
-import useNewsCalls from "../hooks/useNewsCalls";
+// import useNewsCalls from "../hooks/useNewsCalls";
 
 const Home = () => {
   const { getBlogData } = useBlogCalls();
-  const { getNewsData } = useNewsCalls();
+  // const { getNewsData } = useNewsCalls();
 
   useEffect(() => {
     getBlogData("categories");
-    getNewsData("software", 1);
+    // getNewsData("software", 1);
   }, []);
 
   return (

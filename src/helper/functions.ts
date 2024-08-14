@@ -67,21 +67,6 @@ export function formatPublish(dateString: string) {
   return `${month} ${day}`;
 }
 
-export const calculateReadTime = (desc: any): number => {
-  const averageReading = 150;
-
-  if (!desc) {
-    return 0;
-  }
-
-  const div = document.createElement("div");
-  div.innerHTML = typeof desc === "string" ? desc : desc._html || "";
-
-  const textContent = div.textContent || "";
-  const words = textContent.trim().split(/\s+/);
-  return Math.ceil(words.length / averageReading);
-};
-
 export const capitalizeWords = (text: string) => {
   if (!text) {
     return "";
@@ -122,14 +107,6 @@ export const formatNum = (num: number) => {
   else return num.toString();
 };
 
-export const getCategoryName = (
-  categoryId: string,
-  categories: any
-): string => {
-  const category = categories.find((cat: any) => cat?._id === categoryId);
-  return category ? category?.name : "";
-};
-
 export const getTrendBlogs = (arr: any) =>
   arr
     ?.slice()
@@ -139,20 +116,6 @@ export const getTrendBlogs = (arr: any) =>
 export const singularize = (text: string) => {
   // blogs => Blog
   return text.charAt(0).toUpperCase() + text.slice(1, -1);
-};
-
-export const findCategoryName = (array: Array<string>, id: string) => {
-  const category = array.find((cat: any) => cat?._id === id) as
-    | { name: string }
-    | undefined;
-  return category ? category?.name : "";
-};
-
-export const findCategoryId = (array: Array<string>, categoryName: string) => {
-  const category = array.find((cat: any) => cat?.name === categoryName) as
-    | { _id: string }
-    | undefined;
-  return category ? category?._id : "";
 };
 
 // Func for getting categoryName from search query

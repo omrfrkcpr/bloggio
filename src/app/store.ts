@@ -15,6 +15,7 @@ import blogReducer from "../features/blogSlice";
 import modalReducer from "../features/modalSlice";
 import pathReducer from "../features/pathSlice";
 import newsReducer from "../features/newsSlice";
+import contactReducer from "../features/contactSlice";
 
 const persistConfig = {
   key: "root",
@@ -30,6 +31,7 @@ const store = configureStore({
     modal: modalReducer,
     path: pathReducer,
     news: newsReducer,
+    contact: contactReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

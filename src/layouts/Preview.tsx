@@ -34,7 +34,7 @@ const Preview: React.FC<PreviewProps> = ({
     (state: RootState) => state.blog
   ) as any;
   const navigate = useNavigate();
-  const { getBlogData, postBlogData, putBlogData } = useBlogCalls();
+  const { postBlogData, putBlogData } = useBlogCalls();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [newCategory, setNewCategory] = useState<string>("");
   const [imgUrl, setImgUrl] = useState<string>("");
@@ -48,10 +48,6 @@ const Preview: React.FC<PreviewProps> = ({
     image: "",
     isPublish: true,
   });
-
-  useEffect(() => {
-    getBlogData("categories");
-  }, []);
 
   console.log(category);
 
@@ -158,7 +154,7 @@ const Preview: React.FC<PreviewProps> = ({
                 </span>
 
                 {imgUrl && (
-                  <img
+                  <CustomImage
                     src={imgUrl}
                     alt="blog-img"
                     className="absolute w-full h-full"

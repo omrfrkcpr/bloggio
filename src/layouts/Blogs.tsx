@@ -8,38 +8,39 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { getCategoryName } from "../helper/functions";
 
 export const BlogsPerPage = 10;
 
 const Blogs = () => {
   const navigate = useNavigate();
   const { getBlogData } = useBlogCalls();
-  const { blogs, categories, totalPage } = useSelector(
-    (state: RootState) => state.blog
-  );
+  const { blogs, totalPage } = useSelector((state: RootState) => state.blog);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const onPageChange = async (
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
-    await navigate(`/?page=${page}&limit=${BlogsPerPage}`);
-    getBlogData("blogs", `/?page=${page}&limit=${BlogsPerPage}`);
+    await navigate(`?sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`);
+    getBlogData(
+      "blogs",
+      `?sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`
+    );
   };
 
+  // console.log(blogs);
+
   useEffect(() => {
-    getBlogData("blogs", `/?page=1&limit=${BlogsPerPage}`);
+    getBlogData("blogs", `?sort[createdAt]=desc&page=1&limit=${BlogsPerPage}`);
   }, []);
 
   return (
     <>
       <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto ">
         {blogs.slice(0, 10).map((blog: any) => {
-          const categoryName = getCategoryName(blog?.categoryId, categories);
           return (
             <div key={blog?._id}>
-              <BlogCard {...blog} categoryName={categoryName} />
+              <BlogCard {...blog} />
             </div>
           );
         })}

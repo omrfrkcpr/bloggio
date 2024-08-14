@@ -1,12 +1,17 @@
 import React from "react";
-import about from "../assets/about.png";
+import CustomImage from "../utils/CustomImage";
+import setups from "../helper/setup";
 
 const About: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[86.9vh] py-8 bg-white px-4 sm:px-6 lg:px-8">
-      <main className="flex flex-col items-center justify-start md:mt-10 w-full flex-1 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 md:mb-6 flex items-center gap-3">
-          About <img src={about} alt="" className="w-[150px] md:w-[250px]" />
+    <div className="h-[fit-content] min-h-[calc(100vh-149px)] py-8 bg-[#e5effd] px-4 sm:px-6 lg:px-8 grid md:place-content-center md:place-items-center">
+      <main className="flex flex-col items-center justify-start w-full flex-1 text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 flex items-center gap-3">
+          <CustomImage
+            src={`${setups.AWS_S3_BASE_URL}about.png`}
+            alt="about-bloggio"
+            className="w-[300px] md:w-[400px]"
+          />
         </h1>
         <p className="mt-3 text-lg sm:text-xl md:text-2xl text-gray-700">
           Welcome to Bloggio, your new favorite blogging platform!

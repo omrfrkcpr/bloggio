@@ -11,6 +11,7 @@ import { Avatar } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { MdModeEdit } from "react-icons/md";
 import CustomButton from "../../utils/CustomButton";
+import CustomImage from "../../utils/CustomImage";
 
 const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,
@@ -73,11 +74,11 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
       {!isEdit ? (
         <>
           <div className="flex items-center gap-2">
-            {currentUser?.image ? (
-              <img
+            {currentUser?.avatar ? (
+              <CustomImage
                 className="w-[2rem] h-[2rem] rounded-full object-cover"
-                src={currentUser?.image}
-                alt="user-image"
+                src={currentUser?.avatar}
+                alt="user-avatar"
               />
             ) : (
               <Avatar
@@ -107,7 +108,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
                       showDrop={drop}
                       setShowDrop={setDrop}
                       size="w-[10rem]"
-                      ref={dropDownRef}
+                      // ref={dropDownRef}
                     >
                       <CustomButton
                         click={editCommentText}

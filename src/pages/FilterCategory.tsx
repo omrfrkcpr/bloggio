@@ -5,52 +5,55 @@ import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
-import {
-  findCategoryId,
-  findCategoryName,
-  getCapitalizedFilterValue,
-} from "../helper/functions";
+import { getCapitalizedFilterValue } from "../helper/functions";
 import CustomButton from "../utils/CustomButton";
 import News from "../layouts/News";
-import useNewsCalls from "../hooks/useNewsCalls";
+// import useNewsCalls from "../hooks/useNewsCalls";
+
+interface Category {
+  _id: string;
+  name: string;
+}
 
 const FilterCategory = () => {
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const { getBlogData } = useBlogCalls();
-  const { getNewsData } = useNewsCalls();
-
+  // const { getNewsData } = useNewsCalls();
   const { search } = useLocation();
   const [displayCount, setDisplayCount] = useState<number>(3);
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
 
-  // console.log(search);
+  console.log(search);
+
+  console.log(selectedCategory);
 
   useEffect(() => {
-    setSelectedCategory(
-      findCategoryId(categories, getCapitalizedFilterValue(search))
-    );
+    if (categories.length) {
+      setSelectedCategory(
+        categories.filter(
+          (category: Category) =>
+            category.name.toLowerCase() ==
+            getCapitalizedFilterValue(search).toLowerCase()
+        )[0]
+      );
+    }
   }, [search, categories]);
 
-  const categoryName = findCategoryName(categories, selectedCategory);
+  const { _id, name } = selectedCategory || {};
 
   useEffect(() => {
-    getBlogData("categories");
-    getNewsData(categoryName, 1);
+    // getNewsData(name || "", 1);
   }, []);
 
   useEffect(() => {
-    getBlogData(
-      "blogs",
-      `?filter[categoryId]=${
-        selectedCategory ||
-        findCategoryId(categories, getCapitalizedFilterValue(search))
-      }`
-    );
-    if (selectedCategory && !search.includes(categoryName.toLowerCase())) {
-      navigate(`/categories?filter=${categoryName.toLowerCase()}`);
+    if (_id) {
+      getBlogData("blogs", `?filter[categoryId]=${_id}`);
+      if (selectedCategory && !search.includes(name?.toLowerCase() || "")) {
+        navigate(`/categories?filter=${name?.toLowerCase()}`);
+      }
+      setDisplayCount(3); // Reset display count when category changes;
     }
-    setDisplayCount(3); // Reset display count when category changes;
   }, [selectedCategory]);
 
   const handleShowMore = () => {
@@ -64,8 +67,10 @@ const FilterCategory = () => {
         <select
           name="allCategories"
           id="allCategories"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={name}
+          onChange={(e) =>
+            setSelectedCategory({ _id: "", name: e.target.value })
+          }
           className="text-lg border text-black border-gray-700 rounded-full px-2"
         >
           <option value="" disabled>
@@ -86,16 +91,10 @@ const FilterCategory = () => {
                 displayCount < blogs.length ? "mb-[80px]" : "mb-[300px]"
               }`}
             >
-              {blogs.slice(0, displayCount).map((blog: any) => {
+              {blogs.slice(0, displayCount).map((blog: BlogCardProps) => {
                 return (
                   <div key={blog?._id}>
-                    <BlogCard
-                      {...blog}
-                      categoryName={
-                        findCategoryName(categories, blog?.categoryId) ||
-                        categoryName
-                      }
-                    />
+                    <BlogCard {...blog} />
                   </div>
                 );
               })}
@@ -114,7 +113,7 @@ const FilterCategory = () => {
           </div>
         )}
         <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-l border-gray-400 ps-4">
-          <News categoryName={categoryName} />
+          <News categoryName={name || ""} />
         </div>
       </div>
     </div>

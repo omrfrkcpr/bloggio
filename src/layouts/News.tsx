@@ -13,6 +13,8 @@ import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NewsList from "../components/News/NewsList";
+import CustomImage from "../utils/CustomImage";
+import setups from "../helper/setup";
 
 const News = ({ categoryName }: { categoryName: string }) => {
   const { news, loading, totalResults } = useSelector(
@@ -31,9 +33,9 @@ const News = ({ categoryName }: { categoryName: string }) => {
     setPage(value);
   };
 
-  useEffect(() => {
-    getNewsData(categoryName, page);
-  }, [page, categoryName]);
+  // useEffect(() => {
+  //   getNewsData(categoryName, page);
+  // }, [page, categoryName]);
 
   return (
     <div className="hidden lg:block max-h-[680px] mx-auto">
@@ -45,29 +47,36 @@ const News = ({ categoryName }: { categoryName: string }) => {
       </h2>
       {loading ? (
         <div className="my-5">
-          <img
-            src={spinner2}
+          <CustomImage
+            src={`${setups.AWS_S3_BASE_URL}spinner2.gif`}
             alt="news-spinner"
             className="w-[60px] h-[60px] m-auto text-center"
           />
         </div>
       ) : (
         <>
-          <NewsList news={news} />
-          <Stack spacing={2} alignItems="center">
-            <Pagination
-              count={Math.floor(totalResults / 5)}
-              page={page}
-              onChange={handlePageChange}
-              size="small"
-              renderItem={(item) => (
-                <PaginationItem
-                  slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                  {...item}
+          {totalResults && (
+            <>
+              <NewsList news={news} />
+              <Stack spacing={2} alignItems="center">
+                <Pagination
+                  count={Math.floor(totalResults / 5)}
+                  page={page}
+                  onChange={handlePageChange}
+                  size="small"
+                  renderItem={(item) => (
+                    <PaginationItem
+                      slots={{
+                        previous: ArrowBackIcon,
+                        next: ArrowForwardIcon,
+                      }}
+                      {...item}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Stack>
+              </Stack>
+            </>
+          )}
         </>
       )}
     </div>

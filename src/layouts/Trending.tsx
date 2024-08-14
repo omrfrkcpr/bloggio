@@ -11,15 +11,11 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { faker } from "@faker-js/faker";
 import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GiChart } from "react-icons/gi";
-
 import useShowModal from "../hooks/useShowModal";
-import usePath from "../hooks/usePath";
 import { useState, useEffect, useMemo } from "react";
-import useBlogCalls from "../hooks/useBlogCalls";
 import { formatNum, getTrendBlogs } from "../helper/functions";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
@@ -27,15 +23,9 @@ import CustomButton from "../utils/CustomButton";
 const Trending = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { toggleBlogCardModal } = useShowModal();
-  const { getNavigatePath } = usePath();
-  const { getTrendsData } = useBlogCalls();
   const navigate = useNavigate();
-  const { trendings, blogs } = useSelector((state: RootState) => state.blog);
+  const { trendings } = useSelector((state: RootState) => state.blog);
   const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
-
-  useEffect(() => {
-    getTrendsData();
-  }, [blogs]);
 
   const countOfVisitorsArray = useMemo(
     () => trendings.map((trend: any) => trend?.countOfVisitors),
@@ -46,31 +36,15 @@ const Trending = () => {
     setTrendBlogs(getTrendBlogs(trendings));
   }, [countOfVisitorsArray]);
 
-  const randomFirstName = faker.person.firstName(); // TODO
-  const randomLastName = faker.person.lastName(); // TODO
-
-  const userImage = currentUser?.image
-    ? currentUser?.image
-    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`; // TODO
-
   const handleClickMore = (blogId: string) => {
     if (currentUser) {
-      navigate(`/blog/${blogId}`, {
-        state: {
-          randomFirstName,
-          randomLastName,
-          userImage,
-          blogId,
-        },
-      });
+      navigate(`/blog/${blogId}`);
     } else {
       toggleBlogCardModal();
       toastInfoNotify(
         "To read more, please register first or log in if you have an account."
       );
-      getNavigatePath(`/blog/${blogId}`, {
-        state: { randomFirstName, randomLastName, userImage, blogId },
-      });
+      navigate(`/blog/${blogId}`);
     }
   };
 
@@ -122,7 +96,7 @@ const Trending = () => {
                   />
                   <h3
                     onClick={() => handleClickMore(_id)}
-                    className="text-[12px] font-semibold px-4 py-2 cursor-pointer text-center"
+                    className="text-[12px] font-semibold p-2 cursor-pointer text-center"
                   >
                     {title}
                   </h3>

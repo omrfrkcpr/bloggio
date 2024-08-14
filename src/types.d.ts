@@ -63,21 +63,41 @@ interface CustomButtonProps {
 /* ---------------------------------- */
 interface BlogCardProps {
   _id?: string;
-  userId?: string;
-  categoryId: string;
+  userId: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    avatar: string;
+  };
+  categoryId: {
+    _id: string;
+    name: string;
+  };
   title: string;
   content: string;
   image: string;
-  comments: string[];
   likes: string[];
   countOfVisitors: number;
   createdAt: string;
-  categoryName?: string;
+  blogDetails: {
+    countOfLikes: number;
+    countOfComments: number;
+    readTime: string;
+    contentPrev: string;
+  };
+  updatedAt: string;
+  createdAt: Date;
 }
 
 interface BlogAnalyticsProps {
+  blogDetails: {
+    countOfLikes: number;
+    countOfComments: number;
+    readTime: string;
+    contentPrev: string;
+  };
   likes: string[];
-  comments: string[];
   countOfVisitors: number;
   _id?: string;
   userId?: string;
@@ -193,7 +213,6 @@ interface DropDownProps {
   size: string;
   showDrop: boolean;
   setShowDrop: (value: boolean) => void;
-  ref: React.RefObject<HTMLDivElement>;
 }
 
 /* ---------------------------------- */
@@ -210,4 +229,29 @@ interface Article {
   url?: string;
   publish_date?: string;
   authors?: string[];
+}
+
+/* ---------------------------------- */
+/*               Contact              */
+/* ---------------------------------- */
+
+interface FormInputProps {
+  label: string;
+  type: string;
+  value: string;
+  name: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface ContactFormState {
+  name: string;
+  email: string;
+  subject: string;
+  feedback: string;
+}
+
+interface ContactState {
+  form: ContactFormState;
+  loading: boolean;
+  error: boolean;
 }

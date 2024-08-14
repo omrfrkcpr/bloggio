@@ -9,7 +9,6 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 import EditProfile from "../components/ProfileActivities/EditProfile";
 import Loading from "../components/global/Loading";
-import SavedBlogs from "../components/ProfileActivities/SavedBlogs";
 import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 import CustomImage from "../utils/CustomImage";
@@ -36,6 +35,8 @@ const Profile = () => {
     [location, currentUser]
   );
 
+  const { firstName, lastName, avatar, username, bio, createdAt } = currentUser;
+
   const activities = useMemo(
     () => [
       {
@@ -50,7 +51,7 @@ const Profile = () => {
       },
       {
         title: "Saved",
-        comp: (props: any) => <SavedBlogs {...props} />,
+        comp: (props: any) => <PersonalBlogs {...props} blogType="saved" />,
         path: `${basePath}?saved`,
       },
       {
@@ -79,7 +80,6 @@ const Profile = () => {
   }, [search, activities]);
 
   useEffect(() => {
-    getBlogData("blogs", `?author=${currentUser?._id}`);
     getBlogData("categories");
   }, [currentUser]);
 
@@ -93,7 +93,7 @@ const Profile = () => {
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>
               <h2 className="text-3xl sm:text-5xl font-bold capitalize mb-4">
-                {`${currentUser?.firstName} ${currentUser?.lastName}`}
+                {`${firstName} ${lastName}`}
               </h2>
             </div>
             <div className="flex items-center mb-[2rem] border-b border-gray-300 ">
@@ -141,16 +141,18 @@ const Profile = () => {
               </div>
               {/* profile details */}
               <div className="sticky top-7 flex flex-col justify-between">
-                {currentUser?.image ? (
-                  <CustomImage src={currentUser?.image} alt="user-image" />
+                {avatar ? (
+                  <CustomImage
+                    src={avatar}
+                    alt="user-image"
+                    className="w-[150px] h-[150px]"
+                  />
                 ) : (
-                  <Avatar sx={{ width: "3.5rem", height: "3.5rem" }} />
+                  <Avatar sx={{ width: "150px", height: "150px" }} />
                 )}
-                <h2 className="py-2 font-bold mt-4">
-                  @{currentUser?.username}
-                </h2>
+                <h2 className="py-2 font-bold mt-4">@{username}</h2>
                 <p className="text-gray-500 first-letter:uppercase text-sm">
-                  {currentUser?.bio}
+                  {bio}
                 </p>
                 <CustomButton
                   click={() => setEditProfileModal(true)}
@@ -167,7 +169,7 @@ const Profile = () => {
                   alt="edit-account"
                 />
                 <p className="text-gray-500 first-letter:uppercase text-sm pt-[5rem]">
-                  {`Joined on ${dateFormatter(currentUser?.createdAt)}`}
+                  {`Joined on ${dateFormatter(createdAt)}`}
                 </p>
               </div>
             </div>
