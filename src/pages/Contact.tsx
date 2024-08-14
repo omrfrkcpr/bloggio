@@ -1,5 +1,4 @@
 import React from "react";
-// import FormInput from "../components/TextFields/FormInput";
 import { useDispatch, useSelector } from "react-redux";
 import { setContactFormField } from "../features/contactSlice";
 import { RootState } from "../app/store";
@@ -8,6 +7,7 @@ import { CircleLoader } from "react-spinners";
 import useFeedback from "../hooks/useFeedback";
 import { toastWarnNotify } from "../helper/toastNotify";
 import CustomImage from "../utils/CustomImage";
+import setups from "../helper/setup";
 
 const Contact = () => {
   const dispatch = useDispatch();
@@ -18,15 +18,15 @@ const Contact = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    console.log(`Setting ${name} to ${value}`); // Log to check state updates
+    // console.log(`Setting ${name} to ${value}`); // Log to check state updates
     dispatch(setContactFormField({ field: name, value }));
   };
 
-  console.log(form);
+  // console.log(form);
 
   const handleSendFeedback = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted"); // Log to check form submit
+    // console.log("Form submitted"); // Log to check form submit
     const { name, email, feedback } = form;
 
     if (name && email && feedback) {
@@ -92,7 +92,7 @@ const Contact = () => {
 
           <div className="z-10 relative lg:col-span-2 mx-auto lg:ms-auto 2xl:me-10">
             <CustomImage
-              src="https://readymadeui.com/images/analtsis.webp"
+              src={`${setups.AWS_S3_BASE_URL}analtsis.webp`}
               className="w-full object-contain block mx-auto max-w-[700px]"
               alt="contact-form-img"
             />
