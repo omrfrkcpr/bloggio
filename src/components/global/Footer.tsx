@@ -14,6 +14,7 @@ const Footer: React.FC = React.memo(() => {
               sx={{
                 margin: "auto",
                 mt: 1,
+                cursor: "pointer",
               }}
               width="40px"
             />

@@ -136,6 +136,7 @@ const Navbar = () => {
                   display: { xs: "none", md: "flex" },
                   mr: 1,
                   mt: "6px",
+                  cursor: "pointer",
                 }}
                 width="50px"
                 alt="logo"
@@ -151,6 +152,7 @@ const Navbar = () => {
                   color: "inherit",
                   textShadow: "2px 2px 8px #000000",
                   textDecoration: "none",
+                  cursor: "pointer",
                 }}
                 content="Bloggio"
                 alt="bloggioTitle"
@@ -216,6 +218,7 @@ const Navbar = () => {
                   display: { xs: "flex", md: "none" },
                   mr: { xs: "4px", md: 1 },
                   mt: "4px",
+                  cursor: "pointer",
                 }}
                 width="40px"
                 alt="logoMobile"
@@ -233,6 +236,7 @@ const Navbar = () => {
                   color: isActive ? "#B9D0F0" : "inherit",
                   textDecoration: "none",
                   textShadow: isActive ? "" : "1px 2px 1px #0000004a",
+                  cursor: "pointer",
                 }}
                 content="Bloggio"
                 alt="bloggioTitleMobile"
