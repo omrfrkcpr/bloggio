@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import setups from "../helper/setup";
 
 const Hero: React.FC = React.memo(() => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleHeroModal } = useShowModal();
   const navigate = useNavigate();
   const { showHeroModal } = useSelector((store: RootState) => store.modal);
@@ -19,7 +19,7 @@ const Hero: React.FC = React.memo(() => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsLoaded(true);
-    }, 300);
+    }, 100);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -32,11 +32,7 @@ const Hero: React.FC = React.memo(() => {
   return (
     <div className="w-full bg-[#b9d0f0] relative">
       <div
-        className={`w-[300px] md:w-[100px] rotate-90 md:rotate-0 absolute -bottom-52 md:-bottom-2 left-0 md:left-[80%] lg:left-[50%]  ${
-          isLoaded ? "translate-x-0" : "-translate-x-[120%]"
-        } md:transition-none md:translate-x-0 ${
-          isLoaded ? "md:translate-y-0" : "md:translate-y-[110%]"
-        }`}
+        className={`w-[300px] md:w-[100px] rotate-90 md:rotate-0 absolute -bottom-52 md:-bottom-2 left-0 md:left-[80%] lg:left-[50%]`}
       >
         <CustomImage
           src={`${setups.AWS_S3_BASE_URL}pencil.png`}

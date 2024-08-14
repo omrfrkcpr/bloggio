@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import DropDown from "../../utils/DropDown";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -21,6 +20,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useBlogCalls from "../../hooks/useBlogCalls";
+import { RootState } from "../../app/store";
 
 const BlogSettings = ({
   blogId,
@@ -31,13 +31,14 @@ const BlogSettings = ({
 }) => {
   const [showDrop, setShowDrop] = useState(false);
   const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { deleteBlogData, postSave } = useBlogCalls();
   const path = window?.location?.href;
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
 
-  const isSaved = currentUser?.saved?.includes(blogId);
+  const isSaved =
+    currentUser && blogId ? currentUser?.saved?.includes(blogId) : false;
 
   const copyLink = async () => {
     try {
@@ -45,6 +46,7 @@ const BlogSettings = ({
         path.includes("/blog/") ? path : path + `blog/${blogId}`
       );
       toastSuccessNotify("Link has been copied");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toastErrorNotify(error?.message);
     } finally {

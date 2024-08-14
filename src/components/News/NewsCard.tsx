@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { formatPublish, shortenText } from "../../helper/functions";
 import CustomImage from "../../utils/CustomImage";
 import { FaUserAlt } from "react-icons/fa";

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { capitalizeWords, dateFormatter } from "../../helper/functions";
@@ -17,7 +16,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,
   blogId,
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { loading } = useSelector((state: RootState) => state.blog);
   const { deleteBlogData, putCommentData } = useBlogCalls();
   const [drop, setDrop] = useState<boolean>(false);
@@ -82,9 +81,9 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
               />
             ) : (
               <Avatar
-                alt={
-                  currentUser && `${capitalizeWords(currentUser?.firstName)}`
-                }
+                alt={`${
+                  currentUser ? capitalizeWords(currentUser?.firstName) : ""
+                }`}
                 src="/static/images/avatar/2.jpg"
                 sx={{ width: "32px", height: "32px" }}
               />

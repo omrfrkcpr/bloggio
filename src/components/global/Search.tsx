@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CiSearch } from "react-icons/ci";
 import CustomModal from "../../utils/CustomModal";
 import { useEffect, useRef, useState } from "react";
@@ -23,7 +22,7 @@ const Search = ({
 
   const searchData =
     blogs &&
-    blogs.filter((blog: any) =>
+    blogs.filter((blog: Blog) =>
       blog?.title.toLowerCase().includes(search.toLowerCase())
     );
 
@@ -75,33 +74,24 @@ const Search = ({
                   <>
                     {searchData
                       .slice(0, 3)
-                      .map(
-                        (
-                          {
-                            _id,
-                            title,
-                            content,
-                          }: { _id: string; title: string; content: any },
-                          i
-                        ) => (
+                      .map(({ _id, title, content }: Blog, i: number) => (
+                        <div
+                          key={i}
+                          onClick={() => {
+                            navigate(`/blog/${_id}`);
+                            setSearch("");
+                          }}
+                          className="p-2 hover:bg-gray-200 cursor-pointer text-black"
+                        >
+                          <h2 className="line-clamp-1 capitalize text-sm font-semibold">
+                            {title}
+                          </h2>
                           <div
-                            key={i}
-                            onClick={() => {
-                              navigate(`/blog/${_id}`);
-                              setSearch("");
-                            }}
-                            className="p-2 hover:bg-gray-200 cursor-pointer text-black"
-                          >
-                            <h2 className="line-clamp-1 capitalize text-sm font-semibold">
-                              {title}
-                            </h2>
-                            <div
-                              className="text-xs text-gray-500 line-clamp-2"
-                              dangerouslySetInnerHTML={{ __html: content }}
-                            />
-                          </div>
-                        )
-                      )}
+                            className="text-xs text-gray-500 line-clamp-2"
+                            dangerouslySetInnerHTML={{ __html: content }}
+                          />
+                        </div>
+                      ))}
                   </>
                 ) : (
                   <p className="text-sm text-gray-500 p-3">No Blog Found</p>

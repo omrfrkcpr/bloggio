@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LiaTimesSolid } from "react-icons/lia";
 import CustomModal from "../../utils/CustomModal";
 import { Dispatch, SetStateAction } from "react";
@@ -6,6 +5,9 @@ import { useSelector } from "react-redux";
 import CustomButton from "../../utils/CustomButton";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import CustomImage from "../../utils/CustomImage";
+import { RootState } from "../../app/store";
+import { Avatar } from "@mui/material";
+import { capitalizeWords } from "../../helper/functions";
 
 const EditAccountModal = ({
   editModal,
@@ -21,12 +23,12 @@ const EditAccountModal = ({
   setEditModal: Dispatch<SetStateAction<boolean>>;
   setEditProfileModal: Dispatch<SetStateAction<boolean>>;
   form: User;
-  setFieldToEdit: Dispatch<SetStateAction<any>>;
+  setFieldToEdit: Dispatch<SetStateAction<FieldToEdit | null>>;
   handleDeleteAccount: () => void;
   saveForm: () => void;
   setPasswordModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
 
   const btn =
     "border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200";
@@ -92,12 +94,12 @@ const EditAccountModal = ({
                     click={() =>
                       handleEditClick(
                         key,
-                        form[key as keyof typeof form] || "",
+                        form[key as keyof typeof form]?.toString() || "",
                         getFieldText(key)
                       )
                     }
                     className="text-gray-500 hover:text-black text-[12px] md:text-sm"
-                    title={form[key as keyof typeof form] || ""}
+                    title={form[key as keyof typeof form]?.toString() || ""}
                     alt={`edit-${key}`}
                   />
                 </div>
@@ -119,11 +121,27 @@ const EditAccountModal = ({
                 className="text-[12px] md:text-sm"
                 title={`${form?.firstName} ${form?.lastName}`}
               />
-              <CustomImage
-                src={currentUser?.avatar}
-                alt="user-image"
-                className="w-5 h-5 md:w-7 md:h-7 rounded-full"
-              />
+              {currentUser?.avatar ? (
+                <CustomImage
+                  src={currentUser?.avatar}
+                  alt="user-image"
+                  className="w-5 h-5 md:w-7 md:h-7 rounded-full"
+                />
+              ) : (
+                <Avatar
+                  alt={`${
+                    currentUser ? capitalizeWords(currentUser?.firstName) : ""
+                  }`}
+                  src="/static/images/avatar/2.jpg"
+                  sx={{
+                    minWidth: "20px",
+                    height: "35px",
+                    cursor: "pointer",
+                    borderRadius: "100%",
+                  }}
+                  data-test="userAvatar"
+                />
+              )}
               <MdOutlineArrowOutward />
             </div>
           </div>

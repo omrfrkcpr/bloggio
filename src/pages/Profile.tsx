@@ -18,24 +18,25 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import EditAccount from "../components/ProfileActivities/EditAccount";
 import { dateFormatter } from "../helper/functions";
+import { RootState } from "../app/store";
 
 const Profile = () => {
-  const { currentUser, loading } = useSelector((state: any) => state.auth);
+  const { currentUser, loading } = useSelector(
+    (state: RootState) => state.auth
+  );
   const { getBlogData } = useBlogCalls();
-  const location: any = useLocation();
+  const location: { pathname: string } = useLocation();
   const { search } = useLocation();
 
   // console.log(search)
 
   const basePath = useMemo(
     () =>
-      !location?.pathname.includes(currentUser?._id)
+      currentUser?._id && !location?.pathname?.includes(currentUser?._id)
         ? currentUser?._id
         : `/profile/${currentUser?._id}`,
     [location, currentUser]
   );
-
-  const { firstName, lastName, avatar, username, bio, createdAt } = currentUser;
 
   const activities = useMemo(
     () => [
@@ -93,7 +94,7 @@ const Profile = () => {
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>
               <h2 className="text-3xl sm:text-5xl font-bold capitalize mb-4">
-                {`${firstName} ${lastName}`}
+                {`${currentUser?.firstName} ${currentUser?.lastName}`}
               </h2>
             </div>
             <div className="flex items-center mb-[2rem] border-b border-gray-300 ">
@@ -141,18 +142,20 @@ const Profile = () => {
               </div>
               {/* profile details */}
               <div className="sticky top-7 flex flex-col justify-between">
-                {avatar ? (
+                {currentUser?.avatar ? (
                   <CustomImage
-                    src={avatar}
+                    src={currentUser?.avatar}
                     alt="user-image"
                     className="w-[150px] h-[150px]"
                   />
                 ) : (
                   <Avatar sx={{ width: "150px", height: "150px" }} />
                 )}
-                <h2 className="py-2 font-bold mt-4">@{username}</h2>
+                <h2 className="py-2 font-bold mt-4">
+                  @{currentUser?.username}
+                </h2>
                 <p className="text-gray-500 first-letter:uppercase text-sm">
-                  {bio}
+                  {currentUser?.bio}
                 </p>
                 <CustomButton
                   click={() => setEditProfileModal(true)}
@@ -169,7 +172,7 @@ const Profile = () => {
                   alt="edit-account"
                 />
                 <p className="text-gray-500 first-letter:uppercase text-sm pt-[5rem]">
-                  {`Joined on ${dateFormatter(createdAt)}`}
+                  {`Joined on ${dateFormatter(currentUser?.createdAt || "")}`}
                 </p>
               </div>
             </div>

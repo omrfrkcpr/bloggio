@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -27,7 +26,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import CustomImage from "../../utils/CustomImage";
 
 const Navbar = () => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { showNavbarModal } = useSelector((state: RootState) => state.modal);
   const { logout } = useAuthCalls();
   const { toggleNavbarModal, toggleHeroModal } = useShowModal();
@@ -50,7 +49,7 @@ const Navbar = () => {
     window.addEventListener("scroll", scrollMe);
   }, []);
 
-  const pages = React.useMemo(
+  const pages: PageProps[] = React.useMemo(
     () =>
       [
         { label: "Home", path: "/", id: 1 },
@@ -58,13 +57,17 @@ const Navbar = () => {
         { label: "About", path: "/about", id: 3 },
         currentUser &&
           pathname !== "/write" && { label: "Write", path: "/write", id: 4 },
-      ].filter(Boolean),
+      ].filter(Boolean) as PageProps[],
     [currentUser, pathname]
   );
 
   const loggedInSettings = React.useMemo(
     () => [
-      { label: "Profile", path: `/profile/${currentUser?._id}`, id: 1 },
+      {
+        label: "Profile",
+        path: `/profile/${currentUser?._id}?my-blogs`,
+        id: 1,
+      },
       { label: "Stats", path: `/stats/${currentUser?._id}`, id: 2 },
       { label: "Logout", path: "logout", id: 3 },
     ],
@@ -302,10 +305,11 @@ const Navbar = () => {
                     />
                   ) : (
                     <Avatar
-                      alt={
-                        currentUser &&
-                        `${capitalizeWords(currentUser?.firstName)}`
-                      }
+                      alt={`${
+                        currentUser
+                          ? capitalizeWords(currentUser?.firstName)
+                          : ""
+                      }`}
                       src="/static/images/avatar/2.jpg"
                       sx={{
                         minWidth: "40px",

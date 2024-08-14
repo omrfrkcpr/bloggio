@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
 import { useSelector } from "react-redux";
@@ -24,12 +22,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
   updatedAt,
   blogDetails,
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
   const { toggleBlogCardModal } = useShowModal();
   const navigate = useNavigate();
-
-  const { firstName, lastName, avatar, username } = userId;
 
   const handleReadMore = () => {
     if (currentUser) {
@@ -66,11 +62,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
               <CustomButton
                 click={() =>
                   navigate(
-                    `/categories?filter=${categoryId.name.toLowerCase()}`
+                    `/categories?filter=${categoryId?.name.toLowerCase()}`
                   )
                 }
                 className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
-                title={categoryId.name}
+                title={categoryId?.name}
               />
             </div>
             <CustomButton
@@ -82,28 +78,35 @@ const BlogCard: React.FC<BlogCardProps> = ({
               onClick={handleReadMore}
               className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
             >
-              {blogDetails.contentPrev}
+              {blogDetails?.contentPrev}
             </div>
           </div>
           <div className="flex justify-between">
             <div className="flex items-center justify-center">
-              <Avatar
-                alt={`${firstName} ${lastName}`}
-                src={`${avatar}`}
-                sx={{
-                  width: { xs: "25px", md: "32px" },
-                  height: { xs: "25px", md: "32px" },
-                  mr: 1,
-                  backgroundColor: "#B9D0F0",
-                }}
-              />
+              {userId?.avatar ? (
+                <CustomImage
+                  alt="user-avatar"
+                  src={userId?.avatar}
+                  className="w-[25px] h-[25px] md:w-[32px] md:h-[32px] me-1 rounded-full"
+                />
+              ) : (
+                <Avatar
+                  alt={`${userId?.firstName} ${userId?.lastName}`}
+                  src="/static/images/avatar/2.jpg"
+                  sx={{
+                    width: { xs: "25px", md: "32px" },
+                    height: { xs: "25px", md: "32px" },
+                    mr: 1,
+                  }}
+                />
+              )}
               <div className="text-sm">
-                <p className="text-[10px] lg:text-[12px] xl:text-[16px] text-gray-800 leading-none">
-                  @{username}
+                <p className="text-[9px] lg:text-[11px] xl:text-[15px] text-gray-600 leading-none">
+                  {userId?.username}
                 </p>
-                <p className="text-gray-600 space-x-1 text-[10px]  lg:text-[12px] xl:text-[14px] ">
+                <p className="text-gray-600 space-x-1 text-[10px] lg:text-[12px] xl:text-[14px] ">
                   <span>{updatedAt} -</span>
-                  <span>{blogDetails.readTime}</span>
+                  <span>{blogDetails?.readTime}</span>
                 </p>
               </div>
             </div>
@@ -113,7 +116,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 blogDetails={blogDetails}
                 countOfVisitors={countOfVisitors}
                 _id={_id}
-                userId={userId._id}
+                userId={userId?._id}
               />
               <CustomButton
                 click={handleReadMore}

@@ -1,6 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { LiaTimesSolid } from "react-icons/lia";
 import CustomModal from "../../utils/CustomModal";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -9,6 +6,7 @@ import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
 import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
+import { RootState } from "../../app/store";
 
 const EditProfile = ({
   editModal,
@@ -17,12 +15,12 @@ const EditProfile = ({
   editModal: boolean;
   setEditModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { updateUser } = useAuthCalls();
 
   const initialFormData = {
     username: "",
-    image: "",
+    avatar: "",
     bio: "",
   };
 
@@ -32,7 +30,7 @@ const EditProfile = ({
     if (currentUser) {
       setForm({
         username: currentUser?.username || "",
-        image: currentUser?.image || "",
+        avatar: currentUser?.avatar || "",
         bio: currentUser?.bio || "",
       });
     } else {
@@ -45,7 +43,7 @@ const EditProfile = ({
     delete myUser.password;
     const updatedUser = {
       ...myUser,
-      image: form?.image,
+      avatar: form?.avatar,
       username: form?.username,
       bio: form?.bio,
     };
@@ -53,9 +51,6 @@ const EditProfile = ({
     updateUser(updatedUser);
     setEditModal(false);
   };
-
-  const btn =
-    "border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200";
 
   return (
     <CustomModal modal={editModal} hidden="" setModal={setEditModal}>
@@ -77,20 +72,20 @@ const EditProfile = ({
               Image URL:
             </label>
             <input
-              value={form?.image}
+              value={form?.avatar}
               className=" h-[20px] ms-2 border-b-[1.5px] border-black outline-none"
               id="userImg"
-              onChange={(e) => setForm({ ...form, image: e.target.value })}
+              onChange={(e) => setForm({ ...form, avatar: e.target.value })}
               accept="image/jpg, img/png, image/jpeg, image/JPEG, image/gif"
               type="text"
             />
           </div>
           <div className="flex gap-[2rem]">
             <div className="w-[5rem]">
-              {form?.image ? (
+              {form?.avatar ? (
                 <CustomImage
                   className="min-h-[5rem] min-w-[5rem] object-fit border border-gray-400 rounded-full"
-                  src={form?.image}
+                  src={form?.avatar}
                   alt="profile-img"
                 />
               ) : (
@@ -99,7 +94,7 @@ const EditProfile = ({
             </div>
             <div>
               <CustomButton
-                click={() => setForm({ ...form, image: "" })}
+                click={() => setForm({ ...form, avatar: "" })}
                 className="text-red-700 text-sm hover:text-red-300"
                 title="Clear URL"
               />
@@ -155,13 +150,13 @@ const EditProfile = ({
         {/* Profile Edit Buttons */}
         <div className="flex items-center justify-end gap-4 pt-[2rem]">
           <CustomButton
-            className={`text-green-600 ${btn} hover:border-green-300 hover:text-green-300`}
+            className="text-green-600 btn hover:border-green-300 hover:text-green-300"
             click={() => setEditModal(false)}
             title="Cancel"
           />
           <CustomButton
             click={saveForm}
-            className={`text-white ${btn} bg-green-800 hover:bg-green-300 hover:border-green-300`}
+            className="text-white btn bg-green-800 hover:bg-green-300 hover:border-green-300"
             title="Save"
           />
         </div>

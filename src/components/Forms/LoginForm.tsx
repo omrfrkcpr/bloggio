@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormikProps, Form } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";

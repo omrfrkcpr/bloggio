@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import CommentIcon from "@mui/icons-material/Comment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useSelector } from "react-redux";
@@ -11,7 +10,6 @@ import { RootState } from "../../app/store";
 import useShowModal from "../../hooks/useShowModal";
 import { toastInfoNotify } from "../../helper/toastNotify";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { RootState } from "../../app/store";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   blogDetails,
@@ -20,8 +18,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   _id,
   userId,
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
-  // const { saved } = useSelector((state: RootState) => state.blog); // TODO
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleCommentsModal } = useShowModal();
   const { showCommentsModal } = useSelector((state: RootState) => state.modal);
   const navigate = useNavigate();
@@ -29,7 +26,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   const { postLike } = useBlogCalls();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const isUserLiked = likes?.includes(currentUser?._id);
+  const isUserLiked = currentUser ? likes?.includes(currentUser?._id) : false;
 
   // console.log(location.pathname);
 

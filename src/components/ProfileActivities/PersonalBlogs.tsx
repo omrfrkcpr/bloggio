@@ -5,56 +5,43 @@ import BlogCard from "../Cards/BlogCard";
 import { Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import useBlogCalls from "../../hooks/useBlogCalls";
 
 const PersonalBlogs = ({ blogType }: { blogType: string }) => {
-  const { blogs, categories } = useSelector((state: RootState) => state.blog);
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { blogs, totalPage } = useSelector((state: RootState) => state.blog);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const { getBlogData } = useBlogCalls();
   const navigate = useNavigate();
   const { search } = useLocation();
   const [type, setType] = useState<string>(blogType || "");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
 
   // console.log(pathname);
   // console.log(search);
 
   // console.log(blogs);
-  // console.log(currentUser);
+  // console.log(currentUser)
 
   useEffect(() => {
     if (search.includes("my-blogs")) {
       setType("myBlogs");
-    } else if (search.includes("drafts")) {
+      getBlogData(
+        "blogs",
+        `?filter[userId]=${currentUser?._id}&filter[isPublish]=true&sort[createdAt]=desc&page=${currentPage}&limit=${itemsPerPage}`
+      );
+    }
+    if (search.includes("drafts")) {
       setType("drafts");
-    } else if (search.includes("saved")) {
+      getBlogData(
+        "blogs",
+        `?filter[userId]=${currentUser?._id}&filter[isPublish]=false&sort[createdAt]=desc&page=${currentPage}&limit=${itemsPerPage}`
+      );
+    }
+    if (search.includes("saved")) {
       setType("saved");
     }
   }, [search]);
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 5;
-
-  // Type filters blogs and shows drafted or published blogs. The only thing that differs between the 2 components.
-  const filteredBlogs = blogs.filter((item: any) => {
-    if (type === "saved") {
-      // Check if the current blog is in the user's saved blogs
-      return currentUser.saved.includes(item._id);
-    } else if (type === "myBlogs") {
-      // Only include published blogs for "myBlogs"
-      return item.isPublish === true && item.userId._id === currentUser._id;
-    } else if (type === "drafts") {
-      // Only include drafts for "drafts"
-      return item.isPublish === false && item.userId._id === currentUser._id;
-    }
-    return false;
-  });
-
-  console.log(`Filtered Blogs for ${type}:`, filteredBlogs);
-
-  const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
-
-  const currentBlogs = filteredBlogs.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
 
   const onPageChange = async (
     _event: React.ChangeEvent<unknown>,
@@ -62,28 +49,31 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
   ) => {
     setCurrentPage(page);
     navigate(
-      `/profile/${currentUser?._id}/?page=${page}&limit=${itemsPerPage}`
+      `/profile/${currentUser?._id}?${type}&page=${page}&limit=${itemsPerPage}`
     );
   };
 
+  // console.log(currentUser);
+
+  const selectedBlogs =
+    search?.includes("my-blogs") || search?.includes("drafts")
+      ? blogs
+      : currentUser?.saved;
+
   return (
     <>
-      {currentBlogs.length ? (
+      {selectedBlogs?.length ? (
         <div className=" min-h-[43.8vh]">
           <ul className="grid grid-cols-1 gap-y-[3rem] items-start justify-center max-w-[900px] h-auto">
-            {currentBlogs.map((blog: any) => {
-              const category = categories.find(
-                (cat: any) => cat?._id === blog?.categoryId
-              ) as { name: string } | undefined;
-              const categoryName = category ? category?.name : "";
+            {selectedBlogs.map((blog: BlogCardProps) => {
               return (
                 <div key={blog?._id}>
-                  <BlogCard {...blog} categoryName={categoryName} />
+                  <BlogCard {...blog} />
                 </div>
               );
             })}
           </ul>
-          {currentBlogs.length ? (
+          {selectedBlogs.length ? (
             <Stack
               sx={{
                 margin: "5rem 0",
@@ -92,7 +82,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
               }}
             >
               <Pagination
-                count={totalPages}
+                count={totalPage}
                 page={currentPage}
                 color="primary"
                 onChange={onPageChange}

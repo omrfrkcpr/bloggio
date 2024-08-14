@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction } from "react";
 import CustomModal from "../../utils/CustomModal";
 import TextField from "@mui/material/TextField";
@@ -9,15 +8,10 @@ const EditFieldModal = ({
   setFieldToEdit,
   handleFieldChange,
 }: {
-  fieldToEdit: { field: string; value: string; text: string } | null;
-  setFieldToEdit: Dispatch<
-    SetStateAction<{ field: string; value: string; text: string } | null>
-  >;
+  fieldToEdit: FieldToEdit | null;
+  setFieldToEdit: Dispatch<SetStateAction<FieldToEdit | null>>;
   handleFieldChange: (field: string, value: string) => void;
 }) => {
-  const btn =
-    "border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200";
-
   const getFieldLabel = (field: string) => {
     switch (field) {
       case "firstName":
@@ -64,7 +58,7 @@ const EditFieldModal = ({
         </div>
         <div className="flex items-center justify-end gap-4 pt-6">
           <CustomButton
-            className={`text-green-600 ${btn} hover:border-green-300 hover:text-green-300`}
+            className="text-green-600 btn hover:border-green-300 hover:text-green-300"
             click={() => setFieldToEdit(null)}
             title="Cancel"
           />
@@ -75,7 +69,7 @@ const EditFieldModal = ({
                 fieldToEdit?.value || ""
               )
             }
-            className={`text-white ${btn} bg-green-800 hover:bg-green-300 hover:border-green-300`}
+            className="text-white btn bg-green-800 hover:bg-green-300 hover:border-green-300"
             title="Save"
           />
         </div>

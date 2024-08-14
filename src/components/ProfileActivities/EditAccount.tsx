@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useState } from "react";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
@@ -7,6 +6,7 @@ import useBlogCalls from "../../hooks/useBlogCalls";
 import EditAccountModal from "../Modals/EditAccountModal";
 import EditFieldModal from "../Modals/EditFieldModal";
 import ChangePasswordModal from "../Modals/ChangePasswordModal";
+import { RootState } from "../../app/store";
 
 const EditAccount = ({
   editModal,
@@ -17,7 +17,7 @@ const EditAccount = ({
   setEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   setEditProfileModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { deleteBlogData } = useBlogCalls();
   const { updateUser, logout } = useAuthCalls();
 
@@ -45,9 +45,9 @@ const EditAccount = ({
   useEffect(() => {
     if (currentUser) {
       setForm({
-        firstName: currentUser?.firstName || "",
-        lastName: currentUser?.lastName || "",
-        email: currentUser?.email || "",
+        firstName: currentUser?.firstName,
+        lastName: currentUser?.lastName,
+        email: currentUser?.email,
         password: "",
         confirmPassword: "",
       });
@@ -57,15 +57,16 @@ const EditAccount = ({
   }, [currentUser, initialFormData]);
 
   const handleDeleteAccount = async () => {
-    const { _id } = currentUser;
-    await deleteBlogData("users", _id);
-    setEditProfileModal(false);
-    setEditModal(false);
-    logout(false);
+    if (currentUser && currentUser._id) {
+      await deleteBlogData("users", currentUser._id);
+      setEditProfileModal(false);
+      setEditModal(false);
+      logout(false);
+    }
   };
 
   const validateForm = () => {
-    if (!form.email.includes("@")) {
+    if (!form?.email.includes("@")) {
       toastErrorNotify("Invalid email address");
       return false;
     }

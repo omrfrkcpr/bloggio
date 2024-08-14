@@ -38,9 +38,9 @@ const Contact = () => {
 
   return (
     <>
-      <div className="bg-[#e5effd] font-[sans-serif] page-height px-8 md:p-0 grid md:place-content-center md:place-items-center">
-        <div className="grid lg:grid-cols-3 md:gap-10 items-center max-lg:justify-center h-full sm:p-10 max-sm:p-4">
-          <div className="max-w-xl max-lg:mx-auto max-lg:text-center max-lg:mb-6 2xl:ms-10 mx-auto">
+      <div className="bg-[#e5effd] font-[sans-serif] page-height py-[5rem] px-8 grid md:place-content-center md:place-items-center">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-5 md:gap-10 h-full px-8">
+          <div className="max-w-xl max-lg:mx-auto max-lg:text-center max-lg:mb-6 2xl:ms-10 mx-auto w-full xl:w-1/3">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 text-center lg:text-left">
               Get In Touch
             </h2>
@@ -69,7 +69,7 @@ const Contact = () => {
                 placeholder="Message"
                 value={form.feedback}
                 onChange={handleChange}
-                className="w-full px-4 pt-3 bg-[#f0f1f2] rounded-md outline-none text-[10px] md:text-[14px] text-black/60"
+                className="w-full px-4 pt-3 bg-[#f0f1f2] rounded-md outline-none text-sm text-black/60"
                 rows={6}
                 required
               ></textarea>
@@ -90,10 +90,10 @@ const Contact = () => {
             </form>
           </div>
 
-          <div className="z-10 relative lg:col-span-2 mx-auto lg:ms-auto 2xl:me-10">
+          <div className="z-10 relative text-center w-full xl:w-2/3">
             <CustomImage
               src={`${setups.AWS_S3_BASE_URL}analtsis.webp`}
-              className="w-full object-contain block mx-auto max-w-[700px]"
+              className="w-full object-contain block mx-auto max-w-[500px] 2xl:max-w-[700px]"
               alt="contact-form-img"
             />
           </div>

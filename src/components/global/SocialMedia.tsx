@@ -3,8 +3,14 @@ import { FaGithubSquare } from "react-icons/fa";
 import { FaMedium } from "react-icons/fa";
 import { ImMail } from "react-icons/im";
 
+interface SocialMedia {
+  icon: React.ReactElement;
+  path: string;
+  id: number;
+}
+
 const SocialMedia = () => {
-  const socialMedia = [
+  const socialMedia: SocialMedia[] = [
     {
       icon: <FaLinkedin size={24} />,
       path: "https://www.linkedin.com/in/omrfrkcpr/",
@@ -21,11 +27,11 @@ const SocialMedia = () => {
       id: 3,
     },
     {
-      icon: <FaMedium size={24} className="" />,
+      icon: <FaMedium size={24} />,
       path: "https://medium.com/@omrfrkcpr",
       id: 4,
     },
-  ];
+  ] as SocialMedia[];
 
   return (
     <div className="flex space-x-4 sm:justify-center items-center">

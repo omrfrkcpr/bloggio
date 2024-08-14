@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // import React from "react";
 import { useSelector } from "react-redux";
 import useShowModal from "../../hooks/useShowModal";
@@ -16,7 +15,7 @@ import CustomButton from "../../utils/CustomButton";
 const BlogComments = ({ blogId }: { blogId: string }) => {
   const { toggleCommentsModal } = useShowModal();
   const { showCommentsModal } = useSelector((state: RootState) => state.modal);
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { comments, loading } = useSelector((state: RootState) => state.blog);
   const { postBlogData } = useBlogCalls();
   const [commentPrev, setCommentPrev] = useState({
@@ -40,6 +39,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
         ...commentPrev,
         comment: "",
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toastErrorNotify(error.message);
     }

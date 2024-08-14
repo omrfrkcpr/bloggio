@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction } from "react";
 import CustomModal from "../../utils/CustomModal";
 import TextField from "@mui/material/TextField";
@@ -27,9 +26,6 @@ const ChangePasswordModal = ({
   toggleConfirmPasswordVisibility: () => void;
   saveForm: () => void;
 }) => {
-  const btn =
-    "border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200";
-
   return (
     <CustomModal modal={passwordModal} hidden="" setModal={setPasswordModal}>
       <div className="center w-[95%] md:w-[720px] md:h-[485px] bg-white mx-auto shadows my-[1rem] z-10 mb-[3rem] p-[2rem] flex flex-col justify-between">
@@ -87,7 +83,7 @@ const ChangePasswordModal = ({
         </div>
         <div className="flex items-center justify-end gap-4 pt-6">
           <CustomButton
-            className={`text-green-600 ${btn} hover:border-green-300 hover:text-green-300`}
+            className="text-green-600 btn hover:border-green-300 hover:text-green-300"
             click={() => setPasswordModal(false)}
             title="Cancel"
           />
@@ -102,7 +98,7 @@ const ChangePasswordModal = ({
                 saveForm();
               }
             }}
-            className={`text-white ${btn} bg-green-800 hover:bg-green-300 hover:border-green-300`}
+            className="text-white btn bg-green-800 hover:bg-green-300 hover:border-green-300"
             title="Save"
           />
         </div>

@@ -61,8 +61,9 @@ interface CustomButtonProps {
 /* ---------------------------------- */
 /*             Blog Props             */
 /* ---------------------------------- */
+
 interface BlogCardProps {
-  _id?: string;
+  _id: string;
   userId: {
     _id: string;
     firstName: string;
@@ -79,7 +80,6 @@ interface BlogCardProps {
   image: string;
   likes: string[];
   countOfVisitors: number;
-  createdAt: string;
   blogDetails: {
     countOfLikes: number;
     countOfComments: number;
@@ -88,6 +88,13 @@ interface BlogCardProps {
   };
   updatedAt: string;
   createdAt: Date;
+}
+
+interface Category {
+  _id?: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface BlogAnalyticsProps {
@@ -118,21 +125,26 @@ interface BlogSettingsProps {
 }
 
 interface BlogState {
-  randomFirstName?: string;
-  randomLastName?: string;
-  userImage?: string;
-  categoryName?: string;
-  _id?: string;
+  categories: Category[];
+  blogs: BlogCardProps[];
+  singleBlog: Blog | null;
+  trendings: Blog[];
+  comments: CommentProps[];
+  saved: string[];
+  loading: boolean;
+  error: boolean;
+  totalPage: number;
 }
 
 interface Blog {
-  userId: string;
-  categoryId: { name: string };
+  _id: string;
+  userId: User;
+  categoryId: Category;
   title: string;
   content: string;
   image: string;
-  comments: any[];
-  likes: any[];
+  comments: CommentProps[];
+  likes: string[];
   countOfVisitors: number;
   createdAt: string;
 }
@@ -141,7 +153,7 @@ interface Blog {
 /*            Comment Props           */
 /* ---------------------------------- */
 interface CommentFormProps {
-  comments: string[];
+  comments: CommentProps[];
   id?: string;
 }
 
@@ -157,6 +169,31 @@ interface CommentProps {
 /* ---------------------------------- */
 /*             User Props             */
 /* ---------------------------------- */
+
+interface User {
+  _id?: string;
+  username?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password?: string;
+  avatar?: string;
+  bio?: string;
+  isAdmin?: boolean;
+  isActive?: boolean;
+  isStaff?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  saved?: BlogCardProps[];
+}
+
+interface AuthState {
+  currentUser: User | null;
+  loading: boolean;
+  error: boolean;
+  token: string | null;
+}
+
 interface UserIdProps {
   _id: string;
   username: string;
@@ -254,4 +291,27 @@ interface ContactState {
   form: ContactFormState;
   loading: boolean;
   error: boolean;
+}
+
+/* ---------------------------------- */
+/*               Others               */
+/* ---------------------------------- */
+
+interface PageProps {
+  label: string;
+  path: string;
+  id: number;
+}
+
+interface FieldToEdit {
+  field: string;
+  value: string;
+  text: string;
+}
+
+interface UserForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  [key: string]: string; // For other possible fields
 }

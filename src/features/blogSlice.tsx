@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState: BlogState = {
+  categories: [],
+  blogs: [],
+  singleBlog: null,
+  trendings: [],
+  comments: [],
+  saved: [],
+  loading: false,
+  error: false,
+  totalPage: 1,
+};
+
 const blogSlice = createSlice({
   name: "blog",
 
-  initialState: {
-    categories: [],
-    blogs: [],
-    singleBlog: {},
-    trendings: [],
-    comments: [],
-    saved: [],
-    loading: false,
-    error: false,
-    totalPage: 1,
-  },
+  initialState,
 
   reducers: {
     fetchStart: (state) => {

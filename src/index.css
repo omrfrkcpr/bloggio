@@ -14,6 +14,10 @@
   @apply p-2 hover:bg-gray-200 text-black/80 hover:text-gray-600 w-full text-[10px] md:text-sm text-left cursor-pointer flex gap-1 md:gap-2 items-center;
 }
 
+.btn {
+  @apply border border-green-600 p-1 px-3 md:py-2 md:px-5 rounded-full transition-all duration-200;
+}
+
 .shadows {
   box-shadow: 0px 0px 3px 0.3px rgb(182, 182, 182);
 }
