@@ -42,7 +42,6 @@ const Hero: React.FC = React.memo(() => {
           src={`${setups.AWS_S3_BASE_URL}pencil.png`}
           alt="pencil"
           className="w-[100px] md:w-[300px]"
-          data-test="pencil"
         />
       </div>
       <div
@@ -82,7 +81,6 @@ const Hero: React.FC = React.memo(() => {
             src={`${setups.AWS_S3_BASE_URL}typewriter.png`}
             alt="typewriter"
             width="320px"
-            loading="lazy"
           />
         </div>
         {showHeroModal && (

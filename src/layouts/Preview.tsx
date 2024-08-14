@@ -12,11 +12,11 @@ import {
   toastWarnNotify,
 } from "../helper/toastNotify";
 import { useNavigate } from "react-router-dom";
-import spinner from "../assets/spinner.gif";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
+import setups from "../helper/setup";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -282,7 +282,10 @@ const Preview: React.FC<PreviewProps> = ({
               >
                 {loading ? (
                   <div className="w-[30px]">
-                    <CustomImage src={spinner} alt="loading-spinner" />
+                    <CustomImage
+                      src={`${setups.AWS_S3_BASE_URL}spinner.gif`}
+                      alt="loading-spinner"
+                    />
                   </div>
                 ) : (
                   type
