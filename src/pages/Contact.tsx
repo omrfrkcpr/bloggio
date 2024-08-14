@@ -38,7 +38,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="bg-[#e5effd] font-[sans-serif] h-full min-h-[calc(100vh-149px)] px-8 md:p-0 grid md:place-content-center md:place-items-center">
+      <div className="bg-[#e5effd] font-[sans-serif] page-height px-8 md:p-0 grid md:place-content-center md:place-items-center">
         <div className="grid lg:grid-cols-3 md:gap-10 items-center max-lg:justify-center h-full sm:p-10 max-sm:p-4">
           <div className="max-w-xl max-lg:mx-auto max-lg:text-center max-lg:mb-6 2xl:ms-10 mx-auto">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 text-center lg:text-left">

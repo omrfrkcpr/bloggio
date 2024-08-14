@@ -88,7 +88,7 @@ const Profile = () => {
       {loading ? (
         <Loading />
       ) : (
-        <section className="flex gap-[1rem] relative mx-[2rem] min-h-[88.8vh] h-auto">
+        <section className="flex gap-[1rem] relative mx-[2rem] page-height">
           {/* users activities */}
           <div className=" mb-6 flex-[2] pt-[4rem] ">
             <div>

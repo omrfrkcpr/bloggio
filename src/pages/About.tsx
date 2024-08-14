@@ -4,7 +4,7 @@ import setups from "../helper/setup";
 
 const About: React.FC = () => {
   return (
-    <div className="h-[fit-content] min-h-[calc(100vh-149px)] py-8 bg-[#e5effd] px-4 sm:px-6 lg:px-8 grid md:place-content-center md:place-items-center">
+    <div className="page-height py-8 bg-[#e5effd] px-4 sm:px-6 lg:px-8 grid md:place-content-center md:place-items-center">
       <main className="flex flex-col items-center justify-start w-full flex-1 text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 flex items-center gap-3">
           <CustomImage

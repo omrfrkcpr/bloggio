@@ -61,7 +61,7 @@ const FilterCategory = () => {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto min-h-[88.4vh] h-auto p-5 flex flex-col items-center">
+    <div className="max-w-[1600px] mx-auto page-height p-5 flex flex-col items-center">
       <div className="text-center text-4xl text-gray-500 my-[3rem] flex justify-center gap-2">
         <h2>Category:</h2>
         <select

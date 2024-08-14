@@ -6,6 +6,10 @@
   @apply w-[95%] mx-auto max-w-[1600px];
 }
 
+.page-height {
+  @apply h-full min-h-[calc(100vh-141px)];
+}
+
 .share-button {
   @apply p-2 hover:bg-gray-200 text-black/80 hover:text-gray-600 w-full text-[10px] md:text-sm text-left cursor-pointer flex gap-1 md:gap-2 items-center;
 }

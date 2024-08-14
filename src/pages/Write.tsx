@@ -16,8 +16,8 @@ const Write = () => {
   return (
     <>
       {!isOpen && (
-        <section className="min-h-[78vh] h-full w-[90%] md:w-[80%] mb-[5rem] mx-auto max-w-[1000px] relative">
-          <div className="mt-5">
+        <section className="page-height w-[90%] md:w-[80%] mx-auto max-w-[1000px] relative">
+          <div>
             <input
               type="text"
               value={title}
