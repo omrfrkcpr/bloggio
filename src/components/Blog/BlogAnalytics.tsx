@@ -14,8 +14,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 // import { RootState } from "../../app/store";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
+  blogDetails,
   likes,
-  comments,
   countOfVisitors,
   _id,
   userId,
@@ -29,18 +29,19 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   const { postLike } = useBlogCalls();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
+  const isUserLiked = likes?.includes(currentUser?._id);
+
   // console.log(location.pathname);
 
   useEffect(() => {
-    if (currentUser && likes?.includes(currentUser?._id)) {
+    if (currentUser && isUserLiked) {
       setIsLiked(true);
     }
-  }, [currentUser, likes]);
+  }, [currentUser, isUserLiked]);
 
   const handleLikeClick = async () => {
     if (currentUser) {
-      await postLike(`blogs/${_id}/postLike`, _id);
-      setIsLiked(true);
+      await postLike(`blogs/${_id}/like`, _id);
     } else {
       toastInfoNotify("Please login to like a blog.");
     }
@@ -71,16 +72,14 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
       icon: (
         <Heart
           onClick={handleLikeClick}
-          weight={isLiked && likes.includes(currentUser?._id) ? "fill" : "thin"}
+          weight={isLiked && isUserLiked ? "fill" : "thin"}
           className={`cursor-pointer hover:scale-125 ${
-            isLiked && likes.includes(currentUser?._id)
-              ? "text-red-500"
-              : "text-[#A1A1A1]"
+            isLiked && isUserLiked ? "text-red-500" : "text-[#A1A1A1]"
           }`}
           data-test="heart-icon"
         />
       ),
-      count: likes?.length,
+      count: blogDetails?.countOfLikes,
     },
     {
       key: "comments",
@@ -96,7 +95,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
           data-test="comment-icon"
         />
       ),
-      count: comments?.length,
+      count: blogDetails?.countOfComments,
     },
     {
       key: "visitors",

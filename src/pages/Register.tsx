@@ -18,7 +18,7 @@ const Register = () => {
           lastName: "",
           email: "",
           password: "",
-          image: "",
+          avatar: "",
           // bio: "",
           // city: "",
         }}

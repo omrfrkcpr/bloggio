@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import CustomButton from "../../utils/CustomButton";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import CustomImage from "../../utils/CustomImage";
 
 const EditAccountModal = ({
   editModal,
@@ -118,9 +119,9 @@ const EditAccountModal = ({
                 className="text-[12px] md:text-sm"
                 title={`${form?.firstName} ${form?.lastName}`}
               />
-              <img
-                src={currentUser?.image}
-                alt=""
+              <CustomImage
+                src={currentUser?.avatar}
+                alt="user-image"
                 className="w-5 h-5 md:w-7 md:h-7 rounded-full"
               />
               <MdOutlineArrowOutward />

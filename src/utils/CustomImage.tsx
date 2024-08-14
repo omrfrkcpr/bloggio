@@ -8,16 +8,14 @@ const CustomImage: React.FC<CustomImageProps> = ({
   className,
   ...props
 }) => (
-  <div>
-    <LazyLoadImage
-      alt={alt}
-      src={src}
-      className={className}
-      {...props}
-      effect="blur"
-      data-test={alt}
-    />
-  </div>
+  <LazyLoadImage
+    alt={alt}
+    src={src}
+    className={className}
+    {...props}
+    effect="blur"
+    data-test={alt}
+  />
 );
 
 export default CustomImage;

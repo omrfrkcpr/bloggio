@@ -8,12 +8,15 @@ import {
   getSuccess,
   getSingleBlogSuccess,
   getPageSuccess,
+  getSavedSuccess,
+  getTrendBlogs,
   // getSavedSuccess,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
 import { singularize } from "../helper/functions";
 import { useLocation } from "react-router-dom";
+import { updateSuccess } from "../features/authSlice";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
@@ -29,19 +32,8 @@ const useBlogCalls = () => {
       dispatch(getSuccess({ data: data?.data, url }));
       if (url === "blogs") {
         dispatch(getPageSuccess(data?.details?.pages?.total));
+        dispatch(getTrendBlogs(data?.trendings));
       }
-    } catch (error) {
-      console.log(error);
-      dispatch(fetchFail());
-    }
-  };
-
-  const getTrendsData = async () => {
-    dispatch(fetchStart());
-    try {
-      const { data } = await axiosWithToken("blogs/?page=1&limit=500");
-      // console.log(data);
-      dispatch(getSuccess({ data: data?.data, url: "trendings" }));
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());
@@ -153,48 +145,36 @@ const useBlogCalls = () => {
     }
   };
 
-  const getSingleBlog = async (url: string) => {
+  const getSingleBlog = async (blogId: string) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken(`${url}`);
-      // console.log(data);
+      const { data } = await axiosWithToken(`blogs/${blogId}`);
       dispatch(getSingleBlogSuccess({ data: data?.data }));
     } catch (error) {
       dispatch(fetchFail());
     }
   };
 
-  // const postSave = async(blogId: string) => {
-  //   dispatch(fetchStart());
-  //   try {
-  //     const {data} = axiosWithToken.put(`blogs/${blogId}/save`);
-  //     getBlogData("blogs");
-  //     getBlogData("blogs/saved");
-  //   } catch (error) {
-  //     dispatch(fetchFail());
-  //     console.log(error);
-  //   }
-  // };
-
-  // const deleteSave = async(blogId: string) => {
-  //   dispatch(fetchStart());
-  //   try {
-  //     const {data} = axiosWithToken.delete(`blogs/${blogId}/save`);
-  //     getBlogData("blogs");
-  //     getBlogData("blogs/saved");
-  //   } catch (error) {
-  //     dispatch(fetchFail());
-  //     console.log(error);
-  //   }
-  // };
-
   const postLike = async (url: string, blogId: string | undefined) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.post(`${url}`);
+      await axiosWithToken.put(`${url}`);
       // console.log(`Post Like: ${data}`);
       getBlogData("blogs");
       getSingleBlog(`blogs/${blogId}`);
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+  };
+
+  const postSave = async (blogId: string | undefined) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.put(`blogs/${blogId}/save`);
+      toastSuccessNotify(data.message);
+      dispatch(getSavedSuccess());
+      dispatch(updateSuccess(data));
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -220,9 +200,9 @@ const useBlogCalls = () => {
     getBlogData,
     getBlogComment,
     getSingleBlog,
-    getTrendsData,
     postLike,
     getLike,
+    postSave,
     // postSave,
     // deleteSave,
   };

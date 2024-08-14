@@ -8,6 +8,7 @@ import {
   getNews,
   getTotalPage,
 } from "../features/newsSlice";
+import setups from "../helper/setup";
 
 const useNewsCalls = () => {
   const dispatch = useDispatch();
@@ -18,17 +19,17 @@ const useNewsCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_WORLD_NEWS_API_BASE_URL}?text=
+        `${setups.WORLD_NEWS_API_BASE_URL}?text=
          ${categoryName}&language=en&offset=${
           (pageNum - 1) * pageLimit
         }&number=${pageLimit}`,
         {
           headers: {
-            "x-api-key": import.meta.env.VITE_WORLD_NEWS_API_KEY,
+            "x-api-key": setups.WORLD_NEWS_API_KEY,
           },
         }
       );
-      console.log(data?.data);
+      // console.log(data?.data);
       dispatch(getNews({ data: data?.news }));
       dispatch(getTotalPage({ data: data?.available / pageLimit }));
     } catch (error) {

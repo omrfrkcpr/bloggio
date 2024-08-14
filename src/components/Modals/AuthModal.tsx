@@ -4,6 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import CustomButton from "../../utils/CustomButton";
+import AuthBtn from "../Buttons/AuthBtn";
 
 const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
@@ -52,6 +53,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
               </h2>
               <div className="text-center flex flex-col space-y-6">
                 {formType === "sign up" ? <Register /> : <Login />}
+                <AuthBtn />
                 <span className="text-black flex gap-1 justify-center items-center">
                   {formType === "sign up"
                     ? "Already have an account?"

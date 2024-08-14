@@ -5,45 +5,49 @@ import BlogCard from "../Cards/BlogCard";
 import { Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { extractProfileId } from "../../helper/functions";
 
 const PersonalBlogs = ({ blogType }: { blogType: string }) => {
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const { currentUser } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const { search } = useLocation();
-  const [user, setUser] = useState<string>("");
   const [type, setType] = useState<string>(blogType || "");
 
-  console.log(pathname);
-  console.log(search);
+  // console.log(pathname);
+  // console.log(search);
+
+  // console.log(blogs);
+  // console.log(currentUser);
 
   useEffect(() => {
     if (search.includes("my-blogs")) {
       setType("myBlogs");
     } else if (search.includes("drafts")) {
       setType("drafts");
+    } else if (search.includes("saved")) {
+      setType("saved");
     }
   }, [search]);
-
-  useEffect(() => {
-    if (currentUser?._id) {
-      setUser(currentUser?._id);
-    } else {
-      setUser(extractProfileId(pathname));
-    }
-  }, [currentUser, pathname]);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
 
   // Type filters blogs and shows drafted or published blogs. The only thing that differs between the 2 components.
-  const filteredBlogs = blogs.filter(
-    (item: any) =>
-      item?.isPublish === (type === "myBlogs" ? true : false) &&
-      item?.userId === user
-  );
+  const filteredBlogs = blogs.filter((item: any) => {
+    if (type === "saved") {
+      // Check if the current blog is in the user's saved blogs
+      return currentUser.saved.includes(item._id);
+    } else if (type === "myBlogs") {
+      // Only include published blogs for "myBlogs"
+      return item.isPublish === true && item.userId._id === currentUser._id;
+    } else if (type === "drafts") {
+      // Only include drafts for "drafts"
+      return item.isPublish === false && item.userId._id === currentUser._id;
+    }
+    return false;
+  });
+
+  console.log(`Filtered Blogs for ${type}:`, filteredBlogs);
 
   const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
 
@@ -100,7 +104,13 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
         </div>
       ) : (
         <div className="p-5 bg-gray-200 h-[30px] grid place-content-center place-items-center rounded-xl">
-          No {type === "myBlogs" ? "Published" : "Draft"} Blog Found...
+          No{" "}
+          {type === "myBlogs"
+            ? "Published"
+            : type === "drafts"
+            ? "Draft"
+            : "Saved"}{" "}
+          Blog Found...
         </div>
       )}
     </>

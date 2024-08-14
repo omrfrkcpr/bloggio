@@ -4,71 +4,43 @@
 import openLock from "../../assets/open-lock.svg";
 import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
-import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toastInfoNotify } from "../../helper/toastNotify";
 import useShowModal from "../../hooks/useShowModal";
 import AuthModal from "../Modals/AuthModal";
 import { RootState } from "../../app/store";
-import usePath from "../../hooks/usePath";
 import BlogAnalytics from "../Blog/BlogAnalytics";
-import {
-  shortenText,
-  dateFormatter,
-  calculateReadTime,
-} from "../../helper/functions";
 import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
   userId,
+  categoryId,
   title,
-  content,
   image,
-  comments,
   likes,
   countOfVisitors,
-  createdAt,
-  categoryName,
+  updatedAt,
+  blogDetails,
 }) => {
   const { currentUser } = useSelector((state: any) => state.auth);
   const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
   const { toggleBlogCardModal } = useShowModal();
-  const { getNavigatePath } = usePath();
   const navigate = useNavigate();
-  const randomFirstName = faker.person.firstName(); // TODO
-  const randomLastName = faker.person.lastName(); // TODO
 
-  const userImage = currentUser?.image
-    ? currentUser?.image
-    : `https://api.dicebear.com/8.x/avataaars/svg?seed=${randomFirstName}`; // TODO
-
-  // checking userImage response data
-  const isDicebearImage = userImage.startsWith(
-    "https://api.dicebear.com/8.x/avataaars/svg?seed="
-  );
+  const { firstName, lastName, avatar, username } = userId;
 
   const handleReadMore = () => {
     if (currentUser) {
-      navigate(`/blog/${_id}`, {
-        state: {
-          randomFirstName,
-          randomLastName,
-          userImage,
-          categoryName,
-          _id,
-        },
-      });
+      navigate(`/blog/${_id}`);
     } else {
       toggleBlogCardModal();
       toastInfoNotify(
         "To read more, please register first or log in if you have an account."
       );
-      getNavigatePath(`/blog/${_id}`, {
-        state: { randomFirstName, randomLastName, userImage, _id },
-      });
+      navigate(`/blog/${_id}`);
     }
   };
 
@@ -95,11 +67,11 @@ const BlogCard: React.FC<BlogCardProps> = ({
               <CustomButton
                 click={() =>
                   navigate(
-                    `/categories?filter=${(categoryName || "").toLowerCase()}`
+                    `/categories?filter=${categoryId.name.toLowerCase()}`
                   )
                 }
                 className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
-                title={categoryName}
+                title={categoryId.name}
               />
             </div>
             <CustomButton
@@ -107,69 +79,42 @@ const BlogCard: React.FC<BlogCardProps> = ({
               click={handleReadMore}
               title={title}
             />
-            {/* <p
-              className="text-gray-700 mt-2 text-[9px] md:text-[12px] lg:text-[14px] xl:text-[16px] cursor-pointer"
-              onClick={handleReadMore}
-            >
-              {shortenText(content,20)}
-            </p> */}
             <div
               onClick={handleReadMore}
               className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
-              dangerouslySetInnerHTML={{ __html: shortenText(content, 20) }}
-            />
+            >
+              {blogDetails.contentPrev}
+            </div>
           </div>
           <div className="flex justify-between">
             <div className="flex items-center justify-center">
-              {isDicebearImage ? (
-                <CustomImage
-                  className="w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 border-[.5px] border-gray"
-                  src={userImage}
-                  alt="user-image"
-                />
-              ) : (
-                (
-                  <Avatar
-                    alt={`${randomFirstName} ${randomLastName}`}
-                    src="/static/images/avatar/2.jpg"
-                    sx={{
-                      width: { xs: "25px", md: "32px" },
-                      height: { xs: "25px", md: "32px" },
-                      mr: 1,
-                      backgroundColor: "#B9D0F0",
-                    }}
-                  />
-                ) || (
-                  <Avatar
-                    src="/static/images/avatar/2.jpg"
-                    sx={{
-                      width: { xs: "25px", md: "32px" },
-                      height: { xs: "25px", md: "32px" },
-                      mr: 1,
-                      backgroundColor: "#B9D0F0",
-                    }}
-                  />
-                )
-              )}
+              <Avatar
+                alt={`${firstName} ${lastName}`}
+                src={`${avatar}`}
+                sx={{
+                  width: { xs: "25px", md: "32px" },
+                  height: { xs: "25px", md: "32px" },
+                  mr: 1,
+                  backgroundColor: "#B9D0F0",
+                }}
+              />
               <div className="text-sm">
-                <p className="text-[10px] lg:text-[12px] xl:text-[16px] text-gray-900 leading-none">{`${randomFirstName} ${randomLastName}`}</p>
+                <p className="text-[10px] lg:text-[12px] xl:text-[16px] text-gray-800 leading-none">
+                  @{username}
+                </p>
                 <p className="text-gray-600 space-x-1 text-[10px]  lg:text-[12px] xl:text-[14px] ">
-                  <span>{dateFormatter(createdAt)} -</span>
-                  <span>{`${calculateReadTime(
-                    content || {
-                      __html: content,
-                    }
-                  )} min read`}</span>
+                  <span>{updatedAt} -</span>
+                  <span>{blogDetails.readTime}</span>
                 </p>
               </div>
             </div>
             <div className="flex space-x-1 xl:space-x-2 justify-between items-center">
               <BlogAnalytics
                 likes={likes}
-                comments={comments}
+                blogDetails={blogDetails}
                 countOfVisitors={countOfVisitors}
                 _id={_id}
-                userId={userId}
+                userId={userId._id}
               />
               <CustomButton
                 click={handleReadMore}

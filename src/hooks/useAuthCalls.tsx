@@ -8,12 +8,12 @@ import {
   registerSuccess,
   updateSuccess,
 } from "../features/authSlice";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
 import { RootState } from "../app/store";
+import { axiosWithPublic } from "./useAxios";
+import setups from "../helper/setup";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const useAuthCall = () => {
   const register = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${BASE_URL}users/`, userInfo);
+      const { data } = await axiosWithPublic.post("users/", userInfo);
       // console.log(data);
       dispatch(registerSuccess(data));
       navigate("/");
@@ -42,8 +42,8 @@ const useAuthCall = () => {
   const updateUser = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.put(
-        `${BASE_URL}users/${currentUser?._id}/`,
+      const { data } = await axiosWithPublic.put(
+        `users/${currentUser?._id}/`,
         userInfo,
         {
           headers: {
@@ -65,7 +65,7 @@ const useAuthCall = () => {
   const login = async (userInfo: object) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${BASE_URL}auth/login/`, userInfo);
+      const { data } = await axiosWithPublic.post("auth/login/", userInfo);
       dispatch(loginSuccess(data));
       toastSuccessNotify("You're successfully logged in!");
       navigate(path);
@@ -78,10 +78,14 @@ const useAuthCall = () => {
     }
   };
 
+  const signInWithSocial = async (consumerName: string) => {
+    window.open(`${setups.BASE_URL}auth/${consumerName}`, "_self");
+  };
+
   const logout = async (showNotify: boolean) => {
     dispatch(fetchStart());
     try {
-      await axios.get(`${BASE_URL}auth/logout/`, {
+      await axiosWithPublic.get("auth/logout/", {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -99,7 +103,7 @@ const useAuthCall = () => {
     }
   };
 
-  return { register, login, logout, updateUser };
+  return { register, login, signInWithSocial, logout, updateUser };
 };
 
 export default useAuthCall;

@@ -3,11 +3,9 @@
 import { useSelector } from "react-redux";
 // import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import BlogAnalytics from "../components/Blog/BlogAnalytics";
-// import CommentForm from "../components/Forms/CommentForm";
-import { dateFormatter, calculateReadTime } from "../helper/functions";
 import { Avatar } from "@mui/material";
 import Loading from "../components/global/Loading";
 import CustomImage from "../utils/CustomImage";
@@ -17,25 +15,15 @@ const SingleBlog = () => {
   // const { currentUser } = useSelector((state: RootState) => state?.auth);
   const { getSingleBlog, getBlogData } = useBlogCalls();
   const { singleBlog, loading } = useSelector((state: any) => state?.blog);
-  // console.log("Single Blog:", singleBlog);
-  const location = useLocation();
-  const { state } = location;
-  // const [show, setShow] = useState(false);
-  const path = useParams<{ blogId: string }>();
+  const { blogId } = useParams<{ blogId: string }>();
 
-  // console.log(path?.blogId);
-
-  const {
-    randomFirstName = "",
-    randomLastName = "",
-    userImage = "",
-    categoryName = "",
-    _id = "",
-  } = state || {};
+  // console.log(blogId);
 
   useEffect(() => {
-    getSingleBlog(`blogs/${path?.blogId || _id}`);
-  }, [path, _id]);
+    if (blogId) {
+      getSingleBlog(blogId);
+    }
+  }, [blogId]);
 
   useEffect(() => {
     getBlogData("comments");
@@ -47,18 +35,11 @@ const SingleBlog = () => {
     title,
     content,
     image,
-    comments,
     likes,
     countOfVisitors,
-    createdAt,
+    blogDetails,
+    updatedAt,
   } = singleBlog || {};
-
-  const isDicebearImage = userImage.startsWith(
-    "https://api.dicebear.com/8.x/avataaars/svg?seed="
-  );
-
-  // console.log(categoryId);
-  // console.log(categoryName);
 
   return (
     <>
@@ -84,64 +65,42 @@ const SingleBlog = () => {
               className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto"
               data-test="blog-category"
             >
-              {categoryId?.name || categoryName}
+              {categoryId?.name || ""}
             </h3>
             <div className="flex justify-between space-x-5 w-[100%] max-w-[1000px] mt-4">
               <div className="flex items-center">
-                {isDicebearImage ? (
-                  <CustomImage
-                    className="w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 border-[.5px] border-gray"
-                    src={userImage}
-                    alt="user-image"
-                  />
-                ) : (
-                  (
-                    <Avatar
-                      alt={`${randomFirstName} ${randomLastName}`}
-                      src="/static/images/avatar/2.jpg"
-                      sx={{
-                        width: { xs: "20px", md: "32px" },
-                        height: { xs: "20px", md: "32px" },
-                        mr: 1,
-                        backgroundColor: "#B9D0F0",
-                      }}
-                    />
-                  ) || (
-                    <Avatar
-                      src="/static/images/avatar/2.jpg"
-                      sx={{
-                        width: { xs: "20px", md: "32px" },
-                        height: { xs: "20px", md: "32px" },
-                        mr: 1,
-                        backgroundColor: "#B9D0F0",
-                      }}
-                    />
-                  )
-                )}
+                <Avatar
+                  alt={`${userId?.firstName} ${userId?.lastName}`}
+                  src={userId?.avatar}
+                  sx={{
+                    width: { xs: "20px", md: "32px" },
+                    height: { xs: "20px", md: "32px" },
+                    mr: 1,
+                    backgroundColor: "#B9D0F0",
+                  }}
+                />
                 <div className="text-[10px] md:text-[16px]">
                   <p
                     className="text-gray-900 leading-none"
                     data-test="blog-userInfo"
-                  >{`${randomFirstName} ${randomLastName}`}</p>
+                  >
+                    @{userId?.username}
+                  </p>
                   <p
                     className="text-gray-600 space-x-1"
                     data-test="blog-details"
                   >
-                    <span>{dateFormatter(createdAt)} -</span>
-                    <span>{`${calculateReadTime(
-                      {
-                        __html: content,
-                      } || content
-                    )} min read`}</span>
+                    <span>{updatedAt} -</span>
+                    <span>{blogDetails?.readTime}</span>
                   </p>
                 </div>
               </div>
               <div className="flex space-x-1 md:space-x-4">
                 <BlogAnalytics
                   likes={likes}
-                  comments={comments}
+                  blogDetails={blogDetails}
                   countOfVisitors={countOfVisitors}
-                  _id={path?.blogId}
+                  _id={blogId}
                   userId={userId?._id}
                 />
               </div>
@@ -152,7 +111,7 @@ const SingleBlog = () => {
               data-test="blog-description"
             />
           </div>
-          <BlogComments blogId={_id || path?.blogId} />
+          <BlogComments blogId={blogId || ""} />
         </div>
       )}
     </>

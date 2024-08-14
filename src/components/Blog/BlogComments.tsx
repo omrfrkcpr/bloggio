@@ -10,7 +10,6 @@ import { LiaTimesSolid } from "react-icons/lia";
 import Loading from "../global/Loading";
 import { toastErrorNotify } from "../../helper/toastNotify";
 import BlogCommentCard from "../Cards/BlogCommentCard";
-import { capitalizeWords } from "../../helper/functions";
 import { Avatar } from "@mui/material";
 import CustomButton from "../../utils/CustomButton";
 
@@ -76,21 +75,15 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
         {currentUser && (
           <div className="shadows p-3 my-5 overflow-hidden">
             <div className="flex items-center gap-2 mb-5">
-              {currentUser?.image ? (
-                <img
-                  className="w-[2rem] h-[2rem] rounded-full object-cover"
-                  src={currentUser?.image}
-                  alt="user-image"
-                />
-              ) : (
-                <Avatar
-                  alt={
-                    currentUser && `${capitalizeWords(currentUser?.firstName)}`
-                  }
-                  src="/static/images/avatar/2.jpg"
-                  sx={{ width: "32px", height: "32px" }}
-                />
-              )}
+              <Avatar
+                alt={`${currentUser?.firstName} ${currentUser?.lastName}`}
+                src={`${currentUser?.avatar}`}
+                sx={{
+                  width: { xs: "25px", md: "32px" },
+                  height: { xs: "25px", md: "32px" },
+                  backgroundColor: "#B9D0F0",
+                }}
+              />
               <h3 className="text-sm">{currentUser?.username}</h3>
             </div>
             <textarea

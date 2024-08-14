@@ -32,10 +32,12 @@ const BlogSettings = ({
   const [showDrop, setShowDrop] = useState(false);
   const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
   const { currentUser } = useSelector((state: any) => state.auth);
-  const { deleteBlogData } = useBlogCalls();
+  const { deleteBlogData, postSave } = useBlogCalls();
   const path = window?.location?.href;
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
+
+  const isSaved = currentUser?.saved?.includes(blogId);
 
   const copyLink = async () => {
     try {
@@ -48,6 +50,10 @@ const BlogSettings = ({
     } finally {
       setShowDrop(false);
     }
+  };
+
+  const handlepostSave = async () => {
+    postSave(blogId);
   };
 
   useEffect(() => {
@@ -98,11 +104,12 @@ const BlogSettings = ({
       {
         key: "save-blog",
         title: "Save blog",
-        icon: <Bookmarks weight="thin" />,
+        icon: <Bookmarks weight={`${isSaved ? "fill" : "thin"}`} />,
+        onClick: handlepostSave,
       },
     ];
 
-    if (currentUser?._id === userId) {
+    if (currentUser?._id === userId || currentUser?.isAdmin) {
       initialButtons.push(
         {
           key: "edit-blog",
@@ -144,7 +151,7 @@ const BlogSettings = ({
         showDrop={showDrop}
         setShowDrop={setShowDrop}
         size="w-[8.5rem] md:w-[11rem]"
-        ref={dropDownRef}
+        // ref={dropDownRef}
       >
         {settingButtons.map(
           ({ key, title, icon, onClick, component: Component, extraProps }) => {

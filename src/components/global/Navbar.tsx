@@ -19,13 +19,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AuthModal from "../Modals/AuthModal";
 import useShowModal from "../../hooks/useShowModal";
 import { RootState } from "../../app/store";
-import usePath from "../../hooks/usePath";
 import { loginSettings } from "../../helper/constants";
 import { capitalizeWords, maskEmail } from "../../helper/functions";
 import { ChartBar, SignOut, User } from "@phosphor-icons/react";
 import Search from "./Search";
 import { IoIosArrowDown } from "react-icons/io";
-import useBlogCalls from "../../hooks/useBlogCalls";
+import CustomImage from "../../utils/CustomImage";
 
 const Navbar = () => {
   const { currentUser } = useSelector((state: any) => state.auth);
@@ -34,10 +33,8 @@ const Navbar = () => {
   const { toggleNavbarModal, toggleHeroModal } = useShowModal();
   const navigate = useNavigate();
   const [selectedFormType, setSelectedFormType] = React.useState("");
-  const { getNavigatePath } = usePath();
   const [isActive, setIsActive] = React.useState(false);
   const [searchModal, setSearchModal] = React.useState(false);
-  const { getBlogData } = useBlogCalls();
   const { pathname } = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -45,10 +42,6 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-
-  React.useEffect(() => {
-    getBlogData("blogs");
-  }, []);
 
   React.useEffect(() => {
     const scrollMe = () => {
@@ -119,9 +112,9 @@ const Navbar = () => {
       setAnchorElUser(null);
       toggleNavbarModal();
       setSelectedFormType(pathUrl);
-      getNavigatePath("/");
+      navigate("/");
     },
-    [toggleNavbarModal, getNavigatePath]
+    [toggleNavbarModal]
   );
 
   return (
@@ -150,7 +143,6 @@ const Navbar = () => {
               variant="h4"
               sx={{
                 mr: 2,
-                mb: 1,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Playfair Display",
                 fontWeight: 600,
@@ -219,8 +211,8 @@ const Navbar = () => {
             <Logo
               sx={{
                 display: { xs: "flex", md: "none" },
-                mr: 1,
-                mt: "12px",
+                mr: { xs: "4px", md: 1 },
+                mt: "4px",
               }}
               width="40px"
               alt="logoMobile"
@@ -293,12 +285,12 @@ const Navbar = () => {
                   }}
                   data-test="userMenuIcon"
                 >
-                  {currentUser?.image ? (
-                    <img
-                      className="w-[44px] h-11 rounded-full cursor-pointer"
-                      src={currentUser?.image}
-                      alt="user-image"
-                      data-test="userImage"
+                  {currentUser?.avatar ? (
+                    <CustomImage
+                      className="w-[40px] h-10 rounded-full cursor-pointer"
+                      src={currentUser?.avatar}
+                      alt="user-avatar"
+                      data-test="userAvatar"
                     />
                   ) : (
                     <Avatar
@@ -308,8 +300,8 @@ const Navbar = () => {
                       }
                       src="/static/images/avatar/2.jpg"
                       sx={{
-                        minWidth: "44px",
-                        height: "42px",
+                        minWidth: "40px",
+                        height: "40px",
                         cursor: "pointer",
                       }}
                       data-test="userAvatar"
