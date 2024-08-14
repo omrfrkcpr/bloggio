@@ -130,30 +130,32 @@ const Navbar = () => {
           }}
         >
           <Toolbar disableGutters>
-            <Logo
-              sx={{
-                display: { xs: "none", md: "flex" },
-                mr: 1,
-                mt: "6px",
-              }}
-              width="50px"
-              alt="logo"
-            />
-            <CustomTypography
-              variant="h4"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "Playfair Display",
-                fontWeight: 600,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textShadow: "2px 2px 8px #000000",
-                textDecoration: "none",
-              }}
-              content="Bloggio"
-              alt="bloggioTitle"
-            />
+            <div onClick={() => navigate("/")} className="flex">
+              <Logo
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  mr: 1,
+                  mt: "6px",
+                }}
+                width="50px"
+                alt="logo"
+              />
+              <CustomTypography
+                variant="h4"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "Playfair Display",
+                  fontWeight: 600,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textShadow: "2px 2px 8px #000000",
+                  textDecoration: "none",
+                }}
+                content="Bloggio"
+                alt="bloggioTitle"
+              />
+            </div>
 
             <Box
               sx={{
@@ -208,32 +210,34 @@ const Navbar = () => {
                 ))}
               </Menu>
             </Box>
-            <Logo
-              sx={{
-                display: { xs: "flex", md: "none" },
-                mr: { xs: "4px", md: 1 },
-                mt: "4px",
-              }}
-              width="40px"
-              alt="logoMobile"
-            />
-            <CustomTypography
-              variant="h5"
-              noWrap
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "Playfair Display",
-                fontWeight: 600,
-                letterSpacing: ".1rem",
-                color: isActive ? "#B9D0F0" : "inherit",
-                textDecoration: "none",
-                textShadow: isActive ? "" : "1px 2px 1px #0000004a",
-              }}
-              content="Bloggio"
-              alt="bloggioTitleMobile"
-            />
+            <div onClick={() => navigate("/")} className="flex">
+              <Logo
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  mr: { xs: "4px", md: 1 },
+                  mt: "4px",
+                }}
+                width="40px"
+                alt="logoMobile"
+              />
+              <CustomTypography
+                variant="h5"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "flex", md: "none" },
+                  flexGrow: 1,
+                  fontFamily: "Playfair Display",
+                  fontWeight: 600,
+                  letterSpacing: ".1rem",
+                  color: isActive ? "#B9D0F0" : "inherit",
+                  textDecoration: "none",
+                  textShadow: isActive ? "" : "1px 2px 1px #0000004a",
+                }}
+                content="Bloggio"
+                alt="bloggioTitleMobile"
+              />
+            </div>
             {currentUser && (
               <Search
                 modal={searchModal}

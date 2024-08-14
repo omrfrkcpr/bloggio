@@ -6,29 +6,28 @@ const currentYear = new Date().getFullYear();
 
 const Footer: React.FC = React.memo(() => {
   return (
-    <section className=" w-full p-2" style={{ backgroundColor: "#b9d0f0" }}>
-      <footer className="relative w-full">
-        <div className="mx-auto w-full px-6">
-          <div className="flex w-full flex-col items-center justify-center py-3 md:flex-row md:justify-between">
-            <div className="flex flex-col lg:flex-row lg:gap-2 items-center justify-center">
-              <Logo
-                sx={{
-                  margin: "auto",
-                }}
-                width="40px"
-              />
-              <span className="mb-2">
-                <a href="https://github.com/omrfrkcpr/bloggio">
-                  &copy; {currentYear} Bloggio. All Rights Reserved.
-                </a>
-              </span>
-            </div>
-
-            <SocialMedia />
+    <footer className="relative w-full" style={{ backgroundColor: "#b9d0f0" }}>
+      <div className="mx-auto w-full px-6">
+        <div className="flex w-full flex-col items-center justify-center py-3 md:flex-row md:justify-between">
+          <div className="flex flex-col md:flex-row md:gap-2 items-center justify-center">
+            <Logo
+              sx={{
+                margin: "auto",
+                mt: 1,
+              }}
+              width="40px"
+            />
+            <span>
+              <a href="https://github.com/omrfrkcpr/bloggio">
+                &copy; {currentYear} Bloggio. All Rights Reserved.
+              </a>
+            </span>
           </div>
+
+          <SocialMedia />
         </div>
-      </footer>
-    </section>
+      </div>
+    </footer>
   );
 });
 

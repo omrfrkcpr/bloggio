@@ -46,7 +46,7 @@ const SingleBlog = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="min-h-[88.45vh] h-auto flex justify-center items-start">
+        <div className="min-h-[88.62vh] h-auto flex justify-center items-start">
           <div className="flex flex-col justify-center items-center lg:items-start p-5 w-full max-w-[1000px] mx-auto">
             <div className="mx-auto">
               <CustomImage
