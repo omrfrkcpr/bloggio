@@ -82,7 +82,6 @@ const Hero: React.FC = React.memo(() => {
             src={`${setups.AWS_S3_BASE_URL}typewriter.png`}
             alt="typewriter"
             width="320px"
-            loading="lazy"
           />
         </div>
         {showHeroModal && (

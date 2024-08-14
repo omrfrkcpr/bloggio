@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// import lock from "../../assets/lock.svg";
-import openLock from "../../assets/open-lock.svg";
 import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
 import { useSelector } from "react-redux";
@@ -13,6 +11,7 @@ import { RootState } from "../../app/store";
 import BlogAnalytics from "../Blog/BlogAnalytics";
 import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
+import setups from "../../helper/setup";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -55,7 +54,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 className="text-[10px] lg:text-[12px]  text-gray-600 flex items-center space-x-1 cursor-pointer"
               >
                 <CustomImage
-                  src={openLock}
+                  src={`${setups.AWS_S3_BASE_URL}open-lock.svg`} // lock.svg
                   alt="read-permission-status"
                   width="12px"
                 />

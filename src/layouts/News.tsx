@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 // import { RootState } from "../app/store";
 import { useEffect, useState } from "react";
 import useNewsCalls from "../hooks/useNewsCalls";
-import spinner2 from "../assets/spinner2.gif";
 import { GiWorld } from "react-icons/gi";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
