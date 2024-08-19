@@ -42,6 +42,8 @@ const Navbar = () => {
     null
   );
 
+  // console.log(currentUser)
+
   React.useEffect(() => {
     const scrollMe = () => {
       window.scrollY > 250 ? setIsActive(true) : setIsActive(false);
