@@ -1,12 +1,11 @@
 import { LiaTimesSolid } from "react-icons/lia";
 import CustomModal from "../../utils/CustomModal";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Avatar } from "@mui/material";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
-import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
 import { RootState } from "../../app/store";
+import AvatarSection from "./AvatarSection";
 
 const EditProfile = ({
   editModal,
@@ -25,6 +24,10 @@ const EditProfile = ({
   };
 
   const [form, setForm] = useState(initialFormData);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const [removeExistingAvatar, setRemoveExistingAvatar] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -38,23 +41,66 @@ const EditProfile = ({
     }
   }, [currentUser]);
 
-  const saveForm = () => {
-    const myUser = { ...currentUser };
-    delete myUser.password;
-    const updatedUser = {
-      ...myUser,
-      avatar: form?.avatar,
-      username: form?.username,
-      bio: form?.bio,
+  useEffect(() => {
+    return () => {
+      // Clean up URL object when component unmounts or file is removed
+      if (filePreview) {
+        URL.revokeObjectURL(filePreview);
+      }
     };
-    console.log("Updated User Data:", updatedUser);
-    updateUser(updatedUser);
+  }, [filePreview]);
+
+  const handleFileRemove = () => {
+    setSelectedFile(null);
+    setFilePreview(null);
+    setForm((prev) => ({ ...prev, avatar: currentUser?.avatar || "" }));
+    setRemoveExistingAvatar(false);
+  };
+
+  const handleRemoveExistingAvatar = () => {
+    setRemoveExistingAvatar(true);
+    setForm((prev) => ({ ...prev, avatar: "" }));
+    setSelectedFile(null);
+    setFilePreview(null);
+  };
+
+  // console.log(form);
+
+  const saveForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    if (form.username !== currentUser?.username) {
+      formData.append("username", form?.username || "");
+    }
+
+    if (form.bio !== currentUser?.bio) {
+      formData.append("bio", form?.bio || "");
+    }
+
+    if (selectedFile) {
+      formData.append("avatar", selectedFile);
+    } else if (removeExistingAvatar) {
+      formData.append("avatar", ""); // delete existing avatar
+    }
+
+    // console.log("formdata: ", formData);
+
+    await updateUser(formData);
     setEditModal(false);
   };
 
+  const avatarSrc = form.avatar
+    ? form.avatar
+    : "https://i.pinimg.com/736x/09/21/fc/0921fc87aa989330b8d403014bf4f340.jpg";
+
   return (
     <CustomModal modal={editModal} hidden="" setModal={setEditModal}>
-      <div className="center w-[95%] md:w-[45rem] bg-white mx-auto shadows my-[1rem] z-20 mb-[3rem] p-[2rem]">
+      <form
+        onSubmit={saveForm}
+        encType="multipart/form-data"
+        className="center w-[95%] md:w-[45rem] bg-white mx-auto shadows my-[1rem] z-20 mb-[3rem] p-[2rem]"
+      >
         {/* head */}
         <div className="flex items-center justify-between">
           <h2 className="font-bold text-xl">Profile Information</h2>
@@ -65,50 +111,21 @@ const EditProfile = ({
           />
         </div>
         {/* body */}
-        <section className="mt-6">
-          <p className="pb-2 text-sm text-gray-500 mb-2">Photo</p>
-          <div className="flex justify-start mb-2">
-            <label htmlFor="userImg" className="text-sm pb-3">
-              Image URL:
-            </label>
-            <input
-              value={form?.avatar}
-              className=" h-[20px] ms-2 border-b-[1.5px] border-black outline-none"
-              id="userImg"
-              onChange={(e) => setForm({ ...form, avatar: e.target.value })}
-              accept="image/jpg, img/png, image/jpeg, image/JPEG, image/gif"
-              type="text"
-            />
-          </div>
-          <div className="flex gap-[2rem]">
-            <div className="w-[5rem]">
-              {form?.avatar ? (
-                <CustomImage
-                  className="min-h-[5rem] min-w-[5rem] object-fit border border-gray-400 rounded-full"
-                  src={form?.avatar}
-                  alt="profile-img"
-                />
-              ) : (
-                <Avatar sx={{ minWidth: "5rem", minHeight: "5rem" }} />
-              )}
-            </div>
-            <div>
-              <CustomButton
-                click={() => setForm({ ...form, avatar: "" })}
-                className="text-red-700 text-sm hover:text-red-300"
-                title="Clear URL"
-              />
-              <p className="w-full sm:w-[20rem] text-gray-500 text-sm pt-2 ">
-                Recommended: Square JPG, PNG, or GIF, at least 1,000 Pixels per
-                side.
-              </p>
-            </div>
-          </div>
-        </section>
+        <AvatarSection
+          filePreview={filePreview}
+          avatarSrc={avatarSrc}
+          handleRemoveExistingAvatar={handleRemoveExistingAvatar}
+          handleFileRemove={handleFileRemove}
+          setSelectedFile={setSelectedFile}
+          setFilePreview={setFilePreview}
+          selectedFile={selectedFile}
+          setProfileForm={setForm}
+          setRemoveExistingAvatar={setRemoveExistingAvatar}
+        />
         {/* Profile Edit Form*/}
         <section className="pt-[1rem] text-sm">
           <label className="pb-3 block" htmlFor="username">
-            Name*
+            Username*
           </label>
           <input
             type="text"
@@ -154,13 +171,14 @@ const EditProfile = ({
             click={() => setEditModal(false)}
             title="Cancel"
           />
-          <CustomButton
-            click={saveForm}
+          <button
+            type="submit"
             className="text-white btn bg-green-800 hover:bg-green-300 hover:border-green-300"
-            title="Save"
-          />
+          >
+            Save
+          </button>
         </div>
-      </div>
+      </form>
     </CustomModal>
   );
 };

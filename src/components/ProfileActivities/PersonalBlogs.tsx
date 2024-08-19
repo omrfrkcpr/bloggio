@@ -8,9 +8,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useBlogCalls from "../../hooks/useBlogCalls";
 
 const PersonalBlogs = ({ blogType }: { blogType: string }) => {
-  const { blogs, totalPage } = useSelector((state: RootState) => state.blog);
+  const { blogs, totalPage, saved } = useSelector(
+    (state: RootState) => state.blog
+  );
   const { currentUser } = useSelector((state: RootState) => state.auth);
-  const { getBlogData } = useBlogCalls();
+  const { getBlogData, getSavedBlogs } = useBlogCalls();
   const navigate = useNavigate();
   const { search } = useLocation();
   const [type, setType] = useState<string>(blogType || "");
@@ -40,6 +42,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
     }
     if (search.includes("saved")) {
       setType("saved");
+      getSavedBlogs(currentUser?._id || "");
     }
   }, [search]);
 
@@ -53,12 +56,10 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
     );
   };
 
-  // console.log(currentUser);
+  // console.log(saved);
 
   const selectedBlogs =
-    search?.includes("my-blogs") || search?.includes("drafts")
-      ? blogs
-      : currentUser?.saved;
+    search?.includes("my-blogs") || search?.includes("drafts") ? blogs : saved;
 
   return (
     <>
@@ -66,14 +67,10 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
         <div className=" min-h-[43.8vh]">
           <ul className="grid grid-cols-1 gap-y-[3rem] items-start justify-center max-w-[900px] h-auto">
             {selectedBlogs.map((blog: BlogCardProps) => {
-              return (
-                <div key={blog?._id}>
-                  <BlogCard {...blog} />
-                </div>
-              );
+              return <BlogCard key={blog?._id} {...blog} />;
             })}
           </ul>
-          {selectedBlogs.length ? (
+          {selectedBlogs.length && totalPage > 1 ? (
             <Stack
               sx={{
                 margin: "5rem 0",

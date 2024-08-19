@@ -21,7 +21,7 @@ import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 
 const Trending = () => {
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
   const { toggleBlogCardModal } = useShowModal();
   const navigate = useNavigate();
   const { trendings } = useSelector((state: RootState) => state.blog);

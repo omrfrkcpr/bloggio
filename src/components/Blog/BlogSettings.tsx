@@ -37,6 +37,7 @@ const BlogSettings = ({
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
 
+  // console.log(blogId);
   const isSaved =
     currentUser && blogId ? currentUser?.saved?.includes(blogId) : false;
 
@@ -46,7 +47,7 @@ const BlogSettings = ({
         path.includes("/blog/") ? path : path + `blog/${blogId}`
       );
       toastSuccessNotify("Link has been copied");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toastErrorNotify(error?.message);
     } finally {
@@ -105,7 +106,7 @@ const BlogSettings = ({
       },
       {
         key: "save-blog",
-        title: "Save blog",
+        title: isSaved ? "Remove Blog" : "Save blog",
         icon: <Bookmarks weight={`${isSaved ? "fill" : "thin"}`} />,
         onClick: handlepostSave,
       },

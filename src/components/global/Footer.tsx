@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import SocialMedia from "./SocialMedia";
 import React from "react";
@@ -5,6 +6,7 @@ import React from "react";
 const currentYear = new Date().getFullYear();
 
 const Footer: React.FC = React.memo(() => {
+  const navigate = useNavigate();
   return (
     <footer className="relative w-full" style={{ backgroundColor: "#b9d0f0" }}>
       <div className="mx-auto w-full px-6">
@@ -17,6 +19,7 @@ const Footer: React.FC = React.memo(() => {
                 cursor: "pointer",
               }}
               width="40px"
+              onClick={() => navigate("/")}
             />
             <span>
               <a href="https://github.com/omrfrkcpr/bloggio">

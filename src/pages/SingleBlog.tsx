@@ -3,19 +3,23 @@
 import { useSelector } from "react-redux";
 // import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import BlogAnalytics from "../components/Blog/BlogAnalytics";
 import { Avatar } from "@mui/material";
 import Loading from "../components/global/Loading";
 import CustomImage from "../utils/CustomImage";
 import BlogComments from "../components/Blog/BlogComments";
+import { RootState } from "../app/store";
+import CustomButton from "../utils/CustomButton";
 
 const SingleBlog = () => {
-  // const { currentUser } = useSelector((state: RootState) => state?.auth);
   const { getSingleBlog, getBlogData } = useBlogCalls();
-  const { singleBlog, loading } = useSelector((state: any) => state?.blog);
+  const { singleBlog, loading } = useSelector(
+    (state: RootState) => state?.blog
+  );
   const { blogId } = useParams<{ blogId: string }>();
+  const navigate = useNavigate();
 
   // console.log(blogId);
 
@@ -50,7 +54,7 @@ const SingleBlog = () => {
           <div className="flex flex-col justify-center items-center lg:items-start p-5 w-full max-w-[1000px] mx-auto">
             <div className="mx-auto">
               <CustomImage
-                src={image}
+                src={image || ""}
                 alt="blog-image"
                 className="w-[100vw] max-h-[400px] my-5 mx-auto"
               />
@@ -61,12 +65,14 @@ const SingleBlog = () => {
             >
               {title}
             </h1>
-            <h3
-              className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto"
-              data-test="blog-category"
-            >
-              {categoryId?.name || ""}
-            </h3>
+            <CustomButton
+              click={() =>
+                navigate(`/categories?filter=${categoryId?.name.toLowerCase()}`)
+              }
+              className="text-[0.7rem] md:text-[1rem] text-center mb-3 text-white bg-black/30 rounded-md py-[2px] px-2 mx-auto cursor-pointer"
+              alt="blog-category"
+              title={categoryId?.name || ""}
+            />
             <div className="flex justify-between space-x-5 w-[100%] max-w-[1000px] mt-4">
               <div className="flex items-center">
                 <Avatar
@@ -97,9 +103,16 @@ const SingleBlog = () => {
               </div>
               <div className="flex space-x-1 md:space-x-4">
                 <BlogAnalytics
-                  likes={likes}
-                  blogDetails={blogDetails}
-                  countOfVisitors={countOfVisitors}
+                  likes={likes || []}
+                  blogDetails={
+                    blogDetails || {
+                      countOfLikes: 0,
+                      countOfComments: 0,
+                      readTime: "",
+                      contentPrev: "",
+                    }
+                  }
+                  countOfVisitors={countOfVisitors || 0}
                   _id={blogId}
                   userId={userId?._id}
                 />
@@ -107,7 +120,7 @@ const SingleBlog = () => {
             </div>
             <div
               className="w-[100%] max-w-[1000px] my-5 text-[12px] md:text-[1rem] lg:text-[1.2rem]"
-              dangerouslySetInnerHTML={{ __html: content }}
+              dangerouslySetInnerHTML={{ __html: content || "" }}
               data-test="blog-description"
             />
           </div>

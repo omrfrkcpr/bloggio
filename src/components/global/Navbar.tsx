@@ -68,7 +68,7 @@ const Navbar = () => {
         path: `/profile/${currentUser?._id}?my-blogs`,
         id: 1,
       },
-      { label: "Stats", path: `/stats/${currentUser?._id}`, id: 2 },
+      { label: "Stats", path: `/statistics/${currentUser?._id}`, id: 2 },
       { label: "Logout", path: "logout", id: 3 },
     ],
     [currentUser]
@@ -133,34 +133,34 @@ const Navbar = () => {
           }}
         >
           <Toolbar disableGutters>
-            <div onClick={() => navigate("/")} className="flex">
-              <Logo
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  mr: 1,
-                  mt: "6px",
-                  cursor: "pointer",
-                }}
-                width="50px"
-                alt="logo"
-              />
-              <CustomTypography
-                variant="h4"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "Playfair Display",
-                  fontWeight: 600,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textShadow: "2px 2px 8px #000000",
-                  textDecoration: "none",
-                  cursor: "pointer",
-                }}
-                content="Bloggio"
-                alt="bloggioTitle"
-              />
-            </div>
+            <Logo
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+                mt: "6px",
+                cursor: "pointer",
+              }}
+              width="50px"
+              alt="logo"
+              onClick={() => navigate("/")}
+            />
+            <CustomTypography
+              variant="h4"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Playfair Display",
+                fontWeight: 600,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textShadow: "2px 2px 8px #000000",
+                textDecoration: "none",
+                cursor: "pointer",
+              }}
+              content="Bloggio"
+              alt="bloggioTitle"
+              onClick={() => navigate("/")}
+            />
 
             <Box
               sx={{
@@ -215,36 +215,36 @@ const Navbar = () => {
                 ))}
               </Menu>
             </Box>
-            <div onClick={() => navigate("/")} className="flex">
-              <Logo
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  mr: { xs: "4px", md: 1 },
-                  mt: "4px",
-                  cursor: "pointer",
-                }}
-                width="40px"
-                alt="logoMobile"
-              />
-              <CustomTypography
-                variant="h5"
-                noWrap
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "Playfair Display",
-                  fontWeight: 600,
-                  letterSpacing: ".1rem",
-                  color: isActive ? "#B9D0F0" : "inherit",
-                  textDecoration: "none",
-                  textShadow: isActive ? "" : "1px 2px 1px #0000004a",
-                  cursor: "pointer",
-                }}
-                content="Bloggio"
-                alt="bloggioTitleMobile"
-              />
-            </div>
+            <Logo
+              sx={{
+                display: { xs: "flex", md: "none" },
+                mr: { xs: "4px", md: 1 },
+                mt: "4px",
+                cursor: "pointer",
+              }}
+              width="40px"
+              alt="logoMobile"
+              onClick={() => navigate("/")}
+            />
+            <CustomTypography
+              variant="h5"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "Playfair Display",
+                fontWeight: 600,
+                letterSpacing: ".1rem",
+                color: isActive ? "#B9D0F0" : "inherit",
+                textDecoration: "none",
+                textShadow: isActive ? "" : "1px 2px 1px #0000004a",
+                cursor: "pointer",
+              }}
+              content="Bloggio"
+              alt="bloggioTitleMobile"
+              onClick={() => navigate("/")}
+            />
             {currentUser && (
               <Search
                 modal={searchModal}
@@ -298,10 +298,9 @@ const Navbar = () => {
                 >
                   {currentUser?.avatar ? (
                     <CustomImage
-                      className="w-[40px] h-10 rounded-full cursor-pointer"
+                      className="w-[40px] h-10 rounded-full cursor-pointer object-fit"
                       src={currentUser?.avatar}
                       alt="user-avatar"
-                      data-test="userAvatar"
                     />
                   ) : (
                     <Avatar

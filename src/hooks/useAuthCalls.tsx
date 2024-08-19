@@ -14,7 +14,6 @@ import { RootState } from "../app/store";
 import { axiosWithPublic } from "./useAxios";
 import setups from "../helper/setup";
 
-
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ const useAuthCall = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithPublic.put(
-        `users/${currentUser?._id}/`,
+        `users/${currentUser?._id}`,
         userInfo,
         {
           headers: {

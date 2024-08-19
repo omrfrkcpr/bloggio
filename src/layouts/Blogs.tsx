@@ -21,44 +21,47 @@ const Blogs = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    await navigate(`?sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`);
+    await navigate(
+      `?filter[isPublish]=true&sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`
+    );
     getBlogData(
       "blogs",
-      `?sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`
+      `?filter[isPublish]=true&sort[createdAt]=desc&page=${page}&limit=${BlogsPerPage}`
     );
   };
 
   // console.log(blogs);
 
   useEffect(() => {
-    getBlogData("blogs", `?sort[createdAt]=desc&page=1&limit=${BlogsPerPage}`);
+    getBlogData(
+      "blogs",
+      `?filter[isPublish]=true&sort[createdAt]=desc&page=1&limit=${BlogsPerPage}`
+    );
   }, []);
 
   return (
     <>
       <ul className="grid grid-cols-1 gap-y-10 gap-x-6 items-start justify-center max-w-[900px] min-h-[43.8vh] h-auto ">
-        {blogs.slice(0, 10).map((blog: any) => {
-          return (
-            <div key={blog?._id}>
-              <BlogCard {...blog} />
-            </div>
-          );
+        {blogs.slice(0, 10).map((blog: BlogCardProps) => {
+          return <BlogCard key={blog?._id} {...blog} />;
         })}
       </ul>
-      <Stack
-        sx={{
-          margin: "2rem 0",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Pagination
-          count={totalPage}
-          page={currentPage}
-          color="primary"
-          onChange={onPageChange}
-        />
-      </Stack>
+      {blogs.length && totalPage > 1 && (
+        <Stack
+          sx={{
+            margin: "2rem 0",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Pagination
+            count={totalPage}
+            page={currentPage}
+            color="primary"
+            onChange={onPageChange}
+          />
+        </Stack>
+      )}
     </>
   );
 };

@@ -38,9 +38,6 @@ const About: React.FC = () => {
               <li>Create and publish your own blogs with ease</li>
               <li>Save your favorite blogs for later reading</li>
               <li>Like and comment on blogs to engage with the community</li>
-              <li>
-                Follow other users and stay updated with their latest posts
-              </li>
             </ul>
           </div>
 

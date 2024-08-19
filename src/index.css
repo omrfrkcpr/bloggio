@@ -43,3 +43,49 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Wrapper around the tag input */
+.tag-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* Adds space between tags */
+  margin-bottom: 16px;
+}
+
+/* Styling individual tags */
+.ReactTags__tag {
+  background-color: #9fa9ba; /* Dark gray */
+  color: black;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+  max-width: 200px;
+  margin-bottom: 8px;
+}
+
+/* Remove button inside each tag */
+.ReactTags__remove {
+  margin-left: 20px !important;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Input field for new tags */
+.ReactTags__tagInputField {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  margin-left: 8px;
+  padding: 6px;
+}
+
+.ReactTags__tagInput {
+  display: inline-block;
+  padding: 6px;
+}

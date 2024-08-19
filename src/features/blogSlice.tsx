@@ -38,8 +38,9 @@ const blogSlice = createSlice({
       state.loading = false;
       state.singleBlog = data;
     },
-    getSavedSuccess: (state) => {
+    getSavedSuccess: (state, { payload: { data } }) => {
       state.loading = false;
+      state.saved = data;
     },
     getBlogCommentSuccess: (state, { payload }) => {
       state.loading = false;

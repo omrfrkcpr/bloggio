@@ -4,19 +4,15 @@ import ReactQuill from "react-quill";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
-import CustomModal from "../utils/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
-import {
-  toastErrorNotify,
-  toastInfoNotify,
-  toastWarnNotify,
-} from "../helper/toastNotify";
+import { toastErrorNotify, toastInfoNotify } from "../helper/toastNotify";
 import { useNavigate } from "react-router-dom";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 import setups from "../helper/setup";
+import BlogTagInput from "../components/Blog/BlogTagInput";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -36,20 +32,17 @@ const Preview: React.FC<PreviewProps> = ({
   const navigate = useNavigate();
   const { postBlogData, putBlogData } = useBlogCalls();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [newCategory, setNewCategory] = useState<string>("");
   const [imgUrl, setImgUrl] = useState<string>("");
-  const [show, setShow] = useState<boolean>(false);
   const [desc, setDesc] = useState<string>(description || "");
   const [publishType, setPublishType] = useState<string>("");
-  const [preview, setPreview] = useState({
+  const [preview, setPreview] = useState<PrevState>({
     categoryId: "",
     title: title || "",
     content: description || "",
     image: "",
     isPublish: true,
+    tags: [],
   });
-
-  console.log(category);
 
   useEffect(() => {
     setDescription(desc);
@@ -63,17 +56,6 @@ const Preview: React.FC<PreviewProps> = ({
       setSelectedCategory(category?._id);
     }
   }, [desc, setDescription, image, category]);
-
-  const handleAddCategory = async () => {
-    if (newCategory) {
-      await postBlogData("categories", { name: newCategory });
-      setSelectedCategory(newCategory);
-      setNewCategory("");
-      setShow(false);
-    } else {
-      toastWarnNotify("Please write new category name first.");
-    }
-  };
 
   const handleSubmitNewBlog = async () => {
     try {
@@ -106,6 +88,7 @@ const Preview: React.FC<PreviewProps> = ({
         content: "",
         image: "",
         isPublish: true,
+        tags: [],
       });
     } catch (error: any) {
       toastErrorNotify(error.message);
@@ -113,6 +96,7 @@ const Preview: React.FC<PreviewProps> = ({
   };
 
   // console.log(preview);
+  // console.log("Image URL:", imgUrl);
 
   return (
     <>
@@ -154,7 +138,7 @@ const Preview: React.FC<PreviewProps> = ({
                 </span>
 
                 {imgUrl && (
-                  <CustomImage
+                  <img
                     src={imgUrl}
                     alt="blog-img"
                     className="absolute w-full h-full"
@@ -209,21 +193,21 @@ const Preview: React.FC<PreviewProps> = ({
                   id="categories"
                   className="border border-gray-400 p-1"
                 >
-                  <option hidden>Select Category</option>
-                  <option value=""></option>
+                  <option value="" disabled>
+                    Select Category
+                  </option>
                   {categories?.map((category: any) => (
                     <option key={category?._id} value={category?._id}>
                       {category?.name}
                     </option>
                   ))}
                 </select>
-                <CustomButton
-                  click={() => setShow(true)}
-                  className="border border-green-500 hover:bg-green-500 text-sm px-2 py-1 rounded-full text-green-500 hover:text-white transition-all duration-300"
-                  title="New Category"
-                />
               </div>
-              <div className="flex gap-3 items-center mt-5 pt-5 border-t border-gray-400">
+              <BlogTagInput
+                setPreview={setPreview}
+                tags={preview?.tags || []}
+              />
+              <div className="flex gap-3 items-center mt-1 pt-5 border-t border-gray-400">
                 <div
                   onClick={() => {
                     setPublishType("draft");
@@ -296,39 +280,6 @@ const Preview: React.FC<PreviewProps> = ({
           </div>
         </div>
       </section>
-      {show! && (
-        <div
-          onClick={() => setShow(false)}
-          className="bg-black/20 fixed inset-0 z-40"
-        />
-      )}
-      {show && (
-        <CustomModal modal={show} setModal={setShow} hidden="">
-          <div
-            className={`flex-[1] max-w-[400px] shadow-xl p-[2rem] z-50
-        absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[18rem] bg-white 
-        transition-all duration-500 border-1 border-black`}
-          >
-            <CustomButton
-              click={() => setShow(false)}
-              className="absolute right-5 top-5 text-black hover:text-gray-600"
-              icon={<LiaTimesSolid />}
-            />
-            <input
-              type="text"
-              value={newCategory}
-              onChange={(e) => setNewCategory(e.target.value)}
-              placeholder="New Category Name"
-              className="border-b-[1px] border-gray-400 w-full mt-5 outline-none text-md"
-            />
-            <CustomButton
-              click={handleAddCategory}
-              className="bg-blue-200 py-1 px-2 mt-5 mx-auto hover:bg-blue-100 w-[105px] text-sm"
-              title="Add Category"
-            />
-          </div>
-        </CustomModal>
-      )}
     </>
   );
 };

@@ -18,6 +18,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   title,
   image,
   likes,
+  tags,
   countOfVisitors,
   updatedAt,
   blogDetails,
@@ -43,7 +44,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
     <>
       <li className="relative flex items-start justify-center gap-[15px] w-[100%] mx-auto">
         <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px] md:w-[650px]">
-          <div className="mb-4">
+          <div className="mb-1">
             <div className="flex space-x-1 mb-1">
               <div
                 onClick={handleReadMore}
@@ -70,13 +71,22 @@ const BlogCard: React.FC<BlogCardProps> = ({
               />
             </div>
             <CustomButton
-              className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-2 cursor-pointer"
+              className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-1 cursor-pointer"
               click={handleReadMore}
               title={title}
             />
+            {tags && (
+              <div className="flex gap-1">
+                {tags.map((tag: string) => (
+                  <p className="text-gray-600 bg-gray-300 text-xs px-[6px] py-[2px] rounded-full">
+                    #{tag}
+                  </p>
+                ))}
+              </div>
+            )}
             <div
               onClick={handleReadMore}
-              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] xl:text-[18px] cursor-pointer"
+              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] cursor-pointer"
             >
               {blogDetails?.contentPrev}
             </div>
@@ -87,7 +97,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 <CustomImage
                   alt="user-avatar"
                   src={userId?.avatar}
-                  className="w-[25px] h-[25px] md:w-[32px] md:h-[32px] me-1 rounded-full"
+                  className="w-[25px] h-[25px] md:w-[32px] md:h-[32px] me-1 rounded-full object-fit"
                 />
               ) : (
                 <Avatar

@@ -26,6 +26,7 @@ interface LogoProps {
   sx?: SxType;
   width?: string;
   alt?: string;
+  onClick?: () => void;
 }
 
 interface HeaderProps {
@@ -35,6 +36,7 @@ interface HeaderProps {
   content?: string;
   noWrap?: boolean;
   alt?: string;
+  onClick?: () => void;
 }
 
 /* ---------------------------------- */
@@ -79,6 +81,7 @@ interface BlogCardProps {
   content: string;
   image: string;
   likes: string[];
+  tags: string[];
   countOfVisitors: number;
   blogDetails: {
     countOfLikes: number;
@@ -93,8 +96,8 @@ interface BlogCardProps {
 interface Category {
   _id?: string;
   name: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface BlogAnalyticsProps {
@@ -127,10 +130,10 @@ interface BlogSettingsProps {
 interface BlogState {
   categories: Category[];
   blogs: BlogCardProps[];
-  singleBlog: Blog | null;
+  singleBlog: BlogCardProps | null;
   trendings: Blog[];
   comments: CommentProps[];
-  saved: string[];
+  saved: BlogCardProps[];
   loading: boolean;
   error: boolean;
   totalPage: number;
@@ -184,7 +187,7 @@ interface User {
   isStaff?: boolean;
   createdAt?: string;
   updatedAt?: string;
-  saved?: BlogCardProps[];
+  saved?: string[];
 }
 
 interface AuthState {
@@ -222,6 +225,15 @@ interface PreviewProps {
   category?: string | any;
   type: string;
   blogId?: string;
+}
+
+interface PrevState {
+  title: string;
+  content: string;
+  image?: string;
+  categoryId: string;
+  isPublish?: boolean;
+  tags?: string[];
 }
 
 /* ---------------------------------- */
@@ -307,11 +319,4 @@ interface FieldToEdit {
   field: string;
   value: string;
   text: string;
-}
-
-interface UserForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  [key: string]: string; // For other possible fields
 }

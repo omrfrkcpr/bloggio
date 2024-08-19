@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import CustomImage from "../../utils/CustomImage";
 import setups from "../../helper/setup";
 
-const Logo: React.FC<LogoProps> = ({ sx, width, alt }) => {
+const Logo: React.FC<LogoProps> = ({ sx, width, alt, onClick }) => {
   return (
-    <Box sx={sx}>
+    <Box sx={sx} onClick={onClick}>
       <CustomImage
         src={`${setups.AWS_S3_BASE_URL}symbol.png`}
         alt={alt || ""}

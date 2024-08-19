@@ -10,11 +10,6 @@ import CustomButton from "../utils/CustomButton";
 import News from "../layouts/News";
 // import useNewsCalls from "../hooks/useNewsCalls";
 
-interface Category {
-  _id: string;
-  name: string;
-}
-
 const FilterCategory = () => {
   const { blogs, categories } = useSelector((state: RootState) => state.blog);
   const { getBlogData } = useBlogCalls();
@@ -24,33 +19,44 @@ const FilterCategory = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<Category>();
 
-  console.log(search);
+  // console.log(search);
 
-  console.log(selectedCategory);
+  console.log("selected category:", selectedCategory);
+
+  console.log("categories:", categories);
+  console.log("search:", getCapitalizedFilterValue(search));
 
   useEffect(() => {
     if (categories.length) {
-      setSelectedCategory(
-        categories.filter(
-          (category: Category) =>
-            category.name.toLowerCase() ==
-            getCapitalizedFilterValue(search).toLowerCase()
-        )[0]
+      const filteredCategory = categories.find(
+        (category: Category) =>
+          category.name.toLowerCase() ===
+          getCapitalizedFilterValue(search).toLowerCase()
       );
+      setSelectedCategory(filteredCategory);
     }
   }, [search, categories]);
-
-  const { _id, name } = selectedCategory || {};
 
   useEffect(() => {
     // getNewsData(name || "", 1);
   }, []);
 
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = e.target.value;
+    const selected = categories.find(
+      (item: Category) => item._id === selectedId
+    );
+    setSelectedCategory(selected);
+  };
+
   useEffect(() => {
-    if (_id) {
-      getBlogData("blogs", `?filter[categoryId]=${_id}`);
-      if (selectedCategory && !search.includes(name?.toLowerCase() || "")) {
-        navigate(`/categories?filter=${name?.toLowerCase()}`);
+    if (selectedCategory?._id) {
+      getBlogData("blogs", `?filter[categoryId]=${selectedCategory?._id}`);
+      if (
+        selectedCategory &&
+        !search.includes(selectedCategory?.name?.toLowerCase() || "")
+      ) {
+        navigate(`/categories?filter=${selectedCategory?.name?.toLowerCase()}`);
       }
       setDisplayCount(3); // Reset display count when category changes;
     }
@@ -67,16 +73,14 @@ const FilterCategory = () => {
         <select
           name="allCategories"
           id="allCategories"
-          value={name}
-          onChange={(e) =>
-            setSelectedCategory({ _id: "", name: e.target.value })
-          }
+          value={selectedCategory?._id}
+          onChange={handleCategoryChange}
           className="text-lg border text-black border-gray-700 rounded-full px-2"
         >
           <option value="" disabled>
             Select category
           </option>
-          {categories.map((item: any) => (
+          {categories.map((item: Category) => (
             <option key={item?._id} value={item?._id}>
               {item?.name}
             </option>
@@ -113,7 +117,7 @@ const FilterCategory = () => {
           </div>
         )}
         <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-l border-gray-400 ps-4">
-          <News categoryName={name || ""} />
+          <News categoryName={selectedCategory?.name || ""} />
         </div>
       </div>
     </div>

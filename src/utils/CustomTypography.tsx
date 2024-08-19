@@ -9,6 +9,7 @@ const CustomTypography: React.FC<HeaderProps> = ({
   content,
   textAlign,
   alt,
+  onClick,
 }) => {
   return (
     <Typography
@@ -17,6 +18,7 @@ const CustomTypography: React.FC<HeaderProps> = ({
       sx={sx}
       textAlign={textAlign as any}
       data-test={alt}
+      onClick={onClick}
     >
       {content}
     </Typography>

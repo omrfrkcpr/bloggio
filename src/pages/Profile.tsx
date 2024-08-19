@@ -89,9 +89,9 @@ const Profile = () => {
       {loading ? (
         <Loading />
       ) : (
-        <section className="flex gap-[1rem] relative mx-[2rem] page-height">
+        <section className="flex gap-[1rem] relative mx-[1rem] md:mx-[2rem] page-height">
           {/* users activities */}
-          <div className=" mb-6 flex-[2] pt-[4rem] ">
+          <div className="mb-6 flex-[2] pt-8 md:pt-[4rem]">
             <div>
               <h2 className="text-3xl sm:text-5xl font-bold capitalize mb-4">
                 {`${currentUser?.firstName} ${currentUser?.lastName}`}
@@ -128,7 +128,7 @@ const Profile = () => {
           <CustomModal modal={modal} hidden="" setModal={setModal}>
             <div
               className={`flex-[1] max-w-[400px] border-l border-gray-300 p-[2rem] z-10
-        fixed -right-4 bottom-0 top-14 mb-[76px] md:mb-0 w-[18rem] h-[100vh] lg:h-[88.6vh] bg-white lg:sticky
+        fixed -right-4 bottom-0 top-10 md:top-14 mb-[76px] md:mb-0 w-[18rem] h-[100vh] lg:h-[88.6vh] bg-white lg:sticky
         ${modal ? "translate-x-0" : "translate-x-[100%] lg:translate-x-0"}
         transition-all duration-500`}
             >
@@ -146,7 +146,7 @@ const Profile = () => {
                   <CustomImage
                     src={currentUser?.avatar}
                     alt="user-image"
-                    className="w-[150px] h-[150px]"
+                    className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] object-fit"
                   />
                 ) : (
                   <Avatar sx={{ width: "150px", height: "150px" }} />

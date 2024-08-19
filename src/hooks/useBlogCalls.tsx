@@ -10,19 +10,19 @@ import {
   getPageSuccess,
   getSavedSuccess,
   getTrendBlogs,
-  // getSavedSuccess,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
 import { singularize } from "../helper/functions";
 import { useLocation } from "react-router-dom";
 import { updateSuccess } from "../features/authSlice";
+import { RootState } from "../app/store";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
   const axiosWithToken = useAxios();
   const { pathname } = useLocation();
-  const { currentUser } = useSelector((state: any) => state.auth);
+  const { currentUser } = useSelector((state: RootState) => state.auth);
 
   const getBlogData = async (url: string, search: string = "") => {
     dispatch(fetchStart());
@@ -160,8 +160,14 @@ const useBlogCalls = () => {
     try {
       await axiosWithToken.put(`${url}`);
       // console.log(`Post Like: ${data}`);
-      getBlogData("blogs");
-      getSingleBlog(`blogs/${blogId}`);
+      if (pathname.includes("/blog")) {
+        getSingleBlog(`blogs/${blogId}`);
+      } else {
+        getBlogData(
+          "blogs",
+          `?filter[isPublish]=true&sort[createdAt]=desc&page=1&limit=10`
+        );
+      }
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -173,8 +179,11 @@ const useBlogCalls = () => {
     try {
       const { data } = await axiosWithToken.put(`blogs/${blogId}/save`);
       toastSuccessNotify(data.message);
-      dispatch(getSavedSuccess());
+      // dispatch(getSavedSuccess());
       dispatch(updateSuccess(data));
+
+      // after successfully request, get updated saved blogs
+      getSavedBlogs(currentUser?._id || "");
     } catch (error) {
       dispatch(fetchFail());
       console.log(error);
@@ -192,6 +201,17 @@ const useBlogCalls = () => {
     }
   };
 
+  const getSavedBlogs = async (userId: string) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken(`users/${userId}/saved-blogs`);
+      dispatch(getSavedSuccess(data));
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    }
+  };
+
   return {
     deleteBlogData,
     putBlogData,
@@ -203,8 +223,7 @@ const useBlogCalls = () => {
     postLike,
     getLike,
     postSave,
-    // postSave,
-    // deleteSave,
+    getSavedBlogs,
   };
 };
 
