@@ -64,7 +64,7 @@ const PersonalBlogs = ({ blogType }: { blogType: string }) => {
   return (
     <>
       {selectedBlogs?.length ? (
-        <div className=" min-h-[43.8vh]">
+        <div className="min-h-[43.8vh] pb-10">
           <ul className="grid grid-cols-1 gap-y-[3rem] items-start justify-center max-w-[900px] h-auto">
             {selectedBlogs.map((blog: BlogCardProps) => {
               return <BlogCard key={blog?._id} {...blog} />;

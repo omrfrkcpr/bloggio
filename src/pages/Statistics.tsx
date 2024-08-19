@@ -38,13 +38,15 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ blog, badge }) => {
     blog;
 
   return (
-    <div className="relative overflow-hidden shadow-lg rounded-lg w-[360px] h-[520px] cursor-pointer m-auto">
-      <div className="absolute top-0 left-0 z-50 w-full">
+    <div className="relative overflow-hidden shadow-lg rounded-lg w-[300px] xl:w-[340px] 2xl:w-[360px] h-[360px] xl:h-[480px] 2xl:h-[520px] cursor-pointer m-auto">
+      <div className="absolute top-0 left-0 z-10 w-full">
         <CustomImage
           alt="badge"
           src={`${setups.AWS_S3_BASE_URL}${badge}`}
           className={`${
-            badge === "rosette-latest-blog.png" ? "w-[130px]" : "w-[150px]"
+            badge === "rosette-latest-blog.png"
+              ? "w-[60px] xl:w-[90px]"
+              : "w-[120px] xl:w-[150px]"
           } h-auto object-cover`}
         />
       </div>
@@ -52,11 +54,13 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ blog, badge }) => {
         <CustomImage
           alt="blog photo"
           src={image}
-          className="h-[200px] w-[360px] object-fit"
+          className="h-[150px] xl:h-[200px] w-[360px] object-fit"
         />
-        <div className="bg-white w-full p-4">
-          <p className="text-indigo-500 text-2xl font-medium">{title}</p>
-          <p className="text-gray-600 font-light text-md">
+        <div className="bg-white w-full px-2 xl:p-4 space-y-1">
+          <p className="text-indigo-500 text-md xl:text-lg 2xl:text-2xl font-medium">
+            {title}
+          </p>
+          <p className="text-gray-600 font-light text-xs xl:text-sm 2xl:text-md">
             {blogDetails.contentPrev}{" "}
             <a
               className="inline-flex text-indigo-500 hover:underline"
@@ -65,33 +69,40 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ blog, badge }) => {
               Read More
             </a>
           </p>
-          <div className="absolute bottom-[85px] flex flex-wrap justify-start items-center text-xs text-white font-medium">
+          <div className="absolute bottom-[50px] xl:bottom-[60px] flex flex-wrap justify-start items-center text-[10px] xl:text-xs 2xl:text-sm text-white font-medium">
             {tags.map((tag: string, i: number) => (
-              <span key={i} className="m-1 px-2 py-1 rounded bg-[#98b9e9]">
+              <span
+                key={i}
+                className="m-1 px-1 xl:px-2 py-[2px] xl:py-1 rounded bg-[#98b9e9]"
+              >
                 #{tag}
               </span>
             ))}
           </div>
-          <div className="flex items-center mt-2 absolute bottom-2 border-t-2 py-3 justify-between text-center">
-            <div className="pl-3 text-left">
-              <div className="font-medium">Published</div>
-              <div className="text-gray-600 text-sm">{updatedAt}</div>
+          <div className="flex items-center mt-2 absolute bottom-1 xl:bottom-2 border-t-2 py-1 justify-between text-center w-[280px] xl:w-[300px] 2xl:w-[320px]">
+            <div className="pl-1 xl:pl-3 text-left">
+              <div className="font-medium text-sm xl:text-md">Published</div>
+              <div className="text-gray-600 text-xs xl:text-sm">
+                {updatedAt}
+              </div>
             </div>
-            <div className="pl-3">
-              <div className="font-medium">Likes</div>
-              <div className="text-gray-600 text-sm">
+            <div className="pl-1 xl:pl-3">
+              <div className="font-medium text-sm xl:text-md">Likes</div>
+              <div className="text-gray-600 text-xs xl:text-sm">
                 {blogDetails.countOfLikes}
               </div>
             </div>
-            <div className="pl-3">
-              <div className="font-medium">Comments</div>
-              <div className="text-gray-600 text-sm">
+            <div className="pl-1 xl:pl-3">
+              <div className="font-medium text-sm xl:text-md">Comments</div>
+              <div className="text-gray-600 text-xs xl:text-sm">
                 {blogDetails.countOfComments}
               </div>
             </div>
             <div className="pl-3">
-              <div className="font-medium">Visitors</div>
-              <div className="text-gray-600 text-sm">{countOfVisitors}</div>
+              <div className="font-medium text-sm xl:text-md">Visitors</div>
+              <div className="text-gray-600 text-xs xl:text-sm">
+                {countOfVisitors}
+              </div>
             </div>
           </div>
         </div>
@@ -197,12 +208,12 @@ const Statistics: React.FC = () => {
   const blogCards = userStatistics
     ? [
         {
-          blog: userStatistics.latestBlog,
-          badge: "rosette-latest-blog.png",
-        },
-        {
           blog: userStatistics.mostPopularBlog,
           badge: "rosette-best.png",
+        },
+        {
+          blog: userStatistics.latestBlog,
+          badge: "rosette-latest-blog.png",
         },
       ]
     : [];
@@ -216,7 +227,7 @@ const Statistics: React.FC = () => {
         </div>
       ) : (
         <>
-          <div className="h-fit absolute top-5 right-[120px]">
+          <div className="h-fit absolute top-5 right-[30px] xl:right-[78px]">
             <select
               name="timeRange"
               id="timeRange"
@@ -230,53 +241,58 @@ const Statistics: React.FC = () => {
               <option value="Last 1 Year">Last 1 Year</option>
             </select>
           </div>
-          <div className="py-20 px-10 flex flex-col text-center 2xl:text-left 2xl:flex-row w-full justify-center gap-6">
+          <div className="py-20 px-5 2xl:px-10 flex flex-col text-center 2xl:text-left 2xl:flex-row w-full max-w-[1450px] mx-auto justify-center gap-10 md:gap-3">
             {blogCards.length > 0 && (
-              <div className="flex justify-center flex-wrap gap-6 items-start text-left">
+              <div className="flex flex-col md:flex-row justify-center flex-wrap gap-10 md:gap-0 xl:gap-10 items-start text-left w-[300px] md:w-[680px] xl:w-[720px] 2xl:w-[360px] mx-auto mb-5 2xl:mb-0">
                 {blogCards.map((card, index) => (
                   <StatisticCard key={index} {...card} />
                 ))}
               </div>
             )}
-            <div className="flex flex-col justify-start items-center gap-3 py-4 px-1">
-              <h3 className="text-xl font-semibold border-b-2 border-black">
-                Blog Statistics
-              </h3>
-              <div className="relative w-[400px] md:w-[500px] lg:w-[600px] h-[300px] md:h-[400px]">
-                <BarChart
-                  xAxis={[{ scaleType: "band", data: xAxisDataBlog }]}
-                  series={seriesDataBlog}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
+            <div className="flex flex-col justify-start items-center gap-3">
+              <div className="w-full border border-gray-600 text-center">
+                <h3 className="text-xl font-semibold">Blog Statistics</h3>
               </div>
-              <div className="relative w-[400px] md:w-[500px] h-[150px] md:h-[200px] lg:h-[250px] mt-4">
-                <PieChart
-                  series={[
-                    {
-                      data: blogData,
-                      highlightScope: { faded: "global", highlighted: "item" },
-                      faded: {
-                        innerRadius: 30,
-                        additionalRadius: -30,
-                        color: "gray",
+              <div className="flex flex-col lg:flex-row 2xl:flex-col">
+                <div className="relative w-[400px] xl:w-[450px] h-[300px] md:h-[400px] mx-auto">
+                  <BarChart
+                    xAxis={[{ scaleType: "band", data: xAxisDataBlog }]}
+                    series={seriesDataBlog}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
+                <div className="relative w-[400px] md:w-[500px] h-[150px] md:h-[200px] lg:h-[250px] mt-4 mx-auto">
+                  <PieChart
+                    series={[
+                      {
+                        data: blogData,
+                        highlightScope: {
+                          faded: "global",
+                          highlighted: "item",
+                        },
+                        faded: {
+                          innerRadius: 30,
+                          additionalRadius: -30,
+                          color: "gray",
+                        },
                       },
-                    },
-                  ]}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
+                    ]}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
               </div>
             </div>
-            <div className="flex flex-col justify-start items-center gap-3 py-4 px-1 h-fit">
-              <h3 className="text-xl font-semibold border-b-2 border-black">
-                Comment Statistics
-              </h3>
-              <div className="relative w-auto md:w-[600px] 2xl:w-[450px] h-[250px] md:h-[400px]">
+            <div className="flex flex-col justify-start items-center gap-3 h-fit">
+              <div className="w-full border border-gray-600 text-center">
+                <h3 className="text-xl font-semibold">Comment Statistics</h3>
+              </div>
+              <div className="relative w-[400px] xl:w-[450px] h-[300px] md:h-[400px] mx-auto">
                 <BarChart
                   xAxis={[{ scaleType: "band", data: xAxisDataComment }]}
                   series={seriesDataComment}

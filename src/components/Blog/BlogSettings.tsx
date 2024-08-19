@@ -78,6 +78,12 @@ const BlogSettings = ({
   useEffect(() => {
     const initialButtons: BlogSettingsProps[] = [
       {
+        key: "save-blog",
+        title: isSaved ? "Remove Blog" : "Save blog",
+        icon: <Bookmarks weight={`${isSaved ? "fill" : "thin"}`} />,
+        onClick: handlepostSave,
+      },
+      {
         key: "copy-link",
         title: "Copy Link",
         icon: <BiLink />,
@@ -104,16 +110,10 @@ const BlogSettings = ({
         component: LinkedinShareButton,
         extraProps: { url: path },
       },
-      {
-        key: "save-blog",
-        title: isSaved ? "Remove Blog" : "Save blog",
-        icon: <Bookmarks weight={`${isSaved ? "fill" : "thin"}`} />,
-        onClick: handlepostSave,
-      },
     ];
 
     if (currentUser?._id === userId || currentUser?.isAdmin) {
-      initialButtons.push(
+      initialButtons.unshift(
         {
           key: "edit-blog",
           title: "Edit blog ⭐",

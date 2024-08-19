@@ -26,7 +26,9 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   const { postLike } = useBlogCalls();
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const isUserLiked = currentUser ? likes?.includes(currentUser?._id) : false;
+  const isUserLiked = currentUser?._id
+    ? likes?.includes(currentUser?._id)
+    : false;
 
   // console.log(location.pathname);
 

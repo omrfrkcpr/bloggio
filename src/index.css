@@ -44,6 +44,24 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #b9d0f0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #7b9bc6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Wrapper around the tag input */
 .tag-input-wrapper {
   display: flex;

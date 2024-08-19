@@ -25,7 +25,7 @@ const DropDown: React.FC<DropDownProps> = forwardRef<any, DropDownProps>(
         {showDrop && (
           <div
             ref={ref as React.RefObject<HTMLDivElement>}
-            className={`shadows flex flex-col absolute right-0 top-[2rem] z-50 bg-white ${size}`}
+            className={`shadows flex flex-col absolute right-0 top-[1.6rem] z-50 bg-white ${size} max-h-[125px] overflow-scroll custom-scrollbar`}
           >
             {children}
           </div>
