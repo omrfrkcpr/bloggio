@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
 
 import CustomButton from "../utils/CustomButton";
-import News from "../layouts/News";
+// import News from "../layouts/News";
 import BlogCategory from "../components/Blog/BlogCategory";
 import { replaceSpacesAndUnderscores } from "../helper/functions";
+import useCategory from "../hooks/useCategory";
 // import useNewsCalls from "../hooks/useNewsCalls";
 
 const FilterCategory = () => {
@@ -89,10 +90,10 @@ const FilterCategory = () => {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto page-height py-5 px-10 flex flex-col items-center">
-      <div className="text-center text-4xl text-gray-500 my-[3rem] flex flex-col justify-center gap-2">
+    <div className="max-w-[1600px] mx-auto page-height px-4 md:py-5 md:px-10 flex flex-col items-center">
+      <div className="text-center text-2xl md:text-3xl xl:text-4xl text-gray-500 my-[2rem] md:my-[3rem] flex flex-col justify-center gap-2">
         <h2>Category:</h2>
-        <div className="bg-white p-4 border border-gray-300 rounded-lg shadow-md w-full max-w-[300px]">
+        <div className="bg-white p-2 md:p-4 border border-gray-300 rounded-lg shadow-md w-full max-w-[250px] md:max-w-[300px]">
           <BlogCategory
             selectedSubcategory={selectedSubcategoryId}
             setSelectedSubcategory={setSelectedSubcategoryId}
@@ -108,11 +109,7 @@ const FilterCategory = () => {
               }`}
             >
               {blogs.slice(0, displayCount).map((blog: BlogCardProps) => {
-                return (
-                  <div key={blog?._id}>
-                    <BlogCard {...blog} />
-                  </div>
-                );
+                return <BlogCard key={blog?._id} {...blog} />;
               })}
               {displayCount < blogs.length && (
                 <CustomButton
@@ -129,10 +126,10 @@ const FilterCategory = () => {
           </div>
         )}
         <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-l border-gray-400 ps-4">
-          <News
+          {/* <News
             categoryName={selectedSubcategory?.name || ""}
             show={blogs.length > 0}
-          />
+          /> */}
         </div>
       </div>
     </div>

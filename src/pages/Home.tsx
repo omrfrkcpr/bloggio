@@ -5,15 +5,23 @@ import Trending from "../layouts/Trending";
 import Discover from "../layouts/Discover";
 import { useEffect } from "react";
 import useCategory from "../hooks/useCategory";
+import { RootState } from "../app/store";
+import { useSelector } from "react-redux";
 // import useNewsCalls from "../hooks/useNewsCalls";
 
 const Home = () => {
   const { getCategoryData } = useCategory();
+  const { categories } = useSelector((state: RootState) => state.category);
   // const { getNewsData } = useNewsCalls();
 
   useEffect(() => {
-    getCategoryData();
     // getNewsData("software", 1);
+  }, []);
+
+  useEffect(() => {
+    if (!categories.length) {
+      getCategoryData();
+    }
   }, []);
 
   return (

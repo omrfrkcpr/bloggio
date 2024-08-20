@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import useCategory from "../../hooks/useCategory";
 
 interface BlogCategoryProps {
   selectedSubcategory: string;
@@ -14,10 +15,15 @@ const BlogCategory: React.FC<BlogCategoryProps> = ({
   const { categories } = useSelector(
     (state: RootState) => state.category
   ) as CategoryState;
-
+  const { getCategoryData } = useCategory();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
-  // selectedSubcategory'ye bağlı category'yi bulma ve set etme
+  useEffect(() => {
+    if (!categories.length) {
+      getCategoryData();
+    }
+  }, []);
+
   useEffect(() => {
     if (selectedSubcategory) {
       const foundCategory = categories.find((category) =>
@@ -45,14 +51,14 @@ const BlogCategory: React.FC<BlogCategoryProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      {/* Ana kategori seçimi */}
+    <div className="flex flex-col gap-2 md:gap-4">
+      {/* Main Category Selection */}
       <select
         value={selectedCategory}
         onChange={(e) => handleCategoryChange(e.target.value)}
         name="categories"
         id="categories"
-        className="border border-gray-400 p-2 text-[18px]"
+        className="border border-gray-400 p-2 text-[16px] md:text-[18px]"
       >
         <option value="" disabled>
           Select Category
@@ -64,14 +70,14 @@ const BlogCategory: React.FC<BlogCategoryProps> = ({
         ))}
       </select>
 
-      {/* Alt kategori seçimi */}
+      {/* Subcategory Selection */}
       {selectedCategory && currentCategory?.subcategories?.length && (
         <select
           value={selectedSubcategory}
           onChange={(e) => handleSubcategoryChange(e.target.value)}
           name="subcategories"
           id="subcategories"
-          className="border border-gray-400 p-2 text-[18px]"
+          className="border border-gray-400 p-2 text-[16px] md:text-[18px]"
         >
           <option value="" disabled>
             Select Subcategory

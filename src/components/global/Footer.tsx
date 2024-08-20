@@ -10,7 +10,7 @@ const Footer: React.FC = React.memo(() => {
   return (
     <footer className="relative w-full" style={{ backgroundColor: "#b9d0f0" }}>
       <div className="mx-auto w-full px-6">
-        <div className="flex w-full flex-col items-center justify-center py-3 md:flex-row md:justify-between">
+        <div className="flex w-full flex-col gap-2 sm:gap-0 items-center justify-center py-3 md:flex-row md:justify-between">
           <div className="flex flex-col md:flex-row md:gap-2 items-center justify-center">
             <Logo
               sx={{

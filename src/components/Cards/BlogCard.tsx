@@ -43,8 +43,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
 
   return (
     <>
-      <li className="relative flex items-start justify-center gap-[15px] w-[100%] mx-auto">
-        <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[540px] md:w-[650px]">
+      <li className="relative flex items-start justify-center gap-[10px] md:gap-[15px] w-[100%] mx-auto">
+        <div className="order-1 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-center leading-normal w-[500px] md:w-[650px]">
           <div className="mb-1">
             <div className="flex space-x-1 mb-1">
               <div
@@ -82,7 +82,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             {tags && (
               <div className="flex gap-1">
                 {tags.map((tag: string) => (
-                  <p className="text-gray-600 bg-gray-300 text-xs px-[6px] py-[2px] rounded-full">
+                  <p className="text-gray-600 bg-gray-300 text-[11px] md:text-xs px-[6px] py-[2px] rounded-full">
                     #{tag}
                   </p>
                 ))}
@@ -148,7 +148,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <CustomImage
             src={image}
             alt="blog-img"
-            className="shadow-md rounded-lg bg-slate-50 object-fit w-[150px] h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
+            className="shadow-md rounded-lg bg-slate-50 object-fit w-[160px] h-[80px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
           />
         </div>
       </li>
