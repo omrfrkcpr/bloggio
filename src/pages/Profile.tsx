@@ -9,7 +9,6 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { Avatar } from "@mui/material";
 import EditProfile from "../components/ProfileActivities/EditProfile";
 import Loading from "../components/global/Loading";
-import useBlogCalls from "../hooks/useBlogCalls";
 import PersonalBlogs from "../components/ProfileActivities/PersonalBlogs";
 import CustomImage from "../utils/CustomImage";
 import { Link, useLocation } from "react-router-dom";
@@ -24,7 +23,6 @@ const Profile = () => {
   const { currentUser, loading } = useSelector(
     (state: RootState) => state.auth
   );
-  const { getBlogData } = useBlogCalls();
   const location: { pathname: string } = useLocation();
   const { search } = useLocation();
 
@@ -80,9 +78,6 @@ const Profile = () => {
     }
   }, [search, activities]);
 
-  useEffect(() => {
-    getBlogData("categories");
-  }, [currentUser]);
 
   return (
     <>

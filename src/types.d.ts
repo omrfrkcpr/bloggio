@@ -73,10 +73,7 @@ interface BlogCardProps {
     username: string;
     avatar: string;
   };
-  categoryId: {
-    _id: string;
-    name: string;
-  };
+  categoryId: SubCategory;
   title: string;
   content: string;
   image: string;
@@ -93,11 +90,22 @@ interface BlogCardProps {
   createdAt: Date;
 }
 
+interface CategoryState {
+  categories: Category[];
+  loading: boolean;
+  error: boolean;
+}
+
 interface Category {
-  _id?: string;
+  _id: string;
   name: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  subcategories?: SubCategory[];
+}
+
+interface SubCategory {
+  _id: string;
+  name: string;
+  categoryId: string;
 }
 
 interface BlogAnalyticsProps {
@@ -128,7 +136,6 @@ interface BlogSettingsProps {
 }
 
 interface BlogState {
-  categories: Category[];
   blogs: BlogCardProps[];
   singleBlog: BlogCardProps | null;
   trendings: Blog[];
@@ -225,6 +232,7 @@ interface PreviewProps {
   category?: string | any;
   type: string;
   blogId?: string;
+  tags?: string[];
 }
 
 interface PrevState {

@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../utils/CustomButton";
 import News from "./News";
+import { RootState } from "../app/store";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
-  const { categories } = useSelector((state: any) => state.blog);
-  const [displayedCategories, setDisplayedCategories] = useState<number>(5);
+  const { categories } = useSelector(
+    (state: RootState) => state.category
+  ) as CategoryState;
+    const [displayedCategories, setDisplayedCategories] = useState<number>(5);
   const navigate = useNavigate();
   // console.log(categories);
 

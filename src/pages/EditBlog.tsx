@@ -10,10 +10,11 @@ import CustomButton from "../utils/CustomButton";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../hooks/useBlogCalls";
+import { RootState } from "../app/store";
 
 const EditBlog = () => {
   const { getSingleBlog } = useBlogCalls();
-  const { singleBlog } = useSelector((state: any) => state.blog);
+  const { singleBlog } = useSelector((state: RootState) => state.blog);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -22,7 +23,9 @@ const EditBlog = () => {
   const { blogId } = useParams();
 
   useEffect(() => {
-    getSingleBlog(`blogs/${blogId}`);
+    if (blogId) {
+      getSingleBlog(blogId);
+    }
   }, [blogId]);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const EditBlog = () => {
       setTitle(singleBlog?.title);
       setDescription(singleBlog?.content);
       setImage(singleBlog?.image);
-      setCategory(singleBlog?.categoryId);
+      setCategory(singleBlog?.categoryId?._id);
     }
   }, [singleBlog]);
 
@@ -81,6 +84,7 @@ const EditBlog = () => {
             setTitle={setTitle}
             setDescription={setDescription}
             image={image}
+            tags={singleBlog?.tags}
             category={category}
             type="Update"
             blogId={blogId}

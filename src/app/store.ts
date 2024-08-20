@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import authReducer from "../features/authSlice";
 import blogReducer from "../features/blogSlice";
+import categoryReducer from "../features/categorySlice";
 import modalReducer from "../features/modalSlice";
 import pathReducer from "../features/pathSlice";
 import newsReducer from "../features/newsSlice";
@@ -28,6 +29,7 @@ const store = configureStore({
   reducer: {
     auth: persistedReducer,
     blog: blogReducer,
+    category: categoryReducer,
     modal: modalReducer,
     path: pathReducer,
     news: newsReducer,

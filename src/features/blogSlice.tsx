@@ -2,7 +2,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: BlogState = {
-  categories: [],
   blogs: [],
   singleBlog: null,
   trendings: [],

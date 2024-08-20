@@ -11,7 +11,10 @@ import News from "../layouts/News";
 // import useNewsCalls from "../hooks/useNewsCalls";
 
 const FilterCategory = () => {
-  const { blogs, categories } = useSelector((state: RootState) => state.blog);
+  const { blogs } = useSelector((state: RootState) => state.blog);
+  const { categories } = useSelector(
+    (state: RootState) => state.category
+  ) as CategoryState;
   const { getBlogData } = useBlogCalls();
   // const { getNewsData } = useNewsCalls();
   const { search } = useLocation();
@@ -21,10 +24,10 @@ const FilterCategory = () => {
 
   // console.log(search);
 
-  console.log("selected category:", selectedCategory);
+  // console.log("selected category:", selectedCategory);
 
-  console.log("categories:", categories);
-  console.log("search:", getCapitalizedFilterValue(search));
+  // console.log("categories:", categories);
+  // console.log("search:", getCapitalizedFilterValue(search));
 
   useEffect(() => {
     if (categories.length) {

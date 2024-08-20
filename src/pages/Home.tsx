@@ -4,15 +4,15 @@ import Blogs from "../layouts/Blogs";
 import Trending from "../layouts/Trending";
 import Discover from "../layouts/Discover";
 import { useEffect } from "react";
-import useBlogCalls from "../hooks/useBlogCalls";
+import useCategory from "../hooks/useCategory";
 // import useNewsCalls from "../hooks/useNewsCalls";
 
 const Home = () => {
-  const { getBlogData } = useBlogCalls();
+  const { getCategoryData } = useCategory();
   // const { getNewsData } = useNewsCalls();
 
   useEffect(() => {
-    getBlogData("categories");
+    getCategoryData();
     // getNewsData("software", 1);
   }, []);
 
