@@ -31,7 +31,9 @@ const useNewsCalls = () => {
       );
       // console.log(data?.data);
       dispatch(getNews({ data: data?.news }));
-      dispatch(getTotalPage({ data: data?.available / pageLimit }));
+      dispatch(
+        getTotalPage({ data: (data?.available / pageLimit).toFixed(0) })
+      );
     } catch (error) {
       console.log(error);
       dispatch(fetchFail());

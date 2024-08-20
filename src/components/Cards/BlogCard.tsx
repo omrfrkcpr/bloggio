@@ -10,6 +10,7 @@ import BlogAnalytics from "../Blog/BlogAnalytics";
 import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
 import setups from "../../helper/setup";
+import { replaceSpacesAndUnderscores } from "../../helper/functions";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -63,7 +64,10 @@ const BlogCard: React.FC<BlogCardProps> = ({
               <CustomButton
                 click={() =>
                   navigate(
-                    `/categories?filter=${categoryId?.name.toLowerCase()}`
+                    `/categories?filter=${replaceSpacesAndUnderscores({
+                      str: categoryId?.name.toLowerCase(),
+                    })}`,
+                    { state: { subCategory: categoryId } }
                   )
                 }
                 className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"

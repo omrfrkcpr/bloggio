@@ -107,12 +107,6 @@ export const formatNum = (num: number) => {
   else return num.toString();
 };
 
-export const getTrendBlogs = (arr: any) =>
-  arr
-    ?.slice()
-    .sort((a: any, b: any) => b.countOfVisitors - a.countOfVisitors)
-    .slice(0, 10);
-
 export const singularize = (text: string) => {
   // blogs => Blog
   return text.charAt(0).toUpperCase() + text.slice(1, -1);
@@ -145,5 +139,21 @@ export function extractProfileId(url: string) {
     return url.slice(startIndex);
   } else {
     return url.slice(startIndex, endIndex);
+  }
+}
+
+export function replaceSpacesAndUnderscores({
+  str,
+  toUnderscore = true,
+}: {
+  str: string;
+  toUnderscore?: boolean;
+}) {
+  if (typeof str !== "string") return "";
+
+  if (toUnderscore) {
+    return str.replace(/\s+/g, "_");
+  } else {
+    return str.replace(/_/g, " ");
   }
 }

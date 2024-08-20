@@ -15,8 +15,7 @@ import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GiChart } from "react-icons/gi";
 import useShowModal from "../hooks/useShowModal";
-import { useState, useEffect, useMemo } from "react";
-import { formatNum, getTrendBlogs } from "../helper/functions";
+import { formatNum } from "../helper/functions";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 
@@ -25,16 +24,6 @@ const Trending = () => {
   const { toggleBlogCardModal } = useShowModal();
   const navigate = useNavigate();
   const { trendings } = useSelector((state: RootState) => state.blog);
-  const [trendBlogs, setTrendBlogs] = useState<any[]>([]);
-
-  const countOfVisitorsArray = useMemo(
-    () => trendings.map((trend: any) => trend?.countOfVisitors),
-    [trendings]
-  );
-
-  useEffect(() => {
-    setTrendBlogs(getTrendBlogs(trendings));
-  }, [countOfVisitorsArray]);
 
   const handleClickMore = (blogId: string) => {
     if (currentUser) {
@@ -82,7 +71,7 @@ const Trending = () => {
           },
         }}
       >
-        {trendBlogs.map((blog: any) => {
+        {trendings.map((blog: Blog) => {
           const { _id, title, image, countOfVisitors } = blog;
           return (
             <SwiperSlide key={_id}>

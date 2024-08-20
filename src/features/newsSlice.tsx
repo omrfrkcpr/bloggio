@@ -26,10 +26,16 @@ const newsSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    resetNews: (state) => {
+      state.news = [];
+      state.error = false;
+      state.loading = false;
+      state.totalPage = 0;
+    },
   },
 });
 
-export const { fetchStart, getNews, getTotalPage, fetchFail } =
+export const { fetchStart, getNews, getTotalPage, fetchFail, resetNews } =
   newsSlice.actions;
 
 export default newsSlice.reducer;
