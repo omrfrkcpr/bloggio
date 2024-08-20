@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import { useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 import setups from "../helper/setup";
 import BlogTagInput from "../components/Blog/BlogTagInput";
+import BlogCategory from "../components/Blog/BlogCategory";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -25,10 +25,10 @@ const Preview: React.FC<PreviewProps> = ({
   type,
   blogId,
 }) => {
-  const { currentUser } = useSelector((state: any) => state.auth);
-  const { categories, loading } = useSelector(
+  const { currentUser } = useSelector((state: RootState) => state.auth);
+  const { loading } = useSelector(
     (state: RootState) => state.blog
-  ) as any;
+  ) as BlogState;
   const navigate = useNavigate();
   const { postBlogData, putBlogData } = useBlogCalls();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -52,10 +52,13 @@ const Preview: React.FC<PreviewProps> = ({
       setImgUrl(image);
     }
     if (category) {
-      setPreview((prev) => ({ ...prev, categoryId: category?._id }));
       setSelectedCategory(category?._id);
     }
   }, [desc, setDescription, image, category]);
+
+  useEffect(() => {
+    setPreview((prev) => ({ ...prev, categoryId: selectedCategory }));
+  }, [selectedCategory]);
 
   const handleSubmitNewBlog = async () => {
     try {
@@ -90,6 +93,7 @@ const Preview: React.FC<PreviewProps> = ({
         isPublish: true,
         tags: [],
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toastErrorNotify(error.message);
     }
@@ -182,27 +186,10 @@ const Preview: React.FC<PreviewProps> = ({
                 Add or change category of your new blog so readers know what
                 your blog is about
               </p>
-              <div className="flex gap-4">
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => {
-                    setSelectedCategory(e.target.value);
-                    setPreview({ ...preview, categoryId: e.target.value });
-                  }}
-                  name="categories"
-                  id="categories"
-                  className="border border-gray-400 p-1"
-                >
-                  <option value="" disabled>
-                    Select Category
-                  </option>
-                  {categories?.map((category: any) => (
-                    <option key={category?._id} value={category?._id}>
-                      {category?.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <BlogCategory
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
               <BlogTagInput
                 setPreview={setPreview}
                 tags={preview?.tags || []}
