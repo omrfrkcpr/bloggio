@@ -157,3 +157,12 @@ export function replaceSpacesAndUnderscores({
     return str.replace(/_/g, " ");
   }
 }
+
+export function singularizeAndCapitalize(word: string) {
+  // Simple plural to singular conversion
+  if (word.endsWith("s")) {
+    word = word.slice(0, -1);
+  }
+  // Capitalize the first letter
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}

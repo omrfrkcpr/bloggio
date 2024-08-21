@@ -1,16 +1,17 @@
 import Avatar from "@mui/material/Avatar";
 import StarIcon from "@mui/icons-material/Star";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toastInfoNotify } from "../../helper/toastNotify";
 import useShowModal from "../../hooks/useShowModal";
 import AuthModal from "../Modals/AuthModal";
 import { RootState } from "../../app/store";
 import BlogAnalytics from "../Blog/BlogAnalytics";
 import CustomImage from "../../utils/CustomImage";
 import CustomButton from "../../utils/CustomButton";
-import setups from "../../helper/setup";
-import { replaceSpacesAndUnderscores } from "../../helper/functions";
+import setups from "../../helpers/setup";
+import { replaceSpacesAndUnderscores } from "../../helpers/functions";
+import toastNotify from "../../helpers/toastNotify";
+import { resetBlogs } from "../../features/blogSlice";
 
 const BlogCard: React.FC<BlogCardProps> = ({
   _id,
@@ -28,17 +29,31 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const { showBlogCardModal } = useSelector((state: RootState) => state.modal);
   const { toggleBlogCardModal } = useShowModal();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleReadMore = () => {
     if (currentUser) {
       navigate(`/blog/${_id}`);
     } else {
       toggleBlogCardModal();
-      toastInfoNotify(
+      toastNotify(
+        "info",
         "To read more, please register first or log in if you have an account."
       );
       navigate(`/blog/${_id}`);
     }
+  };
+
+  const handleNavigateClick = () => {
+    // Reset blogs before we navigate filterCategory page
+    dispatch(resetBlogs());
+
+    navigate(
+      `/categories?filter=${replaceSpacesAndUnderscores({
+        str: categoryId?.name.toLowerCase(),
+      })}`,
+      { state: { subCategory: categoryId } }
+    );
   };
 
   return (
@@ -62,14 +77,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 />
               </div>
               <CustomButton
-                click={() =>
-                  navigate(
-                    `/categories?filter=${replaceSpacesAndUnderscores({
-                      str: categoryId?.name.toLowerCase(),
-                    })}`,
-                    { state: { subCategory: categoryId } }
-                  )
-                }
+                click={handleNavigateClick}
                 className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
                 title={categoryId?.name}
               />
@@ -83,7 +91,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
               <div className="flex gap-1">
                 {tags.map((tag: string) => (
                   <p className="text-gray-600 bg-gray-300 text-[11px] md:text-xs px-[6px] py-[2px] rounded-full">
-                    #{tag}
+                    #{tag.toLowerCase()}
                   </p>
                 ))}
               </div>

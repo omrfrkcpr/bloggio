@@ -5,11 +5,11 @@ import useBlogCalls from "../../hooks/useBlogCalls";
 import { Heart } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import BlogSettings from "./BlogSettings";
-import { formatNum } from "../../helper/functions";
+import { formatNum } from "../../helpers/functions";
 import { RootState } from "../../app/store";
 import useShowModal from "../../hooks/useShowModal";
-import { toastInfoNotify } from "../../helper/toastNotify";
 import { useLocation, useNavigate } from "react-router-dom";
+import toastNotify from "../../helpers/toastNotify";
 
 const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
   blogDetails,
@@ -42,7 +42,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
     if (currentUser) {
       await postLike(`blogs/${_id}/like`, _id);
     } else {
-      toastInfoNotify("Please login to like a blog.");
+      toastNotify("info", "Please login to like a blog.");
     }
   };
 
@@ -59,7 +59,7 @@ const BlogAnalytics: React.FC<BlogAnalyticsProps> = ({
         !path ? 1000 : 0
       );
     } else {
-      toastInfoNotify("Please login to see blog comments.");
+      toastNotify("info", "Please login to see blog comments.");
     }
   };
 

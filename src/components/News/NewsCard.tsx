@@ -1,4 +1,4 @@
-import { formatPublish, shortenText } from "../../helper/functions";
+import { formatPublish, shortenText } from "../../helpers/functions";
 import CustomImage from "../../utils/CustomImage";
 import { FaUserAlt } from "react-icons/fa";
 
@@ -41,7 +41,7 @@ const NewsCard = ({ article }: { article: Article }) => {
             "https://archive.org/download/placeholder-image/placeholder-image.jpg"
           }
           alt="article-image"
-          className="w-full h-auto object-fit"
+          className="w-[150px] h-auto max-h-[100px] object-fit"
         />
         <p className="font-bold text-xs mx-auto">
           {formatPublish(publish_date || "")}

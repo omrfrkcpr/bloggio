@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import { useSelector } from "react-redux";
-import { toastErrorNotify } from "../../helper/toastNotify";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import EditAccountModal from "../Modals/EditAccountModal";
 import EditFieldModal from "../Modals/EditFieldModal";
 import ChangePasswordModal from "../Modals/ChangePasswordModal";
 import { RootState } from "../../app/store";
+import toastNotify from "../../helpers/toastNotify";
 
 const EditAccount = ({
   editModal,
@@ -67,11 +67,11 @@ const EditAccount = ({
 
   const validateForm = () => {
     if (!form?.email.includes("@")) {
-      toastErrorNotify("Invalid email address");
+      toastNotify("error", "Invalid email address");
       return false;
     }
     if (form.password && form.password !== form.confirmPassword) {
-      toastErrorNotify("Passwords do not match");
+      toastNotify("error", "Passwords do not match");
       return false;
     }
     return true;

@@ -4,15 +4,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { LiaTimesSolid } from "react-icons/lia";
-import { toastErrorNotify, toastInfoNotify } from "../helper/toastNotify";
 import { useNavigate } from "react-router-dom";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RiSave3Fill } from "react-icons/ri";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 import BlogTagInput from "../components/Blog/BlogTagInput";
 import BlogCategory from "../components/Blog/BlogCategory";
+import toastNotify from "../helpers/toastNotify";
 
 const Preview: React.FC<PreviewProps> = ({
   setIsOpen,
@@ -73,12 +73,12 @@ const Preview: React.FC<PreviewProps> = ({
         preview?.categoryId === "" ||
         preview?.image === ""
       ) {
-        toastInfoNotify("All fields are required!");
+        toastNotify("info", "All fields are required!");
         return;
       }
 
       if (preview.title.length < 15) {
-        toastInfoNotify("Title must be at least 15 letters!");
+        toastNotify("info", "Title must be at least 15 letters!");
         return;
       }
 
@@ -100,7 +100,7 @@ const Preview: React.FC<PreviewProps> = ({
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toastErrorNotify(error.message);
+      toastNotify("error", error.message);
     }
   };
 

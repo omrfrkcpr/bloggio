@@ -20,11 +20,27 @@ import EditBlog from "../pages/EditBlog";
 import AuthSuccess from "../pages/AuthSuccess";
 import AuthFail from "../pages/AuthFail";
 import Statistics from "../pages/Statistics";
+import Forgot from "../pages/Forgot";
+import Verify from "../pages/Verify";
+import ResetPassword from "../pages/Reset";
 
 const AppContent = () => {
   const location = useLocation();
-  const hideNavbarFooterPaths = ["/auth/success", "/auth/failure"];
-  const showNavbarFooter = !hideNavbarFooterPaths.includes(location.pathname);
+  const hideNavbarFooterPaths = [
+    "/auth/success",
+    "/auth/failure",
+    // "/forgot-password",
+  ];
+
+  // Check if the current path matches any of the paths that should hide the navbar and footer
+  const hideNavbarFooter = hideNavbarFooterPaths.includes(location.pathname);
+
+  // Additional check for dynamic paths like "/verify-email/:token" or "/reset-password/:token"
+  const hideForDynamicPaths =
+    /\/verify-email\/.+/.test(location.pathname) ||
+    /\/reset-password\/.+/.test(location.pathname);
+
+  const showNavbarFooter = !hideNavbarFooter && !hideForDynamicPaths;
 
   return (
     <>
@@ -36,6 +52,9 @@ const AppContent = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="auth/success" element={<AuthSuccess />} />
         <Route path="auth/failure" element={<AuthFail />} />
+        <Route path="forgot-password" element={<Forgot />} />
+        <Route path="verify-email/:token" element={<Verify />} />
+        <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route path="" element={<PrivateRouter />}>
           <Route path="write" element={<Write />} />
           <Route path="blog/:blogId" element={<SingleBlog />} />

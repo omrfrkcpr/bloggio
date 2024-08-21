@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 
 export const axiosWithPublic = axios.create({
   baseURL: setups.BASE_URL,

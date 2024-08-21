@@ -262,6 +262,21 @@ interface AuthTextFieldProps {
   alt?: string;
 }
 
+interface ResetValues {
+  email: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
+interface ResetInputFields {
+  id: number;
+  name: string;
+  type: string;
+  toggleIcon?: React.ReactNode;
+  onToggleClick?: () => void; // for toggling password visibility
+  placeholder: string;
+}
+
 /* ---------------------------------- */
 /*           Dropdown Props           */
 /* ---------------------------------- */

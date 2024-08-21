@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { loginSuccess } from "../features/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import { toastSuccessNotify } from "../helper/toastNotify";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 import CustomImage from "../utils/CustomImage";
+import toastNotify from "../helpers/toastNotify";
 
 const AuthSuccess = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const AuthSuccess = () => {
       dispatch(loginSuccess(parsedData));
 
       setTimeout(() => {
-        toastSuccessNotify(parsedData.message);
+        toastNotify("success", parsedData.message);
         navigate("/");
       }, 3000);
     };

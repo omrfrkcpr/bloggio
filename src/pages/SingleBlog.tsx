@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-// import { RootState } from "../app/store";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";

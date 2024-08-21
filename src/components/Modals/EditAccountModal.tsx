@@ -7,7 +7,7 @@ import { MdOutlineArrowOutward } from "react-icons/md";
 import CustomImage from "../../utils/CustomImage";
 import { RootState } from "../../app/store";
 import { Avatar } from "@mui/material";
-import { capitalizeWords } from "../../helper/functions";
+import { capitalizeWords } from "../../helpers/functions";
 
 const EditAccountModal = ({
   editModal,

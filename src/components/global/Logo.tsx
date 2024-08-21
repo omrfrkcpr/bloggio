@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import CustomImage from "../../utils/CustomImage";
-import setups from "../../helper/setup";
+import setups from "../../helpers/setup";
 
 const Logo: React.FC<LogoProps> = ({ sx, width, alt, onClick }) => {
   return (

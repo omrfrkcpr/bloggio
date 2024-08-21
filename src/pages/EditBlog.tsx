@@ -5,22 +5,22 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import Preview from "../layouts/Preview";
 import { FaCircleArrowRight } from "react-icons/fa6";
-import { toastWarnNotify } from "../helper/toastNotify";
 import CustomButton from "../utils/CustomButton";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { RootState } from "../app/store";
+import toastNotify from "../helpers/toastNotify";
 
 const EditBlog = () => {
   const { getSingleBlog } = useBlogCalls();
   const { singleBlog } = useSelector((state: RootState) => state.blog);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const { blogId } = useParams();
+  const [category, setCategory] = useState<Category>();
+  const { blogId } = useParams<{ blogId: string }>();
 
   useEffect(() => {
     if (blogId) {
@@ -33,7 +33,7 @@ const EditBlog = () => {
       setTitle(singleBlog?.title);
       setDescription(singleBlog?.content);
       setImage(singleBlog?.image);
-      setCategory(singleBlog?.categoryId?._id);
+      setCategory(singleBlog?.categoryId);
     }
   }, [singleBlog]);
 
@@ -62,7 +62,8 @@ const EditBlog = () => {
               if (title || description) {
                 setIsOpen(true);
               } else {
-                toastWarnNotify(
+                toastNotify(
+                  "warn",
                   "Before continuing, please write content for your new blog."
                 );
               }

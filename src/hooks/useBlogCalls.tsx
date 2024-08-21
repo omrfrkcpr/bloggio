@@ -12,11 +12,12 @@ import {
   getTrendBlogs,
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
-import { toastErrorNotify, toastSuccessNotify } from "../helper/toastNotify";
-import { singularize } from "../helper/functions";
+import { singularize, singularizeAndCapitalize } from "../helpers/functions";
 import { useLocation } from "react-router-dom";
 import { updateSuccess } from "../features/authSlice";
 import { RootState } from "../app/store";
+import showSwal from "../helpers/showSwal";
+import toastNotify from "../helpers/toastNotify";
 
 const useBlogCalls = () => {
   const dispatch = useDispatch();
@@ -41,17 +42,23 @@ const useBlogCalls = () => {
   };
 
   const deleteBlogData = async (url: string, id: string) => {
-    if (
-      confirm(
-        `Are you sure you want to delete this ${
-          url === "users" ? "Account" : singularize(url)
-        }?`
-      )
-    ) {
+    const result = await showSwal({
+      title: "Are you sure?",
+      text: `This ${singularizeAndCapitalize(
+        url
+      )} will be permanently deleted.`,
+      icon: "warning",
+      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#37901e",
+      cancelButtonText: "No, keep it!",
+    });
+
+    if (result.isConfirmed) {
       dispatch(fetchStart());
       try {
         await axiosWithToken.delete(`${url}/${id}`);
-        toastSuccessNotify(
+        toastNotify(
+          "success",
           `${
             url === "users" ? "Account" : singularize(url)
           } is successfully deleted!`
@@ -59,7 +66,8 @@ const useBlogCalls = () => {
       } catch (error: any) {
         console.log(error);
         dispatch(fetchFail());
-        toastErrorNotify(
+        toastNotify(
+          "error",
           `${
             url === "users" ? "Account" : singularize(url)
           } could not be deleted! ${error.message && error.message}`
@@ -79,13 +87,17 @@ const useBlogCalls = () => {
     try {
       await axiosWithToken.post(`${url}`, info);
       getBlogData(url); // only if we post it successfully
-      toastSuccessNotify(`New ${singularize(url)} is successfully created!`);
+      toastNotify(
+        "success",
+        `New ${singularize(url)} is successfully created!`
+      );
     } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(
+      toastNotify(
+        "error",
         `New ${singularize(url)} could not be created! ${
-          error.message && error.message
+          error.message ? error.response.data.message : error.message
         }`
       );
     }
@@ -95,11 +107,12 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.put(`${url}/${blogId}`, info);
-      toastSuccessNotify(`${singularize(url)} ist successfully updated!`);
+      toastNotify("success", `${singularize(url)} ist successfully updated!`);
     } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(
+      toastNotify(
+        "error",
         `${singularize(url)} could not be updated! ${
           error.message && error.message
         }`
@@ -117,11 +130,12 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.put(`${url}/${commentId}`, info);
-      toastSuccessNotify(`Comment ist successfully updated!`);
+      toastNotify("success", `Comment ist successfully updated!`);
     } catch (error: any) {
       console.log(error);
       dispatch(fetchFail());
-      toastErrorNotify(
+      toastNotify(
+        "error",
         `Comment could not be updated! ${error.message && error.message}`
       );
     } finally {
@@ -178,7 +192,7 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.put(`blogs/${blogId}/save`);
-      toastSuccessNotify(data.message);
+      toastNotify("success", data.message);
       // dispatch(getSavedSuccess());
       dispatch(updateSuccess(data));
 

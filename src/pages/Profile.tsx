@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import ProfileAbout from "../components/ProfileActivities/ProfileAbout";
@@ -16,7 +15,7 @@ import CustomButton from "../utils/CustomButton";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import EditAccount from "../components/ProfileActivities/EditAccount";
-import { dateFormatter } from "../helper/functions";
+import { dateFormatter } from "../helpers/functions";
 import { RootState } from "../app/store";
 
 const Profile = () => {
@@ -77,7 +76,6 @@ const Profile = () => {
       setCurrentActive(activities[3]);
     }
   }, [search, activities]);
-
 
   return (
     <>

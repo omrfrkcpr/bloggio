@@ -7,7 +7,7 @@ import { RootState } from "../app/store";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
 import { useNavigate } from "react-router-dom";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 
 const Hero: React.FC = React.memo(() => {
   const { currentUser } = useSelector((state: RootState) => state.auth);

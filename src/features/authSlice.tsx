@@ -37,6 +37,15 @@ const authSlice = createSlice({
       // state.isAdmin = false;
       state.token = null;
     },
+    forgotSuccess: (state) => {
+      state.loading = false;
+    },
+    resetSuccess: (state) => {
+      state.loading = false;
+    },
+    verifySuccess: (state) => {
+      state.loading = false;
+    },
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -50,6 +59,9 @@ export const {
   updateSuccess,
   loginSuccess,
   logoutSuccess,
+  forgotSuccess,
+  resetSuccess,
+  verifySuccess,
   fetchFail,
 } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAuthCalls from "../../hooks/useAuthCalls";
 import CustomImage from "../../utils/CustomImage";
-import setups from "../../helper/setup";
+import setups from "../../helpers/setup";
 
 // Configuration for images
 const images = {
@@ -83,7 +83,7 @@ const AuthBtn = () => {
   };
 
   return (
-    <>
+    <div className="py-3">
       <Divider />
       <div className="flex gap-2 md:gap-5 justify-center items-center">
         <AuthButton
@@ -93,7 +93,7 @@ const AuthBtn = () => {
         />
         {/* Add more AuthButtons for other providers here */}
       </div>
-    </>
+    </div>
   );
 };
 

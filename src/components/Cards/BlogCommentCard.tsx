@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { capitalizeWords, dateFormatter } from "../../helper/functions";
+import { capitalizeWords, dateFormatter } from "../../helpers/functions";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import DropDown from "../../utils/DropDown";
 import { RootState } from "../../app/store";
 import useBlogCalls from "../../hooks/useBlogCalls";
-import { toastWarnNotify } from "../../helper/toastNotify";
 import { Avatar } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { MdModeEdit } from "react-icons/md";
 import CustomButton from "../../utils/CustomButton";
 import CustomImage from "../../utils/CustomImage";
+import toastNotify from "../../helpers/toastNotify";
 
 const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   commentData,
@@ -48,7 +48,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
       setIsEdit(false);
       setDrop(false);
     } else {
-      toastWarnNotify("Please write your thoughts.");
+      toastNotify("warn", "Please write your thoughts.");
     }
   };
 

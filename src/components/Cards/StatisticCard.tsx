@@ -1,6 +1,6 @@
 import React from "react";
 import CustomImage from "../../utils/CustomImage";
-import setups from "../../helper/setup";
+import setups from "../../helpers/setup";
 
 interface StatisticCardProps {
   blog: BlogCardProps;

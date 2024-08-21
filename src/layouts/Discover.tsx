@@ -1,22 +1,47 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../utils/CustomButton";
 import News from "./News";
 import { RootState } from "../app/store";
+import { replaceSpacesAndUnderscores } from "../helpers/functions";
+import { resetBlogs } from "../features/blogSlice";
 // import { Link } from "react-router-dom";
 
 const Discover = () => {
   const { categories } = useSelector(
     (state: RootState) => state.category
   ) as CategoryState;
-    const [displayedCategories, setDisplayedCategories] = useState<number>(5);
+  const { blogs } = useSelector((state: RootState) => state.blog) as BlogState;
+  const [displayedCategories, setDisplayedCategories] = useState<number>(5);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // console.log(categories);
 
   const loadMoreCategories = () => {
     setDisplayedCategories((prevCount) => prevCount + 5);
+  };
+
+  const handleNavigateClick = (name: string) => {
+    // Find the category that matches the name
+    const matchedCategory = categories.find(
+      (category) => category.name.toLowerCase() === name.toLowerCase()
+    );
+
+    // Extract the _id of the first subcategory if it exists
+    const subCategoryId = matchedCategory?.subcategories?.[0];
+
+    // Reset the blogs state before navigating to a new category
+    dispatch(resetBlogs());
+
+    // Navigate to the desired route
+    navigate(
+      `/categories?filter=${replaceSpacesAndUnderscores({
+        str: name.toLowerCase(),
+      })}`,
+      { state: { subCategory: subCategoryId } }
+    );
   };
 
   return (
@@ -30,9 +55,7 @@ const Discover = () => {
             .slice(0, displayedCategories)
             .map(({ _id, name }: { _id: string; name: string }) => (
               <CustomButton
-                click={() =>
-                  navigate(`/categories?filter=${name.toLowerCase()}`)
-                }
+                click={() => handleNavigateClick(name)}
                 key={_id}
                 className="bg-gray-300 text-gray-600 text-[10px] md:text-[12px] lg:text-[14px] hover:text-black px-2 md:px-3 py-1 md:py-2 rounded-full"
                 title={name}
@@ -47,7 +70,7 @@ const Discover = () => {
           )}
         </div>
       </div>
-      <News categoryName="software" />
+      <News categoryName="software" show={blogs.length > 0} />
     </div>
   );
 };

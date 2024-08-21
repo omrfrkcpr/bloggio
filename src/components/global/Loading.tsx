@@ -1,4 +1,4 @@
-import setups from "../../helper/setup";
+import setups from "../../helpers/setup";
 import CustomImage from "../../utils/CustomImage";
 
 const Loading = () => {

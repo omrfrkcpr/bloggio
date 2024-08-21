@@ -6,8 +6,8 @@ import {
   resetContactForm,
 } from "../features/contactSlice";
 import { RootState } from "../app/store";
-import { toastErrorNotify, toastInfoNotify } from "../helper/toastNotify";
 import { axiosWithPublic } from "./useAxios";
+import toastNotify from "../helpers/toastNotify";
 
 const useFeedback = () => {
   const dispatch = useDispatch();
@@ -19,11 +19,14 @@ const useFeedback = () => {
 
     try {
       const { data } = await axiosWithPublic.post("users/feedback", form);
-      toastInfoNotify(data.message);
+      toastNotify("info", data.message);
     } catch (error: any) {
       // console.log("Error: ", error);
       dispatch(fetchFail());
-      toastErrorNotify(error?.response?.data?.message || "An error occurred");
+      toastNotify(
+        "error",
+        error?.response?.data?.message || "An error occurred"
+      );
     } finally {
       dispatch(resetContactForm());
     }

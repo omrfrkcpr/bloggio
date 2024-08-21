@@ -12,7 +12,6 @@ import {
   BiLogoLinkedinSquare,
 } from "react-icons/bi";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { toastErrorNotify, toastSuccessNotify } from "../../helper/toastNotify";
 import CustomButton from "../../utils/CustomButton";
 import { Bookmarks } from "@phosphor-icons/react";
 import { FaRegEdit } from "react-icons/fa";
@@ -21,6 +20,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useBlogCalls from "../../hooks/useBlogCalls";
 import { RootState } from "../../app/store";
+import toastNotify from "../../helpers/toastNotify";
 
 const BlogSettings = ({
   blogId,
@@ -46,10 +46,10 @@ const BlogSettings = ({
       await navigator.clipboard.writeText(
         path.includes("/blog/") ? path : path + `blog/${blogId}`
       );
-      toastSuccessNotify("Link has been copied");
+      toastNotify("success", "Link has been copied");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toastErrorNotify(error?.message);
+      toastNotify("error", error?.message);
     } finally {
       setShowDrop(false);
     }

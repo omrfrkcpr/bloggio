@@ -9,7 +9,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NewsList from "../components/News/NewsList";
 import CustomImage from "../utils/CustomImage";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 import { RootState } from "../app/store";
 import { resetNews } from "../features/newsSlice";
 

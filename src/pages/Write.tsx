@@ -1,17 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import Preview from "../layouts/Preview";
 import { FaCircleArrowRight } from "react-icons/fa6";
-import { toastWarnNotify } from "../helper/toastNotify";
 import CustomButton from "../utils/CustomButton";
+import toastNotify from "../helpers/toastNotify";
 
 const Write = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+
+  const handleContinueClick = () => {
+    if (title || description) {
+      setIsOpen(true);
+    } else {
+      toastNotify(
+        "warn",
+        "Before continuing, please write content for your new blog."
+      );
+    }
+  };
 
   return (
     <>
@@ -34,15 +42,7 @@ const Write = () => {
             />
           </div>
           <CustomButton
-            click={() => {
-              if (title || description) {
-                setIsOpen(true);
-              } else {
-                toastWarnNotify(
-                  "Before continuing, please write content for your new blog."
-                );
-              }
-            }}
+            click={handleContinueClick}
             className={`${
               isOpen && "hidden"
             } flex gap-2 items-center justify-center absolute top-5 z-20 right-0 py-2 px-3 bg-[#76a6e9] text-white hover:text-black hover:bg-[#B9D0F0] rounded-full transition-all duration-500`}

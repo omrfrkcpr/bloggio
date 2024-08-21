@@ -8,7 +8,7 @@ import {
   getNews,
   getTotalPage,
 } from "../features/newsSlice";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
 
 const useNewsCalls = () => {
   const dispatch = useDispatch();

@@ -50,6 +50,9 @@ const blogSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    resetBlogs: (state) => {
+      state.blogs = [];
+    },
   },
 });
 
@@ -62,5 +65,6 @@ export const {
   fetchFail,
   getTrendBlogs,
   getPageSuccess,
+  resetBlogs,
 } = blogSlice.actions;
 export default blogSlice.reducer;

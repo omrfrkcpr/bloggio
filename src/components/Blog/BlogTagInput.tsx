@@ -24,7 +24,7 @@ const BlogTagInput: React.FC<TagInputProps> = ({ tags, setPreview }) => {
 
   const addTag = (tag: string) => {
     if (tag && !tags.includes(tag) && tags.length < MAX_TAGS) {
-      setPreview((prev) => ({ ...prev, tags: [...tags, tag] }));
+      setPreview((prev) => ({ ...prev, tags: [...tags, tag.toLowerCase()] }));
       setInputValue("");
     } else if (tags.length == MAX_TAGS) {
       setWarning(true);

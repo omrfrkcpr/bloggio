@@ -2,12 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setContactFormField } from "../features/contactSlice";
 import { RootState } from "../app/store";
-import { contactFormInputs } from ".././helper/constants";
+import { contactFormInputs } from "../helpers/constants";
 import { CircleLoader } from "react-spinners";
 import useFeedback from "../hooks/useFeedback";
-import { toastWarnNotify } from "../helper/toastNotify";
 import CustomImage from "../utils/CustomImage";
-import setups from "../helper/setup";
+import setups from "../helpers/setup";
+import toastNotify from "../helpers/toastNotify";
 
 const Contact = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Contact = () => {
     if (name && email && feedback) {
       await sendFeedback();
     } else {
-      toastWarnNotify("Please fill the contact form!");
+      toastNotify("warn", "Please fill the contact form!");
     }
   };
 

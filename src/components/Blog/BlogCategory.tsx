@@ -18,6 +18,8 @@ const BlogCategory: React.FC<BlogCategoryProps> = ({
   const { getCategoryData } = useCategory();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
+  console.log(selectedSubcategory);
+
   useEffect(() => {
     if (!categories.length) {
       getCategoryData();
@@ -26,9 +28,9 @@ const BlogCategory: React.FC<BlogCategoryProps> = ({
 
   useEffect(() => {
     if (selectedSubcategory) {
-      const foundCategory = categories.find((category) =>
+      const foundCategory = categories.find((category: Category) =>
         category.subcategories?.some(
-          (subcategory) => subcategory._id === selectedSubcategory
+          (subcategory: SubCategory) => subcategory._id === selectedSubcategory
         )
       );
       if (foundCategory) {

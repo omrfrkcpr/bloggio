@@ -1,6 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// import React from 'react'
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,13 +8,13 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import { Navigation, Pagination, A11y, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { toastInfoNotify } from "../helper/toastNotify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GiChart } from "react-icons/gi";
 import useShowModal from "../hooks/useShowModal";
-import { formatNum } from "../helper/functions";
+import { formatNum } from "../helpers/functions";
 import CustomImage from "../utils/CustomImage";
 import CustomButton from "../utils/CustomButton";
+import toastNotify from "../helpers/toastNotify";
 
 const Trending = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
@@ -30,7 +27,8 @@ const Trending = () => {
       navigate(`/blog/${blogId}`);
     } else {
       toggleBlogCardModal();
-      toastInfoNotify(
+      toastNotify(
+        "info",
         "To read more, please register first or log in if you have an account."
       );
       navigate(`/blog/${blogId}`);

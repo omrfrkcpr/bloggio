@@ -4,12 +4,17 @@ import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import CustomButton from "../../utils/CustomButton";
 import AuthBtn from "../Buttons/AuthBtn";
+import { useNavigate } from "react-router-dom";
+import useShowModal from "../../hooks/useShowModal";
 
 const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   setIsOpen,
   selectedFormType,
 }) => {
+  const navigate = useNavigate();
+  const { toggleNavbarModal } = useShowModal();
+
   const [formType, setFormType] = useState<string>(
     selectedFormType || "sign in"
   );
@@ -27,6 +32,11 @@ const AuthModal: React.FC<AuthModalProps> = ({
   const formText = () => (formType === "sign up" ? "sign up" : "sign in");
   const formTextReverse = () =>
     formType === "sign up" ? "sign in" : "sign up";
+
+  const handleResetNavigate = () => {
+    toggleNavbarModal(false);
+    navigate("/forgot-password");
+  };
 
   return (
     <>
@@ -50,10 +60,10 @@ const AuthModal: React.FC<AuthModalProps> = ({
               <h2 className="text-2xl lg:text-3xl mb-4 text-black">
                 {formType === "sign in" ? "Welcome Back" : "Join Bloggio"}
               </h2>
-              <div className="text-center flex flex-col space-y-6">
+              <div className="text-center flex flex-col space-y-2">
                 {formType === "sign up" ? <Register /> : <Login />}
                 <AuthBtn />
-                <span className="text-black flex gap-1 justify-center items-center">
+                <span className="text-black text-[10px] md:text-[12px] lg:text-[14px] flex gap-1 justify-center items-center">
                   {formType === "sign up"
                     ? "Already have an account?"
                     : "Don't have an account?"}{" "}
@@ -63,6 +73,17 @@ const AuthModal: React.FC<AuthModalProps> = ({
                     title={formTextReverse()}
                   />
                 </span>
+                {formType === "sign in" && (
+                  <span className="text-black text-[10px] md:text-[12px] lg:text-[14px] flex gap-1 justify-center items-center">
+                    Forgot Password
+                    <button
+                      className="text-green-900 hover:underline font-bold capitalize"
+                      onClick={handleResetNavigate}
+                    >
+                      Reset
+                    </button>
+                  </span>
+                )}
               </div>
               <p className="text-xs md:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center text-black">
                 Click “<span className="capitalize">{formText()}</span>” to

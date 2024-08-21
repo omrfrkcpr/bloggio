@@ -12,7 +12,12 @@ function App() {
           <AppRouter />
         </PersistGate>
       </Provider>
-      <ToastContainer data-test="toast-message" />
+      <ToastContainer
+        autoClose={3000}
+        closeOnClick
+        theme="colored"
+        data-test="toast-message"
+      />
     </>
   );
 }

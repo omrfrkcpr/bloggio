@@ -14,9 +14,9 @@ const Home = () => {
   const { categories } = useSelector((state: RootState) => state.category);
   // const { getNewsData } = useNewsCalls();
 
-  useEffect(() => {
-    // getNewsData("software", 1);
-  }, []);
+  // useEffect(() => {
+  //   getNewsData("software", 1);
+  // }, []);
 
   useEffect(() => {
     if (!categories.length) {

@@ -3,7 +3,7 @@ import CustomModal from "../../utils/CustomModal";
 import TextField from "@mui/material/TextField";
 import CustomButton from "../../utils/CustomButton";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { toastErrorNotify } from "../../helper/toastNotify";
+import toastNotify from "../../helpers/toastNotify";
 
 const ChangePasswordModal = ({
   passwordModal,
@@ -26,6 +26,18 @@ const ChangePasswordModal = ({
   toggleConfirmPasswordVisibility: () => void;
   saveForm: () => void;
 }) => {
+  const handleSaveClick = () => {
+    if (form.password !== form.confirmPassword) {
+      toastNotify(
+        "error",
+        "Passwords do not match. Please confirm your password"
+      );
+      setForm({ ...form, password: "", confirmPassword: "" });
+    } else {
+      saveForm();
+    }
+  };
+
   return (
     <CustomModal modal={passwordModal} hidden="" setModal={setPasswordModal}>
       <div className="center w-[95%] md:w-[720px] md:h-[485px] bg-white mx-auto shadows my-[1rem] z-10 mb-[3rem] p-[2rem] flex flex-col justify-between">
@@ -88,16 +100,7 @@ const ChangePasswordModal = ({
             title="Cancel"
           />
           <CustomButton
-            click={() => {
-              if (form.password !== form.confirmPassword) {
-                toastErrorNotify(
-                  "Passwords do not match. Please confirm your password"
-                );
-                setForm({ ...form, password: "", confirmPassword: "" });
-              } else {
-                saveForm();
-              }
-            }}
+            click={handleSaveClick}
             className="text-white btn bg-green-800 hover:bg-green-300 hover:border-green-300"
             title="Save"
           />

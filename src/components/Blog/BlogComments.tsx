@@ -7,10 +7,10 @@ import useBlogCalls from "../../hooks/useBlogCalls";
 import CustomModal from "../../utils/CustomModal";
 import { LiaTimesSolid } from "react-icons/lia";
 import Loading from "../global/Loading";
-import { toastErrorNotify } from "../../helper/toastNotify";
 import BlogCommentCard from "../Cards/BlogCommentCard";
 import { Avatar } from "@mui/material";
 import CustomButton from "../../utils/CustomButton";
+import toastNotify from "../../helpers/toastNotify";
 
 const BlogComments = ({ blogId }: { blogId: string }) => {
   const { toggleCommentsModal } = useShowModal();
@@ -31,7 +31,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
   const writeComment = async () => {
     try {
       if (commentPrev.comment === "") {
-        toastErrorNotify("The input must be filled.");
+        toastNotify("error", "The input must be filled.");
       }
 
       await postBlogData("comments", { ...commentPrev });
@@ -41,7 +41,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toastErrorNotify(error.message);
+      toastNotify("error", error.message);
     }
   };
 

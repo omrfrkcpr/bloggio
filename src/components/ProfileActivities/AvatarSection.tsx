@@ -2,7 +2,7 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import { FiUpload, FiTrash2 } from "react-icons/fi";
-import { toastErrorNotify } from "../../helper/toastNotify";
+import toastNotify from "../../helpers/toastNotify";
 
 interface AvatarSectionProps {
   filePreview: any;
@@ -42,7 +42,7 @@ const AvatarSection: React.FC<AvatarSectionProps> = ({
       setProfileForm((prev: any) => ({ ...prev, avatar: objectURL }));
       setRemoveExistingAvatar(false);
     } else {
-      toastErrorNotify("Only JPEG, JPG and PNG formats are allowed.");
+      toastNotify("error", "Only JPEG, JPG and PNG formats are allowed.");
     }
   };
   const { getRootProps, getInputProps } = useDropzone({

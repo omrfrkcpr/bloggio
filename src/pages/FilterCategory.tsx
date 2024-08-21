@@ -1,26 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../app/store";
 import BlogCard from "../components/Cards/BlogCard";
 import { useEffect, useState } from "react";
 import useBlogCalls from "../hooks/useBlogCalls";
-
 import CustomButton from "../utils/CustomButton";
-// import News from "../layouts/News";
+import News from "../layouts/News";
 import BlogCategory from "../components/Blog/BlogCategory";
-import { replaceSpacesAndUnderscores } from "../helper/functions";
-import useCategory from "../hooks/useCategory";
-// import useNewsCalls from "../hooks/useNewsCalls";
+import { replaceSpacesAndUnderscores } from "../helpers/functions";
+import CustomImage from "../utils/CustomImage";
+import setups from "../helpers/setup";
 
 const FilterCategory = () => {
-  const { blogs } = useSelector((state: RootState) => state.blog);
+  const { blogs, loading } = useSelector((state: RootState) => state.blog);
   const { categories } = useSelector(
     (state: RootState) => state.category
   ) as CategoryState;
   const { getBlogData } = useBlogCalls();
-  // const { getNewsData } = useNewsCalls();
   const { search, state } = useLocation();
   const [displayCount, setDisplayCount] = useState<number>(3);
   const navigate = useNavigate();
@@ -38,11 +34,11 @@ const FilterCategory = () => {
     if (categories.length) {
       let foundSubcategory;
 
-      // Tüm kategorileri dolaşarak, alt kategorilerde arama yapıyoruz
-      categories.forEach((category) => {
+      categories.forEach((category: Category) => {
         if (category.subcategories && category.subcategories.length) {
           const subcategoryMatch = category.subcategories.find(
-            (subcategory) => subcategory._id === selectedSubcategoryId
+            (subcategory: SubCategory) =>
+              subcategory._id === selectedSubcategoryId
           );
           if (subcategoryMatch) {
             foundSubcategory = subcategoryMatch;
@@ -50,7 +46,6 @@ const FilterCategory = () => {
         }
       });
 
-      // Eşleşen alt kategoriyi set ediyoruz
       if (foundSubcategory) {
         setSelectedSubcategory(foundSubcategory);
       }
@@ -59,10 +54,6 @@ const FilterCategory = () => {
 
   // console.log("selected category:", selectedCategory);
   // console.log("search:", getCapitalizedFilterValue(search));
-
-  useEffect(() => {
-    // getNewsData(name || "", 1);
-  }, []);
 
   useEffect(() => {
     if (selectedSubcategory) {
@@ -101,35 +92,47 @@ const FilterCategory = () => {
         </div>
       </div>
       <div className="flex justify-center gap-6">
-        {blogs.length ? (
-          <>
-            <ul
-              className={`grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ${
-                displayCount < blogs.length ? "mb-[80px]" : "mb-[300px]"
-              }`}
-            >
-              {blogs.slice(0, displayCount).map((blog: BlogCardProps) => {
-                return <BlogCard key={blog?._id} {...blog} />;
-              })}
-              {displayCount < blogs.length && (
-                <CustomButton
-                  click={handleShowMore}
-                  className="text-sm border text-black border-gray-500 hover:bg-gray-100 rounded-full px-2 py-1 xl:px-4 xl:py-2 mt-4 w-[100px] xl:w-[130px] text-center mx-auto"
-                  title="Show More"
-                />
-              )}
-            </ul>
-          </>
-        ) : (
-          <div className="text-center text-2xl text-gray-500 my-[3rem]">
-            <h2>No blog found in this category.</h2>
+        {loading ? (
+          <div className="my-5 text-center">
+            <CustomImage
+              src={`${setups.AWS_S3_BASE_URL}spinner2.gif`}
+              alt="news-spinner"
+              className="w-[60px] h-[60px] m-auto text-center"
+            />
           </div>
+        ) : (
+          <>
+            {blogs.length ? (
+              <>
+                <ul
+                  className={`grid grid-cols-1 gap-y-16 gap-x-6 items-start justify-center ${
+                    displayCount < blogs.length ? "mb-[80px]" : "mb-[300px]"
+                  }`}
+                >
+                  {blogs.slice(0, displayCount).map((blog: BlogCardProps) => {
+                    return <BlogCard key={blog?._id} {...blog} />;
+                  })}
+                  {displayCount < blogs.length && (
+                    <CustomButton
+                      click={handleShowMore}
+                      className="text-sm border text-black border-gray-500 hover:bg-gray-100 rounded-full px-2 py-1 xl:px-4 xl:py-2 mt-4 w-[100px] xl:w-[130px] text-center mx-auto"
+                      title="Show More"
+                    />
+                  )}
+                </ul>
+              </>
+            ) : (
+              <div className="text-center text-2xl text-gray-500 my-[3rem]">
+                <h2>No blog found in this category.</h2>
+              </div>
+            )}
+          </>
         )}
-        <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-l border-gray-400 ps-4">
-          {/* <News
+        <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-0 lg:border-l lg:border-gray-400  ps-4">
+          <News
             categoryName={selectedSubcategory?.name || ""}
             show={blogs.length > 0}
-          /> */}
+          />
         </div>
       </div>
     </div>
