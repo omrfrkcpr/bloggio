@@ -119,7 +119,7 @@ const BlogSettings = ({
           title: "Edit blog ⭐",
           icon: <FaRegEdit className="text-[#c1713d]" />,
           onClick: () =>
-            navigate(`/blog/${blogId}/edit`, { state: { blogId } }),
+            navigate(`/blog/edit/${blogId}`, { state: { blogId } }),
         },
         {
           key: "delete-blog",

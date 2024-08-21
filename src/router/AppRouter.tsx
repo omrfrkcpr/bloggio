@@ -58,7 +58,7 @@ const AppContent = () => {
         <Route path="" element={<PrivateRouter />}>
           <Route path="write" element={<Write />} />
           <Route path="blog/:blogId" element={<SingleBlog />} />
-          <Route path="blog/:blogId/edit" element={<EditBlog />} />
+          <Route path="blog/edit/:blogId" element={<EditBlog />} />
           <Route path="profile/:userId" element={<Profile />} />
           <Route path="statistics/:userId" element={<Statistics />} />
         </Route>
