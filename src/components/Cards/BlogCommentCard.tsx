@@ -18,7 +18,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 }) => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { loading } = useSelector((state: RootState) => state.blog);
-  const { deleteBlogData, putCommentData } = useBlogCalls();
+  const { deleteBlogData, putBlogData } = useBlogCalls();
   const [drop, setDrop] = useState<boolean>(false);
   const [more, setMore] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
   const { _id, userId, comment, createdAt, updatedAt } = commentData;
 
   const removeComment = async () => {
-    await deleteBlogData("comments", _id);
+    await deleteBlogData({ url: "comments", id: _id, blogId });
     setDrop(false);
   };
 
@@ -40,10 +40,14 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
 
   const handleEdit = async () => {
     if (editComment) {
-      await putCommentData("comments", _id, {
-        blogId,
-        comment: editComment,
-      });
+      await putBlogData(
+        "comments",
+        {
+          blogId,
+          comment: editComment,
+        },
+        _id
+      );
       setEditComment("");
       setIsEdit(false);
       setDrop(false);

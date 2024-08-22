@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchFail,
   fetchStart,
-  getBlogCommentSuccess,
   getSuccess,
   getSingleBlogSuccess,
   getPageSuccess,
@@ -13,7 +12,7 @@ import {
 } from "../features/blogSlice";
 import useAxios from "./useAxios";
 import { singularize, singularizeAndCapitalize } from "../helpers/functions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { updateSuccess } from "../features/authSlice";
 import { RootState } from "../app/store";
 import showSwal from "../helpers/showSwal";
@@ -24,6 +23,8 @@ const useBlogCalls = () => {
   const axiosWithToken = useAxios();
   const { pathname } = useLocation();
   const { currentUser } = useSelector((state: RootState) => state.auth);
+  const { singleBlog } = useSelector((state: RootState) => state.blog);
+  const navigate = useNavigate();
 
   const getBlogData = async (url: string, search: string = "") => {
     dispatch(fetchStart());
@@ -41,7 +42,15 @@ const useBlogCalls = () => {
     }
   };
 
-  const deleteBlogData = async (url: string, id: string) => {
+  const deleteBlogData = async ({
+    url,
+    id,
+    blogId,
+  }: {
+    url: string;
+    id: string;
+    blogId?: string | undefined;
+  }) => {
     const result = await showSwal({
       title: "Are you sure?",
       text: `This ${singularizeAndCapitalize(
@@ -75,6 +84,13 @@ const useBlogCalls = () => {
       } finally {
         if (pathname.includes("profile")) {
           getBlogData("blogs", `?author=${currentUser?._id}`);
+        } else if (url === "comments") {
+          if (blogId) {
+            getBlogData("comments", `?filter[blogId]=${blogId}`);
+            getSingleBlog(blogId);
+          }
+        } else if (url === "users") {
+          // account deleted, so no request is needed
         } else {
           getBlogData(url);
         }
@@ -82,7 +98,7 @@ const useBlogCalls = () => {
     }
   };
 
-  const postBlogData = async (url: string, info: object) => {
+  const postBlogData = async (url: string, info: any) => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.post(`${url}`, info);
@@ -100,13 +116,25 @@ const useBlogCalls = () => {
           error.message ? error.response.data.message : error.message
         }`
       );
+    } finally {
+      if (url === "blogs") {
+        getBlogData(
+          "blogs",
+          `?filter[isPublish]=true&sort[createdAt]=desc&page=1&limit=10`
+        );
+      } else if (url === "comments") {
+        getBlogData("comments", `?filter[blogId]=${info?.blogId}`);
+        getSingleBlog(info?.blogId);
+      } else {
+        getBlogData(url);
+      }
     }
   };
 
-  const putBlogData = async (url: string, info: object, blogId: string) => {
+  const putBlogData = async (url: string, info: any, objectId: string) => {
     dispatch(fetchStart());
     try {
-      await axiosWithToken.put(`${url}/${blogId}`, info);
+      await axiosWithToken.put(`${url}/${objectId}`, info);
       toastNotify("success", `${singularize(url)} ist successfully updated!`);
     } catch (error: any) {
       console.log(error);
@@ -118,44 +146,14 @@ const useBlogCalls = () => {
         }`
       );
     } finally {
-      getBlogData(url);
-    }
-  };
-
-  const putCommentData = async (
-    url: string,
-    commentId: string,
-    info: object
-  ) => {
-    dispatch(fetchStart());
-    try {
-      await axiosWithToken.put(`${url}/${commentId}`, info);
-      toastNotify("success", `Comment ist successfully updated!`);
-    } catch (error: any) {
-      console.log(error);
-      dispatch(fetchFail());
-      toastNotify(
-        "error",
-        `Comment could not be updated! ${error.message && error.message}`
-      );
-    } finally {
-      getBlogData(url);
-    }
-  };
-
-  // Get all datas after all fullfilled with Promise.all()
-  const getBlogComment = async () => {
-    dispatch(fetchStart());
-    try {
-      // const [a,b] = [1,2] // array destructuring
-      const [blogs, comments] = await Promise.all([
-        axiosWithToken("blogs"),
-        axiosWithToken("comments"),
-      ]);
-      dispatch(getBlogCommentSuccess([blogs?.data, comments?.data]));
-    } catch (error) {
-      console.log(error);
-      dispatch(fetchFail());
+      if (url === "blogs") {
+        getBlogData(
+          "blogs",
+          `?filter[isPublish]=true&sort[createdAt]=desc&page=1&limit=10`
+        );
+      } else if (url === "comments") {
+        getBlogData("comments", `?filter[blogId]=${info?.blogId}`);
+      }
     }
   };
 
@@ -166,6 +164,10 @@ const useBlogCalls = () => {
       dispatch(getSingleBlogSuccess({ data: data?.data }));
     } catch (error) {
       dispatch(fetchFail());
+    } finally {
+      if (!singleBlog?._id) {
+        navigate("/not-found");
+      }
     }
   };
 
@@ -229,10 +231,8 @@ const useBlogCalls = () => {
   return {
     deleteBlogData,
     putBlogData,
-    putCommentData,
     postBlogData,
     getBlogData,
-    getBlogComment,
     getSingleBlog,
     postLike,
     getLike,

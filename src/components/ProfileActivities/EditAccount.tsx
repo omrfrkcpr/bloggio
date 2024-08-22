@@ -58,7 +58,7 @@ const EditAccount = ({
 
   const handleDeleteAccount = async () => {
     if (currentUser && currentUser._id) {
-      await deleteBlogData("users", currentUser._id);
+      await deleteBlogData({ url: "users", id: currentUser._id });
       setEditProfileModal(false);
       setEditModal(false);
       logout(false);

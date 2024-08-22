@@ -127,7 +127,7 @@ const BlogSettings = ({
           icon: <RiDeleteBin6Fill className="text-[#c1413d]" />,
           onClick: async () => {
             if (blogId) {
-              await deleteBlogData("blogs", blogId);
+              await deleteBlogData({ url: "blogs", id: blogId });
               setShowDrop(false);
             }
           },

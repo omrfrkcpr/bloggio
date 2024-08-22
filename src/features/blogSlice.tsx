@@ -41,17 +41,15 @@ const blogSlice = createSlice({
       state.loading = false;
       state.saved = data;
     },
-    getBlogCommentSuccess: (state, { payload }) => {
-      state.loading = false;
-      state.blogs = payload[0].data;
-      state.comments = payload[1].data;
-    },
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
     },
     resetBlogs: (state) => {
       state.blogs = [];
+    },
+    resetSingleBlog: (state) => {
+      state.singleBlog = null;
     },
   },
 });
@@ -61,10 +59,10 @@ export const {
   getSuccess,
   getSingleBlogSuccess,
   getSavedSuccess,
-  getBlogCommentSuccess,
   fetchFail,
   getTrendBlogs,
   getPageSuccess,
   resetBlogs,
+  resetSingleBlog,
 } = blogSlice.actions;
 export default blogSlice.reducer;

@@ -78,19 +78,19 @@ const BlogCard: React.FC<BlogCardProps> = ({
               </div>
               <CustomButton
                 click={handleNavigateClick}
-                className="text-[10px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
+                className="text-[9px] lg:text-[12px] bg-gray-400 hover:bg-gray-300 hover:text-gray-600 rounded-md px-1 text-white"
                 title={categoryId?.name}
               />
             </div>
             <CustomButton
-              className="text-gray-900 font-bold text-[12px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-1 cursor-pointer"
+              className="text-gray-900 font-bold text-[11px] md:text-[14px] lg:text-[18px] xl:text-[20px] lg:mb-1 cursor-pointer"
               click={handleReadMore}
               title={title}
             />
             {tags && (
               <div className="flex gap-1">
                 {tags.map((tag: string) => (
-                  <p className="text-gray-600 bg-gray-300 text-[11px] md:text-xs px-[6px] py-[2px] rounded-full">
+                  <p className="text-gray-600 bg-gray-300 text-[8px] md:text-xs px-[6px] py-[2px] rounded-full">
                     #{tag.toLowerCase()}
                   </p>
                 ))}
@@ -98,7 +98,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             )}
             <div
               onClick={handleReadMore}
-              className="py-1 text-gray-500 line-clamp-2 text-[10px] md:text-[12px] lg:text-[16px] cursor-pointer"
+              className="py-1 text-gray-500 line-clamp-2 text-[9px] md:text-[12px] lg:text-[16px] cursor-pointer"
             >
               {blogDetails?.contentPrev}
             </div>
@@ -156,7 +156,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <CustomImage
             src={image}
             alt="blog-img"
-            className="shadow-md rounded-lg bg-slate-50 object-fit w-[160px] h-[80px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
+            className="shadow-md rounded-lg bg-slate-50 object-fit w-[170px] h-[70px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
           />
         </div>
       </li>

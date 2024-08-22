@@ -23,11 +23,6 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
     comment: "",
   });
 
-  const commentsData = comments
-    .filter((comment: CommentProps) => comment?.blogId === blogId)
-    .slice()
-    .reverse();
-
   const writeComment = async () => {
     try {
       if (commentPrev.comment === "") {
@@ -62,7 +57,7 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
         {/* header  */}
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold" data-test="commentsSection-title">
-            Comments ({commentsData?.length})
+            Comments ({comments?.length})
           </h3>
           <CustomButton
             click={() => toggleCommentsModal()}
@@ -113,22 +108,21 @@ const BlogComments = ({ blogId }: { blogId: string }) => {
             </div>
           </div>
         )}
-        {commentsData && !commentsData?.length ? (
+        {comments && !comments?.length ? (
           <p>This post has no comments</p>
         ) : (
           <div className="border-t py-4 mt-8 flex flex-col gap-8">
-            {commentsData &&
-              commentsData?.map((commentData: CommentProps) =>
-                loading ? (
-                  <Loading />
-                ) : (
-                  <BlogCommentCard
-                    commentData={commentData}
-                    blogId={blogId}
-                    key={commentData._id}
-                  />
-                )
-              )}
+            {comments?.map((commentData: CommentProps) =>
+              loading ? (
+                <Loading />
+              ) : (
+                <BlogCommentCard
+                  commentData={commentData}
+                  blogId={blogId}
+                  key={commentData._id}
+                />
+              )
+            )}
           </div>
         )}
       </section>
