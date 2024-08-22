@@ -76,13 +76,20 @@ const BlogSettings = ({
   }, [dropDownRef]);
 
   useEffect(() => {
-    const initialButtons: BlogSettingsProps[] = [
-      {
+    const initialButtons: BlogSettingsProps[] = [];
+
+    // Add the "Save blog" button only if currentUser._id exists
+    if (currentUser?._id) {
+      initialButtons.push({
         key: "save-blog",
         title: isSaved ? "Remove Blog" : "Save blog",
         icon: <Bookmarks weight={`${isSaved ? "fill" : "thin"}`} />,
         onClick: handlepostSave,
-      },
+      });
+    }
+
+    // Other buttons that are always shown
+    initialButtons.push(
       {
         key: "copy-link",
         title: "Copy Link",
@@ -109,9 +116,10 @@ const BlogSettings = ({
         icon: <BiLogoLinkedinSquare className="text-[#0A66C2]" />,
         component: LinkedinShareButton,
         extraProps: { url: path },
-      },
-    ];
+      }
+    );
 
+    // Add the edit and delete options if the current user is the blog owner or an admin
     if (currentUser?._id === userId || currentUser?.isAdmin) {
       initialButtons.unshift(
         {

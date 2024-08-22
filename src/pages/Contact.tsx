@@ -38,10 +38,10 @@ const Contact = () => {
 
   return (
     <>
-      <div className="bg-[#e5effd] font-[sans-serif] page-height py-[5rem] px-8 grid md:place-content-center md:place-items-center">
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-5 md:gap-10 h-full px-8">
+      <div className="bg-[#e5effd] font-[sans-serif] page-height py-[2rem] md:py-[5rem] px-8 grid md:place-content-center md:place-items-center">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-5 md:gap-10 h-full md:px-8">
           <div className="max-w-xl max-lg:mx-auto max-lg:text-center max-lg:mb-6 2xl:ms-10 mx-auto w-full xl:w-1/3">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 text-center lg:text-left">
+            <h2 className="text-2xl md:text-3xl xl:text-4xl font-extrabold text-gray-800 text-center lg:text-left">
               Get In Touch
             </h2>
             <p className="text-sm text-gray-600 mt-4 leading-relaxed text-center lg:text-left">

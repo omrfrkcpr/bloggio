@@ -23,7 +23,6 @@ const useBlogCalls = () => {
   const axiosWithToken = useAxios();
   const { pathname } = useLocation();
   const { currentUser } = useSelector((state: RootState) => state.auth);
-  const { singleBlog } = useSelector((state: RootState) => state.blog);
   const navigate = useNavigate();
 
   const getBlogData = async (url: string, search: string = "") => {
@@ -164,10 +163,7 @@ const useBlogCalls = () => {
       dispatch(getSingleBlogSuccess({ data: data?.data }));
     } catch (error) {
       dispatch(fetchFail());
-    } finally {
-      if (!singleBlog?._id) {
-        navigate("/not-found");
-      }
+      navigate("/not-found");
     }
   };
 

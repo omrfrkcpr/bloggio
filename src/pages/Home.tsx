@@ -28,7 +28,7 @@ const Home = () => {
     <div>
       <Hero />
       <Trending />
-      <div className="size py-3 md:py-5 lg:py-7 mb-[10rem] flex flex-col-reverse lg:flex-row gap-[2rem]">
+      <div className="size lg:py-4 mb-[10rem] flex flex-col-reverse lg:flex-row gap-[0rem] lg:gap-[2rem]">
         <div className="flex-[1.5] lg:border-r-[1px] lg:pe-4 lg:border-gray-300">
           <Blogs />
         </div>

@@ -85,7 +85,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
                   </span>
                 )}
               </div>
-              <p className="text-xs md:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center text-black">
+              <p className="text-xs lg:text-[0.9rem] lg:leading-6 opacity-50 w-[90%] max-w-[500px] text-center text-black">
                 Click “<span className="capitalize">{formText()}</span>” to
                 agree to Bloggio’s{" "}
                 <span className="underline">Terms of Service</span> and

@@ -156,7 +156,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
           <CustomImage
             src={image}
             alt="blog-img"
-            className="shadow-md rounded-lg bg-slate-50 object-fit w-[170px] h-[70px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
+            className="shadow-md rounded-lg bg-slate-50 object-fit w-[170px] h-[70px] sm:h-[90px] md:h-[120px] md:w-[200px] lg:w-[280px] lg:h-[160px] m-auto cursor-pointer"
           />
         </div>
       </li>

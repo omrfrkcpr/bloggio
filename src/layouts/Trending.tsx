@@ -45,7 +45,7 @@ const Trending = () => {
         modules={[Navigation, Pagination, A11y, Autoplay]}
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
-        className="w-[95%] h-[280px] max-w-[1600px] border-b border-gray-300"
+        className="w-[95%] h-[230px] md:h-[240px] lg:h-[280px] max-w-[1600px] border-b border-gray-300"
         breakpoints={{
           300: {
             slidesPerView: 2,
@@ -73,7 +73,7 @@ const Trending = () => {
           const { _id, title, image, countOfVisitors } = blog;
           return (
             <SwiperSlide key={_id}>
-              <div className="rounded-lg shadow-lg overflow-hidden w-[160px] h-[220px] xl:w-[190px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
+              <div className="rounded-lg shadow-lg overflow-hidden w-[160px] h-[180px] lg:h-[200px] xl:h-[210px] xl:w-[190px] mx-auto flex flex-col justify-between bg-[#bed9fd3a]">
                 <div>
                   <CustomImage
                     onClick={() => handleClickMore(_id)}
@@ -83,7 +83,7 @@ const Trending = () => {
                   />
                   <h3
                     onClick={() => handleClickMore(_id)}
-                    className="text-[12px] font-semibold p-2 cursor-pointer text-center"
+                    className="text-[10px] lg:text-[12px] font-semibold p-2 cursor-pointer text-center"
                   >
                     {title}
                   </h3>
@@ -92,17 +92,17 @@ const Trending = () => {
                   <p className="space-x-1 flex items-center justify-center">
                     <VisibilityIcon
                       sx={{
-                        fontSize: { xs: "0.8rem", md: "0.9rem" },
+                        fontSize: { xs: "0.8rem", lg: "0.9rem" },
                         color: "#A1A1A1",
                       }}
                     />
-                    <span className="text-[12px] xl:text-[16px]">
+                    <span className="text-[10px] lg:text-[12px] xl:text-[14px]">
                       {formatNum(countOfVisitors)}
                     </span>
                   </p>
                   <CustomButton
                     click={() => handleClickMore(_id)}
-                    className="hover:underline font-semibold text-black/60 text-[12px]"
+                    className="hover:underline font-semibold text-black/60  text-[10px] lg:text-[12px]"
                     title="More..."
                   />
                 </div>
