@@ -99,7 +99,7 @@ const EditProfile = ({
       <form
         onSubmit={saveForm}
         encType="multipart/form-data"
-        className="center w-[95%] md:w-[45rem] bg-white mx-auto shadows my-[1rem] z-20 mb-[3rem] p-[2rem]"
+        className="center w-screen h-screen absolute z-50 md:w-[45rem] md:h-fit bg-white mx-auto shadows md:my-[2rem] md:z-20 mb-[3rem] p-6 lg:p-[2rem]"
       >
         {/* head */}
         <div className="flex items-center justify-between">

@@ -87,7 +87,7 @@ const AvatarSection: React.FC<AvatarSectionProps> = ({
             alt="profile-avatar"
             className="w-20 h-20 md:w-28 md:h-28 border ms-2 md:ms-4 border-gray-400 rounded-full object-cover"
           />
-          <div className="absolute grid place-content-center place-items-center w-full z-50">
+          <div className="absolute grid place-content-center place-items-center w-full z-50 ms-10 md:ms-0">
             {selectedFile ? (
               <div className="flex items-center justify-start space-x-2">
                 <span className="text-[10px] md:text-[14px]">

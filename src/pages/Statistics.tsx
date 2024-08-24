@@ -4,7 +4,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { useEffect, useState } from "react";
-import { axiosWithPublic } from "../hooks/useAxios";
+import useAxios from "../hooks/useAxios";
 import { ClipLoader } from "react-spinners";
 import StatisticCard from "../components/Cards/StatisticCard";
 
@@ -29,6 +29,7 @@ interface StatValues {
 
 const Statistics: React.FC = () => {
   const { currentUser } = useSelector((state: RootState) => state.auth);
+  const axiosWithToken = useAxios();
   const [userStatistics, setUserStatistics] = useState<Statistics | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [timeRange, setTimeRange] = useState<string>("All time");
@@ -36,7 +37,7 @@ const Statistics: React.FC = () => {
   const getUserStatistics = async () => {
     setLoading(true);
     try {
-      const { data } = await axiosWithPublic.post(
+      const { data } = await axiosWithToken.post(
         `users/${currentUser?._id}/statistics`,
         { timeRange }
       );
