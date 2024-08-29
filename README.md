@@ -36,21 +36,22 @@
 <br />
 <div align="center">
   <a href="https://github.com/omrfrkcpr/bloggio">
-    <img src="https://bloggio.s3.eu-north-1.amazonaws.com/bloggio-assets/symbol.png" alt="Logo" width="120" height="80">
+    <img src="https://bloggio.s3.eu-north-1.amazonaws.com/bloggio-assets/symbol.png" alt="Logo" width="90" height="70">
   </a>
 
 <h3 align="center">Bloggio</h3>
 
   <p align="center">
-    A comprehensive blog platform. It allows users to authenticate, search for blogs by category and title, read detailed blog posts, create and share new blogs, edit existing ones, like and comment on others' blogs, and share them on other platforms. It offers a seamless and engaging experience for both bloggers and readers. Tools and frameworks: React and TypeScript for the frontend, Formik/Yup for form validation, and Redux / Toolkit for state management. Axios for API interactions.
+   A comprehensive blog platform. It allows users to authenticate, search for blogs by category and title, read detailed blog posts, create and share new blogs, edit existing ones, like and comment on others' blogs, and share them on other platforms. It offers a seamless and engaging experience for both bloggers and readers. Tools and frameworks: React and TypeScript for the frontend, Formik/Yup for form validation, and Redux / Toolkit for state management. Axios for API interactions.
+    <br />
     <br />
     <a href="https://github.com/omrfrkcpr/bloggio"><strong>Explore the docs »</strong></a>
     <br />
+    <a href="https://github.com/omrfrkcpr/bloggio-api"><strong>Bloggio-API »</strong></a>
     <br />
-    <a href="https://bloggio.de/">View Demo</a>
-    ·
+    <br />
+    <a href="https://bloggio.de">View Demo</a>
     <a href="https://github.com/omrfrkcpr/bloggio/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
     <a href="https://github.com/omrfrkcpr/bloggio/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
@@ -63,17 +64,10 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#key-features">Key Features</a></li>
+        <li><a href="#tech-stack">Tech Stack</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -85,101 +79,82 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![bloggio](https://bloggio.s3.eu-north-1.amazonaws.com/bloggio-assets/bloggio.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 <p align="center">
-  <a href="https://react.dev/">
-    <img src="https://skillicons.dev/icons?i=react" />
-  </a>
-  <a href="https://redux.js.org/">
-    <img src="https://skillicons.dev/icons?i=redux" />
-  </a>
-  <a href="https://www.typescriptlang.org/">
-    <img src="https://skillicons.dev/icons?i=ts" />
-  </a>
-  <a href="https://tailwindcss.com/">
-    <img src="https://skillicons.dev/icons?i=tailwind" />
-  </a>
-  <a href="https://mui.com/">
-    <img src="https://skillicons.dev/icons?i=materialui" />
-  </a>
-  <a href="https://nodejs.org/en">
-    <img src="https://skillicons.dev/icons?i=nodejs" />
-  </a>
-  <a href="https://www.cypress.io/">
-    <img src="https://skillicons.dev/icons?i=cypress" />
-  </a>
-  <a href="https://www.postman.com/">
-    <img src="https://skillicons.dev/icons?i=postman" />
-  </a>
-  <a href="https://vercel.com/">
-    <img src="https://skillicons.dev/icons?i=vercel" />
-  </a>
-  <a href="https://vitejs.dev/">
-    <img src="https://skillicons.dev/icons?i=vite" />
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=react,redux,ts,tailwind,materialui,npm,postman,vercel" />
   </a>
 </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+<!-- KEY FEATURES -->
 
-## Getting Started
+## Key Features
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
+- **User Authentication**
+  - Easy account creation and login with Google.
+- **Blog Creation and Management**
+  - Create new blog posts with a title, image, description, tags, and category.
+  - Save drafts and publish blogs at your convenience.
+  - Edit existing blogs and manage them within customizable lists (e.g., Drafts, Published).
+- **Advanced Search and Filtering**
+  - Search for blogs by title, category, or tags.
+  - Filter blogs based on categories for more targeted content discovery.
+- **User Interaction**
+  - Like, comment on, and save blogs from other users.
+  - View trending blogs on the homepage.
+- **Category-Based News Integration**
+  - Fetch and display relevant world news from external APIs based on blog categories.
+- **User Statistics and Analytics**
+  - Track personal blog statistics with detailed graphs and tables.
+  - Monitor engagement on your blogs, including likes, comments, and views.
+- **Responsive Design**
+  - Enjoy a seamless experience on any device with a user-friendly and intuitive interface.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+<!-- TECH STACK -->
 
-## Usage
+## Tech Stack
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+- **This section highlights the key technologies used in the Bloggio project and the reasoning behind choosing them.**
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Frontend
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- **React**
 
-<!-- ROADMAP -->
+  - React is a powerful JavaScript library for building user interfaces. Its component-based architecture enables the creation of reusable UI components, making the development process more efficient and scalable.
 
-## Roadmap
+- **TypeScript**
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+  - TypeScript provides static type checking, which helps prevent errors during development. By catching potential issues before runtime, it enhances code reliability and maintainability.
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- **Redux & Redux Toolkit**
+
+  - Redux is a predictable state container for JavaScript apps, and Redux Toolkit simplifies the setup and management of global state. It reduces boilerplate code and helps manage complex state logic in a more organized manner.
+
+- **Tailwind CSS**
+
+  - Tailwind CSS is a utility-first CSS framework that allows for rapid UI development. It promotes a consistent design system and reduces the need for custom CSS, leading to a more maintainable codebase.
+
+- **Material-UI**
+  - Material-UI provides a set of pre-built, customizable components based on Google's Material Design guidelines. It accelerates the development process by offering ready-to-use components with a modern look and feel.
+
+### Testing
+
+- **Cypress**
+  - Cypress is an end-to-end testing framework that is highly developer-friendly. It offers fast, reliable testing for web applications, making it easier to catch bugs early in the development process.
+
+### Deployment & CI/CD
+
+- **Vercel**
+  - Vercel is a cloud platform for static sites and serverless functions. It provides a seamless deployment experience and ensures that the application is globally available with minimal downtime.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -204,7 +179,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcpr/bloggio/blob/main/LICENSE) for more information.
+Distributed under the GNU Public License. See [LICENSE.txt](https://github.com/omrfrkcpr/bloggio/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,7 +189,7 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 [Send a Email](omerrfarukcapur@gmail.com)<br />
 [Repo Link](https://github.com/omrfrkcpr/bloggio)<br />
-[Demo Link](https://bloggio.de/)
+[Demo Link](https://bloggio.de)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -222,8 +197,7 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 ## Acknowledgments
 
-- []()
-- []()
-- []()
+- [Bloggio-API](https://bloggio-api.onrender.com/)
+- [Postman]()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
