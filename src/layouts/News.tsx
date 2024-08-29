@@ -43,7 +43,11 @@ const News = ({
 
   useEffect(() => {
     if (show) {
-      getNewsData(convertToApiCategory(categoryName), page);
+      if (categoryName) {
+        getNewsData(page, convertToApiCategory(categoryName));
+      } else {
+        getNewsData(page);
+      }
     } else {
       dispatch(resetNews());
     }
@@ -61,7 +65,7 @@ const News = ({
       <h2 className="font-semibold text-[10px] text-gray-600 md:text-[14px] lg:text-[18px] text-center flex items-center justify-start md:justify-center gap-2">
         <GiWorld />
         <span className="capitalize">
-          Top {categoryName === "software" ? "Tech" : categoryName} News
+          {categoryName ? `Top ${categoryName}` : "Latest"} News
         </span>
       </h2>
       {loading ? (
@@ -74,13 +78,13 @@ const News = ({
         </div>
       ) : (
         <>
-          {news.length > 0 && (
+          {news?.length > 0 && (
             <>
               <NewsList news={news} />
               {totalPage && (
                 <Stack spacing={2} alignItems="center">
                   <Pagination
-                    count={totalPage}
+                    count={+totalPage}
                     page={page}
                     onChange={handlePageChange}
                     size="small"

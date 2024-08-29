@@ -70,7 +70,7 @@ const Discover = () => {
           )}
         </div>
       </div>
-      <News categoryName="software" show={blogs.length > 0} />
+      <News categoryName="" show={blogs.length > 0} />
     </div>
   );
 };
