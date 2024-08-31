@@ -98,7 +98,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
             )}
             <div
               onClick={handleReadMore}
-              className="py-1 text-gray-500 line-clamp-2 text-[9px] md:text-[12px] lg:text-[16px] cursor-pointer"
+              className="py-1 text-gray-500 text-[9px] md:text-[12px] lg:text-[16px] cursor-pointer"
             >
               {blogDetails?.contentPrev}
             </div>
@@ -126,7 +126,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                 <p className="text-[9px] lg:text-[11px] xl:text-[15px] text-gray-600 leading-none">
                   {userId?.username}
                 </p>
-                <p className="text-gray-600 space-x-1 text-[10px] lg:text-[12px] xl:text-[14px] ">
+                <p className="text-gray-600 space-x-1 text-[8px] lg:text-[12px] xl:text-[14px] ">
                   <span>{updatedAt} -</span>
                   <span>{blogDetails?.readTime}</span>
                 </p>

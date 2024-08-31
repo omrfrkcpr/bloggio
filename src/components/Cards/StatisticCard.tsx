@@ -28,7 +28,7 @@ const StatisticCard: React.FC<StatisticCardProps> = ({ blog, badge }) => {
           className="h-[150px] xl:h-[200px] w-[360px] object-fit"
         />
         <div className="bg-white w-full px-2 xl:p-4 space-y-1">
-          <p className="text-indigo-500 text-md xl:text-lg 2xl:text-2xl font-medium">
+          <p className="text-indigo-500 text-sm xl:text-lg 2xl:text-2xl font-medium">
             {blog?.title}
           </p>
           <p className="text-gray-600 font-light text-xs xl:text-sm 2xl:text-md">
