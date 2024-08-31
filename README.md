@@ -79,7 +79,7 @@
 
 ## About The Project
 
-![bloggio](https://bloggio.s3.eu-north-1.amazonaws.com/bloggio-assets/bloggio.gif)
+![bloggio](https://github.com/user-attachments/assets/779384e4-9181-45e0-b32e-5f7180413584)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
