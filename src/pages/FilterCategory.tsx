@@ -131,8 +131,8 @@ const FilterCategory = () => {
         <div className="w-0 lg:w-[350px] xl:w-[400px] hidden md:block border-0 lg:border-l lg:border-gray-400  ps-4">
           <News
             categoryName={selectedSubcategory?.name || ""}
-            show={true}
-            // show={blogs.length > 0}
+            // show={true}
+            show={blogs.length > 0}
           />
         </div>
       </div>
