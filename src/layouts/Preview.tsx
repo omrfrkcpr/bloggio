@@ -134,7 +134,7 @@ const Preview: React.FC<PreviewProps> = ({
                 title="Clear URL"
               />
             </div>
-            <div className="w-full h-[200px] object-cover bg-gray-100 my-3 flex flex-col items-center justify-center bg-cover bg-no-repeat relative text-gray-400 text-center">
+            <div className="w-full h-[300px] object-cover bg-gray-100 my-3 flex flex-col items-center justify-center bg-cover bg-no-repeat relative text-gray-400 text-center">
               <span className="underline">Blog Image</span>
               <span className="text-sm px-4">
                 Represents your blog content. Recommended to use a rectangular
