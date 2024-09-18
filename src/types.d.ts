@@ -207,8 +207,11 @@ interface AuthState {
 interface UserIdProps {
   _id: string;
   username: string;
-  firstName: string;
-  lastName: string;
+  avatar?: string;
+  createdAt: string;
+  updatedAt: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 interface User {

@@ -77,16 +77,18 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
       {!isEdit ? (
         <>
           <div className="flex items-center gap-2">
-            {currentUser?.avatar ? (
+            {userId?.avatar ? (
               <CustomImage
                 className="w-[2rem] h-[2rem] rounded-full object-cover"
-                src={currentUser?.avatar}
+                src={userId?.avatar}
                 alt="user-avatar"
               />
             ) : (
               <Avatar
                 alt={`${
-                  currentUser ? capitalizeWords(currentUser?.firstName) : ""
+                  userId?.username
+                    ? capitalizeWords(userId?.username?.toUpperCase())
+                    : ""
                 }`}
                 src="/static/images/avatar/2.jpg"
                 sx={{ width: "32px", height: "32px" }}
@@ -94,7 +96,7 @@ const BlogCommentCard: React.FC<BlogCommentCardProps> = ({
             )}
             <div className="flex-1 flex justify-between">
               <div>
-                <h2 className="text-sm">{currentUser?.username}</h2>
+                <h2 className="text-sm">{userId?.username}</h2>
                 <p className="text-sm text-gray-400">
                   {dateFormatter(updatedAt || createdAt)}
                 </p>
