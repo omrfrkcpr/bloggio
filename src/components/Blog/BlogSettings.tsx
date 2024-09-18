@@ -33,7 +33,7 @@ const BlogSettings = ({
   const [settingButtons, setSettingButtons] = useState<BlogSettingsProps[]>([]);
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { deleteBlogData, postSave } = useBlogCalls();
-  const path = window?.location?.href;
+  const path = import.meta.env.VITE_CLIENT_URL;
   const navigate = useNavigate();
   const dropDownRef = useRef<HTMLDivElement>(null);
 

@@ -172,8 +172,8 @@ const useBlogCalls = () => {
     try {
       await axiosWithToken.put(`${url}`);
       // console.log(`Post Like: ${data}`);
-      if (pathname.includes("/blog")) {
-        getSingleBlog(`blogs/${blogId}`);
+      if (pathname.includes("/blog") && blogId) {
+        getSingleBlog(blogId);
       } else {
         getBlogData(
           "blogs",
