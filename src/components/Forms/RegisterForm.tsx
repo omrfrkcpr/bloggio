@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import AuthTextField from "../TextFields/AuthTextField";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { CircularProgress } from "@mui/material";
 
 interface RegisterFormValues {
   username: string;
@@ -152,14 +153,20 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
             </div>
           ))}
         </div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
-          data-test="register-submit"
-        >
-          {isSubmitting ? "Loading..." : "Sign Up"}
-        </button>
+        {!isSubmitting ? (
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
+            data-test="register-submit"
+          >
+            Sign Up
+          </button>
+        ) : (
+          <div className="bg-[#76a9f0] w-[68px] h-[28px] lg:w-[78px] lg:h-[36px] text-white rounded-xl mt-6 flex items-center justify-center mx-auto">
+            <CircularProgress sx={{ color: "white", padding: "0.8rem" }} />
+          </div>
+        )}
       </Form>
     </div>
   );

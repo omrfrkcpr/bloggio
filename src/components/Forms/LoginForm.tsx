@@ -3,9 +3,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import AuthTextField from "../TextFields/AuthTextField";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
-import { RootState } from "../../app/store";
 
 interface LoginFormValues {
   email: string;
@@ -27,9 +25,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
   errors,
   touched,
   handleBlur,
+  isSubmitting,
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { loading } = useSelector((state: RootState) => state.blog);
 
   const loginFormFields = [
     {
@@ -96,11 +94,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
             </div>
           ))}
         </div>
-        {!loading ? (
+        {!isSubmitting ? (
           <button
             type="submit"
             className="bg-[#76a9f0] text-white py-1 lg:py-2 text-sm lg:text-[1.1rem] px-3 rounded-xl mt-6 hover:bg-[#9bbeef]"
             data-test="login-submit"
+            disabled={isSubmitting}
           >
             Sign In
           </button>
