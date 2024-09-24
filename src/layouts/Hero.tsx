@@ -83,7 +83,7 @@ const Hero: React.FC = React.memo(() => {
           <AuthModal
             isOpen={showHeroModal}
             setIsOpen={toggleHeroModal}
-            selectedFormType="sign up"
+            selectedFormType="sign in"
           />
         )}
       </div>
